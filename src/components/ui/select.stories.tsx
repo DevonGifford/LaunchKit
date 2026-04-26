@@ -12,7 +12,7 @@ import {
 } from './select';
 
 const meta = {
-  title: 'Primitives/Select',
+  title: 'UI/Forms/Select',
   component: Select,
   decorators: [
     (Story) => (

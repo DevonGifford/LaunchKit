@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Container } from './container';
 
 const meta = {
-  title: 'Primitives/Container',
+  title: 'UI/LaunchKit/Container',
   component: Container,
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof Container>;

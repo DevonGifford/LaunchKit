@@ -12,7 +12,7 @@ import {
 } from './dialog';
 
 const meta = {
-  title: 'Primitives/Dialog',
+  title: 'UI/Overlays/Dialog',
   component: Dialog,
 } satisfies Meta<typeof Dialog>;
 

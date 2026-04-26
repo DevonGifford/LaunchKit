@@ -124,3 +124,12 @@ LaunchKit's, so most registry components work as added. When you add one with
    can be translated.
 4. Check control heights: LaunchKit uses 40px controls (`h-10`) so touch
    targets stay comfortably above WCAG 2.2's 24px minimum.
+5. Replace `bg-black/…` overlays with `bg-overlay`, and the registry's
+   `dark:bg-input/30` on text fields with LaunchKit's `dark:bg-input/15`.
+6. Give icon-only buttons and landmarks a translated label prop, and check the
+   primitive itself for English defaults: Radix names a range slider's thumbs
+   "Minimum" and "Maximum" and a navigation menu "Main"; Base UI and
+   `@shadcn/react` have fallbacks too. The story's axe check catches most
+   missing names.
+7. Never run `shadcn add` with `--overwrite`. Answer "no" when it offers to
+   replace an existing component, then compare with `shadcn add <name> --diff`.

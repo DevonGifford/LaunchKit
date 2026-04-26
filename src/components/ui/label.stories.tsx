@@ -3,7 +3,7 @@ import { Input } from './input';
 import { Label } from './label';
 
 const meta = {
-  title: 'Primitives/Label',
+  title: 'UI/Forms/Label',
   component: Label,
   args: { children: 'Full name', htmlFor: 'name' },
 } satisfies Meta<typeof Label>;

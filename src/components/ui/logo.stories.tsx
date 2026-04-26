@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Logo } from './logo';
 
 const meta = {
-  title: 'Primitives/Logo',
+  title: 'UI/LaunchKit/Logo',
   component: Logo,
   args: { className: 'h-10 text-foreground' },
 } satisfies Meta<typeof Logo>;

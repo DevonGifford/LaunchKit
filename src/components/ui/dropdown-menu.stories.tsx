@@ -17,7 +17,7 @@ import {
 } from './dropdown-menu';
 
 const meta = {
-  title: 'Primitives/Dropdown menu',
+  title: 'UI/Navigation/Dropdown menu',
   component: DropdownMenu,
 } satisfies Meta<typeof DropdownMenu>;
 

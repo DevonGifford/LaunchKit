@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from './theme-toggle';
 
 const meta = {
-  title: 'Primitives/Theme toggle',
+  title: 'UI/LaunchKit/Theme toggle',
   component: ThemeToggle,
   args: { label: 'Switch between light and dark mode' },
   decorators: [

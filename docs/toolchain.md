@@ -30,6 +30,14 @@ in `pnpm-workspace.yaml`); Dependabot proposes upgrades as pull requests.
 | Forms / validation | `react-hook-form`                      | 7.89.0 (see “Release age” below)            |
 |                    | `zod`                                  | 4.6.6                                       |
 | Environment        | `@t3-oss/env-nextjs`                   | 0.13.11                                     |
+| UI primitives      | `radix-ui`                             | 1.7.0                                       |
+|                    | `@base-ui/react`                       | 1.9.0 (Combobox only, see below)            |
+|                    | `@shadcn/react`                        | 0.3.1 (Questionnaire only, see below)       |
+| UI components      | `react-day-picker`, `date-fns`         | 10.0.2, 4.4.0 (Calendar)                    |
+|                    | `input-otp`                            | 1.5.0                                       |
+|                    | `sonner`                               | 2.0.8                                       |
+|                    | `embla-carousel-react`                 | 8.6.0                                       |
+|                    | `vaul`                                 | 1.1.2 (Drawer, see below)                   |
 | Runtime            | Node.js                                | ≥ 24 (`.node-version`: 26)                  |
 | Package manager    | pnpm                                   | 12.3.4 (`packageManager` field)             |
 
@@ -152,6 +160,25 @@ keeps `src/lib/utils.ts` (`clsx` + `tailwind-merge`, both long-stable). After
 
 **Revisit when:** the `cn` package reaches 1.0. Switching then is a find and
 replace.
+
+## shadcn/ui components that bring their own libraries
+
+Most registry components build on `radix-ui`. Three add something else:
+
+- **Combobox uses Base UI** (`@base-ui/react`). Radix has no combobox, and
+  shadcn's Radix-flavoured Combobox is built on Base UI. It is a second
+  primitive library, used by `combobox.tsx` only; its `date-fns` peers are
+  optional. Base UI also renders a visually hidden "Dismiss" button with an
+  English label that a prop can't change.
+- **Questionnaire uses `@shadcn/react`** (0.x, published by shadcn). That cuts
+  against the reason for avoiding the 0.x `cn` package above, but the
+  Questionnaire primitive exists nowhere else. Its English defaults (progress
+  text, errors, button labels) are overridden in `questionnaire.tsx`.
+- **Drawer uses `vaul`**, whose last release was December 2024; its author no
+  longer maintains it actively. It still works with React 19.
+
+**Revisit when:** `@shadcn/react` reaches 1.0, Radix ships a combobox, or
+shadcn moves Drawer off `vaul`.
 
 ## Route types before type-aware lint
 

@@ -12,7 +12,7 @@ import {
 } from './sheet';
 
 const meta = {
-  title: 'Primitives/Sheet',
+  title: 'UI/Overlays/Sheet',
   component: Sheet,
 } satisfies Meta<typeof Sheet>;
 

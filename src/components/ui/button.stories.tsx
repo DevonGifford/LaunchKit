@@ -3,7 +3,7 @@ import { ArrowRightIcon } from 'lucide-react';
 import { Button } from './button';
 
 const meta = {
-  title: 'Primitives/Button',
+  title: 'UI/Actions/Button',
   component: Button,
   args: { children: 'Get started' },
   argTypes: {
