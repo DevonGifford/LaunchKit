@@ -24,17 +24,30 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
+  align = 'start',
   className,
 }: {
   id: string;
   eyebrow?: string;
   title: string;
   description?: string;
+  align?: 'start' | 'center';
   className?: string;
 }) {
+  const centered = align === 'center';
+
   return (
-    <div className={cn('max-w-2xl space-y-5', className)}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+    <div className={cn('max-w-2xl space-y-5', centered && 'mx-auto text-center', className)}>
+      {eyebrow && (
+        // Centred, the hairline is mirrored so the label stays optically centred.
+        <Eyebrow
+          className={cn(
+            centered && 'justify-center after:h-px after:w-8 after:shrink-0 after:bg-accent',
+          )}
+        >
+          {eyebrow}
+        </Eyebrow>
+      )}
       <h2 id={`${id}-title`} className="text-headline">
         {title}
       </h2>

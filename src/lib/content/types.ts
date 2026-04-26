@@ -88,6 +88,29 @@ export const workflowSectionSchema = z.object({
   stack: z.array(text).optional(),
 });
 
+export const marketingQualityAndAutomationSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-quality-and-automation'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The stages a change passes through, in order; at most three, side by side on wide screens. */
+  stages: z
+    .array(
+      z.object({
+        /** Short position label above the title, e.g. "Stage 1". */
+        label: text,
+        title: text,
+        icon: z.enum(['shield-check', 'flask-conical', 'package-check']),
+        items: z.array(z.object({ name: text, description: text })).min(1),
+      }),
+    )
+    .min(1)
+    .max(3),
+  /** Short outcomes shown with a check mark below the stages. */
+  highlights: z.array(text).optional(),
+});
+
 export const ctaSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('cta'),
@@ -112,6 +135,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   featuresSectionSchema,
   useCasesSectionSchema,
   workflowSectionSchema,
+  marketingQualityAndAutomationSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);
