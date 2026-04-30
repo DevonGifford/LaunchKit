@@ -111,6 +111,78 @@ export const marketingQualityAndAutomationSectionSchema = z.object({
   highlights: z.array(text).optional(),
 });
 
+const techStackItemSchema = z.object({
+  name: text,
+  description: text,
+  /** A brand mark or icon; the set is defined beside the component. */
+  icon: z.enum([
+    'nextjs',
+    'react',
+    'typescript',
+    'tailwindcss',
+    'shadcn-ui',
+    'next-intl',
+    'zod',
+    'react-hook-form',
+    'radix-ui',
+    'lucide',
+    'next-themes',
+    'sonner',
+    'date-fns',
+    'marked',
+    't3-env',
+    'vitest',
+    'playwright',
+    'storybook',
+    'axe-core',
+    'eslint',
+    'prettier',
+    'lefthook',
+    'commitlint',
+    'pnpm',
+    'github-actions',
+    'dependabot',
+  ]),
+});
+
+export const marketingTechStackSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-tech-stack'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The main technologies, as larger cards; four per row on wide screens. */
+  featured: z.array(techStackItemSchema).min(1),
+  /** Supporting tools in a denser grid below; an incomplete last row is centred. */
+  tools: z.array(techStackItemSchema).optional(),
+});
+
+const timelineRowSchema = z.object({ item: text, before: text, after: text });
+
+export const marketingTimelineSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-timeline'),
+  title: text,
+  /** A second line of the heading, shown muted. */
+  titleMuted: text.optional(),
+  /** Body copy; an `emphasis` paragraph stands out in the text colour. */
+  paragraphs: z.array(z.object({ text, emphasis: z.boolean().optional() })).min(1),
+  /** A highlighted conclusion below the copy. */
+  callout: z
+    .object({ eyebrow: text.optional(), title: text, description: text.optional() })
+    .optional(),
+  /** The table beside the copy: how long each item takes without and with the foundation. */
+  timeline: z.object({
+    title: text,
+    badge: text.optional(),
+    /** Column headings, in the same order as each row. */
+    columns: timelineRowSchema,
+    rows: z.array(timelineRowSchema).min(1),
+    total: timelineRowSchema.optional(),
+    note: text.optional(),
+  }),
+});
+
 export const ctaSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('cta'),
@@ -136,6 +208,8 @@ export const sectionSchema = z.discriminatedUnion('type', [
   useCasesSectionSchema,
   workflowSectionSchema,
   marketingQualityAndAutomationSectionSchema,
+  marketingTechStackSectionSchema,
+  marketingTimelineSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);
