@@ -60,6 +60,7 @@ export const Default: Story = {
 /** On small screens Previous and Next collapse to icons, keeping their names. */
 export const OnMobile: Story = {
   ...Default,
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };
 

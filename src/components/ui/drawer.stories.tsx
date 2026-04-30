@@ -60,5 +60,6 @@ export const Right: Story = { render: () => <Example direction="right" /> };
 
 export const OnMobile: Story = {
   render: () => <Example />,
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };

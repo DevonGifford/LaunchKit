@@ -31,5 +31,6 @@ export const ValidationErrors: Story = {
 };
 
 export const OnMobile: Story = {
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };

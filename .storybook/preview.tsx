@@ -1,9 +1,28 @@
+import { DocsContainer, type DocsContainerProps } from '@storybook/addon-docs/blocks';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs-vite';
 import { NextIntlClientProvider } from 'next-intl';
+import { useEffect, useState, type PropsWithChildren } from 'react';
 import messages from '../messages/en.json';
 import '../src/app/globals.css';
-import { lightTheme } from './theme';
+import { darkTheme, lightTheme } from './theme';
+
+/**
+ * Docs pages in the toolbar's appearance. The theme decorator below sets it as a
+ * class on <html>; following that class keeps the page and its stories matched.
+ */
+function ThemedDocsContainer(props: PropsWithChildren<DocsContainerProps>) {
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'));
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const observer = new MutationObserver(() => setDark(root.classList.contains('dark')));
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  return <DocsContainer {...props} theme={dark ? darkTheme : lightTheme} />;
+}
 
 const preview: Preview = {
   // A generated docs page for every component: its stories, props table and comments.
@@ -23,8 +42,10 @@ const preview: Preview = {
         ],
       },
     },
-    // Docs pages use the brand's light theme; the canvas follows the toolbar.
-    docs: { theme: lightTheme },
+    // Docs pages follow the toolbar's appearance. Stories that set their own
+    // viewport or theme are tagged '!autodocs': a docs page renders every story
+    // inline at the page's width, and one <html> class sets the theme for all.
+    docs: { theme: lightTheme, container: ThemedDocsContainer },
     // The i18n Link and usePathname need the App Router mocks.
     nextjs: { appDirectory: true, navigation: { pathname: '/' } },
     layout: 'padded',

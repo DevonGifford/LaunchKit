@@ -107,13 +107,13 @@ export const Default: Story = {
 };
 
 /** A carousel that starts on the recommended plan, with the neighbours peeking in. */
-export const Tablet: Story = { globals: { viewport: { value: 'tablet' } } };
+export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };
 
 /** The same carousel on a phone; swipe, or use the buttons below it. */
-export const OnMobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const OnMobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };
 
 /** The Midnight appearance; story tests run axe in light, so this checks dark contrast too. */
-export const Dark: Story = { globals: { theme: 'dark' } };
+export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };
 
 /** Without the callout and the row of figures. */
 export const PlansOnly: Story = { args: { callout: undefined, proof: undefined } };

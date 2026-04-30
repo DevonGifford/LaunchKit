@@ -10,6 +10,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Desktop: Story = { globals: { viewport: { value: 'desktop' } } };
+export const Desktop: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'desktop' } } };
 
-export const Mobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const Mobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };

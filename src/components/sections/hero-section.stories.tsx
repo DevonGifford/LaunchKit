@@ -21,5 +21,6 @@ export const PageHeader: Story = { args: findSection(contact, 'hero') };
 
 export const OnMobile: Story = {
   args: findSection(home, 'hero'),
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };

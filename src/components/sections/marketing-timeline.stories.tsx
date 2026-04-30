@@ -56,10 +56,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 /** Below 1024px the table sits above the copy. */
-export const Tablet: Story = { globals: { viewport: { value: 'tablet' } } };
+export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };
 
 /** On phones the item column wraps, so the table fits without scrolling sideways. */
-export const OnMobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const OnMobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };
 
 /** Story tests run axe in the light theme; this checks dark contrast too. */
-export const Dark: Story = { globals: { theme: 'dark' } };
+export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };

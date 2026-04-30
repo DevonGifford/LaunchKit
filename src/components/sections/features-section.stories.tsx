@@ -15,4 +15,4 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Tablet: Story = { globals: { viewport: { value: 'tablet' } } };
+export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };

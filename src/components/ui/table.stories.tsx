@@ -67,6 +67,7 @@ export const Default: Story = {
 
 export const OnMobile: Story = {
   ...Default,
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };
 

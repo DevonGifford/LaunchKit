@@ -55,10 +55,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 /** Two featured cards and four tools per row; the last row of tools is centred. */
-export const Tablet: Story = { globals: { viewport: { value: 'tablet' } } };
+export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };
 
 /** One featured card and two tools per row. */
-export const OnMobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const OnMobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };
 
 /** Story tests run axe in the light theme; this checks dark contrast too. */
-export const Dark: Story = { globals: { theme: 'dark' } };
+export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };

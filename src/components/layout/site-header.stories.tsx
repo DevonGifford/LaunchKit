@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /** Inline navigation, language menu and theme toggle from md up. */
-export const Desktop: Story = { globals: { viewport: { value: 'desktop' } } };
+export const Desktop: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'desktop' } } };
 
 /** Below md the navigation collapses into the menu button. */
-export const Mobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const Mobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };

@@ -16,4 +16,4 @@ type Story = StoryObj<typeof meta>;
 /** The homepage statement, rendered from src/content/en/pages/home.ts. */
 export const Default: Story = {};
 
-export const OnMobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const OnMobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };

@@ -58,10 +58,10 @@ type Story = StoryObj<typeof meta>;
 /** Four promises beside the pipeline, which takes the wider column. */
 export const Default: Story = {};
 
-export const Tablet: Story = { globals: { viewport: { value: 'tablet' } } };
+export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };
 
 /** Stacked, with the pipeline below the list and each step's detail under its name. */
-export const OnMobile: Story = { globals: { viewport: { value: 'mobile' } } };
+export const OnMobile: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'mobile' } } };
 
 /** The Midnight appearance; story tests run axe in light, so this checks dark contrast too. */
-export const Dark: Story = { globals: { theme: 'dark' } };
+export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };
