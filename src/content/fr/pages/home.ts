@@ -24,7 +24,7 @@ export const home = {
     { type: 'statement', title: 'Construire une fois…' },
     { type: 'features', title: 'Trois couches…' },
     { type: 'use-cases', title: 'Six sites…' },
-    { type: 'workflow', title: 'Du clone…' },
+    { type: 'marketing-developer-experience', title: 'Du clone…' },
     { type: 'cta', title: 'Partez d’une…' },
   ],
 } satisfies PageDefinition;`,
@@ -126,7 +126,7 @@ export const home = {
     },
     {
       id: 'developer-experience',
-      type: 'workflow',
+      type: 'marketing-developer-experience',
       eyebrow: 'Expérience développeur',
       title: 'Du clone au site en ligne en quelques minutes.',
       description:

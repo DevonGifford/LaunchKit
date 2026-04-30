@@ -24,7 +24,7 @@ export const home = {
     { type: 'statement', title: 'Build once…' },
     { type: 'features', title: 'Three layers…' },
     { type: 'use-cases', title: 'Six websites…' },
-    { type: 'workflow', title: 'From clone…' },
+    { type: 'marketing-developer-experience', title: 'From clone…' },
     { type: 'cta', title: 'Begin with…' },
   ],
 } satisfies PageDefinition;`,
@@ -126,7 +126,7 @@ export const home = {
     },
     {
       id: 'developer-experience',
-      type: 'workflow',
+      type: 'marketing-developer-experience',
       eyebrow: 'Developer experience',
       title: 'From clone to running site in minutes.',
       description:

@@ -2,15 +2,15 @@ import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
 import { SectionHeading } from './section-parts';
 
-/** Developer workflow: the stack, and the commands that get a project running. */
-export function WorkflowSection({
+/** Developer experience: the stack, and the commands that get a project running. */
+export function MarketingDeveloperExperience({
   id,
   eyebrow,
   title,
   description,
   steps,
   stack,
-}: SectionOf<'workflow'>) {
+}: SectionOf<'marketing-developer-experience'>) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="border-t bg-muted/50">
       <Container className="grid gap-12 py-20 lg:grid-cols-2 lg:items-center lg:gap-16 lg:py-28">

@@ -77,9 +77,9 @@ export const useCasesSectionSchema = z.object({
   items: z.array(z.object({ name: text, kind: text, description: text })).min(1),
 });
 
-export const workflowSectionSchema = z.object({
+export const marketingDeveloperExperienceSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('workflow'),
+  type: z.literal('marketing-developer-experience'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -183,6 +183,33 @@ export const marketingTimelineSectionSchema = z.object({
   }),
 });
 
+export const marketingInfrastructureSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-infrastructure'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** Short promises beside the pipeline; four read best. */
+  items: z
+    .array(
+      z.object({
+        icon: z.enum(['globe', 'trending-up', 'coins', 'file-code']),
+        title: text,
+        description: text,
+      }),
+    )
+    .min(1)
+    .max(4),
+  /** A push travelling through each stage; the last step is the destination. */
+  pipeline: z.object({
+    caption: text,
+    command: text,
+    steps: z.array(z.object({ label: text, detail: text.optional() })).min(1),
+  }),
+  /** Short platform and tool labels under the pipeline. */
+  badges: z.array(text).optional(),
+});
+
 export const ctaSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('cta'),
@@ -206,10 +233,11 @@ export const sectionSchema = z.discriminatedUnion('type', [
   statementSectionSchema,
   featuresSectionSchema,
   useCasesSectionSchema,
-  workflowSectionSchema,
+  marketingDeveloperExperienceSectionSchema,
   marketingQualityAndAutomationSectionSchema,
   marketingTechStackSectionSchema,
   marketingTimelineSectionSchema,
+  marketingInfrastructureSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);
