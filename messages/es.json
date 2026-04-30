@@ -63,6 +63,16 @@
       "server": "No se ha podido enviar tu mensaje. Inténtalo de nuevo."
     }
   },
+  "Pricing": {
+    "currency": "Moneda",
+    "recommended": "Recomendado",
+    "plans": "Planes",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "slideLabel": "{name}, {index} de {total}",
+    "previous": "Plan anterior",
+    "next": "Plan siguiente"
+  },
   "NotFound": {
     "title": "Página no encontrada",
     "description": "La página que buscabas no existe o se ha movido.",

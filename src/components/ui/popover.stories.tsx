@@ -48,7 +48,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const body = within(document.body);
     await userEvent.click(within(canvasElement).getByRole('button', { name: 'Dimensions' }));
-    await expect(await body.findByLabelText('Width')).toBeVisible();
+    const width = await body.findByLabelText('Width');
+    // Waits for the fade-in to finish.
+    await waitFor(() => expect(width).toBeVisible());
     await userEvent.keyboard('{Escape}');
     await waitFor(() => expect(body.queryByLabelText('Width')).not.toBeInTheDocument());
   },

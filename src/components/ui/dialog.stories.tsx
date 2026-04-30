@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from './button';
 import {
   Dialog,
@@ -46,6 +46,7 @@ export const Default: Story = {
     const dialog = await within(document.body).findByRole('dialog', {
       name: 'Merge upstream changes?',
     });
-    await expect(dialog).toBeVisible();
+    // Waits for the fade-in to finish.
+    await waitFor(() => expect(dialog).toBeVisible());
   },
 };

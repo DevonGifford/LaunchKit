@@ -44,7 +44,8 @@ function useCarousel() {
  * A slide carousel (Embla). Interface text is passed in so it can be translated:
  * `label` on the previous and next buttons, and optionally `aria-label` and
  * `aria-roledescription` (such as "carousel" and "slide") on the carousel and
- * its items.
+ * its items. At either end the previous or next button is `aria-disabled`
+ * rather than `disabled`, so keyboard focus stays on it instead of being lost.
  */
 function Carousel({
   orientation = 'horizontal',
@@ -182,13 +183,13 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        'absolute touch-manipulation rounded-full',
+        'absolute touch-manipulation rounded-full aria-disabled:opacity-50',
         orientation === 'horizontal'
           ? 'inset-y-0 -left-12 my-auto'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
-      disabled={!canScrollPrev}
+      aria-disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
@@ -213,13 +214,13 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        'absolute touch-manipulation rounded-full',
+        'absolute touch-manipulation rounded-full aria-disabled:opacity-50',
         orientation === 'horizontal'
           ? 'inset-y-0 -right-12 my-auto'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
-      disabled={!canScrollNext}
+      aria-disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >

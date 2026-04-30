@@ -63,6 +63,16 @@
       "server": "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
     }
   },
+  "Pricing": {
+    "currency": "Währung",
+    "recommended": "Empfohlen",
+    "plans": "Tarife",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "slideLabel": "{name}, {index} von {total}",
+    "previous": "Vorheriger Tarif",
+    "next": "Nächster Tarif"
+  },
   "NotFound": {
     "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",

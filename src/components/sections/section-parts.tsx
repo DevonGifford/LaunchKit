@@ -5,11 +5,21 @@ import type { Action } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
 
 /** Small uppercase label above a heading, led by a champagne hairline. */
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
+export function Eyebrow({
+  children,
+  align = 'start',
+  className,
+}: {
+  children: ReactNode;
+  align?: 'start' | 'center';
+  className?: string;
+}) {
   return (
     <p
       className={cn(
         'flex items-center gap-3 text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase before:h-px before:w-8 before:shrink-0 before:bg-accent',
+        // Centred, the hairline is mirrored so the label stays optically centred.
+        align === 'center' && 'justify-center after:h-px after:w-8 after:shrink-0 after:bg-accent',
         className,
       )}
     >
@@ -38,16 +48,7 @@ export function SectionHeading({
 
   return (
     <div className={cn('max-w-2xl space-y-5', centered && 'mx-auto text-center', className)}>
-      {eyebrow && (
-        // Centred, the hairline is mirrored so the label stays optically centred.
-        <Eyebrow
-          className={cn(
-            centered && 'justify-center after:h-px after:w-8 after:shrink-0 after:bg-accent',
-          )}
-        >
-          {eyebrow}
-        </Eyebrow>
-      )}
+      {eyebrow && <Eyebrow align={align}>{eyebrow}</Eyebrow>}
       <h2 id={`${id}-title`} className="text-headline">
         {title}
       </h2>

@@ -63,6 +63,16 @@
       "server": "Your message couldn’t be sent. Please try again."
     }
   },
+  "Pricing": {
+    "currency": "Currency",
+    "recommended": "Recommended",
+    "plans": "Plans",
+    "carousel": "carousel",
+    "slide": "slide",
+    "slideLabel": "{name}, {index} of {total}",
+    "previous": "Previous plan",
+    "next": "Next plan"
+  },
   "NotFound": {
     "title": "Page not found",
     "description": "The page you were looking for doesn’t exist or has moved.",

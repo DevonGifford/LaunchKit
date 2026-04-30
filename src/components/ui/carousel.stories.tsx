@@ -54,9 +54,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const previous = canvas.getByRole('button', { name: 'Previous slide' });
-    await expect(previous).toBeDisabled();
+    await expect(previous).toHaveAttribute('aria-disabled', 'true');
     await userEvent.click(canvas.getByRole('button', { name: 'Next slide' }));
-    await waitFor(() => expect(previous).toBeEnabled());
+    await waitFor(() => expect(previous).toHaveAttribute('aria-disabled', 'false'));
   },
 };
 

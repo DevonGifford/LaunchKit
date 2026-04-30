@@ -210,6 +210,56 @@ export const marketingInfrastructureSectionSchema = z.object({
   badges: z.array(text).optional(),
 });
 
+/** Currencies the pricing section can show; each plan sets its own amount in every one. */
+export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
+
+export const marketingPricingSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-pricing'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** Currencies offered in the selector, in order; the first (required) is the default. */
+  currencies: z.tuple([currencyCodeSchema], currencyCodeSchema),
+  /** A short note under the currency selector. */
+  currencyNote: text.optional(),
+  plans: z
+    .array(
+      z.object({
+        name: text,
+        description: text,
+        /**
+         * Fixed amounts per currency, set by hand rather than converted live, or a
+         * label such as "Custom" that stays the same in every currency.
+         */
+        price: z.union([
+          z.object({ amounts: z.record(currencyCodeSchema, z.number().nonnegative()) }),
+          z.object({ label: text }),
+        ]),
+        /** Beside the price, e.g. "starting price". */
+        priceNote: text.optional(),
+        features: z.array(text).min(1),
+        action: actionSchema,
+        /** Highlighted, and where the carousel starts on small screens. */
+        recommended: z.boolean().optional(),
+      }),
+    )
+    .min(1)
+    .max(3),
+  /** A smaller invitation below the plans, for work they don't cover. */
+  callout: z.object({ title: text, description: text, action: actionSchema }).optional(),
+  /** A restrained row of figures below the plans. Use only real, verifiable ones. */
+  proof: z
+    .object({
+      title: text,
+      items: z
+        .array(z.object({ value: text, label: text }))
+        .min(1)
+        .max(4),
+    })
+    .optional(),
+});
+
 export const ctaSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('cta'),
@@ -238,6 +288,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   marketingTechStackSectionSchema,
   marketingTimelineSectionSchema,
   marketingInfrastructureSectionSchema,
+  marketingPricingSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);
