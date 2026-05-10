@@ -29,7 +29,7 @@ export function MarketingHero({
         on wider screens the two stay together, centred. From `md` the artwork is a
         layer behind the copy.
       */}
-      <Container className="relative flex flex-col justify-center pt-16 pb-(--art-band) [--art-band:min(18rem,62vw)] sm:pt-20 md:min-h-[clamp(40rem,52vw,50rem)] md:pb-20 lg:py-24">
+      <Container className="relative flex flex-col justify-center pt-16 sm:pt-20 md:min-h-[clamp(40rem,52vw,50rem)] md:pb-20 lg:min-h-[max(40rem,calc(min(100vw,72rem)*0.57))] lg:py-24 xl:min-h-[clamp(40rem,52vw,50rem)]">
         <div className="relative z-10 max-w-xl space-y-8 lg:max-w-[42rem]">
           <div className="space-y-6">
             {eyebrow && <Eyebrow className="text-accent-text">{eyebrow}</Eyebrow>}
@@ -75,17 +75,23 @@ function HighlightedLine({ line, highlight }: { line: string; highlight?: string
   );
 }
 
-// Sizes and offsets are shares of the container. On phones it is a little wider
-// than the screen, and the top of its windows sits a fixed 6rem above the band
-// (the 13% lift skips the image's transparent top edge), tucked behind the actions, showing most of the Capsule
-// window with the others beside it; a radial mask on the image itself fades its
-// edges, so nothing is cut off in a straight line. From `md` it starts halfway across and
-// runs off the right: behind the lower copy on tablets, and beside the headline,
-// reaching back behind it, from `lg`. From `xl` it is larger and starts sooner.
+// Sizes and offsets are shares of the container.
+//
+// Phones: in the flow under the copy, so the hero always makes room for the whole
+// artwork, reflection included. It is 135% of the screen's width up to 480px, easing
+// to 105% by 767px, and pulled up so the top of its windows sits 6rem above the
+// bottom of the actions (the image's own negative margin skips its transparent top
+// edge: 13% of its height, which is 9.75% of its width).
+//
+// From `md` it is a layer anchored to the bottom right. Between `md` and `lg` it
+// grows from 66% to 72.5% of the container and moves from halfway across to 42.5%,
+// so it eases closer to the copy instead of jumping at a breakpoint. From `xl` it is
+// centred beside the copy, where the two positions all but coincide.
 const artwork = cn(
-  'absolute top-[-6rem] left-[-14%] h-auto w-[135%] max-w-none -translate-y-[13%] [mask-image:radial-gradient(70%_70%_at_50%_50%,black_60%,transparent_100%)] sm:left-0 sm:w-full',
-  'md:top-auto md:bottom-[3%] md:left-1/2 md:w-[66%] md:translate-y-0 md:[mask-image:none]',
-  'lg:top-1/2 lg:bottom-auto lg:w-[58%] lg:-translate-y-1/2 xl:left-[42.5%] xl:w-[72.5%]',
+  'relative left-[clamp(-14%,calc(-14%_+_(100vw_-_30rem)_*_0.33),-2%)] mt-[calc(var(--art-w)_*_-0.0975)] block h-auto w-(--art-w) max-w-none [--art-w:clamp(105%,calc(135%_-_(100vw_-_30rem)_*_0.8),135%)]',
+  'md:absolute md:top-auto md:bottom-[3%] md:mt-0',
+  'md:left-[clamp(42.5%,calc(50%_-_(100vw_-_48rem)_*_0.3),50%)] md:w-[clamp(66%,calc(66%_+_(100vw_-_48rem)_*_0.26),72.5%)]',
+  'xl:top-1/2 xl:bottom-auto xl:-translate-y-1/2',
 );
 
 /** The same artwork drawn for each appearance; only the visible one loads. */
@@ -97,10 +103,10 @@ function Showcase({ showcase }: { showcase: Section['showcase'] }) {
   };
 
   return (
-    // On phones the layer is the band the container reserves below the actions. From
-    // `md` it fills the container, and a fade in the page colour keeps the copy
-    // readable where the artwork reaches behind it.
-    <div className="absolute inset-x-0 bottom-0 z-0 h-(--art-band) md:inset-0 md:h-auto md:before:absolute md:before:inset-0 md:before:z-10 md:before:bg-linear-to-r md:before:from-background md:before:from-25% md:before:to-transparent md:before:to-55%">
+    // On phones it runs edge to edge, pulled up 6rem behind the actions. From `md` it
+    // fills the container behind the copy, and a fade in the page colour keeps the
+    // copy readable where the artwork reaches behind it.
+    <div className="relative z-0 -mx-5 -mt-24 sm:-mx-8 md:absolute md:inset-0 md:m-0 md:before:absolute md:before:inset-0 md:before:z-10 md:before:bg-linear-to-r md:before:from-background md:before:from-25% md:before:to-transparent md:before:to-55%">
       <Image
         {...image}
         src={showcase.light}
