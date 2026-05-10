@@ -22,6 +22,7 @@
   --muted-foreground: #5b6878; /* Slate, deepened from #637182 to keep 4.5:1 on muted */
   --accent: #c5b391; /* Champagne — hairlines and small details, never body text */
   --accent-foreground: #142d46;
+  --accent-text: #80683d; /* Bronze — the accent as text: 4.5:1 on background, surface and muted */
   --emphasis: #142d46; /* high-emphasis bands, e.g. the final call to action */
   --emphasis-foreground: #f8f7f3;
   --border: #dedad0;
@@ -55,6 +56,7 @@
   --muted-foreground: #8996a3; /* Muted Blue-Grey */
   --accent: #bda77b; /* Antique Gold — sparse details only */
   --accent-foreground: #0d1b2a;
+  --accent-text: #bda77b; /* Antique Gold is already legible as text here */
   --emphasis: #08131f;
   --emphasis-foreground: #e8e2d5;
   --border: #243a51;

@@ -210,6 +210,32 @@ export const marketingInfrastructureSectionSchema = z.object({
   badges: z.array(text).optional(),
 });
 
+/** A path to a file in public/, such as `/marketing/hero-showcase-light.webp`. */
+const publicPath = z.string().regex(/^\/(?!\/)/, 'Public files start with a single "/"');
+
+export const marketingHeroSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-hero'),
+  eyebrow: text.optional(),
+  /** The page's h1, one entry per line. */
+  title: z.array(text).min(1).max(3),
+  /** Words within the title shown in gold, e.g. "matters.". */
+  titleHighlight: text.optional(),
+  /** Audiences the line under the title cycles through, e.g. "For founders". */
+  audiences: z.array(text).min(1).optional(),
+  description: text,
+  primaryAction: actionSchema.optional(),
+  secondaryAction: actionSchema.optional(),
+  /** Artwork for each appearance; it's shared by every locale. */
+  showcase: z.object({
+    light: publicPath,
+    dark: publicPath,
+    alt: text,
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  }),
+});
+
 /** Currencies the pricing section can show; each plan sets its own amount in every one. */
 export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 
@@ -289,6 +315,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   marketingTimelineSectionSchema,
   marketingInfrastructureSectionSchema,
   marketingPricingSectionSchema,
+  marketingHeroSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);

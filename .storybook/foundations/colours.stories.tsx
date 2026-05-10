@@ -23,6 +23,7 @@ const pairs = [
 /** Single tokens, each checked against the page background where it matters. */
 const singles = [
   { name: 'muted-foreground', use: 'Secondary text on the page', minimum: 4.5 },
+  { name: 'accent-text', use: 'Gold text, such as a highlighted word', minimum: 4.5 },
   { name: 'destructive', use: 'Errors and destructive actions', minimum: 4.5 },
   { name: 'input', use: 'Form control borders', minimum: 3 },
   { name: 'ring', use: 'Focus rings', minimum: 3 },

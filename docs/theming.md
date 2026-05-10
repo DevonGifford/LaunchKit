@@ -24,6 +24,7 @@ Defined in `theme.css`, mapped to Tailwind utilities in `globals.css`
 | `primary` / `primary-foreground`   | Primary buttons                            | ≥ 4.5:1                                                           |
 | `muted` / `muted-foreground`       | Quiet backgrounds; secondary text          | `muted-foreground` ≥ 4.5:1 on `background`, `surface` and `muted` |
 | `accent` / `accent-foreground`     | Small brand details: hairlines, markers    | Decorative — never body text on `background`                      |
+| `accent-text`                      | Gold text: a highlighted word, an eyebrow  | ≥ 4.5:1 on `background`, `surface` and `muted`                    |
 | `emphasis` / `emphasis-foreground` | High-emphasis bands (final call to action) | ≥ 4.5:1                                                           |
 | `border`                           | Dividers                                   | Decorative                                                        |
 | `input`                            | Form control borders                       | ≥ 3:1 on `background` and `surface`                               |
