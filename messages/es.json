@@ -91,6 +91,25 @@
     "previous": "Plan anterior",
     "next": "Plan siguiente"
   },
+  "MarketingCenteredHero": {
+    "rating": "Valoración de {rating, number} sobre 5"
+  },
+  "MarketingDashboard": {
+    "label": "Pantallas",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "previous": "Pantalla anterior",
+    "next": "Pantalla siguiente",
+    "slideLabel": "{name}, {index} de {total}"
+  },
+  "MarketingReviews": {
+    "label": "Opiniones",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "previous": "Opinión anterior",
+    "next": "Opinión siguiente",
+    "slideLabel": "{name}, {index} de {total}"
+  },
   "NotFound": {
     "title": "Página no encontrada",
     "description": "La página que buscabas no existe o se ha movido.",

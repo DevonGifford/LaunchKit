@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 import type { Action } from '@/lib/content/types';
@@ -77,5 +78,31 @@ export function ActionButton({
         <a href={action.href}>{action.label}</a>
       )}
     </Button>
+  );
+}
+
+/** A person's photo, or their initials when there is none. Decorative: name them nearby. */
+export function PersonAvatar({
+  name,
+  image,
+  size,
+  className,
+}: {
+  name: string;
+  image?: string;
+  size?: React.ComponentProps<typeof Avatar>['size'];
+  className?: string;
+}) {
+  const initials = name
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.charAt(0))
+    .join('');
+
+  return (
+    <Avatar aria-hidden="true" size={size} className={className}>
+      {image && <AvatarImage src={image} alt="" />}
+      <AvatarFallback>{initials}</AvatarFallback>
+    </Avatar>
   );
 }

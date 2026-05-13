@@ -91,6 +91,25 @@
     "previous": "Vorheriger Tarif",
     "next": "Nächster Tarif"
   },
+  "MarketingCenteredHero": {
+    "rating": "Mit {rating, number} von 5 bewertet"
+  },
+  "MarketingDashboard": {
+    "label": "Bildschirme",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "previous": "Vorheriger Bildschirm",
+    "next": "Nächster Bildschirm",
+    "slideLabel": "{name}, {index} von {total}"
+  },
+  "MarketingReviews": {
+    "label": "Bewertungen",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "previous": "Vorherige Bewertung",
+    "next": "Nächste Bewertung",
+    "slideLabel": "{name}, {index} von {total}"
+  },
   "NotFound": {
     "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",

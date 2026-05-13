@@ -91,6 +91,25 @@
     "previous": "Previous plan",
     "next": "Next plan"
   },
+  "MarketingCenteredHero": {
+    "rating": "Rated {rating, number} out of 5"
+  },
+  "MarketingDashboard": {
+    "label": "Screens",
+    "carousel": "carousel",
+    "slide": "slide",
+    "previous": "Previous screen",
+    "next": "Next screen",
+    "slideLabel": "{name}, {index} of {total}"
+  },
+  "MarketingReviews": {
+    "label": "Reviews",
+    "carousel": "carousel",
+    "slide": "slide",
+    "previous": "Previous review",
+    "next": "Next review",
+    "slideLabel": "{name}, {index} of {total}"
+  },
   "NotFound": {
     "title": "Page not found",
     "description": "The page you were looking for doesn’t exist or has moved.",

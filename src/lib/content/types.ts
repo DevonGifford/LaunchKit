@@ -111,38 +111,40 @@ export const marketingQualityAndAutomationSectionSchema = z.object({
   highlights: z.array(text).optional(),
 });
 
+/** Brand marks and icons for tools; the set is drawn in marketing-tech-stack-icons.tsx. */
+const techIconSchema = z.enum([
+  'nextjs',
+  'react',
+  'typescript',
+  'tailwindcss',
+  'shadcn-ui',
+  'next-intl',
+  'zod',
+  'react-hook-form',
+  'radix-ui',
+  'lucide',
+  'next-themes',
+  'sonner',
+  'date-fns',
+  'marked',
+  't3-env',
+  'vitest',
+  'playwright',
+  'storybook',
+  'axe-core',
+  'eslint',
+  'prettier',
+  'lefthook',
+  'commitlint',
+  'pnpm',
+  'github-actions',
+  'dependabot',
+]);
+
 const techStackItemSchema = z.object({
   name: text,
   description: text,
-  /** A brand mark or icon; the set is defined beside the component. */
-  icon: z.enum([
-    'nextjs',
-    'react',
-    'typescript',
-    'tailwindcss',
-    'shadcn-ui',
-    'next-intl',
-    'zod',
-    'react-hook-form',
-    'radix-ui',
-    'lucide',
-    'next-themes',
-    'sonner',
-    'date-fns',
-    'marked',
-    't3-env',
-    'vitest',
-    'playwright',
-    'storybook',
-    'axe-core',
-    'eslint',
-    'prettier',
-    'lefthook',
-    'commitlint',
-    'pnpm',
-    'github-actions',
-    'dependabot',
-  ]),
+  icon: techIconSchema,
 });
 
 export const marketingTechStackSectionSchema = z.object({
@@ -256,6 +258,153 @@ export const marketingCinematicHeroSectionSchema = z.object({
   }),
 });
 
+/**
+ * A centred page opener: the h1 with a highlighted phrase, a primary action, an
+ * optional menu of links and a line of social proof. Adapted from shadcn-ui-kit.
+ */
+export const marketingCenteredHeroSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-centered-hero'),
+  title: text,
+  /** Words within the title marked as if with a highlighter, e.g. "LaunchKit". */
+  titleHighlight: text.optional(),
+  description: text,
+  primaryAction: actionSchema,
+  /** A second button that opens a menu of links. */
+  menu: z.object({ label: text, items: z.array(actionSchema).min(1) }).optional(),
+  /** Faces, a star rating and a short claim, linking to the evidence. */
+  proof: z
+    .object({
+      href,
+      rating: z.number().min(0).max(5),
+      label: text,
+      people: z
+        .array(z.object({ name: text, image: publicPath.optional() }))
+        .min(1)
+        .max(5),
+    })
+    .optional(),
+});
+
+/** An image with a version for each appearance. */
+const themedImageSchema = z.object({ light: publicPath, dark: publicPath });
+
+/** Four tiles of different kinds in a 2×2 grid. Adapted from shadcn-ui-kit. */
+export const marketingBentoSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-bento'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The tall tile: a figure, copy and screenshots that take turns. */
+  showcase: z.object({
+    stat: text,
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    images: z.array(themedImageSchema).min(1),
+    alt: text,
+  }),
+  /** A figure and copy over up to three rows of names, drifting in alternate directions. */
+  marquee: z.object({
+    stat: text,
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    rows: z.array(z.array(text).min(3)).min(1).max(3),
+  }),
+  /** Six tools wired to the centre mark. */
+  integrations: z.object({
+    title: text,
+    description: text,
+    tools: z.array(z.object({ name: text, icon: techIconSchema })).length(6),
+  }),
+  /** Three screenshots fanned out like prints. */
+  gallery: z.object({
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    images: z.array(themedImageSchema.extend({ alt: text })).length(3),
+  }),
+});
+
+/** A heading and actions over a carousel of screenshots. Adapted from shadcn-ui-kit. */
+export const marketingDashboardSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-dashboard'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  primaryAction: actionSchema.optional(),
+  secondaryAction: actionSchema.optional(),
+  /** Each screenshot links to its demo; the name labels the link, so the image needs no alt. */
+  items: z.array(themedImageSchema.extend({ name: text, href })).min(1),
+});
+
+/** Quotes in a bordered grid; a carousel on phones. Adapted from shadcn-ui-kit. */
+export const marketingReviewsSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-reviews'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  reviews: z
+    .array(
+      z.object({
+        name: text,
+        /** Role and organisation, e.g. "Founder, Northwind". */
+        role: text.optional(),
+        quote: text,
+        /** A square photo; initials are shown without one. */
+        image: publicPath.optional(),
+        /** Where the review was first published. */
+        href: href.optional(),
+      }),
+    )
+    .min(1),
+});
+
+/** Two to four figures in a row under a heading. Adapted from shadcn-ui-kit. */
+export const marketingStatsSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-stats'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  stats: z
+    .array(z.object({ value: text, label: text }))
+    .min(2)
+    .max(4),
+});
+
+/** Questions in accordions, grouped by topic, beside the heading. Adapted from shadcn-ui-kit. */
+export const marketingFaqSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-faq'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  groups: z
+    .array(
+      z.object({
+        title: text,
+        items: z.array(z.object({ question: text, answer: text })).min(1),
+      }),
+    )
+    .min(1)
+    .max(2),
+});
+
+/** A closing invitation in a contained, quiet panel. Adapted from shadcn-ui-kit. */
+export const marketingCtaSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-cta'),
+  title: text,
+  description: text.optional(),
+  primaryAction: actionSchema,
+  secondaryAction: actionSchema.optional(),
+});
+
 /** Currencies the pricing section can show; each plan sets its own amount in every one. */
 export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 
@@ -337,6 +486,13 @@ export const sectionSchema = z.discriminatedUnion('type', [
   marketingPricingSectionSchema,
   marketingHeroSectionSchema,
   marketingCinematicHeroSectionSchema,
+  marketingCenteredHeroSectionSchema,
+  marketingBentoSectionSchema,
+  marketingDashboardSectionSchema,
+  marketingReviewsSectionSchema,
+  marketingStatsSectionSchema,
+  marketingFaqSectionSchema,
+  marketingCtaSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);

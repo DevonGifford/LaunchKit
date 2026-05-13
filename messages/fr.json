@@ -91,6 +91,25 @@
     "previous": "Formule précédente",
     "next": "Formule suivante"
   },
+  "MarketingCenteredHero": {
+    "rating": "Noté {rating, number} sur 5"
+  },
+  "MarketingDashboard": {
+    "label": "Écrans",
+    "carousel": "carrousel",
+    "slide": "diapositive",
+    "previous": "Écran précédent",
+    "next": "Écran suivant",
+    "slideLabel": "{name}, {index} sur {total}"
+  },
+  "MarketingReviews": {
+    "label": "Avis",
+    "carousel": "carrousel",
+    "slide": "diapositive",
+    "previous": "Avis précédent",
+    "next": "Avis suivant",
+    "slideLabel": "{name}, {index} sur {total}"
+  },
   "NotFound": {
     "title": "Page introuvable",
     "description": "La page que vous cherchez n’existe pas ou a été déplacée.",
