@@ -3,6 +3,7 @@ import { ContactSection } from '@/components/sections/contact-section';
 import { CtaSection } from '@/components/sections/cta-section';
 import { FeaturesSection } from '@/components/sections/features-section';
 import { HeroSection } from '@/components/sections/hero-section';
+import { MarketingCinematicHero } from '@/components/sections/marketing-cinematic-hero';
 import { MarketingDeveloperExperience } from '@/components/sections/marketing-developer-experience';
 import { MarketingHero } from '@/components/sections/marketing-hero';
 import { MarketingInfrastructure } from '@/components/sections/marketing-infrastructure';
@@ -31,6 +32,7 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   'marketing-infrastructure': MarketingInfrastructure,
   'marketing-pricing': MarketingPricing,
   'marketing-hero': MarketingHero,
+  'marketing-cinematic-hero': MarketingCinematicHero,
   cta: CtaSection,
   contact: ContactSection,
 };

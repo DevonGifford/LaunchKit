@@ -236,6 +236,26 @@ export const marketingHeroSectionSchema = z.object({
   }),
 });
 
+export const marketingCinematicHeroSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-cinematic-hero'),
+  title: text,
+  description: text.optional(),
+  action: actionSchema.optional(),
+  /** Shown with a percentage while the frames load. */
+  loadingLabel: text,
+  /**
+   * The frames played as the section scrolls: `frame-001.jpg` and onwards in
+   * `directory`, zero-padded to at least three digits.
+   */
+  sequence: z.object({
+    directory: publicPath,
+    frames: z.number().int().min(2),
+    extension: z.enum(['jpg', 'webp', 'avif', 'png']),
+    alt: text,
+  }),
+});
+
 /** Currencies the pricing section can show; each plan sets its own amount in every one. */
 export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 
@@ -316,6 +336,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   marketingInfrastructureSectionSchema,
   marketingPricingSectionSchema,
   marketingHeroSectionSchema,
+  marketingCinematicHeroSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
 ]);
