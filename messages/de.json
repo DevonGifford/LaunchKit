@@ -17,7 +17,18 @@
   "Navigation": {
     "home": "Start",
     "docs": "Dokumentation",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "roadmap": "Roadmap",
+    "showcase": "Beispiele",
+    "storybook": "Storybook",
+    "changelog": "Änderungen",
+    "faq": "FAQ",
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "llmNotice": "LLM-Hinweis"
   },
   "Theme": {
     "toggle": "Zwischen hellem und dunklem Modus wechseln"
@@ -27,8 +38,15 @@
   },
   "Footer": {
     "tagline": "Einmal bauen, oft wiederverwenden, zentral verbessern.",
+    "description": "LaunchKit ist eine wiederverwendbare Grundlage für moderne Websites, mit der Teams schneller auf einer einheitlichen, hochwertigen Basis veröffentlichen.",
     "navigation": "Fußzeile",
-    "copyright": "© {year} LaunchKit. Veröffentlicht unter der MIT-Lizenz."
+    "copyright": "© {year} LaunchKit. Veröffentlicht unter der MIT-Lizenz.",
+    "legal": "Rechtliches",
+    "groups": {
+      "product": "Produkt",
+      "resources": "Ressourcen",
+      "company": "Unternehmen"
+    }
   },
   "Docs": {
     "title": "Dokumentation",

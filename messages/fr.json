@@ -17,7 +17,18 @@
   "Navigation": {
     "home": "Accueil",
     "docs": "Documentation",
-    "contact": "Contact"
+    "contact": "Contact",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "roadmap": "Feuille de route",
+    "showcase": "Exemples",
+    "storybook": "Storybook",
+    "changelog": "Nouveautés",
+    "faq": "FAQ",
+    "about": "À propos",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d’utilisation",
+    "llmNotice": "Avis sur les LLM"
   },
   "Theme": {
     "toggle": "Basculer entre le mode clair et le mode sombre"
@@ -27,8 +38,15 @@
   },
   "Footer": {
     "tagline": "Construire une fois, réutiliser souvent, améliorer de façon centralisée.",
+    "description": "LaunchKit est une base réutilisable pour les sites web modernes, qui aide les équipes à livrer plus vite sur un socle cohérent et de qualité.",
     "navigation": "Pied de page",
-    "copyright": "© {year} LaunchKit. Publié sous licence MIT."
+    "copyright": "© {year} LaunchKit. Publié sous licence MIT.",
+    "legal": "Mentions légales",
+    "groups": {
+      "product": "Produit",
+      "resources": "Ressources",
+      "company": "Entreprise"
+    }
   },
   "Docs": {
     "title": "Documentation",

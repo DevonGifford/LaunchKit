@@ -17,7 +17,18 @@
   "Navigation": {
     "home": "Home",
     "docs": "Docs",
-    "contact": "Contact"
+    "contact": "Contact",
+    "features": "Features",
+    "pricing": "Pricing",
+    "roadmap": "Roadmap",
+    "showcase": "Showcase",
+    "storybook": "Storybook",
+    "changelog": "Changelog",
+    "faq": "FAQ",
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "llmNotice": "LLM Notice"
   },
   "Theme": {
     "toggle": "Switch between light and dark mode"
@@ -27,8 +38,15 @@
   },
   "Footer": {
     "tagline": "Build once, reuse often, improve centrally.",
+    "description": "LaunchKit is a reusable foundation for modern websites, helping teams ship faster with a consistent, high-quality base.",
     "navigation": "Footer",
-    "copyright": "© {year} LaunchKit. Released under the MIT licence."
+    "copyright": "© {year} LaunchKit. Released under the MIT licence.",
+    "legal": "Legal",
+    "groups": {
+      "product": "Product",
+      "resources": "Resources",
+      "company": "Company"
+    }
   },
   "Docs": {
     "title": "Documentation",
