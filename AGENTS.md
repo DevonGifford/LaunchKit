@@ -137,7 +137,14 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
 - `src/lib/` and `src/config/` stay free of components, with one exception:
   `src/lib/content/registry.ts` maps section types to their components.
 - Sections do not import each other. Shared pieces go in
-  `src/components/sections/section-parts.tsx`.
+  `src/components/sections/section-parts.tsx`, or a helper beside it such as
+  `tech-icons.tsx`.
+- Reusable sections sit in `src/components/sections/` with plain names
+  (`stats-section.tsx`, type `stats`); variants of one kind share a prefix
+  (`hero-centered`). Sections written for LaunchKit's own site sit in
+  `sections/marketing/` with a `marketing-` prefix, and generic sections never
+  import from there. Their stories mirror this: `Sections/<Name>` and
+  `Sections/Marketing/<Name>`.
 - Colocate: a component's stories sit beside it, and a helper used by one
   component stays in that component's folder until a second user appears.
 - Server Components by default. Add `'use client'` only for state, effects,

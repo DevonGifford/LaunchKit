@@ -88,9 +88,9 @@ export const marketingDeveloperExperienceSectionSchema = z.object({
   stack: z.array(text).optional(),
 });
 
-export const marketingQualityAndAutomationSectionSchema = z.object({
+export const marketingQualityGatesSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-quality-and-automation'),
+  type: z.literal('marketing-quality-gates'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -111,7 +111,7 @@ export const marketingQualityAndAutomationSectionSchema = z.object({
   highlights: z.array(text).optional(),
 });
 
-/** Brand marks and icons for tools; the set is drawn in marketing-tech-stack-icons.tsx. */
+/** Brand marks and icons for tools; the set is drawn in src/components/sections/tech-icons.tsx. */
 const techIconSchema = z.enum([
   'nextjs',
   'react',
@@ -161,9 +161,9 @@ export const marketingTechStackSectionSchema = z.object({
 
 const timelineRowSchema = z.object({ item: text, before: text, after: text });
 
-export const marketingTimelineSectionSchema = z.object({
+export const marketingSetupTimelineSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-timeline'),
+  type: z.literal('marketing-setup-timeline'),
   title: text,
   /** A second line of the heading, shown muted. */
   titleMuted: text.optional(),
@@ -185,9 +185,9 @@ export const marketingTimelineSectionSchema = z.object({
   }),
 });
 
-export const marketingInfrastructureSectionSchema = z.object({
+export const marketingDeploymentPipelineSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-infrastructure'),
+  type: z.literal('marketing-deployment-pipeline'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -215,9 +215,9 @@ export const marketingInfrastructureSectionSchema = z.object({
 /** A path to a file in public/, such as `/marketing/hero-showcase-light.webp`. */
 const publicPath = z.string().regex(/^\/(?!\/)/, 'Public files start with a single "/"');
 
-export const marketingHeroSectionSchema = z.object({
+export const marketingHeroLaunchKitSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-hero'),
+  type: z.literal('marketing-hero-launchkit'),
   eyebrow: text.optional(),
   /** The page's h1, one entry per line. */
   title: z.array(text).min(1).max(3),
@@ -238,9 +238,9 @@ export const marketingHeroSectionSchema = z.object({
   }),
 });
 
-export const marketingCinematicHeroSectionSchema = z.object({
+export const heroCinematicSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-cinematic-hero'),
+  type: z.literal('hero-cinematic'),
   title: text,
   description: text.optional(),
   action: actionSchema.optional(),
@@ -262,9 +262,9 @@ export const marketingCinematicHeroSectionSchema = z.object({
  * A centred page opener: the h1 with a highlighted phrase, a primary action, an
  * optional menu of links and a line of social proof. Adapted from shadcn-ui-kit.
  */
-export const marketingCenteredHeroSectionSchema = z.object({
+export const heroCenteredSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-centered-hero'),
+  type: z.literal('hero-centered'),
   title: text,
   /** Words within the title marked as if with a highlighter, e.g. "LaunchKit". */
   titleHighlight: text.optional(),
@@ -290,9 +290,9 @@ export const marketingCenteredHeroSectionSchema = z.object({
 const themedImageSchema = z.object({ light: publicPath, dark: publicPath });
 
 /** Four tiles of different kinds in a 2×2 grid. Adapted from shadcn-ui-kit. */
-export const marketingBentoSectionSchema = z.object({
+export const bentoSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-bento'),
+  type: z.literal('bento'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -329,9 +329,9 @@ export const marketingBentoSectionSchema = z.object({
 });
 
 /** A heading and actions over a carousel of screenshots. Adapted from shadcn-ui-kit. */
-export const marketingDashboardSectionSchema = z.object({
+export const marketingShowcaseCarouselSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-dashboard'),
+  type: z.literal('marketing-showcase-carousel'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -342,9 +342,9 @@ export const marketingDashboardSectionSchema = z.object({
 });
 
 /** Quotes in a bordered grid; a carousel on phones. Adapted from shadcn-ui-kit. */
-export const marketingReviewsSectionSchema = z.object({
+export const reviewsSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-reviews'),
+  type: z.literal('reviews'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -365,9 +365,9 @@ export const marketingReviewsSectionSchema = z.object({
 });
 
 /** Two to four figures in a row under a heading. Adapted from shadcn-ui-kit. */
-export const marketingStatsSectionSchema = z.object({
+export const statsSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-stats'),
+  type: z.literal('stats'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -378,9 +378,9 @@ export const marketingStatsSectionSchema = z.object({
 });
 
 /** Questions in accordions, grouped by topic, beside the heading. Adapted from shadcn-ui-kit. */
-export const marketingFaqSectionSchema = z.object({
+export const faqSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-faq'),
+  type: z.literal('faq'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -395,22 +395,12 @@ export const marketingFaqSectionSchema = z.object({
     .max(2),
 });
 
-/** A closing invitation in a contained, quiet panel. Adapted from shadcn-ui-kit. */
-export const marketingCtaSectionSchema = z.object({
-  ...sectionBase,
-  type: z.literal('marketing-cta'),
-  title: text,
-  description: text.optional(),
-  primaryAction: actionSchema,
-  secondaryAction: actionSchema.optional(),
-});
-
 /** Currencies the pricing section can show; each plan sets its own amount in every one. */
 export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 
-export const marketingPricingSectionSchema = z.object({
+export const marketingPricingPlansSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-pricing'),
+  type: z.literal('marketing-pricing-plans'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -458,6 +448,11 @@ export const marketingPricingSectionSchema = z.object({
 export const ctaSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('cta'),
+  /**
+   * The same invitation in two looks: `band` (the default) runs full width on the
+   * high-emphasis surface; `panel` is a quieter, contained panel on the muted one.
+   */
+  appearance: z.enum(['band', 'panel']).optional(),
   title: text,
   description: text.optional(),
   primaryAction: actionSchema,
@@ -475,26 +470,26 @@ export const contactSectionSchema = z.object({
 
 export const sectionSchema = z.discriminatedUnion('type', [
   heroSectionSchema,
-  statementSectionSchema,
-  featuresSectionSchema,
-  useCasesSectionSchema,
-  marketingDeveloperExperienceSectionSchema,
-  marketingQualityAndAutomationSectionSchema,
-  marketingTechStackSectionSchema,
-  marketingTimelineSectionSchema,
-  marketingInfrastructureSectionSchema,
-  marketingPricingSectionSchema,
-  marketingHeroSectionSchema,
-  marketingCinematicHeroSectionSchema,
-  marketingCenteredHeroSectionSchema,
-  marketingBentoSectionSchema,
-  marketingDashboardSectionSchema,
-  marketingReviewsSectionSchema,
-  marketingStatsSectionSchema,
-  marketingFaqSectionSchema,
-  marketingCtaSectionSchema,
+  heroCenteredSectionSchema,
+  heroCinematicSectionSchema,
   ctaSectionSchema,
   contactSectionSchema,
+  featuresSectionSchema,
+  statsSectionSchema,
+  reviewsSectionSchema,
+  faqSectionSchema,
+  bentoSectionSchema,
+  statementSectionSchema,
+  useCasesSectionSchema,
+  // LaunchKit's own marketing site (src/components/sections/marketing/).
+  marketingHeroLaunchKitSectionSchema,
+  marketingDeveloperExperienceSectionSchema,
+  marketingDeploymentPipelineSectionSchema,
+  marketingPricingPlansSectionSchema,
+  marketingQualityGatesSectionSchema,
+  marketingTechStackSectionSchema,
+  marketingSetupTimelineSectionSchema,
+  marketingShowcaseCarouselSectionSchema,
 ]);
 
 export const pageDefinitionSchema = z
@@ -508,6 +503,7 @@ export const pageDefinitionSchema = z
   );
 
 export type Action = z.infer<typeof actionSchema>;
+export type TechIconName = z.infer<typeof techIconSchema>;
 export type Section = z.infer<typeof sectionSchema>;
 export type SectionType = Section['type'];
 export type SectionOf<T extends SectionType> = Extract<Section, { type: T }>;

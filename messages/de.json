@@ -91,10 +91,10 @@
     "previous": "Vorheriger Tarif",
     "next": "Nächster Tarif"
   },
-  "MarketingCenteredHero": {
+  "HeroCentered": {
     "rating": "Mit {rating, number} von 5 bewertet"
   },
-  "MarketingDashboard": {
+  "ShowcaseCarousel": {
     "label": "Bildschirme",
     "carousel": "Karussell",
     "slide": "Folie",
@@ -102,7 +102,7 @@
     "next": "Nächster Bildschirm",
     "slideLabel": "{name}, {index} von {total}"
   },
-  "MarketingReviews": {
+  "Reviews": {
     "label": "Bewertungen",
     "carousel": "Karussell",
     "slide": "Folie",

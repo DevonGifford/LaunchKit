@@ -91,10 +91,10 @@
     "previous": "Previous plan",
     "next": "Next plan"
   },
-  "MarketingCenteredHero": {
+  "HeroCentered": {
     "rating": "Rated {rating, number} out of 5"
   },
-  "MarketingDashboard": {
+  "ShowcaseCarousel": {
     "label": "Screens",
     "carousel": "carousel",
     "slide": "slide",
@@ -102,7 +102,7 @@
     "next": "Next screen",
     "slideLabel": "{name}, {index} of {total}"
   },
-  "MarketingReviews": {
+  "Reviews": {
     "label": "Reviews",
     "carousel": "carousel",
     "slide": "slide",

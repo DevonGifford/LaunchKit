@@ -5,7 +5,7 @@ import { findSection } from '@/lib/content/pages';
 import { HeroSection } from './hero-section';
 
 const meta = {
-  title: 'Sections/Hero',
+  title: 'Sections/Hero basic',
   component: HeroSection,
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof HeroSection>;
