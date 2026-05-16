@@ -19,6 +19,9 @@ export const mainNavigation: readonly NavigationLink[] = [
   contact,
 ];
 
+/** The call to action at the end of the wide header. */
+export const headerAction: NavigationLink = { key: 'getStarted', href: '/docs/getting-started' };
+
 /**
  * Grouped footer links, shared by every footer variant. Headings are
  * `Footer.groups.<key>` messages; `compact` marks the groups the compact
