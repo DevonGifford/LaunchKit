@@ -133,12 +133,14 @@
   --text-lede--line-height: 1.6;
 }
 
-/* Marketing motion. Use with `motion-safe:` so reduced motion shows the end state. */
+/* Decorative motion. Use with `motion-safe:` so reduced motion shows the end state. */
 @theme {
   /* A highlighter stroke drawn left to right behind text, once. */
   --animate-marker: marker 0.9s 0.4s cubic-bezier(0.65, 0, 0.35, 1) both;
   /* An endless drift over two copies of a row; the second copy follows the first. */
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  /* A slow bob, for illustrations that should feel light. */
+  --animate-float: float 6s ease-in-out infinite;
 
   @keyframes marker {
     from {
@@ -149,6 +151,12 @@
   @keyframes marquee {
     to {
       translate: -50% 0;
+    }
+  }
+
+  @keyframes float {
+    50% {
+      translate: 0 -6px;
     }
   }
 }

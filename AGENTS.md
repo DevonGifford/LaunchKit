@@ -145,6 +145,9 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
   `sections/marketing/` with a `marketing-` prefix, and generic sections never
   import from there. Their stories mirror this: `Sections/<Name>` and
   `Sections/Marketing/<Name>`.
+- Page states (not found, error, coming soon) sit in `src/components/layout/`
+  and are built from the hero section; route files such as `not-found.tsx`
+  and `error.tsx` only render them.
 - Colocate: a component's stories sit beside it, and a helper used by one
   component stays in that component's folder until a second user appears.
 - Server Components by default. Add `'use client'` only for state, effects,

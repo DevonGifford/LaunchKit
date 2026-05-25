@@ -112,8 +112,24 @@
     "slideLabel": "{name}, {index} de {total}"
   },
   "NotFound": {
+    "label": "Error 404",
     "title": "Página no encontrada",
     "description": "La página que buscabas no existe o se ha movido.",
     "backHome": "Volver a la página de inicio"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Algo salió mal",
+    "description": "Un problema inesperado impidió cargar esta página. Vuelve a intentarlo o regresa a la página de inicio.",
+    "retry": "Reintentar",
+    "backHome": "Volver a la página de inicio",
+    "reference": "Referencia: {digest}"
+  },
+  "ComingSoon": {
+    "label": "Próximamente",
+    "title": "Esta página está en camino",
+    "description": "Todavía la estamos preparando. Vuelve pronto o escríbenos si quieres saber cuándo estará lista.",
+    "backHome": "Volver a la página de inicio",
+    "contact": "Escríbenos"
   }
 }
