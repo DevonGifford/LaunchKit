@@ -3,7 +3,7 @@ import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { LocaleLinks, LocaleSwitcher } from './locale-switcher';
 
 const meta = {
-  title: 'UI/LaunchKit/Locale switcher',
+  title: 'UI/Navigation/Locale switcher',
   component: LocaleSwitcher,
   args: { label: 'Language' },
 } satisfies Meta<typeof LocaleSwitcher>;

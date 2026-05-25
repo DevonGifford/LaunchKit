@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import type { SectionOf } from '@/lib/content/types';
-import { MarketingPricingPlans } from './marketing-pricing-plans';
+import { PricingSection } from './pricing-section';
 
 /**
  * Fixture copy until the section is placed on a page. The EUR, USD and ZAR
@@ -9,7 +9,7 @@ import { MarketingPricingPlans } from './marketing-pricing-plans';
  */
 const section = {
   id: 'pricing',
-  type: 'marketing-pricing-plans',
+  type: 'pricing',
   eyebrow: 'Pricing',
   title: 'Simple pricing for every stage.',
   description: 'Start with the LaunchKit foundation, then choose how much hands-on help you need.',
@@ -74,14 +74,14 @@ const section = {
       { value: '5', label: 'CI checks on every pull request' },
     ],
   },
-} satisfies SectionOf<'marketing-pricing-plans'>;
+} satisfies SectionOf<'pricing'>;
 
 const meta = {
-  title: 'Sections/Marketing/Pricing plans',
-  component: MarketingPricingPlans,
+  title: 'Sections/Pricing',
+  component: PricingSection,
   parameters: { layout: 'fullscreen' },
   args: section,
-} satisfies Meta<typeof MarketingPricingPlans>;
+} satisfies Meta<typeof PricingSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

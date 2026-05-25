@@ -46,7 +46,7 @@ const section = {
 } satisfies SectionOf<'marketing-deployment-pipeline'>;
 
 const meta = {
-  title: 'Sections/Marketing/Deployment pipeline',
+  title: 'Sections/LaunchKit Marketing/Deployment pipeline',
   component: MarketingDeploymentPipeline,
   parameters: { layout: 'fullscreen' },
   args: section,

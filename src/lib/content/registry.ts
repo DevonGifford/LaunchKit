@@ -1,24 +1,25 @@
 import type { ComponentType } from 'react';
 import { BentoSection } from '@/components/sections/bento-section';
 import { ContactSection } from '@/components/sections/contact-section';
-import { CtaSection } from '@/components/sections/cta-section';
+import { CtaBandSection } from '@/components/sections/cta/cta-band-section';
+import { CtaPanelSection } from '@/components/sections/cta/cta-panel-section';
 import { FaqSection } from '@/components/sections/faq-section';
 import { FeaturesSection } from '@/components/sections/features-section';
-import { HeroCenteredSection } from '@/components/sections/hero-centered-section';
-import { HeroCinematicSection } from '@/components/sections/hero-cinematic-section';
-import { HeroSection } from '@/components/sections/hero-section';
-import { MarketingShowcaseCarousel } from '@/components/sections/marketing/marketing-showcase-carousel';
-import { MarketingDeveloperExperience } from '@/components/sections/marketing/marketing-developer-experience';
-import { MarketingHeroLaunchKit } from '@/components/sections/marketing/marketing-hero-launchkit';
-import { MarketingDeploymentPipeline } from '@/components/sections/marketing/marketing-deployment-pipeline';
-import { MarketingPricingPlans } from '@/components/sections/marketing/marketing-pricing-plans';
-import { MarketingQualityGates } from '@/components/sections/marketing/marketing-quality-gates';
-import { MarketingTechStack } from '@/components/sections/marketing/marketing-tech-stack';
-import { MarketingSetupTimeline } from '@/components/sections/marketing/marketing-setup-timeline';
+import { HeroCenteredSection } from '@/components/sections/hero/hero-centered-section';
+import { HeroCinematicSection } from '@/components/sections/hero/hero-cinematic-section';
+import { HeroSection } from '@/components/sections/hero/hero-section';
+import { MarketingDeveloperExperience } from '@/components/sections/launchkit-marketing/marketing-developer-experience';
+import { MarketingHeroLaunchKit } from '@/components/sections/launchkit-marketing/marketing-hero-launchkit';
+import { MarketingDeploymentPipeline } from '@/components/sections/launchkit-marketing/marketing-deployment-pipeline';
+import { MarketingQualityGates } from '@/components/sections/launchkit-marketing/marketing-quality-gates';
+import { MarketingTechnicalStack } from '@/components/sections/launchkit-marketing/marketing-technical-stack';
+import { MarketingSetupTimeline } from '@/components/sections/launchkit-marketing/marketing-setup-timeline';
+import { LineupSection } from '@/components/sections/lineup-section';
+import { PricingSection } from '@/components/sections/pricing-section';
 import { ReviewsSection } from '@/components/sections/reviews-section';
+import { ShowcaseSection } from '@/components/sections/showcase-section';
 import { StatementSection } from '@/components/sections/statement-section';
 import { StatsSection } from '@/components/sections/stats-section';
-import { UseCasesSection } from '@/components/sections/use-cases-section';
 import type { SectionOf, SectionType } from './types';
 
 /**
@@ -30,7 +31,8 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   hero: HeroSection,
   'hero-centered': HeroCenteredSection,
   'hero-cinematic': HeroCinematicSection,
-  cta: CtaSection,
+  'cta-band': CtaBandSection,
+  'cta-panel': CtaPanelSection,
   contact: ContactSection,
   features: FeaturesSection,
   stats: StatsSection,
@@ -38,14 +40,14 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   faq: FaqSection,
   bento: BentoSection,
   statement: StatementSection,
-  'use-cases': UseCasesSection,
+  lineup: LineupSection,
+  pricing: PricingSection,
+  showcase: ShowcaseSection,
   // LaunchKit's own marketing site.
   'marketing-hero-launchkit': MarketingHeroLaunchKit,
   'marketing-developer-experience': MarketingDeveloperExperience,
   'marketing-deployment-pipeline': MarketingDeploymentPipeline,
-  'marketing-pricing-plans': MarketingPricingPlans,
   'marketing-quality-gates': MarketingQualityGates,
-  'marketing-tech-stack': MarketingTechStack,
+  'marketing-technical-stack': MarketingTechnicalStack,
   'marketing-setup-timeline': MarketingSetupTimeline,
-  'marketing-showcase-carousel': MarketingShowcaseCarousel,
 };

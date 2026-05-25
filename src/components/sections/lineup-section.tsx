@@ -3,13 +3,7 @@ import type { SectionOf } from '@/lib/content/types';
 import { SectionHeading } from './section-parts';
 
 /** An index of the kinds of project that can grow from the same foundation. */
-export function UseCasesSection({
-  id,
-  eyebrow,
-  title,
-  description,
-  items,
-}: SectionOf<'use-cases'>) {
+export function LineupSection({ id, eyebrow, title, description, items }: SectionOf<'lineup'>) {
   return (
     <section id={id} aria-labelledby={`${id}-title`} className="border-t">
       <Container className="py-20 lg:py-28">

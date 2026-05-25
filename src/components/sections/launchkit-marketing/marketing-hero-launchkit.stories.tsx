@@ -24,7 +24,7 @@ const section = {
 } satisfies SectionOf<'marketing-hero-launchkit'>;
 
 const meta = {
-  title: 'Sections/Marketing/Hero LaunchKit',
+  title: 'Sections/LaunchKit Marketing/Hero LaunchKit',
   component: MarketingHeroLaunchKit,
   parameters: { layout: 'fullscreen' },
   args: section,

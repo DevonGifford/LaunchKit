@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
 import type { SectionOf } from '@/lib/content/types';
-import { MarketingShowcaseCarousel } from './marketing-showcase-carousel';
+import { ShowcaseSection } from './showcase-section';
 
 /** Screenshots of LaunchKit's own sections, in public/marketing/showcase/. */
 const screen = (name: string, file: string, href: string) => ({
@@ -14,7 +14,7 @@ const screen = (name: string, file: string, href: string) => ({
 /** Fixture copy until the section is placed on a page. */
 const section = {
   id: 'showcase',
-  type: 'marketing-showcase-carousel',
+  type: 'showcase',
   eyebrow: 'Showcase',
   title: 'Every section, ready to compose.',
   description:
@@ -31,14 +31,14 @@ const section = {
     screen('Quality and automation', 'quality', '/#quality'),
     screen('Use cases', 'use-cases', '/#adapt'),
   ],
-} satisfies SectionOf<'marketing-showcase-carousel'>;
+} satisfies SectionOf<'showcase'>;
 
 const meta = {
-  title: 'Sections/Marketing/Showcase carousel',
-  component: MarketingShowcaseCarousel,
+  title: 'Sections/Showcase',
+  component: ShowcaseSection,
   parameters: { layout: 'fullscreen' },
   args: section,
-} satisfies Meta<typeof MarketingShowcaseCarousel>;
+} satisfies Meta<typeof ShowcaseSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

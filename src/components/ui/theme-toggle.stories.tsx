@@ -4,7 +4,7 @@ import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from './theme-toggle';
 
 const meta = {
-  title: 'UI/LaunchKit/Theme toggle',
+  title: 'UI/Actions/Theme toggle',
   component: ThemeToggle,
   args: { label: 'Switch between light and dark mode' },
   decorators: [

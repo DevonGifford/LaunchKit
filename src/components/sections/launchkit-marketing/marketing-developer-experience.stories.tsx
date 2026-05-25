@@ -4,7 +4,7 @@ import { findSection } from '@/lib/content/pages';
 import { MarketingDeveloperExperience } from './marketing-developer-experience';
 
 const meta = {
-  title: 'Sections/Marketing/Developer experience',
+  title: 'Sections/LaunchKit Marketing/Developer experience',
   component: MarketingDeveloperExperience,
   parameters: { layout: 'fullscreen' },
   // On the homepage already, so the story renders its real content.

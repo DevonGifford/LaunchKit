@@ -23,9 +23,9 @@ export const home = {
     { type: 'hero', title: 'Built for what’s next.' },
     { type: 'statement', title: 'Build once…' },
     { type: 'features', title: 'Three layers…' },
-    { type: 'use-cases', title: 'Six websites…' },
+    { type: 'lineup', title: 'Six websites…' },
     { type: 'marketing-developer-experience', title: 'From clone…' },
-    { type: 'cta', title: 'Begin with…' },
+    { type: 'cta-band', title: 'Begin with…' },
   ],
 } satisfies PageDefinition;`,
       },
@@ -83,7 +83,7 @@ export const home = {
     },
     {
       id: 'adapt',
-      type: 'use-cases',
+      type: 'lineup',
       eyebrow: 'Built to adapt',
       title: 'Six different websites. One foundation.',
       description:
@@ -158,7 +158,7 @@ export const home = {
     },
     {
       id: 'begin',
-      type: 'cta',
+      type: 'cta-band',
       title: 'Begin with a better foundation.',
       description:
         'Start your next website from LaunchKit, make it unmistakably yours, and keep the engineering improving underneath.',

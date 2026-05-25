@@ -5,11 +5,11 @@
 import { useTranslations } from 'next-intl';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
-import { ShowcaseSlides } from './marketing-showcase-carousel-slides';
-import { ActionButton, SectionHeading } from '@/components/sections/section-parts';
+import { ShowcaseSlides } from './showcase-slides';
+import { ActionButton, SectionHeading } from './section-parts';
 
 /** A centred heading and actions over a carousel of screenshots, each linking to its demo. */
-export function MarketingShowcaseCarousel({
+export function ShowcaseSection({
   id,
   eyebrow,
   title,
@@ -17,9 +17,9 @@ export function MarketingShowcaseCarousel({
   primaryAction,
   secondaryAction,
   items,
-}: SectionOf<'marketing-showcase-carousel'>) {
+}: SectionOf<'showcase'>) {
   // Translated here, so the client part needs no message catalogue of its own.
-  const t = useTranslations('ShowcaseCarousel');
+  const t = useTranslations('Showcase');
   const labels = {
     label: t('label'),
     carousel: t('carousel'),

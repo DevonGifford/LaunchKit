@@ -140,11 +140,14 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
   `src/components/sections/section-parts.tsx`, or a helper beside it such as
   `tech-icons.tsx`.
 - Reusable sections sit in `src/components/sections/` with plain names
-  (`stats-section.tsx`, type `stats`); variants of one kind share a prefix
-  (`hero-centered`). Sections written for LaunchKit's own site sit in
-  `sections/marketing/` with a `marketing-` prefix, and generic sections never
-  import from there. Their stories mirror this: `Sections/<Name>` and
-  `Sections/Marketing/<Name>`.
+  (`stats-section.tsx`, type `stats`). A kind with variants gets a folder named
+  after its prefix, such as `hero/` (`hero-centered-section.tsx`, type
+  `hero-centered`) and `cta/` (`cta-band-section.tsx`, type `cta-band`).
+  Sections written for LaunchKit's own site sit in
+  `sections/launchkit-marketing/` with a `marketing-` prefix, and generic
+  sections never import from there. Their stories mirror this: `Sections/<Name>`,
+  `Sections/<Group>/<Name>` (`Sections/CTA/Band`) and
+  `Sections/LaunchKit Marketing/<Name>`.
 - Page states (not found, error, coming soon) sit in `src/components/layout/`
   and are built from the hero section; route files such as `not-found.tsx`
   and `error.tsx` only render them.
@@ -163,7 +166,7 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
   `not-found`, `sitemap`, `robots`, stories).
 - **Files:** `kebab-case` for files and folders, `PascalCase` components,
   `camelCase` functions. Stories sit next to their component
-  (`cta-section.stories.tsx`).
+  (`stats-section.stories.tsx`).
 - **Pages:** the default export is named `<Thing>Page`, takes
   `PageProps<'/[locale]/...'>`, and calls `resolveLocale(params)` first.
 - **Environment variables** are declared and validated in `src/env.ts`. Read

@@ -95,7 +95,7 @@
   "HeroCentered": {
     "rating": "Rated {rating, number} out of 5"
   },
-  "ShowcaseCarousel": {
+  "Showcase": {
     "label": "Screens",
     "carousel": "carousel",
     "slide": "slide",

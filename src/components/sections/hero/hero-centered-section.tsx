@@ -16,7 +16,7 @@ import {
 import { Link } from '@/i18n/navigation';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
-import { ActionButton, PersonAvatar } from './section-parts';
+import { ActionButton, PersonAvatar } from '@/components/sections/section-parts';
 
 type Section = SectionOf<'hero-centered'>;
 

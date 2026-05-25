@@ -3,13 +3,13 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
-import { PricingCards } from './marketing-pricing-cards';
-import { ActionButton, Eyebrow, SectionHeading } from '@/components/sections/section-parts';
+import { PricingCards } from './pricing-cards';
+import { ActionButton, Eyebrow, SectionHeading } from './section-parts';
 
-type Section = SectionOf<'marketing-pricing-plans'>;
+type Section = SectionOf<'pricing'>;
 
 /** Plans with a currency selector, then a callout for larger work and an optional row of figures. */
-export function MarketingPricingPlans({
+export function PricingSection({
   id,
   eyebrow,
   title,

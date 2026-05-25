@@ -24,7 +24,7 @@ const section = {
 } satisfies SectionOf<'hero-cinematic'>;
 
 const meta = {
-  title: 'Sections/Hero cinematic',
+  title: 'Sections/Hero/Hero cinematic',
   component: HeroCinematicSection,
   // A four-screen sticky section can't play inline on a docs page.
   tags: ['!autodocs'],

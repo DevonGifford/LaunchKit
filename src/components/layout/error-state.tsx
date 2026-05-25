@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { HeroSection } from '@/components/sections/hero-section';
+import { HeroSection } from '@/components/sections/hero/hero-section';
 import { ActionButton } from '@/components/sections/section-parts';
 import { Button } from '@/components/ui/button';
 import { ErrorIllustration } from './page-state-illustrations';

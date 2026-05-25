@@ -5,14 +5,14 @@ import { TechIcon } from '@/components/sections/tech-icons';
 import { SectionHeading } from '@/components/sections/section-parts';
 
 /** The technologies a project is built on: main ones as cards, supporting tools in a denser grid. */
-export function MarketingTechStack({
+export function MarketingTechnicalStack({
   id,
   eyebrow,
   title,
   description,
   featured,
   tools,
-}: SectionOf<'marketing-tech-stack'>) {
+}: SectionOf<'marketing-technical-stack'>) {
   return (
     <section
       id={id}

@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
-import { ActionButton, Eyebrow } from './section-parts';
+import { ActionButton, Eyebrow } from '@/components/sections/section-parts';
 
 /**
  * Page-opening section: the page's only h1, plus optional actions and code

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import type { SectionOf } from '@/lib/content/types';
-import { MarketingTechStack } from './marketing-tech-stack';
+import { MarketingTechnicalStack } from './marketing-technical-stack';
 
 /** Fixture copy until the section is placed on a page. It lists what LaunchKit ships. */
 const section = {
   id: 'stack',
-  type: 'marketing-tech-stack',
+  type: 'marketing-technical-stack',
   eyebrow: 'Tech stack',
   title: 'Built on proven tools.',
   description: 'Current, well-supported tools, already configured and tested together.',
@@ -39,14 +39,14 @@ const section = {
     { name: 'GitHub Actions', description: 'CI', icon: 'github-actions' },
     { name: 'Dependabot', description: 'Weekly updates', icon: 'dependabot' },
   ],
-} satisfies SectionOf<'marketing-tech-stack'>;
+} satisfies SectionOf<'marketing-technical-stack'>;
 
 const meta = {
-  title: 'Sections/Marketing/Tech stack',
-  component: MarketingTechStack,
+  title: 'Sections/LaunchKit Marketing/Technical stack',
+  component: MarketingTechnicalStack,
   parameters: { layout: 'fullscreen' },
   args: section,
-} satisfies Meta<typeof MarketingTechStack>;
+} satisfies Meta<typeof MarketingTechnicalStack>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

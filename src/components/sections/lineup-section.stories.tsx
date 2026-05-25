@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { home } from '@/content/en/pages/home';
 import { findSection } from '@/lib/content/pages';
-import { UseCasesSection } from './use-cases-section';
+import { LineupSection } from './lineup-section';
 
 const meta = {
-  title: 'Sections/Use cases',
-  component: UseCasesSection,
+  title: 'Sections/Lineup',
+  component: LineupSection,
   parameters: { layout: 'fullscreen' },
-  args: findSection(home, 'use-cases'),
-} satisfies Meta<typeof UseCasesSection>;
+  args: findSection(home, 'lineup'),
+} satisfies Meta<typeof LineupSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

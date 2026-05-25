@@ -68,9 +68,9 @@ export const featuresSectionSchema = z.object({
     .min(1),
 });
 
-export const useCasesSectionSchema = z.object({
+export const lineupSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('use-cases'),
+  type: z.literal('lineup'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -141,22 +141,22 @@ const techIconSchema = z.enum([
   'dependabot',
 ]);
 
-const techStackItemSchema = z.object({
+const technicalStackItemSchema = z.object({
   name: text,
   description: text,
   icon: techIconSchema,
 });
 
-export const marketingTechStackSectionSchema = z.object({
+export const marketingTechnicalStackSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-tech-stack'),
+  type: z.literal('marketing-technical-stack'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
   /** The main technologies, as larger cards; four per row on wide screens. */
-  featured: z.array(techStackItemSchema).min(1),
+  featured: z.array(technicalStackItemSchema).min(1),
   /** Supporting tools in a denser grid below; an incomplete last row is centred. */
-  tools: z.array(techStackItemSchema).optional(),
+  tools: z.array(technicalStackItemSchema).optional(),
 });
 
 const timelineRowSchema = z.object({ item: text, before: text, after: text });
@@ -329,9 +329,9 @@ export const bentoSectionSchema = z.object({
 });
 
 /** A heading and actions over a carousel of screenshots. Adapted from shadcn-ui-kit. */
-export const marketingShowcaseCarouselSectionSchema = z.object({
+export const showcaseSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-showcase-carousel'),
+  type: z.literal('showcase'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -398,9 +398,9 @@ export const faqSectionSchema = z.object({
 /** Currencies the pricing section can show; each plan sets its own amount in every one. */
 export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 
-export const marketingPricingPlansSectionSchema = z.object({
+export const pricingSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('marketing-pricing-plans'),
+  type: z.literal('pricing'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -445,18 +445,26 @@ export const marketingPricingPlansSectionSchema = z.object({
     .optional(),
 });
 
-export const ctaSectionSchema = z.object({
-  ...sectionBase,
-  type: z.literal('cta'),
-  /**
-   * The same invitation in two looks: `band` (the default) runs full width on the
-   * high-emphasis surface; `panel` is a quieter, contained panel on the muted one.
-   */
-  appearance: z.enum(['band', 'panel']).optional(),
+/** The content every call to action takes, whatever its look. */
+const ctaFields = {
   title: text,
   description: text.optional(),
   primaryAction: actionSchema,
   secondaryAction: actionSchema.optional(),
+};
+
+/** A closing invitation that runs full width on the high-emphasis surface. */
+export const ctaBandSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-band'),
+  ...ctaFields,
+});
+
+/** A quieter closing invitation in a contained panel on the muted surface. */
+export const ctaPanelSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-panel'),
+  ...ctaFields,
 });
 
 export const contactSectionSchema = z.object({
@@ -472,7 +480,8 @@ export const sectionSchema = z.discriminatedUnion('type', [
   heroSectionSchema,
   heroCenteredSectionSchema,
   heroCinematicSectionSchema,
-  ctaSectionSchema,
+  ctaBandSectionSchema,
+  ctaPanelSectionSchema,
   contactSectionSchema,
   featuresSectionSchema,
   statsSectionSchema,
@@ -480,16 +489,16 @@ export const sectionSchema = z.discriminatedUnion('type', [
   faqSectionSchema,
   bentoSectionSchema,
   statementSectionSchema,
-  useCasesSectionSchema,
-  // LaunchKit's own marketing site (src/components/sections/marketing/).
+  lineupSectionSchema,
+  pricingSectionSchema,
+  showcaseSectionSchema,
+  // LaunchKit's own marketing site (src/components/sections/launchkit-marketing/).
   marketingHeroLaunchKitSectionSchema,
   marketingDeveloperExperienceSectionSchema,
   marketingDeploymentPipelineSectionSchema,
-  marketingPricingPlansSectionSchema,
   marketingQualityGatesSectionSchema,
-  marketingTechStackSectionSchema,
+  marketingTechnicalStackSectionSchema,
   marketingSetupTimelineSectionSchema,
-  marketingShowcaseCarouselSectionSchema,
 ]);
 
 export const pageDefinitionSchema = z

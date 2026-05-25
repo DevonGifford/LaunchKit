@@ -21,9 +21,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
-import { ActionButton } from '@/components/sections/section-parts';
+import { ActionButton } from './section-parts';
 
-type Section = SectionOf<'marketing-pricing-plans'>;
+type Section = SectionOf<'pricing'>;
 type Plan = Section['plans'][number];
 type Currency = Section['currencies'][number];
 

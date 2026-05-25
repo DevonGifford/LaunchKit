@@ -17,7 +17,7 @@ import {
 import { Link } from '@/i18n/navigation';
 import type { SectionOf } from '@/lib/content/types';
 
-type Item = SectionOf<'marketing-showcase-carousel'>['items'][number];
+type Item = SectionOf<'showcase'>['items'][number];
 
 /** Interface text, translated on the server and passed in. */
 export type ShowcaseLabels = {

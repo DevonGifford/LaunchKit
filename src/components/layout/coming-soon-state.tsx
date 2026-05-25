@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { HeroSection } from '@/components/sections/hero-section';
+import { HeroSection } from '@/components/sections/hero/hero-section';
 import { ComingSoonIllustration } from './page-state-illustrations';
 import { PageState } from './page-state';
 
