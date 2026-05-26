@@ -12,8 +12,13 @@ const config: StorybookConfig = {
     '@storybook/addon-vitest',
   ],
   framework: { name: '@storybook/nextjs-vite', options: {} },
-  // The app's public files, plus logo colourways used only by Storybook's own UI.
-  staticDirs: ['../public', { from: './brand', to: '/storybook-brand' }],
+  // The app's public files, logo colourways used only by Storybook's own UI, and
+  // stand-in logos for stories, kept out of public/ so the site never ships them.
+  staticDirs: [
+    '../public',
+    { from: './brand', to: '/storybook-brand' },
+    { from: '../tests/fixtures/logos', to: '/fixtures/logos' },
+  ],
   core: { disableTelemetry: true },
   // Lets async Server Components (the site header and footer) render in the preview.
   features: { experimentalRSC: true },

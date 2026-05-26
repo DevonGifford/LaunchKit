@@ -341,6 +341,34 @@ export const showcaseSectionSchema = z.object({
   items: z.array(themedImageSchema.extend({ name: text, href })).min(1),
 });
 
+/** A row of logos drifting sideways in a seamless loop, such as clients, partners or tools. */
+export const marqueeSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marquee'),
+  /** A quiet line above the logos, e.g. "Trusted by teams at". */
+  title: text.optional(),
+  /**
+   * Each logo is drawn as a single-colour silhouette of its transparent areas, so
+   * it follows the theme: use a PNG, WebP or SVG with a transparent background.
+   * The name is its accessible name; width and height give its proportions.
+   */
+  items: z
+    .array(
+      z.object({
+        name: text,
+        src: publicPath,
+        width: z.number().int().positive(),
+        height: z.number().int().positive(),
+        href: href.optional(),
+      }),
+    )
+    .min(1),
+  /** Which way the logos drift; `left` by default. */
+  direction: z.enum(['left', 'right']).optional(),
+  /** How fast they drift; `normal` by default. */
+  speed: z.enum(['slow', 'normal', 'fast']).optional(),
+});
+
 /** Quotes in a bordered grid; a carousel on phones. Adapted from shadcn-ui-kit. */
 export const reviewsSectionSchema = z.object({
   ...sectionBase,
@@ -490,6 +518,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   bentoSectionSchema,
   statementSectionSchema,
   lineupSectionSchema,
+  marqueeSectionSchema,
   pricingSectionSchema,
   showcaseSectionSchema,
   // LaunchKit's own marketing site (src/components/sections/launchkit-marketing/).

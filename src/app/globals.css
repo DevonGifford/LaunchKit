@@ -137,7 +137,10 @@
 @theme {
   /* A highlighter stroke drawn left to right behind text, once. */
   --animate-marker: marker 0.9s 0.4s cubic-bezier(0.65, 0, 0.35, 1) both;
-  /* An endless drift over two copies of a row; the second copy follows the first. */
+  /*
+   * An endless drift over copies of a row, moved by one copy's width: -50% for
+   * two copies, or set --marquee-shift (e.g. calc(-100% / 3) for three).
+   */
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   /* A slow bob, for illustrations that should feel light. */
   --animate-float: float 6s ease-in-out infinite;
@@ -150,7 +153,7 @@
 
   @keyframes marquee {
     to {
-      translate: -50% 0;
+      translate: var(--marquee-shift, -50%) 0;
     }
   }
 

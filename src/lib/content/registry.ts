@@ -15,6 +15,7 @@ import { MarketingQualityGates } from '@/components/sections/launchkit-marketing
 import { MarketingTechnicalStack } from '@/components/sections/launchkit-marketing/marketing-technical-stack';
 import { MarketingSetupTimeline } from '@/components/sections/launchkit-marketing/marketing-setup-timeline';
 import { LineupSection } from '@/components/sections/lineup-section';
+import { MarqueeSection } from '@/components/sections/marquee-section';
 import { PricingSection } from '@/components/sections/pricing-section';
 import { ReviewsSection } from '@/components/sections/reviews-section';
 import { ShowcaseSection } from '@/components/sections/showcase-section';
@@ -41,6 +42,7 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   bento: BentoSection,
   statement: StatementSection,
   lineup: LineupSection,
+  marquee: MarqueeSection,
   pricing: PricingSection,
   showcase: ShowcaseSection,
   // LaunchKit's own marketing site.
