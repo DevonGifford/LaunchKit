@@ -24,18 +24,15 @@ export const headerAction: NavigationLink = { key: 'getStarted', href: '/docs/ge
 
 /**
  * Grouped footer links, shared by every footer variant. Headings are
- * `Footer.groups.<key>` messages; `compact` marks the groups the compact
- * footer keeps. Routes that don't exist yet are placeholders for the project
- * to add or remove.
+ * `Footer.groups.<key>` messages. Routes that don't exist yet are placeholders
+ * for the project to add or remove.
  */
 export const footerNavigation: ReadonlyArray<{
   key: keyof Messages['Footer']['groups'];
-  compact: boolean;
   links: readonly NavigationLink[];
 }> = [
   {
     key: 'product',
-    compact: true,
     links: [
       { key: 'features', href: '/#included' },
       { key: 'pricing', href: '/pricing' },
@@ -45,7 +42,6 @@ export const footerNavigation: ReadonlyArray<{
   },
   {
     key: 'resources',
-    compact: true,
     links: [
       docs,
       { key: 'storybook', href: '/storybook' },
@@ -55,7 +51,6 @@ export const footerNavigation: ReadonlyArray<{
   },
   {
     key: 'company',
-    compact: false,
     links: [{ key: 'about', href: '/about' }, contact, privacy, terms],
   },
 ];

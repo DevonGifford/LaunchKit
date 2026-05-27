@@ -1,9 +1,36 @@
 import { env } from '@/env';
 
+/**
+ * Ways to reach the project, in the order the footer lists them; each one shows
+ * only when it is set.
+ */
+export type SiteContact = {
+  email?: string;
+  /** In international format, e.g. "+44 7700 900123". */
+  phone?: string;
+  /** The WhatsApp number, in international format. */
+  whatsapp?: string;
+  /** The postal address, shown on three lines. */
+  address?: {
+    street: string;
+    /** The town or city, with the country if it helps, e.g. "Madrid, Spain". */
+    city: string;
+    postcode: string;
+  };
+};
+
+/** Networks the footer has a mark for. */
+export type SocialNetwork = 'github' | 'x' | 'youtube' | 'discord';
+
+export type SocialLink = { network: SocialNetwork; href: string };
+
 /** Project identity (spec §9: brand is build-time configuration). */
-export const siteConfig = {
+export const siteConfig: { name: string; contact: SiteContact; social: SocialLink[] } = {
   name: 'LaunchKit',
-} as const;
+  // Real details only: the full footer shows whatever is set here.
+  contact: {},
+  social: [],
+};
 
 /**
  * Canonical origin for absolute URLs (metadata, sitemap, hreflang).

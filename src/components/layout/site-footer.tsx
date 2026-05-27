@@ -1,31 +1,53 @@
 import type { ReactNode } from 'react';
+import { MapPinIcon, PhoneIcon, SendIcon } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Logo } from '@/components/ui/logo';
 import { features } from '@/config/features';
-import { footerNavigation, legalNavigation, mainNavigation } from '@/config/navigation';
+import { footerNavigation, legalNavigation } from '@/config/navigation';
+import { siteConfig, type SiteContact, type SocialLink } from '@/config/site';
 import { Container } from '@/components/ui/container';
 import { LocaleLinks } from '@/components/ui/locale-switcher';
 import { cn } from '@/lib/utils';
+import { BrandMark, brandName } from './brand-marks';
 import { NavLinks, type NavItem } from './nav-links';
 
-type FooterVariant = 'simple' | 'full' | 'compact' | 'mobile';
+type FooterVariant = 'full' | 'mobile';
+
+type ContactLabels = Record<keyof SiteContact, string>;
 
 /** The footer's text and links, translated once and laid out by each variant. */
 type FooterContent = {
   tagline: string;
   description: string;
   copyright: string;
-  labels: { navigation: string; legal: string; language: string };
-  main: NavItem[];
-  groups: { key: string; heading: string; compact: boolean; links: NavItem[] }[];
+  labels: {
+    navigation: string;
+    legal: string;
+    language: string;
+    social: string;
+    contact: ContactLabels;
+  };
+  groups: { key: string; heading: string; links: NavItem[] }[];
   legal: NavItem[];
+  contact: SiteContact;
+  social: SocialLink[];
 };
 
 /**
- * The site footer. `simple` is the one the site layout uses today; `full`,
- * `compact` and `mobile` lay out the same footer navigation in more detail.
+ * The site footer. `full`, the one the site layout uses, shows the brand, the
+ * link groups, the contact details and the social links; `mobile` is a pared-down
+ * version for phones. The contact details and social links come from
+ * src/config/site.ts unless passed in (as the stories do).
  */
-export async function SiteFooter({ variant = 'simple' }: { variant?: FooterVariant }) {
+export async function SiteFooter({
+  variant = 'full',
+  contact = siteConfig.contact,
+  social = siteConfig.social,
+}: {
+  variant?: FooterVariant;
+  contact?: SiteContact;
+  social?: SocialLink[];
+}) {
   const t = await getTranslations();
   const content: FooterContent = {
     tagline: t('Footer.tagline'),
@@ -35,113 +57,85 @@ export async function SiteFooter({ variant = 'simple' }: { variant?: FooterVaria
       navigation: t('Footer.navigation'),
       legal: t('Footer.legal'),
       language: t('LocaleSwitcher.label'),
+      social: t('Footer.social'),
+      contact: {
+        email: t('Footer.contact.email'),
+        phone: t('Footer.contact.phone'),
+        whatsapp: t('Footer.contact.whatsapp'),
+        address: t('Footer.contact.address'),
+      },
     },
-    main: mainNavigation.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) })),
     groups: footerNavigation.map((group) => ({
       key: group.key,
       heading: t(`Footer.groups.${group.key}`),
-      compact: group.compact,
       links: group.links.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) })),
     })),
     legal: legalNavigation.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) })),
+    contact,
+    social,
   };
 
-  switch (variant) {
-    case 'full':
-      return <FullFooter {...content} />;
-    case 'compact':
-      return <CompactFooter {...content} />;
-    case 'mobile':
-      return <MobileFooter {...content} />;
-    default:
-      return <SimpleFooter {...content} />;
-  }
-}
-
-/** The emblem and tagline beside the main navigation and languages. */
-function SimpleFooter({ tagline, copyright, labels, main }: FooterContent) {
-  return (
-    <footer className="border-t">
-      <Container className="grid gap-10 py-12 md:grid-cols-[1fr_auto] md:items-start md:py-16">
-        <div className="space-y-4">
-          <Logo variant="emblem" className="h-10 text-foreground" />
-          <p className="max-w-xs font-serif text-lg text-muted-foreground italic">{tagline}</p>
-        </div>
-        <div className="space-y-3 md:text-right">
-          <nav aria-label={labels.navigation}>
-            <NavLinks
-              items={main}
-              className="flex flex-wrap gap-x-5 md:justify-end"
-              linkClassName="text-sm"
-            />
-          </nav>
-          {features.localeSwitcher && (
-            <LocaleLinks label={labels.language} className="text-sm md:[&_ul]:justify-end" />
-          )}
-        </div>
-      </Container>
-      <div className="border-t">
-        <Container className="py-6 text-xs text-muted-foreground">{copyright}</Container>
-      </div>
-    </footer>
-  );
+  return variant === 'mobile' ? <MobileFooter {...content} /> : <FullFooter {...content} />;
 }
 
 /**
- * Desktop first: the brand beside a column for each group and one for the
- * languages. Below 1024px the columns move under the brand, and on phones they
- * pair up.
+ * The brand, a column per group, then the contact details and social links: in
+ * that order on phones, with the groups paired. From 768px the contact details
+ * and social links sit beside the brand, in line with the last group's column
+ * below. From 1024px the brand, groups and contact details share one row, with a
+ * hairline before the details, and the social links move under the brand.
  */
-function FullFooter({ tagline, description, copyright, labels, groups, legal }: FooterContent) {
+function FullFooter({
+  tagline,
+  description,
+  copyright,
+  labels,
+  groups,
+  legal,
+  contact,
+  social,
+}: FooterContent) {
+  const reachable = hasDetails(contact) || social.length > 0;
+
   return (
     <footer className="border-t">
-      <Container className="grid gap-14 py-16 md:py-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 lg:py-24">
-        <FooterBrand tagline={tagline} description={description} />
+      <Container
+        className={cn(
+          'grid gap-y-12 py-14 md:grid-cols-3 md:gap-x-10 md:py-16 lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6',
+          reachable
+            ? 'lg:grid-cols-[minmax(0,1fr)_auto_auto]'
+            : 'lg:grid-cols-[minmax(0,1fr)_auto]',
+        )}
+      >
+        <FooterBrand
+          tagline={tagline}
+          description={description}
+          className="md:col-span-2 lg:col-start-1 lg:col-end-2 lg:row-start-1"
+        />
         <ColumnNav
           groups={groups}
           labels={labels}
-          className="md:grid-cols-4 md:gap-x-10 xl:gap-x-14"
-        />
-      </Container>
-      <FooterBottom copyright={copyright} label={labels.legal} links={legal} />
-    </footer>
-  );
-}
-
-/**
- * Pared down to one band: the brand beside a row for each essential group and
- * one for the languages, so it is short as well as narrow.
- */
-function CompactFooter({ tagline, copyright, labels, groups, legal }: FooterContent) {
-  return (
-    <footer className="border-t">
-      <Container className="grid gap-10 py-12 md:py-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-16">
-        <FooterBrand tagline={tagline} size="sm" />
-        {/* From 640px each row is a heading and its links, the headings in one column. */}
-        <nav
-          aria-label={labels.navigation}
-          className="grid gap-y-5 sm:grid-cols-[auto_1fr] sm:gap-x-10 sm:gap-y-1"
-        >
-          {groups
-            .filter((group) => group.compact)
-            .map((group) => (
-              <Row key={group.key} heading={group.heading}>
-                <NavLinks
-                  items={group.links}
-                  className="flex flex-wrap gap-x-6"
-                  linkClassName={link}
-                />
-              </Row>
-            ))}
-          {features.localeSwitcher && (
-            <Row heading={labels.language}>
-              <LocaleLinks
-                label={labels.language}
-                className="[&_a]:text-foreground/80 [&_ul]:gap-x-6 [&_ul]:gap-y-0"
-              />
-            </Row>
+          languages={false}
+          className={cn(
+            'md:col-span-3 md:grid-cols-subgrid md:gap-x-10 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:grid-cols-[repeat(3,auto)] lg:gap-x-10 lg:self-start',
+            reachable && 'lg:border-e lg:pe-10',
           )}
-        </nav>
+        />
+        {reachable && (
+          // From 1024px the wrapper steps aside, so the details and links can part.
+          <div className="space-y-4 md:col-start-3 md:row-start-1 md:self-center lg:contents">
+            <FooterContact
+              contact={contact}
+              labels={labels.contact}
+              className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3 lg:self-start"
+            />
+            <SocialLinks
+              links={social}
+              label={labels.social}
+              className="lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:self-start"
+            />
+          </div>
+        )}
       </Container>
       <FooterBottom copyright={copyright} label={labels.legal} links={legal} />
     </footer>
@@ -171,14 +165,16 @@ function FooterBrand({
   tagline,
   description,
   size = 'md',
+  className,
 }: {
   tagline: string;
   description?: string;
   size?: 'sm' | 'md';
+  className?: string;
 }) {
   return (
-    <div className="flex flex-col items-start gap-6">
-      <Logo className={cn('text-foreground', size === 'md' ? 'h-11 sm:h-12 lg:h-14' : 'h-10')} />
+    <div className={cn('flex flex-col items-start gap-6', className)}>
+      <Logo className={cn('text-foreground', size === 'md' ? 'h-11 sm:h-12 lg:h-13' : 'h-10')} />
       <div className="space-y-3">
         <p
           className={cn(
@@ -196,17 +192,135 @@ function FooterBrand({
   );
 }
 
+/** True when at least one contact detail is set. */
+function hasDetails({ email, phone, whatsapp, address }: SiteContact) {
+  return Boolean(email || phone || whatsapp || address);
+}
+
 /**
- * A column per group, plus the languages, two to a row unless `className` adds
- * more. Each link fills its column's width, so it is easy to tap.
+ * The contact details in one compact column: email, phone, WhatsApp, then the
+ * address on three lines. Smaller than the text around them, and a step larger
+ * from 1024px, where they have a column of their own. Only the details that are
+ * set appear.
+ */
+function FooterContact({
+  contact,
+  labels,
+  className,
+}: {
+  contact: SiteContact;
+  labels: ContactLabels;
+  className?: string;
+}) {
+  if (!hasDetails(contact)) return null;
+  const { email, phone, whatsapp, address } = contact;
+
+  return (
+    <dl className={cn('grid gap-y-2.5 text-sm lg:gap-y-3 lg:text-base', className)}>
+      {email && (
+        <ContactItem icon={<SendIcon />} label={labels.email}>
+          <ContactLink href={`mailto:${email}`}>{email}</ContactLink>
+        </ContactItem>
+      )}
+      {phone && (
+        <ContactItem icon={<PhoneIcon />} label={labels.phone}>
+          <ContactLink href={`tel:${phone.replace(/[^\d+]/g, '')}`}>{phone}</ContactLink>
+        </ContactItem>
+      )}
+      {whatsapp && (
+        <ContactItem icon={<BrandMark brand="whatsapp" />} label={labels.whatsapp}>
+          <ContactLink href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`}>
+            {whatsapp}
+          </ContactLink>
+        </ContactItem>
+      )}
+      {address && (
+        <ContactItem icon={<MapPinIcon />} label={labels.address}>
+          <span className="block">{address.street}</span>
+          <span className="block">{address.city}</span>
+          <span className="block">{address.postcode}</span>
+        </ContactItem>
+      )}
+    </dl>
+  );
+}
+
+/** One detail: a champagne icon carrying a hidden label, then the value. */
+function ContactItem({
+  icon,
+  label,
+  children,
+}: {
+  icon: ReactNode;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 leading-normal text-foreground/80">
+      <dt className="flex h-[1lh] items-center text-accent [&_svg]:size-4 lg:[&_svg]:size-5">
+        {icon}
+        <span className="sr-only">{label}</span>
+      </dt>
+      <dd className="wrap-anywhere">{children}</dd>
+    </div>
+  );
+}
+
+function ContactLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      className="rounded-sm transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+    >
+      {children}
+    </a>
+  );
+}
+
+/** The project's social profiles as a row of marks, each named for assistive tech. */
+function SocialLinks({
+  links,
+  label,
+  className,
+}: {
+  links: SocialLink[];
+  label: string;
+  className?: string;
+}) {
+  if (links.length === 0) return null;
+
+  return (
+    // Pulled left so the first mark lines up with the text above it.
+    <ul aria-label={label} className={cn('-ms-2 flex flex-wrap gap-2', className)}>
+      {links.map(({ network, href }) => (
+        <li key={href}>
+          <a
+            href={href}
+            aria-label={brandName(network)}
+            className="flex size-10 items-center justify-center rounded-md text-foreground/80 transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <BrandMark brand={network} className="size-6" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * A column per group, plus the languages unless `languages` is false, two to a
+ * row unless `className` adds more. Each link fills its column's width, so it is
+ * easy to tap.
  */
 function ColumnNav({
   groups,
   labels,
+  languages = true,
   className,
 }: {
   groups: FooterContent['groups'];
   labels: FooterContent['labels'];
+  languages?: boolean;
   className?: string;
 }) {
   return (
@@ -224,7 +338,7 @@ function ColumnNav({
           />
         </Column>
       ))}
-      {features.localeSwitcher && (
+      {languages && features.localeSwitcher && (
         <Column heading={labels.language}>
           <LocaleLinks
             label={labels.language}
@@ -241,18 +355,6 @@ function Column({ heading, children }: { heading: string; children: ReactNode })
   return (
     <div className="space-y-5">
       <h2 className="font-sans text-xs font-medium tracking-[0.2em] text-foreground uppercase after:mt-3 after:block after:h-0.5 after:w-8 after:bg-accent">
-        {heading}
-      </h2>
-      {children}
-    </div>
-  );
-}
-
-/** A heading led by a champagne hairline, beside its links from 640px. */
-function Row({ heading, children }: { heading: string; children: ReactNode }) {
-  return (
-    <div className="sm:col-span-2 sm:grid sm:grid-cols-subgrid sm:items-center">
-      <h2 className="flex items-center gap-3 font-sans text-xs font-medium tracking-[0.2em] text-foreground uppercase before:h-px before:w-6 before:bg-accent">
         {heading}
       </h2>
       {children}

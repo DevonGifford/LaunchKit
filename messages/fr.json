@@ -43,6 +43,13 @@
     "navigation": "Pied de page",
     "copyright": "© {year} LaunchKit. Publié sous licence MIT.",
     "legal": "Mentions légales",
+    "contact": {
+      "address": "Adresse",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "whatsapp": "WhatsApp"
+    },
+    "social": "Réseaux sociaux",
     "groups": {
       "product": "Produit",
       "resources": "Ressources",
