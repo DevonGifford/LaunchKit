@@ -85,3 +85,70 @@ jobs:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
       - run: pnpm build-storybook
+      - name: Keep the build for deployment
+        if: vars.STORYBOOK_DEPLOY == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: storybook
+          path: storybook-static/
+          retention-days: 1
+
+  # Optional: publishes the Storybook to Vercel, to production from `main` and as
+  # a preview for each pull request from this repository. Off unless the
+  # STORYBOOK_DEPLOY variable is 'true'; see docs/releasing.md.
+  storybook-deploy:
+    name: Deploy Storybook
+    needs: storybook
+    if: >-
+      vars.STORYBOOK_DEPLOY == 'true' && github.actor != 'dependabot[bot]' &&
+      ((github.event_name != 'pull_request' && github.ref == 'refs/heads/main') ||
+      github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Not a required check, and a failed deploy leaves the run green: the release
+    # workflow only tags commits whose CI run succeeded.
+    continue-on-error: true
+    permissions:
+      contents: read
+      pull-requests: write # the preview link comment
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ vars.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ vars.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+      # Deployed from outside the checkout so Vercel gets no commit metadata: on
+      # the Hobby plan, Vercel can block a private repository's commits unless
+      # the account owner made them.
+      - uses: actions/download-artifact@v8
+        with:
+          name: storybook
+          path: ${{ runner.temp }}/storybook/.vercel/output/static
+      # A prebuilt Build Output API deployment, so Vercel serves the files without
+      # building anything. pnpm dlx can't deny install scripts the way allowBuilds
+      # does, so esbuild's runs here; it only checks its binary. The CLI version
+      # is pinned by hand.
+      - name: Deploy to Vercel
+        id: deploy
+        working-directory: ${{ runner.temp }}/storybook
+        env:
+          TARGET: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
+        run: |
+          echo '{"version":3}' > .vercel/output/config.json
+          url=$(pnpm dlx --allow-build=esbuild vercel@64.2.0 deploy --prebuilt --yes \
+            --target "$TARGET" --token "$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Storybook ($TARGET): $url" >> "$GITHUB_STEP_SUMMARY"
+      - name: Link the preview on the pull request
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          URL: ${{ steps.deploy.outputs.url }}
+        run: >-
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --edit-last --create-if-none
+          --body "Storybook preview: $URL"

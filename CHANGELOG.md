@@ -38,3 +38,5 @@ need to take when merging it.
   and mobile.
 - GitHub Actions CI, Dependabot, a manual release workflow, and governance
   documents.
+- Optional Storybook deployment to Vercel from CI: production from `main` and
+  a preview for each pull request, off until switched on.
