@@ -3,7 +3,10 @@ import { BentoSection } from '@/components/sections/bento-section';
 import { CapabilitiesSection } from '@/components/sections/capabilities-section';
 import { ContactSection } from '@/components/sections/contact-section';
 import { CtaBandSection } from '@/components/sections/cta/cta-band-section';
+import { CtaEditorialSection } from '@/components/sections/cta/cta-editorial-section';
+import { CtaMediaSection } from '@/components/sections/cta/cta-media-section';
 import { CtaPanelSection } from '@/components/sections/cta/cta-panel-section';
+import { CtaSplitSection } from '@/components/sections/cta/cta-split-section';
 import { FaqSection } from '@/components/sections/faq-section';
 import { FeaturesSection } from '@/components/sections/features-section';
 import { HeroCenteredSection } from '@/components/sections/hero/hero-centered-section';
@@ -35,6 +38,9 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   'hero-cinematic': HeroCinematicSection,
   'cta-band': CtaBandSection,
   'cta-panel': CtaPanelSection,
+  'cta-editorial': CtaEditorialSection,
+  'cta-media': CtaMediaSection,
+  'cta-split': CtaSplitSection,
   contact: ContactSection,
   features: FeaturesSection,
   capabilities: CapabilitiesSection,

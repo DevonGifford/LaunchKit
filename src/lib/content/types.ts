@@ -541,6 +541,44 @@ export const ctaPanelSectionSchema = z.object({
   ...ctaFields,
 });
 
+/** A compact band: an eyebrow and large heading, with the actions opposite them on wide screens. */
+export const ctaEditorialSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-editorial'),
+  eyebrow: text.optional(),
+  ...ctaFields,
+});
+
+/** A band with the actions opposite the heading and a decorative photo behind it. */
+export const ctaMediaSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-media'),
+  ...ctaFields,
+  /**
+   * A decorative photo, cropped to fit and toned to the band; it carries no
+   * meaning, so it has no alt text. Without one, a faint dot grid takes its place.
+   */
+  image: publicPath.optional(),
+});
+
+/** Copy beside a short list of principles, with an optional photo in its own column. */
+export const ctaSplitSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-split'),
+  eyebrow: text.optional(),
+  ...ctaFields,
+  /** Optional here, so the section can close a page as a statement. */
+  primaryAction: actionSchema.optional(),
+  /**
+   * A decorative photo, cropped to fit: a column on wide screens and a strip
+   * above the copy before then. It has no alt text; without one, the copy and
+   * list take the full width.
+   */
+  image: publicPath.optional(),
+  /** Short principles or facts beside the copy, e.g. "Security". */
+  items: z.array(text).min(1).max(6).optional(),
+});
+
 export const contactSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('contact'),
@@ -556,6 +594,9 @@ export const sectionSchema = z.discriminatedUnion('type', [
   heroCinematicSectionSchema,
   ctaBandSectionSchema,
   ctaPanelSectionSchema,
+  ctaEditorialSectionSchema,
+  ctaMediaSectionSchema,
+  ctaSplitSectionSchema,
   contactSectionSchema,
   featuresSectionSchema,
   capabilitiesSectionSchema,
