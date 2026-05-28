@@ -44,6 +44,7 @@
     "copyright": "© {year} LaunchKit. Released under the MIT licence.",
     "legal": "Legal",
     "contact": {
+      "heading": "Contact",
       "address": "Address",
       "email": "Email",
       "phone": "Phone",
@@ -51,7 +52,6 @@
     },
     "social": "Social links",
     "groups": {
-      "product": "Product",
       "resources": "Resources",
       "company": "Company"
     }

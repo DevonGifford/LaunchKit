@@ -40,8 +40,9 @@ type Story = StoryObj<typeof meta>;
 const box = (element: Element) => element.getBoundingClientRect();
 
 /**
- * One row: the brand with the social links under it, a column per link group,
- * then after a hairline the contact details, with the address last. There is no
+ * One row: the brand with the social links under it, the Company links, the
+ * Resources links in two columns under one heading, then after a hairline the
+ * contact details under their own heading, with the address last. There is no
  * language column.
  */
 export const Full: Story = {
@@ -55,7 +56,21 @@ export const Full: Story = {
     await expect(phone).toHaveAttribute('href', 'tel:+447700900123');
     await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/447700900456');
     await expect(canvas.getByText('28001')).toBeVisible();
-    await expect(canvas.queryByRole('heading', { name: 'Language' })).toBeNull();
+    await expect(canvas.getAllByRole('heading').map((heading) => heading.textContent)).toEqual([
+      'Company',
+      'Resources',
+      'Contact',
+    ]);
+    await expect(box(canvas.getByRole('heading', { name: 'Contact' })).top).toBeCloseTo(
+      box(canvas.getByRole('heading', { name: 'Company' })).top,
+      0,
+    );
+
+    // Resources runs down two columns: Features to Showcase, then Docs to FAQ.
+    const features = box(canvas.getByRole('link', { name: 'Features' }));
+    const docs = box(canvas.getByRole('link', { name: 'Docs' }));
+    await expect(docs.left).toBeGreaterThan(features.right);
+    await expect(docs.top).toBeCloseTo(features.top, 0);
 
     // Email, phone, WhatsApp, then the address.
     const address = box(canvas.getByText(street));
@@ -63,15 +78,24 @@ export const Full: Story = {
     await expect(box(whatsapp).top).toBeGreaterThan(box(phone).bottom);
     await expect(address.top).toBeGreaterThan(box(whatsapp).bottom);
 
-    // The details beside the groups, aligned at the top; the social links under the brand.
-    const product = box(canvas.getByRole('heading', { name: 'Product' }));
-    const company = box(canvas.getByRole('heading', { name: 'Company' }));
+    // The details beside the groups, level with the first links; the social links under the brand.
+    const nav = box(canvas.getByRole('navigation', { name: 'Footer' }));
     const description = box(canvas.getByText(/reusable foundation/));
     const links = box(canvas.getByRole('list', { name: 'Social links' }));
-    await expect(box(email).left).toBeGreaterThan(company.right);
-    await expect(Math.abs(box(email).top - product.top)).toBeLessThan(12);
+    await expect(box(email).left).toBeGreaterThan(nav.right);
+    await expect(
+      Math.abs(box(email).top - box(canvas.getByRole('link', { name: 'About' })).top),
+    ).toBeLessThan(12);
     await expect(links.top).toBeGreaterThan(description.bottom);
-    await expect(links.right).toBeLessThan(product.left);
+    await expect(links.right).toBeLessThan(nav.left);
+
+    // The four details spread evenly down the column, wider apart than the 12px
+    // they would have packed at the top.
+    const rows = [...(canvasElement.querySelector('dl')?.children ?? [])].map(box);
+    const gaps = rows.slice(1).map((row, index) => row.top - (rows[index]?.bottom ?? 0));
+    await expect(gaps).toHaveLength(3);
+    await expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(2);
+    await expect(Math.min(...gaps)).toBeGreaterThan(12);
   },
 };
 
@@ -86,8 +110,8 @@ export const FullWithoutContact: Story = {
 };
 
 /**
- * Below 1024px the contact details and social links move beside the brand, in
- * line with the last group's column, and the groups run underneath.
+ * Below 1024px the contact details and social links move beside the brand, and
+ * the groups run underneath, Resources' second column in line with the details.
  */
 export const FullOnTablet: Story = {
   tags: ['!autodocs'],
@@ -100,13 +124,20 @@ export const FullOnTablet: Story = {
     const links = box(canvas.getByRole('list', { name: 'Social links' }));
     await expect(email.left).toBeGreaterThan(box(canvas.getByText(/reusable foundation/)).right);
     // The text starts after a 16px icon and a 12px gap.
-    await expect(email.left - 28).toBeCloseTo(company.left, 0);
+    await expect(email.left - 28).toBeCloseTo(
+      box(canvas.getByRole('link', { name: 'Docs' })).left,
+      0,
+    );
     await expect(links.top).toBeGreaterThan(box(canvas.getByText(street)).bottom);
     await expect(company.top).toBeGreaterThan(links.bottom);
+    await expect(canvas.queryByRole('heading', { name: 'Contact' })).toBeNull();
   },
 };
 
-/** On phones the link groups pair up and come before the contact details. */
+/**
+ * On phones each group takes the full width with its links in two columns, and
+ * the groups come before the contact details.
+ */
 export const FullOnMobile: Story = {
   tags: ['!autodocs'],
   args: { variant: 'full' },
@@ -115,15 +146,22 @@ export const FullOnMobile: Story = {
     const canvas = within(canvasElement);
     const email = box(canvas.getByRole('link', { name: contact.email }));
     const address = box(canvas.getByText(street));
-    await expect(email.top).toBeGreaterThan(
-      box(canvas.getByRole('heading', { name: 'Company' })).bottom,
+    // The legal row repeats some links, so look inside the groups.
+    const nav = within(canvas.getByRole('navigation', { name: 'Footer' }));
+    await expect(box(nav.getByRole('heading', { name: 'Resources' })).top).toBeGreaterThan(
+      box(nav.getByRole('link', { name: 'Terms of Use' })).bottom,
     );
+    await expect(box(nav.getByRole('link', { name: 'Privacy Policy' })).left).toBeGreaterThan(
+      box(nav.getByRole('link', { name: 'About' })).right,
+    );
+    await expect(email.top).toBeGreaterThan(box(canvas.getByRole('link', { name: 'FAQ' })).bottom);
     await expect(address.top).toBeGreaterThan(
       box(canvas.getByRole('link', { name: contact.whatsapp })).bottom,
     );
     await expect(box(canvas.getByRole('list', { name: 'Social links' })).top).toBeGreaterThan(
       address.bottom,
     );
+    await expect(canvas.queryByRole('heading', { name: 'Contact' })).toBeNull();
     const page = canvasElement.ownerDocument.documentElement;
     await expect(page.scrollWidth).toBeLessThanOrEqual(page.clientWidth);
   },

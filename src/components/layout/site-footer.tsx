@@ -25,9 +25,10 @@ type FooterContent = {
     legal: string;
     language: string;
     social: string;
+    contactHeading: string;
     contact: ContactLabels;
   };
-  groups: { key: string; heading: string; links: NavItem[] }[];
+  groups: { key: string; heading: string; wide: boolean; links: NavItem[] }[];
   legal: NavItem[];
   contact: SiteContact;
   social: SocialLink[];
@@ -58,6 +59,7 @@ export async function SiteFooter({
       legal: t('Footer.legal'),
       language: t('LocaleSwitcher.label'),
       social: t('Footer.social'),
+      contactHeading: t('Footer.contact.heading'),
       contact: {
         email: t('Footer.contact.email'),
         phone: t('Footer.contact.phone'),
@@ -68,6 +70,7 @@ export async function SiteFooter({
     groups: footerNavigation.map((group) => ({
       key: group.key,
       heading: t(`Footer.groups.${group.key}`),
+      wide: group.wide ?? false,
       links: group.links.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) })),
     })),
     legal: legalNavigation.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) })),
@@ -117,18 +120,25 @@ function FullFooter({
           labels={labels}
           languages={false}
           className={cn(
-            'md:col-span-3 md:grid-cols-subgrid md:gap-x-10 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:grid-cols-[repeat(3,auto)] lg:gap-x-10 lg:self-start',
+            'md:col-span-3 md:grid-cols-subgrid md:gap-x-10 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:grid-cols-[repeat(3,auto)] lg:content-start lg:gap-x-10',
             reachable && 'lg:border-e lg:pe-10',
           )}
         />
         {reachable && (
           // From 1024px the wrapper steps aside, so the details and links can part.
           <div className="space-y-4 md:col-start-3 md:row-start-1 md:self-center lg:contents">
-            <FooterContact
-              contact={contact}
-              labels={labels.contact}
-              className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3 lg:self-start"
-            />
+            {/* From 1024px the details sit under a heading, spread down the rest of the column. */}
+            {hasDetails(contact) && (
+              <div className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3 lg:flex lg:flex-col lg:gap-5">
+                <ColumnHeading className="hidden lg:block">{labels.contactHeading}</ColumnHeading>
+                {/* The top padding lines the email up with the first links, which sit in taller targets. */}
+                <FooterContact
+                  contact={contact}
+                  labels={labels.contact}
+                  className="lg:flex-1 lg:content-between lg:pt-2"
+                />
+              </div>
+            )}
             <SocialLinks
               links={social}
               label={labels.social}
@@ -308,9 +318,11 @@ function SocialLinks({
 }
 
 /**
- * A column per group, plus the languages unless `languages` is false, two to a
- * row unless `className` adds more. Each link fills its column's width, so it is
- * easy to tap.
+ * A group per row, plus the languages unless `languages` is false, each with its
+ * links running down two columns, so short and long groups stay balanced.
+ * `className` can lay the groups out side by side from 768px: each then takes
+ * one column with its links in one, except a wide group, which spans two and
+ * keeps two. Each link fills its column's width, so it is easy to tap.
  */
 function ColumnNav({
   groups,
@@ -327,13 +339,17 @@ function ColumnNav({
     // Long single words, such as German ones, hyphenate instead of overflowing a column.
     <nav
       aria-label={labels.navigation}
-      className={cn('grid grid-cols-2 gap-x-6 gap-y-8 wrap-break-word hyphens-auto', className)}
+      className={cn('grid gap-x-6 gap-y-8 wrap-break-word hyphens-auto', className)}
     >
       {groups.map((group) => (
-        <Column key={group.key} heading={group.heading}>
+        <Column
+          key={group.key}
+          heading={group.heading}
+          className={cn(group.wide && 'md:col-span-2')}
+        >
           <NavLinks
             items={group.links}
-            className="flex flex-col sm:gap-1"
+            className={cn(linkColumns, group.wide ? 'md:gap-x-10' : 'md:columns-1')}
             linkClassName={cn(link, 'flex')}
           />
         </Column>
@@ -342,7 +358,7 @@ function ColumnNav({
         <Column heading={labels.language}>
           <LocaleLinks
             label={labels.language}
-            className="[&_a]:flex [&_a]:text-foreground/80 [&_ul]:flex-col [&_ul]:gap-0 sm:[&_ul]:gap-1"
+            className="[&_a]:flex [&_a]:text-foreground/80 [&_li]:break-inside-avoid sm:[&_li:not(:last-child)]:mb-1 [&_ul]:block [&_ul]:columns-2 [&_ul]:gap-x-6"
           />
         </Column>
       )}
@@ -350,15 +366,38 @@ function ColumnNav({
   );
 }
 
-/** A heading underlined with a short champagne bar, above its links. */
-function Column({ heading, children }: { heading: string; children: ReactNode }) {
+// Links run down two columns, the first filled before the second.
+const linkColumns = 'columns-2 gap-x-6 sm:space-y-1 [&>li]:break-inside-avoid';
+
+/** A heading above its links, 20px clear of them. */
+function Column({
+  heading,
+  className,
+  children,
+}: {
+  heading: string;
+  className?: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="space-y-5">
-      <h2 className="font-sans text-xs font-medium tracking-[0.2em] text-foreground uppercase after:mt-3 after:block after:h-0.5 after:w-8 after:bg-accent">
-        {heading}
-      </h2>
+    <div className={cn('space-y-5', className)}>
+      <ColumnHeading>{heading}</ColumnHeading>
       {children}
     </div>
+  );
+}
+
+/** A small uppercase heading underlined with a short champagne bar. */
+function ColumnHeading({ className, children }: { className?: string; children: ReactNode }) {
+  return (
+    <h2
+      className={cn(
+        'font-sans text-xs font-medium tracking-[0.2em] text-foreground uppercase after:mt-3 after:block after:h-0.5 after:w-8 after:bg-accent',
+        className,
+      )}
+    >
+      {children}
+    </h2>
   );
 }
 
