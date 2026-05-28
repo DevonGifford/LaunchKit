@@ -42,7 +42,7 @@ const section = {
 } satisfies SectionOf<'marketing-technical-stack'>;
 
 const meta = {
-  title: 'Sections/LaunchKit Marketing/Technical stack',
+  title: 'Sections/Marketing/Technical stack',
   component: MarketingTechnicalStack,
   parameters: { layout: 'fullscreen' },
   args: section,

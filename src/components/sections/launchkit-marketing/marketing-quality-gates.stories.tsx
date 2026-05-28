@@ -53,7 +53,7 @@ const section = {
 } satisfies SectionOf<'marketing-quality-gates'>;
 
 const meta = {
-  title: 'Sections/LaunchKit Marketing/Quality gates',
+  title: 'Sections/Marketing/Quality gates',
   component: MarketingQualityGates,
   parameters: { layout: 'fullscreen' },
   args: section,

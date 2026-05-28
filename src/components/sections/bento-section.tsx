@@ -2,17 +2,15 @@
  * Adapted from shadcn-ui-kit, components/sections/bento.tsx and template-stack.tsx
  * (https://github.com/bundui/shadcn-ui-kit). Copyright (c) 2024 Mohd. Nisab, MIT License.
  */
-import { ArrowUpRightIcon } from 'lucide-react';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { Container } from '@/components/ui/container';
 import { Logo } from '@/components/ui/logo';
-import { Link } from '@/i18n/navigation';
 import type { Action, SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
 import { ImageRotator } from './bento-rotator';
 import { TechIcon } from './tech-icons';
-import { SectionHeading } from './section-parts';
+import { ActionLink, SectionHeading } from './section-parts';
 
 type Section = SectionOf<'bento'>;
 
@@ -101,29 +99,8 @@ function TileCopy({
     <div className={cn('space-y-3', className)}>
       <h3 className="text-2xl">{title}</h3>
       <p className="leading-relaxed text-pretty text-muted-foreground">{description}</p>
-      {action && <TileLink action={action} />}
+      {action && <ActionLink action={action} />}
     </div>
-  );
-}
-
-function TileLink({ action }: { action: Action }) {
-  const className =
-    'inline-flex min-h-10 items-center gap-1.5 rounded-md font-medium underline decoration-accent underline-offset-4 outline-none hover:decoration-foreground focus-visible:ring-3 focus-visible:ring-ring/50';
-  const content = (
-    <>
-      {action.label}
-      <ArrowUpRightIcon aria-hidden="true" className="size-4" />
-    </>
-  );
-
-  return action.href.startsWith('/') ? (
-    <Link href={action.href} className={className}>
-      {content}
-    </Link>
-  ) : (
-    <a href={action.href} className={className}>
-      {content}
-    </a>
   );
 }
 

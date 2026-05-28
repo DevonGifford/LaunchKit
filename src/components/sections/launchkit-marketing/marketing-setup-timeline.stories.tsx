@@ -43,7 +43,7 @@ const section = {
 } satisfies SectionOf<'marketing-setup-timeline'>;
 
 const meta = {
-  title: 'Sections/LaunchKit Marketing/Setup timeline',
+  title: 'Sections/Marketing/Setup timeline',
   component: MarketingSetupTimeline,
   parameters: { layout: 'fullscreen' },
   args: section,

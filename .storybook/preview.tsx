@@ -40,10 +40,11 @@ const preview: Preview = {
             ['Hero basic', 'Hero centered', 'Hero cinematic'],
             'CTA',
             ['Band', 'Panel'],
-            'Marquee',
+            'Capabilities',
             'Statement',
             'Showcase',
             'Features',
+            'Marquee',
             'Reviews',
             'Lineup',
             'Bento',
@@ -52,7 +53,7 @@ const preview: Preview = {
             'Pricing',
             'Contact',
             // Sections written for LaunchKit's own site.
-            'LaunchKit Marketing',
+            'Marketing',
             [
               'Hero LaunchKit',
               'Developer experience',

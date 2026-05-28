@@ -1,3 +1,4 @@
+import { ArrowUpRightIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -78,6 +79,28 @@ export function ActionButton({
         <a href={action.href}>{action.label}</a>
       )}
     </Button>
+  );
+}
+
+/** A content-defined text link with an arrow: locale-aware for internal paths. */
+export function ActionLink({ action }: { action: Action }) {
+  const className =
+    'inline-flex min-h-10 items-center gap-1.5 rounded-md font-medium underline decoration-accent underline-offset-4 outline-none hover:decoration-foreground focus-visible:ring-3 focus-visible:ring-ring/50';
+  const content = (
+    <>
+      {action.label}
+      <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+    </>
+  );
+
+  return action.href.startsWith('/') ? (
+    <Link href={action.href} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <a href={action.href} className={className}>
+      {content}
+    </a>
   );
 }
 

@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 import { BentoSection } from '@/components/sections/bento-section';
+import { CapabilitiesSection } from '@/components/sections/capabilities-section';
 import { ContactSection } from '@/components/sections/contact-section';
 import { CtaBandSection } from '@/components/sections/cta/cta-band-section';
 import { CtaPanelSection } from '@/components/sections/cta/cta-panel-section';
@@ -36,6 +37,7 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   'cta-panel': CtaPanelSection,
   contact: ContactSection,
   features: FeaturesSection,
+  capabilities: CapabilitiesSection,
   stats: StatsSection,
   reviews: ReviewsSection,
   faq: FaqSection,

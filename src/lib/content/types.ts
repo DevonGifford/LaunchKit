@@ -68,6 +68,52 @@ export const featuresSectionSchema = z.object({
     .min(1),
 });
 
+/** A service, capability or area of expertise; each variant shows the fields it needs. */
+const capabilityItemSchema = z.object({
+  title: text,
+  description: text,
+  /** An icon above the title, shown by the cards variant. */
+  icon: z
+    .enum([
+      'app-window',
+      'cloud',
+      'sparkles',
+      'users',
+      'code',
+      'server',
+      'shield-check',
+      'chart-line',
+      'palette',
+      'megaphone',
+      'compass',
+      'rocket',
+    ])
+    .optional(),
+  /** A text link under the description, shown by the cards and numbered variants. */
+  action: actionSchema.optional(),
+  /** Short labels under the description, shown by the detailed variant, e.g. "Typography". */
+  tags: z.array(text).optional(),
+});
+
+/** Services or areas of expertise under a split heading, in one of three layouts. */
+export const capabilitiesSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('capabilities'),
+  /**
+   * `cards` (the default): bordered cards with icons, four to a row.
+   * `numbered`: numbered editorial columns, four to a row.
+   * `detailed`: larger titles with tags, three to a row between vertical rules.
+   */
+  variant: z.enum(['cards', 'numbered', 'detailed']).optional(),
+  eyebrow: text.optional(),
+  title: text,
+  /** Beside the heading from 1024px, under it before then. */
+  description: text.optional(),
+  /** A text link under the intro, e.g. "Explore our services". */
+  action: actionSchema.optional(),
+  items: z.array(capabilityItemSchema).min(1),
+});
+
 export const lineupSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('lineup'),
@@ -512,6 +558,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   ctaPanelSectionSchema,
   contactSectionSchema,
   featuresSectionSchema,
+  capabilitiesSectionSchema,
   statsSectionSchema,
   reviewsSectionSchema,
   faqSectionSchema,

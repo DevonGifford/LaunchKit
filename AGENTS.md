@@ -140,14 +140,16 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
   `src/components/sections/section-parts.tsx`, or a helper beside it such as
   `tech-icons.tsx`.
 - Reusable sections sit in `src/components/sections/` with plain names
-  (`stats-section.tsx`, type `stats`). A kind with variants gets a folder named
-  after its prefix, such as `hero/` (`hero-centered-section.tsx`, type
-  `hero-centered`) and `cta/` (`cta-band-section.tsx`, type `cta-band`).
+  (`stats-section.tsx`, type `stats`). Layouts that share one data model are
+  one section with a `variant` field, in one file (`capabilities-section.tsx`,
+  type `capabilities`). A kind whose variants are separate section types gets a
+  folder named after its prefix, such as `hero/` (`hero-centered-section.tsx`,
+  type `hero-centered`) and `cta/` (`cta-band-section.tsx`, type `cta-band`).
   Sections written for LaunchKit's own site sit in
   `sections/launchkit-marketing/` with a `marketing-` prefix, and generic
   sections never import from there. Their stories mirror this: `Sections/<Name>`,
-  `Sections/<Group>/<Name>` (`Sections/CTA/Band`) and
-  `Sections/LaunchKit Marketing/<Name>`.
+  `Sections/<Group>/<Name>` (`Sections/CTA/Band`) and, for
+  `launchkit-marketing/`, `Sections/Marketing/<Name>`.
 - Page states (not found, error, coming soon) sit in `src/components/layout/`
   and are built from the hero section; route files such as `not-found.tsx`
   and `error.tsx` only render them.
