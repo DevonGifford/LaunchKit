@@ -104,6 +104,28 @@ export function ActionLink({ action }: { action: Action }) {
   );
 }
 
+/**
+ * Small uppercase labels separated by dots, such as tags or places. Each label
+ * carries the dot before it; the list is pulled left inside a clipping box, so
+ * the dot that would start each line is hidden.
+ */
+export function DotList({ items, className }: { items: string[]; className?: string }) {
+  return (
+    <div className={cn('overflow-hidden', className)}>
+      <ul className="-ms-5 flex flex-wrap gap-y-1 text-xs tracking-[0.16em] text-muted-foreground uppercase">
+        {items.map((item) => (
+          <li key={item} className="relative ps-5">
+            <span aria-hidden="true" className="absolute start-2">
+              ·
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /** A person's photo, or their initials when there is none. Decorative: name them nearby. */
 export function PersonAvatar({
   name,

@@ -10,7 +10,7 @@ const section = {
   title: 'Have a project in mind?',
   description: 'Tell us where you are, and we will help you plan the next step.',
   primaryAction: { label: 'Start a conversation', href: '/contact' },
-  image: '/marketing/cta-images/CTA-image-1.png',
+  image: '/marketing/cta-images/cta-image-1.webp',
 } satisfies SectionOf<'cta-media'>;
 
 const meta = {
@@ -45,7 +45,7 @@ export const Default: Story = {
 
 /** A bright photo works too: the wash keeps the copy on an almost plain surface. */
 export const WithLightPhoto: Story = {
-  args: { image: '/marketing/cta-images/CTA-image-3.png' },
+  args: { image: '/marketing/cta-images/cta-image-3.webp' },
 };
 
 /** No photo and no placeholder: a faint dot grid fills the band instead. */

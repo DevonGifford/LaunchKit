@@ -17,7 +17,7 @@ import type { ComponentType } from 'react';
 import { Card } from '@/components/ui/card';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
-import { ActionLink, SectionHeading } from './section-parts';
+import { ActionLink, DotList, SectionHeading } from './section-parts';
 
 type Capabilities = SectionOf<'capabilities'>;
 type Capability = Capabilities['items'][number];
@@ -155,7 +155,7 @@ function DetailedCapabilities({ items }: { items: Capability[] }) {
           <p className="max-w-md leading-relaxed text-pretty text-muted-foreground">
             {item.description}
           </p>
-          {item.tags && <Tags tags={item.tags} />}
+          {item.tags && <DotList items={item.tags} className="mt-2" />}
         </li>
       ))}
     </ol>
@@ -172,27 +172,5 @@ function ItemNumber({ index }: { index: number }) {
     >
       {String(index + 1).padStart(2, '0')}
     </p>
-  );
-}
-
-/**
- * Small uppercase labels separated by dots. Each label carries the dot before it;
- * the list is pulled left inside a clipping box, so the dot that would start each
- * line is hidden.
- */
-function Tags({ tags }: { tags: string[] }) {
-  return (
-    <div className="mt-2 overflow-hidden">
-      <ul className="-ms-5 flex flex-wrap gap-y-1 text-xs tracking-[0.16em] text-muted-foreground uppercase">
-        {tags.map((tag) => (
-          <li key={tag} className="relative ps-5">
-            <span aria-hidden="true" className="absolute start-2">
-              ·
-            </span>
-            {tag}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

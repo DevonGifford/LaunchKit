@@ -12,7 +12,7 @@ const section = {
   description:
     'Technology keeps changing; what people expect of a well-run organisation does not. We pair current engineering with care for security, reliability and long-term value.',
   primaryAction: { label: 'How we work', href: '/contact' },
-  image: '/marketing/cta-images/CTA-image-2.png',
+  image: '/marketing/cta-images/cta-image-2.webp',
   items: ['Confidentiality', 'Security', 'Accountability', 'Judgement'],
 } satisfies SectionOf<'cta-split'>;
 
@@ -52,7 +52,7 @@ export const Default: Story = {
 
 /** A bright photo in the column. */
 export const WithLightPhoto: Story = {
-  args: { image: '/marketing/cta-images/CTA-image-4.png' },
+  args: { image: '/marketing/cta-images/cta-image-4.webp' },
 };
 
 /** No photo and no empty column: the copy starts at the page margin, like other sections. */

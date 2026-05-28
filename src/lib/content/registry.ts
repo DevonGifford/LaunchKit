@@ -12,6 +12,7 @@ import { FeaturesSection } from '@/components/sections/features-section';
 import { HeroCenteredSection } from '@/components/sections/hero/hero-centered-section';
 import { HeroCinematicSection } from '@/components/sections/hero/hero-cinematic-section';
 import { HeroSection } from '@/components/sections/hero/hero-section';
+import { HeroSplitSection } from '@/components/sections/hero/hero-split-section';
 import { MarketingDeveloperExperience } from '@/components/sections/launchkit-marketing/marketing-developer-experience';
 import { MarketingHeroLaunchKit } from '@/components/sections/launchkit-marketing/marketing-hero-launchkit';
 import { MarketingDeploymentPipeline } from '@/components/sections/launchkit-marketing/marketing-deployment-pipeline';
@@ -36,6 +37,7 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   hero: HeroSection,
   'hero-centered': HeroCenteredSection,
   'hero-cinematic': HeroCinematicSection,
+  'hero-split': HeroSplitSection,
   'cta-band': CtaBandSection,
   'cta-panel': CtaPanelSection,
   'cta-editorial': CtaEditorialSection,

@@ -332,6 +332,36 @@ export const heroCenteredSectionSchema = z.object({
     .optional(),
 });
 
+/**
+ * A page opener in two halves: the h1, description and actions beside a photo
+ * that runs to the screen's edge, with a few optional words over it.
+ */
+export const heroSplitSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('hero-split'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text,
+  primaryAction: actionSchema.optional(),
+  /** A text link beside the button, e.g. "Our services". */
+  secondaryAction: actionSchema.optional(),
+  /** Short facts under the actions, e.g. the cities you work from. */
+  details: z.array(text).min(1).max(4).optional(),
+  /** A decorative photo, cropped to fit; it carries no meaning, so it has no alt text. */
+  image: publicPath,
+  /**
+   * The same photo framed for the column beside the copy from 1024px, such as a
+   * crop closer to its subject. Without it, `image` is used at every width.
+   */
+  desktopImage: publicPath.optional(),
+  /**
+   * A few words over the photo's lower corner from 1024px, e.g. "Discretion.".
+   * They have no backdrop, so the photo must be dark enough there to keep them
+   * at 4.5:1.
+   */
+  highlights: z.array(text).min(1).max(4).optional(),
+});
+
 /** An image with a version for each appearance. */
 const themedImageSchema = z.object({ light: publicPath, dark: publicPath });
 
@@ -592,6 +622,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   heroSectionSchema,
   heroCenteredSectionSchema,
   heroCinematicSectionSchema,
+  heroSplitSectionSchema,
   ctaBandSectionSchema,
   ctaPanelSectionSchema,
   ctaEditorialSectionSchema,
