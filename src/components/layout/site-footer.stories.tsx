@@ -99,16 +99,6 @@ export const Full: Story = {
   },
 };
 
-/** With nothing set in src/config/site.ts, the brand stands alone, as on the site until then. */
-export const FullWithoutContact: Story = {
-  args: { variant: 'full', contact: {}, social: [] },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.queryByRole('list', { name: 'Social links' })).toBeNull();
-    await expect(canvasElement.querySelector('dl')).toBeNull();
-  },
-};
-
 /**
  * Below 1024px the contact details and social links move beside the brand, and
  * the groups run underneath, Resources' second column in line with the details.
@@ -167,6 +157,16 @@ export const FullOnMobile: Story = {
   },
 };
 
+/** With nothing set in src/config/site.ts, the brand stands alone, as on the site until then. */
+export const FullNoContact: Story = {
+  args: { variant: 'full', contact: {}, social: [] },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByRole('list', { name: 'Social links' })).toBeNull();
+    await expect(canvasElement.querySelector('dl')).toBeNull();
+  },
+};
+
 /** The Midnight appearance. */
 export const FullDark: Story = {
   tags: ['!autodocs'],
@@ -179,11 +179,4 @@ export const Mobile: Story = {
   tags: ['!autodocs'],
   args: { variant: 'mobile' },
   globals: { viewport: { value: 'mobile' } },
-};
-
-/** The Midnight appearance. */
-export const MobileDark: Story = {
-  tags: ['!autodocs'],
-  args: { variant: 'mobile' },
-  globals: { viewport: { value: 'mobile' }, theme: 'dark' },
 };

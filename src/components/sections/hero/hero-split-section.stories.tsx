@@ -20,7 +20,7 @@ const section = {
 } satisfies SectionOf<'hero-split'>;
 
 const meta = {
-  title: 'Sections/Hero/Hero split',
+  title: 'Sections/Hero/Split',
   component: HeroSplitSection,
   parameters: { layout: 'fullscreen' },
   args: section,

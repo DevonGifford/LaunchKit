@@ -37,7 +37,7 @@ const preview: Preview = {
           'Sections',
           [
             'Hero',
-            ['Hero basic', 'Hero centered', 'Hero cinematic', 'Hero split'],
+            ['Basic', 'Centered', 'Cinematic', 'Split'],
             'CTA',
             ['Band', 'Panel', 'Editorial', 'Media', 'Split'],
             'Capabilities',

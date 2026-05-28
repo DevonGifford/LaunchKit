@@ -35,7 +35,7 @@ const section = {
 } satisfies SectionOf<'hero-centered'>;
 
 const meta = {
-  title: 'Sections/Hero/Hero centered',
+  title: 'Sections/Hero/Centered',
   component: HeroCenteredSection,
   parameters: { layout: 'fullscreen' },
   args: section,
