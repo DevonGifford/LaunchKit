@@ -96,11 +96,12 @@ function Photo({ image, desktopImage }: { image: string; desktopImage?: string }
 /**
  * A few words over the photo's lower corner, from 1024px: before then the copy
  * covers the photo. A hairline runs up from them, well past the first word.
- * Nothing sits behind them, so the photo needs to be dark in that corner.
+ * There's no backdrop: a soft halo of the surface colour lifts each letter off
+ * brighter patches, but the photo still needs to be dark in that corner.
  */
 function Highlights({ items }: { items: string[] }) {
   return (
-    <ul className="absolute end-10 bottom-12 space-y-4 border-s border-emphasis-foreground/40 ps-6 pt-24 pb-1 text-sm font-medium tracking-[0.2em] text-emphasis-foreground uppercase max-lg:hidden">
+    <ul className="absolute end-10 bottom-12 space-y-4 border-s border-emphasis-foreground/40 ps-6 pt-24 pb-1 text-sm font-medium tracking-[0.2em] text-emphasis-foreground uppercase [text-shadow:0_0_2px_var(--color-emphasis),0_0_4px_var(--color-emphasis),0_0_12px_var(--color-emphasis)] max-lg:hidden">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
