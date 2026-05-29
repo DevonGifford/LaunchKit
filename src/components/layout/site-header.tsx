@@ -67,12 +67,12 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
     return (
       <header className={bar}>
         {/*
-          Its own frame rather than the page container: gutters that grow with the
-          screen (matching the container's on phones) and a cap at 120rem. From md
-          the side columns share the leftover width, so the navigation sits at the
-          centre; if one side needs more room, it nudges over rather than overlap.
+          Its own frame rather than the page container: slim gutters (the
+          container's on phones) and a cap at 120rem. From md the side columns
+          share the leftover width, so the navigation sits at the centre; if one
+          side needs more room, it nudges over rather than overlap.
         */}
-        <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-[clamp(1.25rem,5vw,6rem)] md:grid md:grid-cols-[1fr_auto_1fr]">
+        <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-5 sm:px-6 md:grid md:grid-cols-[1fr_auto_1fr]">
           {home('md:justify-self-start')}
           <div className="hidden md:block">{nav}</div>
           <div className="hidden items-center gap-1 justify-self-end md:flex">
@@ -99,8 +99,8 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
         <div className="hidden items-center gap-2 md:flex">
           {nav}
           <span aria-hidden="true" className="mx-2 h-5 w-px bg-border" />
-          {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
           {features.themeSwitcher && <ThemeToggle label={t('Theme.toggle')} />}
+          {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
         </div>
 
         {mobile}
