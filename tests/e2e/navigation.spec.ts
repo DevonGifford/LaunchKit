@@ -45,7 +45,25 @@ test('main navigation marks the current page', async ({ page, isMobile }) => {
     : page.getByRole('banner').getByRole('navigation', { name: 'Main' });
 
   await expect(nav.getByRole('link', { name: 'Docs' })).toHaveAttribute('aria-current', 'page');
-  await expect(nav.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current');
+  await expect(nav.getByRole('link', { name: 'Product' })).not.toHaveAttribute('aria-current');
+});
+
+test('the header lists the main sections and leads to the contact page', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, 'The header call to action shows from md up');
+  await page.goto('/en');
+  const header = page.getByRole('banner');
+
+  await expect(header.getByRole('navigation', { name: 'Main' }).getByRole('link')).toHaveText([
+    'Product',
+    'Examples',
+    'Pricing',
+    'Docs',
+  ]);
+  await header.getByRole('link', { name: 'Get in Contact' }).click();
+  await expect(page).toHaveURL(/\/en\/contact$/);
 });
 
 test.describe('mobile menu', () => {
@@ -57,9 +75,9 @@ test.describe('mobile menu', () => {
 
     const menu = page.getByRole('dialog', { name: 'Menu' });
     await expect(menu).toBeVisible();
-    await menu.getByRole('link', { name: 'Contact' }).tap();
+    await menu.getByRole('link', { name: 'Docs' }).tap();
 
-    await expect(page).toHaveURL(/\/en\/contact$/);
+    await expect(page).toHaveURL(/\/en\/docs$/);
     await expect(menu).toBeHidden();
   });
 

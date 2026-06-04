@@ -16,9 +16,11 @@
   },
   "Navigation": {
     "home": "Start",
+    "product": "Produkt",
+    "examples": "Beispiele",
     "docs": "Dokumentation",
     "contact": "Kontakt",
-    "getStarted": "Loslegen",
+    "getInContact": "Kontakt aufnehmen",
     "features": "Funktionen",
     "pricing": "Preise",
     "roadmap": "Roadmap",

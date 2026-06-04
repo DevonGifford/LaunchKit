@@ -5,6 +5,7 @@ type NavigationLink = { key: NavigationKey; href: string };
 
 // Links that appear in more than one list, defined once.
 const docs: NavigationLink = { key: 'docs', href: '/docs' };
+const pricing: NavigationLink = { key: 'pricing', href: '/pricing' };
 const contact: NavigationLink = { key: 'contact', href: '/contact' };
 const privacy: NavigationLink = { key: 'privacy', href: '/privacy' };
 const terms: NavigationLink = { key: 'terms', href: '/terms' };
@@ -14,13 +15,14 @@ const terms: NavigationLink = { key: 'terms', href: '/terms' };
  * (`Navigation.<key>`); hrefs are locale-less — the i18n Link adds the prefix.
  */
 export const mainNavigation: readonly NavigationLink[] = [
-  { key: 'home', href: '/' },
+  { key: 'product', href: '/' },
+  { key: 'examples', href: '/examples' },
+  pricing,
   docs,
-  contact,
 ];
 
 /** The call to action at the end of the wide header. */
-export const headerAction: NavigationLink = { key: 'getStarted', href: '/docs/getting-started' };
+export const headerAction: NavigationLink = { key: 'getInContact', href: '/contact' };
 
 /**
  * Grouped footer links, shared by every footer variant. Headings are
@@ -42,7 +44,7 @@ export const footerNavigation: ReadonlyArray<{
     wide: true,
     links: [
       { key: 'features', href: '/#included' },
-      { key: 'pricing', href: '/pricing' },
+      pricing,
       { key: 'roadmap', href: '/roadmap' },
       { key: 'showcase', href: '/#adapt' },
       docs,

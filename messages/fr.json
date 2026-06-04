@@ -16,9 +16,11 @@
   },
   "Navigation": {
     "home": "Accueil",
+    "product": "Produit",
+    "examples": "Exemples",
     "docs": "Documentation",
     "contact": "Contact",
-    "getStarted": "Commencer",
+    "getInContact": "Nous contacter",
     "features": "Fonctionnalités",
     "pricing": "Tarifs",
     "roadmap": "Feuille de route",
