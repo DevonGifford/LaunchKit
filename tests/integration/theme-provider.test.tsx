@@ -7,6 +7,8 @@ import { ThemeProvider } from '@/components/theme/theme-provider';
 test('renders in the browser without React’s script tag warning', async () => {
   // Switching language remounts the root layout, so the provider renders on the
   // client as well as the server.
+  // Test files share the browser's storage, and another may have stored a theme.
+  localStorage.clear();
   const errors: string[] = [];
   const spy = vi.spyOn(console, 'error').mockImplementation((...args: unknown[]) => {
     errors.push(args.map(String).join(' '));
