@@ -66,6 +66,15 @@ test('the header lists the main sections and leads to the contact page', async (
   await expect(page).toHaveURL(/\/en\/contact$/);
 });
 
+test('placeholder social links lead to the coming-soon page in the current language', async ({
+  page,
+}) => {
+  await page.goto('/fr');
+  await page.getByRole('contentinfo').getByRole('link', { name: 'GitHub' }).click();
+  await expect(page).toHaveURL(/\/fr\/coming-soon$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cette page arrive bientôt');
+});
+
 test.describe('mobile menu', () => {
   test.skip(({ isMobile }) => !isMobile, 'Small screens only');
 

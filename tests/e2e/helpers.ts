@@ -11,6 +11,7 @@ export const routes = [
   '/docs/getting-started',
   '/docs/making-it-yours',
   '/contact',
+  '/coming-soon',
 ] as const;
 
 export const localized = (locale: string, route: string) =>

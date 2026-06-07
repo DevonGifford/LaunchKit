@@ -157,7 +157,7 @@ export const FullOnMobile: Story = {
   },
 };
 
-/** With nothing set in src/config/site.ts, the brand stands alone, as on the site until then. */
+/** With nothing set in src/config/site.ts, the brand stands alone. */
 export const FullNoContact: Story = {
   args: { variant: 'full', contact: {}, social: [] },
   play: async ({ canvasElement }) => {

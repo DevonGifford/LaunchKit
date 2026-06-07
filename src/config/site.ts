@@ -27,9 +27,22 @@ export type SocialLink = { network: SocialNetwork; href: string };
 /** Project identity (spec §9: brand is build-time configuration). */
 export const siteConfig: { name: string; contact: SiteContact; social: SocialLink[] } = {
   name: 'LaunchKit',
-  // Real details only: the full footer shows whatever is set here.
-  contact: {},
-  social: [],
+  // Placeholders until the real details exist: the full footer shows whatever is
+  // set here. A reserved example.com address and UK numbers Ofcom sets aside for
+  // drama, so none of them reach anyone real.
+  contact: {
+    email: 'hello@example.com',
+    phone: '+44 7700 900123',
+    whatsapp: '+44 7700 900456',
+    address: { street: 'Calle de Ejemplo 123', city: 'Madrid, Spain', postcode: '28001' },
+  },
+  // Placeholders: each profile points at the coming-soon page until it exists.
+  social: [
+    { network: 'github', href: '/coming-soon' },
+    { network: 'x', href: '/coming-soon' },
+    { network: 'youtube', href: '/coming-soon' },
+    { network: 'discord', href: '/coming-soon' },
+  ],
 };
 
 /**

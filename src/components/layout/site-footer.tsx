@@ -303,7 +303,7 @@ function SocialLinks({
     // Pulled left so the first mark lines up with the text above it.
     <ul aria-label={label} className={cn('-ms-2 flex flex-wrap gap-2', className)}>
       {links.map(({ network, href }) => (
-        <li key={href}>
+        <li key={network}>
           <a
             href={href}
             aria-label={brandName(network)}
