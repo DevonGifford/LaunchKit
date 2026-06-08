@@ -84,9 +84,9 @@ test.describe('mobile menu', () => {
 
     const menu = page.getByRole('dialog', { name: 'Menu' });
     await expect(menu).toBeVisible();
-    await menu.getByRole('link', { name: 'Docs' }).tap();
+    await menu.getByRole('link', { name: 'Get in Contact' }).tap();
 
-    await expect(page).toHaveURL(/\/en\/docs$/);
+    await expect(page).toHaveURL(/\/en\/contact$/);
     await expect(menu).toBeHidden();
   });
 

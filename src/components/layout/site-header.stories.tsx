@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { expect, within } from 'storybook/test';
 import { SiteHeader } from './site-header';
 
 const meta = {
@@ -38,14 +39,22 @@ export const Wide: Story = {
   globals: { viewport: { value: 'desktop' } },
 };
 
-/** The same composition while it fits; the navigation nudges off centre rather than overlap. */
+/**
+ * Below 1024px, tablets included, the menu button takes over: the full row is
+ * wider than a 768px screen in the longer languages.
+ */
 export const WideOnTablet: Story = {
   tags: ['!autodocs'],
   args: { variant: 'wide' },
   globals: { viewport: { value: 'tablet' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole('button', { name: 'Open menu' })).toBeVisible();
+    await expect(canvas.queryByRole('navigation', { name: 'Main' })).toBeNull();
+  },
 };
 
-/** Below md it collapses into the same menu button as the simple header. */
+/** On phones, the same menu button as the simple header, with the call to action inside. */
 export const WideOnMobile: Story = {
   tags: ['!autodocs'],
   args: { variant: 'wide' },
