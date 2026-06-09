@@ -1,128 +1,294 @@
 import type { PageDefinition } from '@/lib/content/types';
 
+/** Screenshots of LaunchKit's own sections, in public/marketing/showcase/. */
+const screenshot = (file: string) => ({
+  light: `/marketing/showcase/${file}-light.webp`,
+  dark: `/marketing/showcase/${file}-dark.webp`,
+});
+
+/**
+ * Technology marks in public/marketing/logos/: the marquee stories'
+ * tests/fixtures/logos/ files, plus more drawn the same way from the path data
+ * in src/components/sections/tech-icons.tsx. Both come from Simple Icons
+ * 16.35.0 (CC0-1.0, https://simpleicons.org). The marks are trademarks of their
+ * owners, used here only to name the tools.
+ */
+const logo = (name: string, file: string) => ({
+  name,
+  src: `/marketing/logos/${file}.svg`,
+  width: 24,
+  height: 24,
+});
+
+/**
+ * The homepage. English first: until it is translated, the other locales show
+ * the previous homepage (home-v1.ts). The copy is the sections' Storybook
+ * fixtures and the previous homepage, adapted where noted.
+ */
 export const home = {
   meta: {
-    title: 'A reusable Next.js foundation',
+    title: 'The foundation for your next website',
     description:
-      'LaunchKit is a maintained foundation of design system, localization, content and tooling, so every new website starts from proven ground.',
+      'LaunchKit is a refined Next.js foundation with a design system, four languages, typed content and automated checks, so every new website starts from proven ground.',
   },
   sections: [
     {
       id: 'hero',
-      type: 'hero',
-      eyebrow: 'A foundation for ambitious ideas',
-      title: 'Built for what’s next.',
+      type: 'marketing-hero-launchkit',
+      eyebrow: 'The modern foundation for your next big idea',
+      title: ['Launch faster.', 'Build what matters.'],
+      titleHighlight: 'matters.',
+      audiences: ['For founders', 'For startups', 'For rewrites'],
       description:
-        'LaunchKit is a refined Next.js foundation: design system, localization, content and tooling, ready on day one. Every new site starts from proven ground instead of an empty folder.',
+        'A refined foundation for founders, startups and businesses ready for a fresh start.',
       primaryAction: { label: 'Get started', href: '/docs/getting-started' },
-      secondaryAction: { label: 'Start a project', href: '/contact' },
-      preview: {
-        filename: 'src/content/en/pages/home.ts',
-        code: `export const home = {
-  sections: [
-    { type: 'hero', title: 'Built for what’s next.' },
-    { type: 'statement', title: 'Build once…' },
-    { type: 'features', title: 'Three layers…' },
-    { type: 'lineup', title: 'Six websites…' },
-    { type: 'marketing-developer-experience', title: 'From clone…' },
-    { type: 'cta-band', title: 'Begin with…' },
-  ],
-} satisfies PageDefinition;`,
+      // Becomes "See examples" once the Examples page exists.
+      secondaryAction: { label: 'Read the docs', href: '/docs' },
+      showcase: {
+        light: '/marketing/hero-showcase-light.webp',
+        dark: '/marketing/hero-showcase-dark.webp',
+        alt: 'Three websites built with LaunchKit, shown in browser windows',
+        width: 1448,
+        height: 1086,
       },
     },
     {
-      id: 'philosophy',
-      type: 'statement',
-      eyebrow: 'The philosophy',
-      title: 'Build once. Reuse often. Improve centrally.',
-      paragraphs: [
-        'Most websites begin the same way: a framework, components, a theme, translations, forms, tests and CI, assembled again from scratch and slightly differently each time.',
-        'LaunchKit does that work once, carefully, and keeps it maintained. New projects start accessible, localized and tested, and spend their time on what makes them different.',
-        'When the foundation improves, every project built on it can take the improvement deliberately, through an ordinary Git merge.',
+      id: 'technologies',
+      type: 'marquee',
+      title: 'Built with tools you already know',
+      items: [
+        logo('Next.js', 'nextjs'),
+        logo('React', 'react'),
+        logo('TypeScript', 'typescript'),
+        logo('Tailwind CSS', 'tailwindcss'),
+        logo('shadcn/ui', 'shadcn-ui'),
+        logo('Radix UI', 'radix-ui'),
+        logo('Zod', 'zod'),
+        logo('React Hook Form', 'react-hook-form'),
+        logo('Vitest', 'vitest'),
+        logo('Storybook', 'storybook'),
+        logo('ESLint', 'eslint'),
+        logo('pnpm', 'pnpm'),
+        logo('GitHub Actions', 'github-actions'),
       ],
+      direction: 'right',
+      speed: 'slow',
+    },
+    {
+      id: 'timeline',
+      type: 'marketing-setup-timeline',
+      title: 'Same setup, every time.',
+      titleMuted: 'It doesn’t have to be.',
+      paragraphs: [
+        {
+          text: 'A framework, a theme, translations, forms, tests and CI, assembled again for every project and slightly differently each time.',
+        },
+        { text: 'Nine weeks of work that doesn’t make your site different.', emphasis: true },
+        {
+          text: 'LaunchKit does that work once and keeps it maintained, so each project starts on what makes it its own.',
+        },
+      ],
+      callout: {
+        eyebrow: 'With LaunchKit',
+        title: 'Day 1: build what matters',
+        description:
+          'The foundation is done. Start with the brand, content and features only you can add.',
+      },
+      // Illustrative estimates, as in the fixture; the fixture's note to "replace
+      // these figures" is meant for downstream projects, so it is left off here.
+      timeline: {
+        title: 'Development timeline',
+        badge: 'Estimate',
+        columns: { item: 'Capability', before: 'From scratch', after: 'With LaunchKit' },
+        rows: [
+          { item: 'Project setup and tooling', before: '1 week', after: 'Day 1' },
+          { item: 'Design tokens and theming', before: '1 week', after: 'Day 1' },
+          { item: 'Accessible UI components', before: '2 weeks', after: 'Day 1' },
+          { item: 'Localisation in four languages', before: '1 week', after: 'Day 1' },
+          { item: 'Typed content and sections', before: '1 week', after: 'Day 1' },
+          { item: 'Forms and server actions', before: '1 week', after: 'Day 1' },
+          { item: 'Unit, browser and end-to-end tests', before: '1 week', after: 'Day 1' },
+          { item: 'CI, Git hooks and releases', before: '1 week', after: 'Day 1' },
+        ],
+        total: { item: 'Total', before: '9 weeks', after: 'Day 1' },
+        note: 'Estimated for one experienced developer.',
+      },
     },
     {
       id: 'included',
-      type: 'features',
-      eyebrow: 'What’s included',
-      title: 'Three layers, each one ready on day one.',
+      type: 'bento',
+      eyebrow: 'Inside LaunchKit',
+      title: 'Everything a new site needs, already built.',
       description:
-        'A small, well-made baseline rather than an enormous gallery built for imagined requirements.',
-      items: [
-        {
-          title: 'Design system',
-          description:
-            'Semantic tokens, light and dark appearances, and accessible primitives that take on a new brand without being rewritten.',
-          points: [
-            'A brand palette lives in one file',
-            'Light and dark, following the system',
-            'shadcn/ui primitives owned in the repository',
+        'Themes, four languages, responsive layouts, tests and accessibility checks come with every project.',
+      showcase: {
+        stat: '20+ sections',
+        title: 'Sections for every page',
+        description:
+          'Heroes, pricing, timelines, FAQs and more, each driven by typed content and ready for both themes.',
+        images: [
+          screenshot('hero'),
+          screenshot('pricing'),
+          screenshot('timeline'),
+          screenshot('infrastructure'),
+        ],
+        alt: 'LaunchKit sections in turn: the hero, pricing plans, a timeline and an infrastructure overview.',
+      },
+      marquee: {
+        stat: '40+ components',
+        title: 'Primitives from shadcn/ui',
+        description:
+          'Accessible building blocks on Radix UI, restyled with LaunchKit’s tokens and reviewed in Storybook.',
+        action: { label: 'Read the docs', href: '/docs' },
+        rows: [
+          [
+            'Accordion',
+            'Alert dialog',
+            'Avatar',
+            'Badge',
+            'Button',
+            'Calendar',
+            'Card',
+            'Carousel',
           ],
-        },
-        {
-          title: 'Application foundation',
-          description:
-            'Routing, localization, typed content and validated forms: the parts every site needs, already connected.',
-          points: [
-            'Four locales with localized metadata',
-            'Pages composed from typed sections',
-            'React Hook Form with Zod validation',
+          [
+            'Checkbox',
+            'Combobox',
+            'Dialog',
+            'Drawer',
+            'Dropdown menu',
+            'Popover',
+            'Select',
+            'Tabs',
           ],
-        },
-        {
-          title: 'Developer experience',
-          description:
-            'Strict types, fast feedback, and checks that run the same way on every machine and in CI.',
-          points: [
-            'Strict TypeScript, ESLint and Prettier',
-            'Unit, browser and end-to-end tests',
-            'Storybook with accessibility checks',
+          [
+            'Input OTP',
+            'Pagination',
+            'Radio group',
+            'Sheet',
+            'Slider',
+            'Switch',
+            'Table',
+            'Tooltip',
           ],
-        },
+        ],
+      },
+      integrations: {
+        title: 'Built on tools you know',
+        description:
+          'Next.js, React and TypeScript underneath; Tailwind CSS, shadcn/ui and Zod on top. Nothing proprietary to learn.',
+        tools: [
+          { name: 'Next.js', icon: 'nextjs' },
+          { name: 'React', icon: 'react' },
+          { name: 'TypeScript', icon: 'typescript' },
+          { name: 'Tailwind CSS', icon: 'tailwindcss' },
+          { name: 'shadcn/ui', icon: 'shadcn-ui' },
+          { name: 'Zod', icon: 'zod' },
+        ],
+      },
+      gallery: {
+        title: 'Pages that look finished',
+        description:
+          'Sunlight and Midnight themes, checked for contrast, so every page is presentable from the first deploy.',
+        action: { label: 'Make it yours', href: '/docs/making-it-yours' },
+        images: [
+          { ...screenshot('tech-stack'), alt: 'The tech stack section' },
+          { ...screenshot('developer-experience'), alt: 'The developer experience section' },
+          { ...screenshot('quality'), alt: 'The quality and automation section' },
+        ],
+      },
+    },
+    {
+      id: 'stack',
+      type: 'marketing-technical-stack',
+      eyebrow: 'Tech stack',
+      title: 'Built on proven tools.',
+      description: 'Current, well-supported tools, already configured and tested together.',
+      featured: [
+        { name: 'Next.js', description: 'React framework', icon: 'nextjs' },
+        { name: 'React', description: 'UI library', icon: 'react' },
+        { name: 'TypeScript', description: 'Strict type safety', icon: 'typescript' },
+        { name: 'Tailwind CSS', description: 'Token-driven styling', icon: 'tailwindcss' },
+        { name: 'shadcn/ui', description: 'UI components', icon: 'shadcn-ui' },
+        { name: 'next-intl', description: 'Four locales built in', icon: 'next-intl' },
+        { name: 'Zod', description: 'Schema validation', icon: 'zod' },
+        { name: 'React Hook Form', description: 'Validated forms', icon: 'react-hook-form' },
+      ],
+      tools: [
+        { name: 'Radix UI', description: 'UI primitives', icon: 'radix-ui' },
+        { name: 'Lucide', description: 'Icons', icon: 'lucide' },
+        { name: 'next-themes', description: 'Light and dark', icon: 'next-themes' },
+        { name: 'Sonner', description: 'Toasts', icon: 'sonner' },
+        { name: 'date-fns', description: 'Dates', icon: 'date-fns' },
+        { name: 'Marked', description: 'Markdown docs', icon: 'marked' },
+        { name: 'T3 Env', description: 'Typed env vars', icon: 't3-env' },
+        { name: 'Vitest', description: 'Unit tests', icon: 'vitest' },
+        { name: 'Playwright', description: 'End-to-end tests', icon: 'playwright' },
+        { name: 'Storybook', description: 'Component docs', icon: 'storybook' },
+        { name: 'axe-core', description: 'Accessibility checks', icon: 'axe-core' },
+        { name: 'ESLint', description: 'Linting', icon: 'eslint' },
+        { name: 'Prettier', description: 'Formatting', icon: 'prettier' },
+        { name: 'Lefthook', description: 'Git hooks', icon: 'lefthook' },
+        { name: 'Commitlint', description: 'Commit messages', icon: 'commitlint' },
+        { name: 'pnpm', description: 'Package manager', icon: 'pnpm' },
+        { name: 'GitHub Actions', description: 'CI', icon: 'github-actions' },
+        { name: 'Dependabot', description: 'Weekly updates', icon: 'dependabot' },
       ],
     },
     {
-      id: 'adapt',
-      type: 'lineup',
-      eyebrow: 'Built to adapt',
-      title: 'Six different websites. One foundation.',
+      id: 'quality',
+      type: 'marketing-quality-gates',
+      eyebrow: 'Quality gates',
+      title: 'Checked at every step.',
       description:
-        'Each project keeps its own brand, content and features, while sharing the engineering underneath.',
-      items: [
+        'The same automated checks run on your machine and in CI, whether a person or an agent wrote the code.',
+      stages: [
         {
-          name: 'Agency website',
-          kind: 'Corporate · Portfolio',
-          description: 'Services, case studies and a considered contact journey.',
+          label: 'Stage 1',
+          title: 'Before commit',
+          icon: 'shield-check',
+          items: [
+            { name: 'Lefthook', description: 'Fast, check-only Git hooks' },
+            { name: 'ESLint', description: 'Zero warnings allowed' },
+            { name: 'Prettier', description: 'Consistent formatting' },
+            { name: 'Commitlint', description: 'Conventional Commits' },
+          ],
         },
         {
-          name: 'Homelab hardware',
-          kind: 'Product showcase',
-          description:
-            'Refurbished equipment with specifications and enquiries; commerce can follow later.',
+          label: 'Stage 2',
+          title: 'CI pipeline',
+          icon: 'flask-conical',
+          items: [
+            { name: 'TypeScript', description: 'Strict type checking' },
+            { name: 'Vitest', description: 'Unit and browser-mode tests' },
+            { name: 'Storybook', description: 'Every story tested with axe' },
+            { name: 'Playwright', description: 'End-to-end tests' },
+          ],
         },
         {
-          name: 'UnPocketed',
-          kind: 'App landing page',
-          description: 'Features, screenshots and download links for a mobile app.',
-        },
-        {
-          name: 'selfOS',
-          kind: 'Product · SaaS',
-          description: 'A clear product story, documentation and a waitlist.',
-        },
-        {
-          name: 'Clothing brand',
-          kind: 'Retail showcase',
-          description:
-            'Collections, imagery and brand storytelling, with checkout handled elsewhere.',
-        },
-        {
-          name: 'Redesign demonstrations',
-          kind: 'Sales · Portfolio',
-          description:
-            'Before-and-after homepage refactors that show what a better foundation allows.',
+          label: 'Stage 3',
+          title: 'Release',
+          icon: 'package-check',
+          items: [
+            { name: 'Protected branches', description: 'CI must pass' },
+            { name: 'Dependabot', description: 'Weekly updates' },
+            { name: 'Changelog', description: 'Notes for every version' },
+            { name: 'Release workflow', description: 'Passing builds' },
+          ],
         },
       ],
+      highlights: [
+        'Every commit is checked',
+        'The same checks locally and in CI',
+        'Releases only from passing builds',
+      ],
+    },
+    {
+      id: 'talk',
+      type: 'cta-editorial',
+      eyebrow: 'Ready to start something new?',
+      title: 'Let’s talk about your project.',
+      primaryAction: { label: 'Start a conversation', href: '/contact' },
     },
     {
       id: 'developer-experience',
@@ -157,13 +323,185 @@ export const home = {
       ],
     },
     {
+      id: 'numbers',
+      type: 'stats',
+      eyebrow: 'By the numbers',
+      title: 'A foundation that keeps up with you.',
+      description:
+        'Every release is checked by the same suite of tests, in every language and both themes, before it reaches your project.',
+      stats: [
+        { value: '4', label: 'Languages out of the box' },
+        { value: '40+', label: 'Tested components' },
+        { value: '400+', label: 'Automated tests' },
+      ],
+    },
+    {
+      id: 'pricing',
+      type: 'pricing',
+      eyebrow: 'Pricing',
+      title: 'Simple pricing for every stage.',
+      description:
+        'Start with the LaunchKit foundation, then choose how much hands-on help you need.',
+      // The fixture's plans only; the callout and proof stay for /pricing. The
+      // EUR, USD and ZAR amounts are set by hand from the GBP price.
+      currencies: ['GBP', 'EUR', 'USD', 'ZAR'],
+      plans: [
+        {
+          name: 'Build It Yourself',
+          description: 'For founders, developers and teams using LaunchKit directly.',
+          price: { amounts: { GBP: 0, EUR: 0, USD: 0, ZAR: 0 } },
+          priceNote: 'open source',
+          features: [
+            'Reusable website foundation',
+            'Themes and four languages',
+            'Section-based content',
+            'Forms, tests and CI',
+          ],
+          action: { label: 'Get started', href: '/docs/getting-started' },
+        },
+        {
+          name: 'Built For You',
+          description: 'We design and build your website with LaunchKit.',
+          price: { amounts: { GBP: 1300, EUR: 1500, USD: 1700, ZAR: 30000 } },
+          priceNote: 'starting price',
+          features: [
+            'Design for your brand',
+            'Responsive build and launch',
+            'Content structure and guidance',
+            'A tested foundation underneath',
+          ],
+          action: { label: 'Book a call', href: '/contact' },
+          recommended: true,
+        },
+        {
+          name: 'Built to Grow',
+          description: 'For teams that need custom features and ongoing support.',
+          price: { label: 'Custom' },
+          priceNote: 'ongoing',
+          features: [
+            'Custom features and integrations',
+            'Ongoing improvements',
+            'Maintenance and support',
+            'A long-term engineering partner',
+          ],
+          action: { label: 'Talk to us', href: '/contact' },
+        },
+      ],
+    },
+    {
+      // Demo reviews from the fixture: invented people. Replace them with real,
+      // attributable reviews before launch.
+      id: 'reviews',
+      type: 'reviews',
+      eyebrow: 'Reviews',
+      title: 'What teams say about LaunchKit',
+      reviews: [
+        {
+          name: 'Amara Osei',
+          role: 'Founder, design studio',
+          quote:
+            'We launched our new site in a week. The sections, the translations and the tests were already there, so we spent the time on our story instead.',
+        },
+        {
+          name: 'Jonas Weber',
+          role: 'Lead developer, software agency',
+          quote:
+            'The content model is the part I didn’t know I needed. Typed sections mean the build fails before a broken page ever reaches production.',
+        },
+        {
+          name: 'Lucía Romero',
+          role: 'Freelance designer',
+          quote:
+            'Changing the brand took one file. Both themes followed, and the contrast checks told me where my palette needed work.',
+        },
+        {
+          name: 'Théo Martin',
+          role: 'CTO, online retailer',
+          quote:
+            'Four languages from day one. Our French and German customers finally get the same site as everyone else.',
+        },
+        {
+          name: 'Priya Nair',
+          role: 'Product manager, SaaS start-up',
+          quote:
+            'Storybook made reviews easy: every section on its own, at every width, in both themes, before anything went live.',
+        },
+        {
+          name: 'Sam Okafor',
+          role: 'Owner, web agency',
+          quote:
+            'We start every client project from LaunchKit now, and improvements we make for one client reach the others too.',
+        },
+      ],
+    },
+    {
+      id: 'faq',
+      type: 'faq',
+      eyebrow: 'FAQ',
+      title: 'Frequently asked questions',
+      description: 'Anything else you might want to know before you start.',
+      groups: [
+        {
+          title: 'General',
+          items: [
+            {
+              question: 'What is LaunchKit?',
+              answer:
+                'A reusable Next.js foundation for building and launching websites: content-driven pages, ready-made sections, two themes, four languages and a full test setup.',
+            },
+            {
+              question: 'Who is it for?',
+              answer:
+                'Founders, startups and agencies who start new sites often and want each one to begin from the same well-tested base.',
+            },
+            {
+              question: 'Can I change the brand?',
+              answer:
+                'Yes. Colours and type live in one theme file, and every component follows it in light and dark.',
+            },
+            {
+              question: 'Is it free to use?',
+              answer:
+                'Yes. LaunchKit is released under the MIT licence, for personal and commercial projects alike.',
+            },
+          ],
+        },
+        {
+          title: 'Support',
+          items: [
+            {
+              question: 'How do I add a page?',
+              answer:
+                'Add a content file for each language and register it. The page is rendered from typed sections, so a mistake is caught before it ships.',
+            },
+            {
+              question: 'How do updates reach my project?',
+              answer:
+                'Projects started from LaunchKit pull upstream changes with Git, as the upstream sync guide describes.',
+            },
+            {
+              question: 'Which languages are included?',
+              answer:
+                'English, Spanish, French and German. Adding another takes a message catalogue and a set of content files.',
+            },
+            {
+              question: 'Can you build my site for me?',
+              answer:
+                'Yes. Get in touch through the contact page and we’ll talk through what you need.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      // The previous homepage's closing band, with the header's contact label.
       id: 'begin',
       type: 'cta-band',
       title: 'Begin with a better foundation.',
       description:
         'Start your next website from LaunchKit, make it unmistakably yours, and keep the engineering improving underneath.',
-      primaryAction: { label: 'Read the guide', href: '/docs/getting-started' },
-      secondaryAction: { label: 'Get in touch', href: '/contact' },
+      primaryAction: { label: 'Get started', href: '/docs/getting-started' },
+      secondaryAction: { label: 'Get in Contact', href: '/contact' },
     },
   ],
 } satisfies PageDefinition;

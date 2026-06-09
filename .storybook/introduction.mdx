@@ -95,14 +95,14 @@ export const reading = [
 export const linkFocus = 'outline-none focus-visible:ring-3 focus-visible:ring-ring/50';
 
 export const storyExample = `import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { home } from '@/content/en/pages/home';
+import { homeV1 } from '@/content/en/pages/home-v1';
 import { findSection } from '@/lib/content/pages';
 import { StatementSection } from './statement-section';
 
 const meta = {
   title: 'Sections/Statement',
   component: StatementSection,
-  args: findSection(home, 'statement'),
+  args: findSection(homeV1, 'statement'),
 } satisfies Meta<typeof StatementSection>;
 
 export default meta;

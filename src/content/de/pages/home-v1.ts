@@ -1,6 +1,7 @@
 import type { PageDefinition } from '@/lib/content/types';
 
-export const home = {
+/** The previous homepage, kept unlinked at /home-v1 with its translations. */
+export const homeV1 = {
   meta: {
     title: 'Ein wiederverwendbares Next.js-Fundament',
     description:
@@ -17,8 +18,8 @@ export const home = {
       primaryAction: { label: 'Loslegen', href: '/docs/getting-started' },
       secondaryAction: { label: 'Projekt starten', href: '/contact' },
       preview: {
-        filename: 'src/content/de/pages/home.ts',
-        code: `export const home = {
+        filename: 'src/content/de/pages/home-v1.ts',
+        code: `export const homeV1 = {
   sections: [
     { type: 'hero', title: 'Gebaut für das, was kommt.' },
     { type: 'statement', title: 'Einmal bauen…' },

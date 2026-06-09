@@ -88,6 +88,13 @@ describe('mobile navigation', () => {
     await expect
       .element(dialog.getByRole('link', { name: 'Español' }))
       .toHaveAttribute('hreflang', 'es');
+    // Mid fade-in, the sheet's colours blend with the overlay; check contrast once it has settled.
+    await Promise.all(
+      dialog
+        .element()
+        .getAnimations({ subtree: true })
+        .map((animation) => animation.finished),
+    );
     expect(await axeViolations(document.body)).toEqual([]);
 
     await userEvent.keyboard('{Escape}');
