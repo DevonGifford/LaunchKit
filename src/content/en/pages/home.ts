@@ -42,8 +42,7 @@ export const home = {
       description:
         'A refined foundation for founders, startups and businesses ready for a fresh start.',
       primaryAction: { label: 'Get started', href: '/docs/getting-started' },
-      // Becomes "See examples" once the Examples page exists.
-      secondaryAction: { label: 'Read the docs', href: '/docs' },
+      secondaryAction: { label: 'See examples', href: '/examples' },
       showcase: {
         light: '/marketing/hero-showcase-light.webp',
         dark: '/marketing/hero-showcase-dark.webp',

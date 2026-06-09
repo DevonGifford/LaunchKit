@@ -46,7 +46,7 @@ export const footerNavigation: ReadonlyArray<{
       { key: 'features', href: '/#included' },
       pricing,
       { key: 'roadmap', href: '/roadmap' },
-      { key: 'showcase', href: '/#adapt' },
+      { key: 'showcase', href: '/examples' },
       docs,
       { key: 'storybook', href: '/storybook' },
       { key: 'changelog', href: '/changelog' },

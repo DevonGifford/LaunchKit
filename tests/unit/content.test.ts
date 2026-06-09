@@ -8,7 +8,13 @@ import { pageDefinitionSchema, type PageDefinition } from '@/lib/content/types';
 // over the real content, instead of re-validating on every request.
 
 const slugs = await getDocSlugs();
-const knownPaths = new Set(['/', '/docs', '/contact', ...slugs.map((slug) => `/docs/${slug}`)]);
+const knownPaths = new Set([
+  '/',
+  '/examples',
+  '/docs',
+  '/contact',
+  ...slugs.map((slug) => `/docs/${slug}`),
+]);
 
 function internalLinks(page: PageDefinition): string[] {
   return page.sections
@@ -25,7 +31,7 @@ function internalLinks(page: PageDefinition): string[] {
 }
 
 describe.each(routing.locales)('content: %s', (locale) => {
-  const localePages = Object.entries(pages[locale]);
+  const localePages = Object.entries<PageDefinition>(pages[locale]);
 
   it.each(localePages)('page "%s" matches the content schema', (_slug, page) => {
     const result = pageDefinitionSchema.safeParse(page);

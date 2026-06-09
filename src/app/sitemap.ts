@@ -11,7 +11,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     new URL(getPathname({ locale, href }), base).href;
 
   // Add new top-level routes here when you create them.
-  const hrefs = ['/', '/docs', '/contact', ...(await getDocSlugs()).map((slug) => `/docs/${slug}`)];
+  const hrefs = [
+    '/',
+    '/examples',
+    '/docs',
+    '/contact',
+    ...(await getDocSlugs()).map((slug) => `/docs/${slug}`),
+  ];
 
   return hrefs.flatMap((href) =>
     routing.locales.map((locale) => ({
