@@ -1,4 +1,5 @@
 import type { PageDefinition } from '@/lib/content/types';
+import { pricingCurrencies, pricingPlans } from './pricing';
 
 /** Screenshots of LaunchKit's own sections, in public/marketing/showcase/. */
 const screenshot = (file: string) => ({
@@ -341,51 +342,9 @@ export const home = {
       title: 'Simple pricing for every stage.',
       description:
         'Start with the LaunchKit foundation, then choose how much hands-on help you need.',
-      // The fixture's plans only; the callout and proof stay for /pricing. The
-      // EUR, USD and ZAR amounts are set by hand from the GBP price.
-      currencies: ['GBP', 'EUR', 'USD', 'ZAR'],
-      plans: [
-        {
-          name: 'Build It Yourself',
-          description: 'For founders, developers and teams using LaunchKit directly.',
-          price: { amounts: { GBP: 0, EUR: 0, USD: 0, ZAR: 0 } },
-          priceNote: 'open source',
-          features: [
-            'Reusable website foundation',
-            'Themes and four languages',
-            'Section-based content',
-            'Forms, tests and CI',
-          ],
-          action: { label: 'Get started', href: '/docs/getting-started' },
-        },
-        {
-          name: 'Built For You',
-          description: 'We design and build your website with LaunchKit.',
-          price: { amounts: { GBP: 1300, EUR: 1500, USD: 1700, ZAR: 30000 } },
-          priceNote: 'starting price',
-          features: [
-            'Design for your brand',
-            'Responsive build and launch',
-            'Content structure and guidance',
-            'A tested foundation underneath',
-          ],
-          action: { label: 'Book a call', href: '/contact' },
-          recommended: true,
-        },
-        {
-          name: 'Built to Grow',
-          description: 'For teams that need custom features and ongoing support.',
-          price: { label: 'Custom' },
-          priceNote: 'ongoing',
-          features: [
-            'Custom features and integrations',
-            'Ongoing improvements',
-            'Maintenance and support',
-            'A long-term engineering partner',
-          ],
-          action: { label: 'Talk to us', href: '/contact' },
-        },
-      ],
+      // The plans only, shared with /pricing; the callout and proof stay there.
+      currencies: pricingCurrencies,
+      plans: pricingPlans,
     },
     {
       // Demo reviews from the fixture: invented people. Replace them with real,

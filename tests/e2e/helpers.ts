@@ -8,6 +8,7 @@ export const locales = routing.locales;
 export const routes = [
   '/',
   '/examples',
+  '/pricing',
   '/docs',
   '/docs/getting-started',
   '/docs/making-it-yours',

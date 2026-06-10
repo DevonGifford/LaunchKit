@@ -505,8 +505,14 @@ export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 export const pricingSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('pricing'),
+  /** Shown only with a title. */
   eyebrow: text.optional(),
-  title: text,
+  /**
+   * Optional, so a page's hero can introduce the plans; a visually hidden
+   * heading takes its place.
+   */
+  title: text.optional(),
+  /** Shown only with a title. */
   description: text.optional(),
   /** Currencies offered in the selector, in order; the first (required) is the default. */
   currencies: z.tuple([currencyCodeSchema], currencyCodeSchema),

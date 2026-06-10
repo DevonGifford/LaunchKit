@@ -117,3 +117,12 @@ export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };
 
 /** Without the callout and the row of figures. */
 export const PlansOnly: Story = { args: { callout: undefined, proof: undefined } };
+
+/** Introduced by the page's hero instead: a visually hidden heading names the plans. */
+export const WithoutHeading: Story = {
+  args: { eyebrow: undefined, title: undefined, description: undefined },
+  play: async ({ canvasElement }) => {
+    const heading = within(canvasElement).getByRole('heading', { level: 2, name: 'Plans' });
+    await expect(heading).toHaveClass('sr-only');
+  },
+};

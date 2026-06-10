@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const hrefs = [
     '/',
     '/examples',
+    '/pricing',
     '/docs',
     '/contact',
     ...(await getDocSlugs()).map((slug) => `/docs/${slug}`),

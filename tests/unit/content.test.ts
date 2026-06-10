@@ -11,6 +11,7 @@ const slugs = await getDocSlugs();
 const knownPaths = new Set([
   '/',
   '/examples',
+  '/pricing',
   '/docs',
   '/contact',
   ...slugs.map((slug) => `/docs/${slug}`),

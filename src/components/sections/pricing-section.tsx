@@ -8,7 +8,10 @@ import { ActionButton, Eyebrow, SectionHeading } from './section-parts';
 
 type Section = SectionOf<'pricing'>;
 
-/** Plans with a currency selector, then a callout for larger work and an optional row of figures. */
+/**
+ * Plans with a currency selector, then a callout for larger work and an optional
+ * row of figures. Without a title, a visually hidden heading names the plans.
+ */
 export function PricingSection({
   id,
   eyebrow,
@@ -37,15 +40,20 @@ export function PricingSection({
   };
 
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="border-t">
+    // Without a title the section goes unnamed: the plans inside are already a region named "Plans".
+    <section id={id} aria-labelledby={title ? `${id}-title` : undefined} className="border-t">
       <Container className="py-20 lg:py-28">
-        <SectionHeading
-          id={id}
-          eyebrow={eyebrow}
-          title={title}
-          description={description}
-          align="center"
-        />
+        {title ? (
+          <SectionHeading
+            id={id}
+            eyebrow={eyebrow}
+            title={title}
+            description={description}
+            align="center"
+          />
+        ) : (
+          <h2 className="sr-only">{labels.plans}</h2>
+        )}
         <PricingCards
           plans={plans}
           currencies={currencies}
