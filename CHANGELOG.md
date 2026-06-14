@@ -40,3 +40,20 @@ need to take when merging it.
   documents.
 - Optional Storybook deployment to Vercel from CI: production from `main` and
   a preview for each pull request, off until switched on.
+- Website pages: a new homepage composed from the section library, an
+  Examples page and a Pricing page, in English first; the other languages show
+  their previous homepage and coming-soon placeholders until translated. The
+  previous homepage stays at `/home-v1`, unlinked and out of search results.
+- Site navigation: the wide header with Product, Examples, Pricing and Docs and
+  a "Get in Contact" call to action (also in the mobile menu), and the full
+  footer with placeholder contact details and social links.
+- A coming-soon page for links whose page doesn't exist yet.
+- Page transitions: a cross-fade between pages with React's `<ViewTransition>`,
+  turned off by reduced motion.
+
+### Changed
+
+- The wide header shows its navigation inline from 1024px rather than 768px,
+  so the row fits in every language.
+- The pricing section's title is optional, so a page's hero can introduce the
+  plans.

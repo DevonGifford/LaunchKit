@@ -133,7 +133,7 @@ export const examples = {
       secondaryAction: { label: 'Read the docs', href: '/docs' },
       items: [
         screen('Hero', 'hero', '/#hero'),
-        screen('Pricing', 'pricing', '/#pricing'),
+        screen('Pricing', 'pricing', '/pricing'),
         screen('Timeline', 'timeline', '/#timeline'),
         screen('Tech stack', 'tech-stack', '/#stack'),
         screen('Developer experience', 'developer-experience', '/#developer-experience'),

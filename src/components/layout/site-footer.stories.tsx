@@ -66,7 +66,7 @@ export const Full: Story = {
       0,
     );
 
-    // Resources runs down two columns: Features to Showcase, then Docs to FAQ.
+    // Resources runs down two columns: Features to Examples, then Docs to FAQ.
     const features = box(canvas.getByRole('link', { name: 'Features' }));
     const docs = box(canvas.getByRole('link', { name: 'Docs' }));
     await expect(docs.left).toBeGreaterThan(features.right);

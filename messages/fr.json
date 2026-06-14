@@ -15,7 +15,6 @@
     "menuDescription": "Navigation du site et préférences"
   },
   "Navigation": {
-    "home": "Accueil",
     "product": "Produit",
     "examples": "Exemples",
     "docs": "Documentation",
@@ -24,7 +23,6 @@
     "features": "Fonctionnalités",
     "pricing": "Tarifs",
     "roadmap": "Feuille de route",
-    "showcase": "Exemples",
     "storybook": "Storybook",
     "changelog": "Nouveautés",
     "faq": "FAQ",

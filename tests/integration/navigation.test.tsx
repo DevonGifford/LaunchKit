@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { MobileNav } from '@/components/layout/mobile-nav';
 import { NavLinks } from '@/components/layout/nav-links';
+import { LinkMenu } from '@/components/sections/hero/hero-centered-link-menu';
 import { axeViolations, renderWithIntl } from './utils';
 
 const navigation = vi.hoisted(() => ({ pathname: '/docs' }));
@@ -110,5 +111,33 @@ describe('mobile navigation', () => {
     await page.getByRole('button', { name: 'Open menu' }).click();
     await page.getByRole('dialog').getByRole('link', { name: 'Contact' }).click();
     await expect.element(page.getByRole('dialog')).not.toBeInTheDocument();
+  });
+});
+
+describe('link menu', () => {
+  const menu = { label: 'Explore', items: [{ label: 'Details', href: '/examples#details' }] };
+
+  test('moves focus to a same-page section instead of back to the button', async () => {
+    const screen = await renderWithIntl(
+      <>
+        <LinkMenu menu={menu} />
+        <section id="details" aria-label="Details">
+          Details
+        </section>
+      </>,
+    );
+    await page.getByRole('button', { name: 'Explore' }).click();
+    await page.getByRole('menuitem', { name: 'Details' }).click();
+    await expect.element(page.getByRole('region', { name: 'Details' })).toHaveFocus();
+    await screen.unmount();
+  });
+
+  test('returns focus to the button when closed with Escape', async () => {
+    await renderWithIntl(<LinkMenu menu={menu} />);
+    const trigger = page.getByRole('button', { name: 'Explore' });
+    await trigger.click();
+    await expect.element(page.getByRole('menu')).toBeVisible();
+    await userEvent.keyboard('{Escape}');
+    await expect.element(trigger).toHaveFocus();
   });
 });
