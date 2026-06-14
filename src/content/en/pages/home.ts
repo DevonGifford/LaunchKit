@@ -342,9 +342,15 @@ export const home = {
       title: 'Simple pricing for every stage.',
       description:
         'Start with the LaunchKit foundation, then choose how much hands-on help you need.',
-      // The plans only, shared with /pricing; the callout and proof stay there.
+      // The plans, shared with /pricing, and a link to everything else there.
       currencies: pricingCurrencies,
       plans: pricingPlans,
+      callout: {
+        title: 'Compare the plans in detail',
+        description:
+          'Everything each plan includes, prices in your currency, and answers to common questions.',
+        action: { label: 'See pricing', href: '/pricing' },
+      },
     },
     {
       // Demo reviews from the fixture: invented people. Replace them with real,
