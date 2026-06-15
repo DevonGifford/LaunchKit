@@ -8,7 +8,7 @@ const docs: NavigationLink = { key: 'docs', href: '/docs' };
 const pricing: NavigationLink = { key: 'pricing', href: '/pricing' };
 const contact: NavigationLink = { key: 'contact', href: '/contact' };
 // Pages that don't exist yet point at the coming-soon page until they do.
-const privacy: NavigationLink = { key: 'privacy', href: '/coming-soon' };
+const privacy: NavigationLink = { key: 'privacy', href: '/privacy' };
 const terms: NavigationLink = { key: 'terms', href: '/coming-soon' };
 
 /**

@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/pricing',
     '/docs',
     '/contact',
+    '/privacy',
     ...(await getDocSlugs()).map((slug) => `/docs/${slug}`),
   ];
 

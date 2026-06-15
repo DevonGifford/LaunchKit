@@ -116,7 +116,7 @@ more, so run it first and the hooks will pass.
 | ----------------------------------------- | ------------------------------------------------------------------------- |
 | `src/app/[locale]/`                       | Routes. Every page calls `resolveLocale(params)` first.                   |
 | `src/app/theme.css`                       | Brand tokens (project-owned). `globals.css` maps them to Tailwind.        |
-| `src/content/<locale>/`                   | Page content (`pages/*.ts`) and Markdown documents (`docs/*.md`).         |
+| `src/content/<locale>/`                   | Page content (`pages/*.ts`), Markdown docs (`docs/*.md`) and legal pages. |
 | `messages/<locale>.json`                  | Interface text; English is the source catalogue.                          |
 | `src/lib/content/`                        | Content model (Zod → types), section registry, renderer, Markdown loader. |
 | `src/components/ui/`                      | shadcn/ui primitives plus small shared controls (logo, container, …).     |

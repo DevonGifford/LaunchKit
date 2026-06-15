@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { pages } from '@/content';
 import { routing } from '@/i18n/routing';
-import { getDoc, getDocSlugs } from '@/lib/content/docs';
+import { getDoc, getDocSlugs, getLegalDoc } from '@/lib/content/docs';
 import { pageDefinitionSchema, type PageDefinition } from '@/lib/content/types';
 
 // Rules TypeScript cannot express (URL formats, unique ids) are enforced here,
@@ -41,6 +41,11 @@ describe.each(routing.locales)('content: %s', (locale) => {
 
   it.each(localePages)('page "%s" links only to pages that exist', (_slug, page) => {
     for (const href of internalLinks(page)) expect(knownPaths).toContain(href.split('#')[0]);
+  });
+
+  it('privacy policy loads with valid frontmatter', async () => {
+    const doc = await getLegalDoc(locale, 'privacy');
+    expect(doc?.html).toContain('<h2');
   });
 
   it.each(slugs)('document "%s" loads with valid frontmatter', async (slug) => {

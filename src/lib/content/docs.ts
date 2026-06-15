@@ -5,7 +5,8 @@ import { routing, type Locale } from '@/i18n/routing';
 import { docFrontmatterSchema, type DocFrontmatter } from './types';
 
 /*
- * Long-form Markdown documents in src/content/<locale>/docs/<slug>.md.
+ * Long-form Markdown documents in src/content/<locale>/docs/<slug>.md, and legal
+ * pages in src/content/<locale>/legal/<slug>.md.
  *
  * The default locale defines which documents exist. A document missing from
  * another locale falls back to the default-locale version, flagged so the page
@@ -49,12 +50,21 @@ export function renderMarkdown(markdown: string): string {
 }
 
 /**
- * Documents under `contentRoot` (normally src/content). A factory so tests can
- * point it at fixtures; the app uses the default instance exported below.
+ * Documents in `<contentRoot>/<locale>/<folder>/` (normally src/content and
+ * `docs`). A factory so tests can point it at fixtures; the app uses the
+ * instances exported below.
  */
-export function createDocsSource(contentRoot: string) {
+export function createDocsSource(contentRoot: string, folder: 'docs' | 'legal' = 'docs') {
+  // Spelled out rather than joined from `folder`, so the build can trace which
+  // files are read instead of tracing the whole project.
+  function folderPath(locale: Locale) {
+    return folder === 'legal'
+      ? path.join(contentRoot, locale, 'legal')
+      : path.join(contentRoot, locale, 'docs');
+  }
+
   function docPath(locale: Locale, slug: string) {
-    return path.join(contentRoot, locale, 'docs', `${slug}.md`);
+    return path.join(folderPath(locale), `${slug}.md`);
   }
 
   async function readDocSource(locale: Locale, slug: string) {
@@ -68,7 +78,7 @@ export function createDocsSource(contentRoot: string) {
 
   /** Slugs of every document, as defined by the default locale. */
   async function getDocSlugs(): Promise<string[]> {
-    const files = await readdir(path.join(contentRoot, routing.defaultLocale, 'docs'));
+    const files = await readdir(folderPath(routing.defaultLocale));
     return files.filter((file) => file.endsWith('.md')).map((file) => file.slice(0, -3));
   }
 
@@ -112,6 +122,12 @@ export function createDocsSource(contentRoot: string) {
   return { getDocSlugs, getDoc, listDocs };
 }
 
-export const { getDocSlugs, getDoc, listDocs } = createDocsSource(
-  path.join(process.cwd(), 'src', 'content'),
-);
+const contentRoot = path.join(process.cwd(), 'src', 'content');
+
+export const { getDocSlugs, getDoc, listDocs } = createDocsSource(contentRoot);
+
+/**
+ * Legal pages such as the privacy policy, in src/content/<locale>/legal/: kept
+ * out of the docs index, with the same fallback to the default locale.
+ */
+export const { getDoc: getLegalDoc } = createDocsSource(contentRoot, 'legal');

@@ -13,6 +13,7 @@ export const routes = [
   '/docs/getting-started',
   '/docs/making-it-yours',
   '/contact',
+  '/privacy',
   '/coming-soon',
   '/home-v1',
 ] as const;

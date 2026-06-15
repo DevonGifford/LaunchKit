@@ -64,6 +64,9 @@
     "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
     "allGuides": "Alle Anleitungen"
   },
+  "Legal": {
+    "fallbackNotice": "Diese Seite ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt."
+  },
   "ContactForm": {
     "requiredNote": "Alle Felder sind Pflichtfelder.",
     "name": "Name",

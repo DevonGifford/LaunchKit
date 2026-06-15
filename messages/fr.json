@@ -64,6 +64,9 @@
     "fallbackNotice": "Ce guide n’est pas encore disponible en {language} ; il est donc affiché en {fallbackLanguage}.",
     "allGuides": "Tous les guides"
   },
+  "Legal": {
+    "fallbackNotice": "Cette page n’est pas encore disponible en {language} ; elle est donc affichée en {fallbackLanguage}."
+  },
   "ContactForm": {
     "requiredNote": "Tous les champs sont obligatoires.",
     "name": "Nom",
