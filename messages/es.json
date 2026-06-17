@@ -58,9 +58,10 @@
   },
   "Docs": {
     "title": "Documentación",
-    "description": "Guías para empezar un proyecto nuevo a partir de LaunchKit y hacerlo tuyo.",
+    "description": "Guías y artículos para crear, lanzar y hacer crecer un sitio web con LaunchKit.",
     "count": "{count, plural, one {# guía} other {# guías}}",
     "updated": "Actualizado el {date, date, long}",
+    "readingTime": "{minutes} min de lectura",
     "fallbackNotice": "Esta guía aún no está disponible en {language}, así que se muestra en {fallbackLanguage}.",
     "allGuides": "Todas las guías"
   },

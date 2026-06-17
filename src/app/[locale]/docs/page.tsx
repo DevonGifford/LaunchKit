@@ -43,10 +43,13 @@ export default async function DocsIndexPage({ params }: PageProps<'/[locale]/doc
               >
                 {doc.description}
               </span>
-              <span className="text-xs text-muted-foreground md:col-span-2 md:text-right">
-                {doc.isFallback
-                  ? localeNames[doc.locale]
-                  : t('updated', { date: new Date(doc.updated) })}
+              <span className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground md:col-span-2 md:flex-col md:items-end">
+                <span>
+                  {doc.isFallback
+                    ? localeNames[doc.locale]
+                    : t('updated', { date: new Date(doc.updated) })}
+                </span>
+                <span>{t('readingTime', { minutes: doc.readingMinutes })}</span>
               </span>
             </Link>
           </li>

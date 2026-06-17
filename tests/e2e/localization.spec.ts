@@ -61,7 +61,7 @@ test('dates and plurals follow the locale', async ({ page }) => {
   await expect(page.getByText('Aktualisiert am 12. Oktober 2026')).toBeVisible();
 
   await page.goto('/fr/docs');
-  await expect(page.getByText('2 guides', { exact: true })).toBeVisible();
+  await expect(page.getByText('6 guides', { exact: true })).toBeVisible();
 
   await page.goto('/es/docs/making-it-yours');
   await expect(page.getByText('Actualizado el 12 de octubre de 2026')).toBeVisible();

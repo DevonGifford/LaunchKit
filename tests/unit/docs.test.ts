@@ -1,6 +1,11 @@
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { createDocsSource, parseFrontmatter, renderMarkdown } from '@/lib/content/docs';
+import {
+  createDocsSource,
+  estimateReadingMinutes,
+  parseFrontmatter,
+  renderMarkdown,
+} from '@/lib/content/docs';
 
 const fixtures = path.join(import.meta.dirname, '..', 'fixtures');
 const docs = createDocsSource(path.join(fixtures, 'content'));
@@ -45,6 +50,14 @@ describe('parseFrontmatter', () => {
 
   it('treats a document without frontmatter as all body', () => {
     expect(parseFrontmatter('Just text')).toEqual({ data: {}, body: 'Just text' });
+  });
+});
+
+describe('estimateReadingMinutes', () => {
+  it('rounds up at about 220 words a minute, and is never zero', () => {
+    expect(estimateReadingMinutes('word '.repeat(660))).toBe(3);
+    expect(estimateReadingMinutes('word '.repeat(661))).toBe(4);
+    expect(estimateReadingMinutes('')).toBe(1);
   });
 });
 

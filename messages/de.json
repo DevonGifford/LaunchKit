@@ -58,9 +58,10 @@
   },
   "Docs": {
     "title": "Dokumentation",
-    "description": "Anleitungen, um ein neues Projekt auf Basis von LaunchKit zu starten und anzupassen.",
+    "description": "Anleitungen und Artikel zum Bauen, Starten und Weiterentwickeln einer Website mit LaunchKit.",
     "count": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
     "updated": "Aktualisiert am {date, date, long}",
+    "readingTime": "{minutes} Min. Lesezeit",
     "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
     "allGuides": "Alle Anleitungen"
   },

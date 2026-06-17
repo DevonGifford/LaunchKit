@@ -50,6 +50,12 @@ need to take when merging it.
 - A coming-soon page for links whose page doesn't exist yet.
 - Page transitions: a cross-fade between pages with React's `<ViewTransition>`,
   turned off by reduced motion.
+- A privacy policy at `/privacy`, written in Markdown under
+  `src/content/<locale>/legal/` and loaded like the docs, with the same
+  fallback to English.
+- Documentation: the getting-started and making-it-yours guides rewritten, and
+  four new articles on launching a project, the component library, building
+  with AI, and the roadmap. Each document shows an estimated reading time.
 
 ### Changed
 

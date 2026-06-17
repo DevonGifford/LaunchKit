@@ -19,6 +19,8 @@ export type DocSummary = DocFrontmatter & {
   /** The locale the text is actually written in. */
   locale: Locale;
   isFallback: boolean;
+  /** Estimated minutes to read, from the word count. */
+  readingMinutes: number;
 };
 
 export type Doc = DocSummary & { html: string };
@@ -40,6 +42,12 @@ export function parseFrontmatter(source: string): { data: Record<string, string>
     data[key] = value;
   }
   return { data, body: source.slice(match[0].length) };
+}
+
+/** Minutes to read `markdown` at about 220 words a minute, rounded up; at least one. */
+export function estimateReadingMinutes(markdown: string): number {
+  const words = markdown.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 220));
 }
 
 /** Renders trusted, repository-authored Markdown to HTML. */
@@ -106,6 +114,7 @@ export function createDocsSource(contentRoot: string, folder: 'docs' | 'legal' =
       slug,
       locale: sourceLocale,
       isFallback: sourceLocale !== locale,
+      readingMinutes: estimateReadingMinutes(body),
       html: renderMarkdown(body),
     };
   }

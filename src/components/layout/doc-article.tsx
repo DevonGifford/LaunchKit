@@ -4,9 +4,9 @@ import { Container } from '@/components/ui/container';
 import type { Doc } from '@/lib/content/docs';
 
 /**
- * A Markdown document as a page: its title, summary and date, then the text.
- * `before` sits above the title, such as a link back to an index;
- * `fallbackNotice` says why the text is in another language, when it is.
+ * A Markdown document as a page: its title, summary, date and reading time,
+ * then the text. `before` sits above the title, such as a link back to an
+ * index; `fallbackNotice` says why the text is in another language, when it is.
  */
 export async function DocArticle({
   doc,
@@ -29,6 +29,8 @@ export async function DocArticle({
           <p className="text-lede text-muted-foreground">{doc.description}</p>
           <p className="text-sm text-muted-foreground">
             {t('updated', { date: new Date(doc.updated) })}
+            <span aria-hidden="true"> · </span>
+            {t('readingTime', { minutes: doc.readingMinutes })}
           </p>
           {doc.isFallback && (
             <p lang={locale} className="rounded-lg bg-muted px-4 py-3 text-sm">
