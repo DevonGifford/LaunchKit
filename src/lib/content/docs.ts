@@ -128,12 +128,25 @@ export function createDocsSource(contentRoot: string, folder: 'docs' | 'legal' =
       .sort((a, b) => a.order - b.order);
   }
 
-  return { getDocSlugs, getDoc, listDocs };
+  /**
+   * The documents to suggest after `doc`: those its `next` lists, or else the
+   * two that follow it in order, wrapping round to the start.
+   */
+  async function getNextDocs(locale: Locale, doc: DocSummary): Promise<DocSummary[]> {
+    const docs = await listDocs(locale);
+    if (doc.next.length > 0) {
+      return doc.next.flatMap((slug) => docs.filter((candidate) => candidate.slug === slug));
+    }
+    const index = docs.findIndex((candidate) => candidate.slug === doc.slug);
+    return [...docs.slice(index + 1), ...docs.slice(0, index)].slice(0, 2);
+  }
+
+  return { getDocSlugs, getDoc, listDocs, getNextDocs };
 }
 
 const contentRoot = path.join(process.cwd(), 'src', 'content');
 
-export const { getDocSlugs, getDoc, listDocs } = createDocsSource(contentRoot);
+export const { getDocSlugs, getDoc, listDocs, getNextDocs } = createDocsSource(contentRoot);
 
 /**
  * Legal pages such as the privacy policy, in src/content/<locale>/legal/: kept

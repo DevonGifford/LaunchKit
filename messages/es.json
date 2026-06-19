@@ -62,8 +62,11 @@
     "count": "{count, plural, one {# guía} other {# guías}}",
     "updated": "Actualizado el {date, date, long}",
     "readingTime": "{minutes} min de lectura",
+    "summaryLabel": "Resumen ejecutivo con IA",
+    "summaryIntro": "En esta página encontrarás",
     "fallbackNotice": "Esta guía aún no está disponible en {language}, así que se muestra en {fallbackLanguage}.",
-    "allGuides": "Todas las guías"
+    "allGuides": "Todas las guías",
+    "whereNext": "Qué leer después"
   },
   "Legal": {
     "fallbackNotice": "Esta página aún no está disponible en {language}, así que se muestra en {fallbackLanguage}."

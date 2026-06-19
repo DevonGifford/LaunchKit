@@ -55,6 +55,20 @@ describe.each(routing.locales)('content: %s', (locale) => {
   });
 });
 
+describe(`documents: ${routing.defaultLocale}`, () => {
+  it.each(slugs)('"%s" has a summary that reads in under 20 seconds', async (slug) => {
+    const doc = await getDoc(routing.defaultLocale, slug);
+    const words = doc?.summary?.split(/\s+/).length ?? 0;
+    expect(words).toBeGreaterThan(0);
+    expect(words).toBeLessThanOrEqual(70); // about 20 seconds at 220 words a minute
+  });
+
+  it.each(slugs)('"%s" suggests only documents that exist', async (slug) => {
+    const doc = await getDoc(routing.defaultLocale, slug);
+    for (const next of doc?.next ?? []) expect(slugs).toContain(next);
+  });
+});
+
 describe('pageDefinitionSchema', () => {
   const page = (sections: unknown[]) => ({ meta: { title: 'T', description: 'D' }, sections });
   const cta = (id: string, href: string) => ({

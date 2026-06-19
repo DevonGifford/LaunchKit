@@ -680,6 +680,22 @@ export const docFrontmatterSchema = z.object({
   updated: z.iso.date(),
   /** Position in the docs index; lower comes first. */
   order: z.coerce.number().int().nonnegative(),
+  /** What the page covers, above the text: short enough to read in under 20 seconds. */
+  summary: text.optional(),
+  /**
+   * Slugs of the documents to suggest at the end, comma-separated. Without
+   * them, the documents that follow in `order` are suggested.
+   */
+  next: z
+    .string()
+    .optional()
+    .transform(
+      (slugs) =>
+        slugs
+          ?.split(',')
+          .map((slug) => slug.trim())
+          .filter(Boolean) ?? [],
+    ),
 });
 
 export type DocFrontmatter = z.infer<typeof docFrontmatterSchema>;

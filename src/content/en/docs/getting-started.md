@@ -3,6 +3,8 @@ title: Getting started
 description: What LaunchKit is, what you need, and how to go from a fresh clone to a running site in a few minutes.
 updated: 2026-10-17
 order: 1
+summary: What LaunchKit is and deliberately leaves out, the two tools you need, the commands to get a site running locally, a map of where everything lives, and how a page is assembled from typed sections.
+next: launching-a-project, making-it-yours, component-library
 ---
 
 LaunchKit is a reusable foundation for building and launching better websites,
@@ -111,13 +113,3 @@ export const contact = {
 Reorder, remove or add sections and the page follows, with no component
 changes. TypeScript checks every field as you type, and an unknown section
 type stops the build.
-
-## Where to go next
-
-- [Making it yours](making-it-yours): brand, pages, languages and site details.
-- [How the component library works](component-library): the primitives and
-  sections, and how to add your own.
-- [Building LaunchKit with AI](building-with-ai): how coding agents work in
-  this repository, safely.
-- [What’s next for LaunchKit](roadmap): the plans, and what LaunchKit won’t
-  become.

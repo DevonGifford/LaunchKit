@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { DocArticle } from '@/components/layout/doc-article';
+import { NextDocs } from '@/components/layout/next-docs';
 import { Link } from '@/i18n/navigation';
 import { localeNames, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';
-import { getDoc, getDocSlugs } from '@/lib/content/docs';
+import { getDoc, getDocSlugs, getNextDocs } from '@/lib/content/docs';
 import { pageMetadata } from '@/lib/seo';
 
 // Only documents that exist at build time; anything else is a 404.
@@ -33,10 +34,12 @@ export default async function DocPage({ params }: PageProps<'/[locale]/docs/[slu
   if (!doc) notFound();
 
   const t = await getTranslations('Docs');
+  const next = await getNextDocs(locale, doc);
 
   return (
     <DocArticle
       doc={doc}
+      after={<NextDocs docs={next} />}
       fallbackNotice={t('fallbackNotice', {
         language: localeNames[locale],
         fallbackLanguage: localeNames[doc.locale],

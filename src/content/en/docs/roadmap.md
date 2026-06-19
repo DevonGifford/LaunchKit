@@ -3,6 +3,8 @@ title: What’s next for LaunchKit
 description: Where LaunchKit is heading, what each phase adds, and what it will deliberately never become.
 updated: 2026-10-17
 order: 6
+summary: Where LaunchKit is heading: finishing and translating this website, proving the foundation on real sites, optional analytics and error monitoring, application services only when needed, the decisions still open, and what it will never become.
+next: launching-a-project, building-with-ai
 ---
 
 LaunchKit is meant to stay small. It won’t grow by adding everything a

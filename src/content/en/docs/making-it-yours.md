@@ -3,6 +3,8 @@ title: Making it yours
 description: Change the brand, rewrite the pages, set your languages and site details, and keep taking improvements from LaunchKit.
 updated: 2026-10-17
 order: 2
+summary: A quick reference for what to edit, then how to swap in your own colours, typefaces and logo, rewrite the pages, set your languages, site details and menus, and keep merging LaunchKit’s improvements.
+next: launching-a-project, component-library
 ---
 
 A site built on LaunchKit shouldn’t look like LaunchKit. The foundation keeps

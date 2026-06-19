@@ -3,6 +3,8 @@ title: Building LaunchKit with AI
 description: How coding agents work in this repository, the rules that keep them safe, and what a real working session looks like.
 updated: 2026-10-17
 order: 5
+summary: How AI coding agents work in LaunchKit: the shared rulebook in AGENTS.md, the rule that only people commit, 18 pinned skills, bundled framework docs, the checks that catch mistakes, and the five-step loop this website was built with.
+next: component-library, roadmap
 ---
 
 Much of LaunchKit, this website included, was built with an AI coding agent

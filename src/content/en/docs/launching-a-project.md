@@ -3,6 +3,8 @@ title: Launching a new project with LaunchKit
 description: A worked example, from an empty repository to a site that’s live, tested and still taking LaunchKit’s improvements.
 updated: 2026-10-17
 order: 3
+summary: An eight-step walkthrough of launching a site on LaunchKit: setting up the repository, giving it a brand, composing pages from existing sections, connecting the contact form, running the checks, going live and taking future releases.
+next: making-it-yours, component-library
 ---
 
 LaunchKit exists to be built on. This walkthrough follows one project from

@@ -55,7 +55,9 @@ need to take when merging it.
   fallback to English.
 - Documentation: the getting-started and making-it-yours guides rewritten, and
   four new articles on launching a project, the component library, building
-  with AI, and the roadmap. Each document shows an estimated reading time.
+  with AI, and the roadmap. Each document shows an estimated reading time, an
+  optional executive summary from its frontmatter, and suggestions for what to
+  read next.
 
 ### Changed
 

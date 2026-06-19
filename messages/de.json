@@ -62,8 +62,11 @@
     "count": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
     "updated": "Aktualisiert am {date, date, long}",
     "readingTime": "{minutes} Min. Lesezeit",
+    "summaryLabel": "KI-Zusammenfassung",
+    "summaryIntro": "Auf dieser Seite finden Sie",
     "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
-    "allGuides": "Alle Anleitungen"
+    "allGuides": "Alle Anleitungen",
+    "whereNext": "Weiterlesen"
   },
   "Legal": {
     "fallbackNotice": "Diese Seite ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt."

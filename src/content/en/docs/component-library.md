@@ -3,6 +3,8 @@ title: How the component library works
 description: The primitives and sections every LaunchKit site is built from, how a section goes from typed content to the page, and how to add your own.
 updated: 2026-10-17
 order: 4
+summary: How LaunchKit’s two layers fit together: around fifty owned primitives and 27 section types, how a section travels from a Zod schema to the page, how Storybook tests every story, and the steps and house rules for adding your own.
+next: making-it-yours, building-with-ai
 ---
 
 Every page on a LaunchKit site, including this one, is assembled from the

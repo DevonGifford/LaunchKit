@@ -6,6 +6,7 @@ import {
   parseFrontmatter,
   renderMarkdown,
 } from '@/lib/content/docs';
+import { docFrontmatterSchema } from '@/lib/content/types';
 
 const fixtures = path.join(import.meta.dirname, '..', 'fixtures');
 const docs = createDocsSource(path.join(fixtures, 'content'));
@@ -33,6 +34,19 @@ describe('Markdown documents', () => {
   it('returns null for unknown or unsafe slugs', async () => {
     expect(await docs.getDoc('en', 'missing')).toBeNull();
     expect(await docs.getDoc('en', '../../package')).toBeNull();
+  });
+
+  it('suggests the documents that follow, wrapping round to the start', async () => {
+    const [first, second] = await docs.listDocs('en');
+    if (!first || !second) throw new Error('The fixtures have two documents');
+    expect((await docs.getNextDocs('en', first)).map((doc) => doc.slug)).toEqual(['second']);
+    expect((await docs.getNextDocs('en', second)).map((doc) => doc.slug)).toEqual(['first']);
+  });
+
+  it('reads the documents to suggest from a comma-separated list', () => {
+    const base = { title: 'T', description: 'D', updated: '2026-10-17', order: '1' };
+    expect(docFrontmatterSchema.parse({ ...base, next: 'a, b' }).next).toEqual(['a', 'b']);
+    expect(docFrontmatterSchema.parse(base).next).toEqual([]);
   });
 
   it('fails loudly on invalid frontmatter', async () => {
