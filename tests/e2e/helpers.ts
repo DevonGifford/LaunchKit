@@ -18,6 +18,8 @@ export const routes = [
   '/docs/roadmap',
   '/contact',
   '/privacy',
+  '/terms',
+  '/llm-notice',
   '/coming-soon',
   '/home-v1',
 ] as const;

@@ -53,6 +53,11 @@ need to take when merging it.
 - A privacy policy at `/privacy`, written in Markdown under
   `src/content/<locale>/legal/` and loaded like the docs, with the same
   fallback to English.
+- Terms of use at `/terms`, separating use of the website from the MIT-licensed
+  source code, and an LLM notice at `/llm-notice`.
+- `/llms.txt`, a curated map of the site for LLMs and coding agents following
+  the llms.txt proposal, generated from the content at build time; the LLM
+  notice shows the same file in full.
 - Documentation: the getting-started and making-it-yours guides rewritten, and
   four new articles on launching a project, the component library, building
   with AI, and the roadmap. Each document shows an estimated reading time, an

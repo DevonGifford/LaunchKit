@@ -9,7 +9,7 @@ const pricing: NavigationLink = { key: 'pricing', href: '/pricing' };
 const contact: NavigationLink = { key: 'contact', href: '/contact' };
 // Pages that don't exist yet point at the coming-soon page until they do.
 const privacy: NavigationLink = { key: 'privacy', href: '/privacy' };
-const terms: NavigationLink = { key: 'terms', href: '/coming-soon' };
+const terms: NavigationLink = { key: 'terms', href: '/terms' };
 
 /**
  * Primary navigation. Labels are translation keys in `messages/*.json`
@@ -60,5 +60,5 @@ export const footerNavigation: ReadonlyArray<{
 export const legalNavigation: readonly NavigationLink[] = [
   privacy,
   terms,
-  { key: 'llmNotice', href: '/coming-soon' },
+  { key: 'llmNotice', href: '/llm-notice' },
 ];

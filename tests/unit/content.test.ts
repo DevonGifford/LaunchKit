@@ -43,10 +43,13 @@ describe.each(routing.locales)('content: %s', (locale) => {
     for (const href of internalLinks(page)) expect(knownPaths).toContain(href.split('#')[0]);
   });
 
-  it('privacy policy loads with valid frontmatter', async () => {
-    const doc = await getLegalDoc(locale, 'privacy');
-    expect(doc?.html).toContain('<h2');
-  });
+  it.each(['privacy', 'terms', 'llm-notice'])(
+    'legal page "%s" loads with valid frontmatter',
+    async (slug) => {
+      const doc = await getLegalDoc(locale, slug);
+      expect(doc?.html).toContain('<h2');
+    },
+  );
 
   it.each(slugs)('document "%s" loads with valid frontmatter', async (slug) => {
     const doc = await getDoc(locale, slug);

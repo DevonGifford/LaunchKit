@@ -7,18 +7,21 @@ import type { Doc } from '@/lib/content/docs';
 /**
  * A Markdown document as a page: its title, description, date and reading
  * time, its executive summary if it has one, then the text. `before` sits above
- * the title, such as a link back to an index, and `after` follows the text;
- * `fallbackNotice` says why the text is in another language, when it is.
+ * the title, such as a link back to an index; `children` continue the text
+ * inside the article, and `after` follows it outside; `fallbackNotice` says why
+ * the text is in another language, when it is.
  */
 export async function DocArticle({
   doc,
   before,
   after,
+  children,
   fallbackNotice,
 }: {
   doc: Doc;
   before?: ReactNode;
   after?: ReactNode;
+  children?: ReactNode;
   fallbackNotice: string;
 }) {
   const locale = await getLocale();
@@ -45,6 +48,7 @@ export async function DocArticle({
         {doc.summary && <ExecutiveSummary summary={doc.summary} />}
         {/* Repository-authored Markdown, rendered at build time. */}
         <div className="prose mt-10" dangerouslySetInnerHTML={{ __html: doc.html }} />
+        {children}
       </article>
       {/* Outside the article, so it's in the page's language even when the text isn't. */}
       {after && <div className="mx-auto max-w-3xl">{after}</div>}
