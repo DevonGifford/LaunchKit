@@ -76,17 +76,14 @@ export const pricing = {
   },
   sections: [
     {
-      id: 'intro',
-      type: 'hero',
+      // The pricing fixture in full. Its own compact heading opens the page, so
+      // the plans start close to the top.
+      id: 'plans',
+      type: 'pricing',
       eyebrow: 'Pricing',
       title: 'Simple pricing for every stage.',
       description:
         'Start free with the foundation, or let us design, build and grow your website with you.',
-    },
-    {
-      // The pricing fixture in full, introduced by the page's hero.
-      id: 'plans',
-      type: 'pricing',
       currencies: pricingCurrencies,
       currencyNote: 'Choose your currency. Prices are set for each region.',
       plans: pricingPlans,
