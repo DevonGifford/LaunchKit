@@ -58,9 +58,9 @@ need to take when merging it.
 - `/llms.txt`, a curated map of the site for LLMs and coding agents following
   the llms.txt proposal, generated from the content at build time; the LLM
   notice shows the same file in full.
-- Documentation: the getting-started and making-it-yours guides rewritten, and
-  four new articles on launching a project, the component library, building
-  with AI, and the roadmap. Each document shows an estimated reading time, an
+- Documentation: the quickstart and customizing guides rewritten, and four new
+  articles on launching a project, the design system, AI integrations and the
+  roadmap, with a closing call to action on the docs index. Each document shows an estimated reading time, an
   optional executive summary from its frontmatter, and suggestions for what to
   read next.
 

@@ -77,7 +77,7 @@ they follow are in `AGENTS.md`: read the code before changing it, follow the
 project’s conventions, run every check, and never stage, commit, push or open
 a pull request without the person’s explicit permission. The same automated
 checks apply whoever wrote the code.
-[Building LaunchKit with AI](/docs/building-with-ai) tells the story in more
+[LaunchKit AI Integrations](/docs/building-with-ai) tells the story in more
 detail.
 
 Some of the website’s content is written with AI and labelled as such, like

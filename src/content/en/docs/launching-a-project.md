@@ -1,5 +1,5 @@
 ---
-title: Launching a new project with LaunchKit
+title: Launching with LaunchKit
 description: A worked example, from an empty repository to a site that’s live, tested and still taking LaunchKit’s improvements.
 updated: 2026-10-17
 order: 3
@@ -24,9 +24,11 @@ history. That shared history is what lets improvements flow down later, so
 start with a clone, not a copy:
 
 ```sh
-git clone --origin upstream git@github.com:DevonGifford/LaunchKit.git unpocketed-site
+git clone --origin upstream \
+  git@github.com:DevonGifford/LaunchKit.git unpocketed-site
 cd unpocketed-site
-git remote add origin git@github.com:unpocketed/unpocketed-site.git
+git remote add origin \
+  git@github.com:unpocketed/unpocketed-site.git
 git push -u origin main
 pnpm install
 ```
@@ -76,7 +78,7 @@ already has:
 No component changes are needed: the page is data, and TypeScript checks
 every field. Anything specific to UnPocketed, such as an app-store badge
 row, would become a new section in the project, built the way
-[How the component library works](component-library) describes.
+[LaunchKit Design System](component-library) describes.
 
 ## 4. Fill in the details
 
@@ -103,8 +105,12 @@ messages themselves: they’re personal data.
 Before anything goes live, run the same checks CI runs:
 
 ```sh
-pnpm check       # types, lint, formatting, translations, unit, browser and story tests
-pnpm test:e2e    # a production build, tested on desktop and mobile
+# Types, lint, formatting and translations,
+# then the unit, browser and story tests
+pnpm check
+
+# A production build, tested on desktop and mobile
+pnpm test:e2e
 ```
 
 Between them, they check every page for accessibility problems in both

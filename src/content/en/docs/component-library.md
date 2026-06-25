@@ -1,5 +1,5 @@
 ---
-title: How the component library works
+title: LaunchKit Design System
 description: The primitives and sections every LaunchKit site is built from, how a section goes from typed content to the page, and how to add your own.
 updated: 2026-10-17
 order: 4

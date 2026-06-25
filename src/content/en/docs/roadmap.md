@@ -1,5 +1,5 @@
 ---
-title: What’s next for LaunchKit
+title: What’s Next for LaunchKit
 description: Where LaunchKit is heading, what each phase adds, and what it will deliberately never become.
 updated: 2026-10-17
 order: 6

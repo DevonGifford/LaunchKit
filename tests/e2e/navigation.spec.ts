@@ -36,7 +36,7 @@ test('the previous homepage’s call to action leads to the getting-started guid
   await page.goto('/en/home-v1');
   await page.getByRole('link', { name: 'Get started' }).click();
   await expect(page).toHaveURL(/\/en\/docs\/getting-started$/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Getting started');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('LaunchKit Quickstart');
 });
 
 test('the homepage describes the site in structured data', async ({ page }) => {

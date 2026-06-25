@@ -17,7 +17,7 @@ const section = {
     items: [
       { label: 'What’s included', href: '/#included' },
       { label: 'Documentation', href: '/docs' },
-      { label: 'Making it yours', href: '/docs/making-it-yours' },
+      { label: 'Customizing LaunchKit', href: '/docs/making-it-yours' },
       { label: 'Contact', href: '/contact' },
     ],
   },

@@ -1,5 +1,5 @@
 ---
-title: Making it yours
+title: Customizing LaunchKit
 description: Change the brand, rewrite the pages, set your languages and site details, and keep taking improvements from LaunchKit.
 updated: 2026-10-17
 order: 2
@@ -67,7 +67,7 @@ download, and nothing to undo. To use a web font, load it with `next/font` in
 stack in `theme.css`:
 
 ```css
---typeface-serif: var(--font-brand-serif), ui-serif, Georgia, serif;
+--typeface-serif: var(--font-brand-serif), serif;
 ```
 
 ## The pages
@@ -80,7 +80,7 @@ TypeScript checks every field as you type.
 Browse the sections in Storybook (`pnpm storybook`) to see what each one
 looks like, in both themes and at every screen size. When a page needs a
 section LaunchKit doesn’t have, build it in your project first.
-[How the component library works](component-library) explains how. If it
+[LaunchKit Design System](component-library) explains how. If it
 later proves useful to other sites, propose it upstream.
 
 ## The words around the pages

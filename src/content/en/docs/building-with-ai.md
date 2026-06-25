@@ -1,5 +1,5 @@
 ---
-title: Building LaunchKit with AI
+title: LaunchKit AI Integrations
 description: How coding agents work in this repository, the rules that keep them safe, and what a real working session looks like.
 updated: 2026-10-17
 order: 5

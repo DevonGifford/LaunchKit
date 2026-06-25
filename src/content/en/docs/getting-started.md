@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: LaunchKit Quickstart
 description: What LaunchKit is, what you need, and how to go from a fresh clone to a running site in a few minutes.
 updated: 2026-10-17
 order: 1
@@ -53,17 +53,21 @@ Clone LaunchKit into a new folder, keeping it as the `upstream` remote so you
 can merge improvements later:
 
 ```sh
-git clone --origin upstream git@github.com:DevonGifford/LaunchKit.git my-site
+git clone --origin upstream \
+  git@github.com:DevonGifford/LaunchKit.git my-site
 cd my-site
 pnpm install
-pnpm exec playwright install chromium   # once: the browser the tests use
+
+# Once: the browser the tests use
+pnpm exec playwright install chromium
+
 pnpm dev
 ```
 
 The site is now running at `http://localhost:3000`.
 
 > Starting a real project rather than exploring? Read
-> [Launching a new project with LaunchKit](launching-a-project) next. It
+> [Launching with LaunchKit](launching-a-project) next. It
 > covers remotes, repository setup and deployment, step by step.
 
 ## Everyday commands
@@ -104,8 +108,17 @@ A page is an ordered list of sections, each a typed object:
 export const contact = {
   meta: { title: 'Contact', description: '…' },
   sections: [
-    { id: 'intro', type: 'hero', title: 'Let’s talk about your next launch.', description: '…' },
-    { id: 'message', type: 'contact', title: 'Send a message' },
+    {
+      id: 'intro',
+      type: 'hero',
+      title: 'Let’s talk about your next launch.',
+      description: '…',
+    },
+    {
+      id: 'message',
+      type: 'contact',
+      title: 'Send a message',
+    },
   ],
 } satisfies PageDefinition;
 ```

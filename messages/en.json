@@ -66,7 +66,12 @@
     "summaryIntro": "On this page you’ll find",
     "fallbackNotice": "This guide isn’t available in {language} yet, so it’s shown in {fallbackLanguage}.",
     "allGuides": "All guides",
-    "whereNext": "Where to go next"
+    "whereNext": "Where to go next",
+    "cta": {
+      "title": "Ready to start building?",
+      "description": "Follow the quickstart and have a site running in minutes, or get in touch and we’ll build it with you.",
+      "quickstart": "Open the quickstart"
+    }
   },
   "Legal": {
     "fallbackNotice": "This page isn’t available in {language} yet, so it’s shown in {fallbackLanguage}."
