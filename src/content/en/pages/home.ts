@@ -236,6 +236,49 @@ export const home = {
       ],
     },
     {
+      // The pipeline fixture, with two of its promises reworded to what
+      // LaunchKit itself provides rather than what a host does.
+      id: 'infrastructure',
+      type: 'marketing-deployment-pipeline',
+      eyebrow: 'Deployment pipeline',
+      title: 'Infrastructure that grows with you.',
+      description:
+        'One push takes a change from your branch to production, through the same checks every time.',
+      items: [
+        {
+          icon: 'globe',
+          title: 'Deploy anywhere',
+          description: 'A standard Next.js app, for Vercel or any host that runs Next.js.',
+        },
+        {
+          icon: 'trending-up',
+          title: 'Scales with traffic',
+          description: 'Pages are prerendered at build time and served as static files.',
+        },
+        {
+          icon: 'coins',
+          title: 'Lean to run',
+          description: 'No paid services to start, and static pages keep hosting costs low.',
+        },
+        {
+          icon: 'file-code',
+          title: 'Infrastructure as code',
+          description: 'Configuration, environments and deployment stay version-controlled.',
+        },
+      ],
+      pipeline: {
+        caption: 'From push to production',
+        command: 'git push origin feat/pricing-page',
+        steps: [
+          { label: 'Quality', detail: 'types, lint, tests and axe' },
+          { label: 'Build', detail: 'every locale prerendered' },
+          { label: 'Preview', detail: 'a URL for every pull request' },
+          { label: 'Production', detail: 'live on merge to main' },
+        ],
+      },
+      badges: ['GitHub Actions', 'Vercel', 'Node.js 24+', 'pnpm 12'],
+    },
+    {
       id: 'quality',
       type: 'marketing-quality-gates',
       eyebrow: 'Quality gates',

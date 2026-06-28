@@ -135,6 +135,7 @@ export const examples = {
         screen('Hero', 'hero', '/#hero'),
         screen('Pricing', 'pricing', '/pricing'),
         screen('Timeline', 'timeline', '/#timeline'),
+        screen('Infrastructure', 'infrastructure', '/#infrastructure'),
         screen('Tech stack', 'tech-stack', '/#stack'),
         screen('Developer experience', 'developer-experience', '/#developer-experience'),
         screen('Quality and automation', 'quality', '/#quality'),

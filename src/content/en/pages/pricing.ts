@@ -64,8 +64,8 @@ const client = (name: string, file: string, width: number) => ({
 });
 
 /**
- * The Pricing page: every plan in full, then proof and the questions people ask
- * before choosing. English first; the other locales show a coming-soon
+ * The Pricing page: every plan in full, then proof, the questions people ask
+ * before choosing, and a quiet invitation to talk. English first; the other locales show a coming-soon
  * placeholder until it is translated.
  */
 export const pricing = {
@@ -172,6 +172,16 @@ export const pricing = {
           ],
         },
       ],
+    },
+    {
+      // A quiet close for anyone who read this far: the plans' buttons are well above.
+      id: 'talk',
+      type: 'cta-panel',
+      title: 'Still deciding?',
+      description:
+        'Tell us about your project and we’ll help you choose the plan that fits, or start on your own today.',
+      primaryAction: { label: 'Get in Contact', href: '/contact' },
+      secondaryAction: { label: 'Start for free', href: '/docs/getting-started' },
     },
   ],
 } satisfies PageDefinition;
