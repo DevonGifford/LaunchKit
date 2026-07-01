@@ -17,7 +17,7 @@ test.describe('locale detection', () => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/de$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'de');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gebaut für das, was kommt.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Schneller starten.');
   });
 });
 

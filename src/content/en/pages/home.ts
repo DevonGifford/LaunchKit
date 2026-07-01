@@ -22,9 +22,8 @@ const logo = (name: string, file: string) => ({
 });
 
 /**
- * The homepage. English first: until it is translated, the other locales show
- * the previous homepage (home-v1.ts). The copy is the sections' Storybook
- * fixtures and the previous homepage, adapted where noted.
+ * The homepage. The copy is the sections' Storybook fixtures and the previous
+ * homepage (home-v1.ts), adapted where noted.
  */
 export const home = {
   meta: {

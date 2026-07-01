@@ -1,6 +1,6 @@
 import type { PageDefinition, SectionOf } from '@/lib/content/types';
 
-/** Currencies the plans are priced in; the first is the default. */
+/** Currencies the plans are priced in, in every language; the first is the default. */
 export const pricingCurrencies = [
   'GBP',
   'EUR',
@@ -9,14 +9,21 @@ export const pricingCurrencies = [
 ] satisfies SectionOf<'pricing'>['currencies'];
 
 /**
- * The plans, shared with the homepage's pricing section so prices are set in
- * one place. The EUR, USD and ZAR amounts are set by hand from the GBP price.
+ * Each plan's price in every currency, shared by every language so prices are
+ * set in one place. The EUR, USD and ZAR amounts are set by hand from the GBP
+ * price.
  */
+export const planAmounts = {
+  buildItYourself: { GBP: 0, EUR: 0, USD: 0, ZAR: 0 },
+  builtForYou: { GBP: 1300, EUR: 1500, USD: 1700, ZAR: 30000 },
+};
+
+/** The plans, shared with the homepage's pricing section. */
 export const pricingPlans = [
   {
     name: 'Build It Yourself',
     description: 'For founders, developers and teams using LaunchKit directly.',
-    price: { amounts: { GBP: 0, EUR: 0, USD: 0, ZAR: 0 } },
+    price: { amounts: planAmounts.buildItYourself },
     priceNote: 'open source',
     features: [
       'Reusable website foundation',
@@ -29,7 +36,7 @@ export const pricingPlans = [
   {
     name: 'Built For You',
     description: 'We design and build your website with LaunchKit.',
-    price: { amounts: { GBP: 1300, EUR: 1500, USD: 1700, ZAR: 30000 } },
+    price: { amounts: planAmounts.builtForYou },
     priceNote: 'starting price',
     features: [
       'Design for your brand',
@@ -65,8 +72,7 @@ const client = (name: string, file: string, width: number) => ({
 
 /**
  * The Pricing page: every plan in full, then proof, the questions people ask
- * before choosing, and a quiet invitation to talk. English first; the other locales show a coming-soon
- * placeholder until it is translated.
+ * before choosing, and a quiet invitation to talk.
  */
 export const pricing = {
   meta: {

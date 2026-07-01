@@ -10,8 +10,7 @@ const screen = (name: string, file: string, href: string) => ({
 
 /**
  * The Examples page, until there are launched projects to show: the projects in
- * progress, the sections they draw on and the sections themselves. English
- * first; the other locales show a coming-soon placeholder until it is translated.
+ * progress, the sections they draw on and the sections themselves.
  */
 export const examples = {
   meta: {
