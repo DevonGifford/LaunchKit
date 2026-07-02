@@ -41,9 +41,8 @@ need to take when merging it.
 - Optional Storybook deployment to Vercel from CI: production from `main` and
   a preview for each pull request, off until switched on.
 - Website pages: a new homepage composed from the section library, an
-  Examples page and a Pricing page, in English first; the other languages show
-  their previous homepage and coming-soon placeholders until translated. The
-  previous homepage stays at `/home-v1`, unlinked and out of search results.
+  Examples page and a Pricing page. The previous homepage stays at `/home-v1`,
+  unlinked and out of search results.
 - Site navigation: the wide header with Product, Examples, Pricing and Docs and
   a "Get in Contact" call to action (also in the mobile menu), and the full
   footer with placeholder contact details and social links.
@@ -60,9 +59,11 @@ need to take when merging it.
   notice shows the same file in full.
 - Documentation: the quickstart and customizing guides rewritten, and four new
   articles on launching a project, the design system, AI integrations and the
-  roadmap, with a closing call to action on the docs index. Each document shows an estimated reading time, an
-  optional executive summary from its frontmatter, and suggestions for what to
-  read next.
+  roadmap, with a closing call to action on the docs index. Each document
+  shows an estimated reading time, an optional executive summary from its
+  frontmatter, and suggestions for what to read next.
+- The new pages, documents and legal pages in English, Spanish, French and
+  German, with the plans' prices shared by every language.
 
 ### Changed
 

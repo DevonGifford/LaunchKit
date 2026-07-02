@@ -13,6 +13,11 @@ test('/llms.txt is served as plain text and matches the LLM notice exactly', asy
   await page.goto('/en/llm-notice');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('LLM notice');
   expect(await page.locator('figure pre').textContent()).toBe(file);
+
+  // Translated notices show the same English file.
+  await page.goto('/de/llm-notice');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('LLM-Hinweis');
+  expect(await page.locator('figure pre').textContent()).toBe(file);
 });
 
 test('the footer links reach the terms and the LLM notice', async ({ page }) => {

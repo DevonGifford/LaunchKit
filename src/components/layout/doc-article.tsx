@@ -32,7 +32,8 @@ export async function DocArticle({
       <article lang={doc.isFallback ? doc.locale : undefined} className="mx-auto max-w-3xl">
         <header className="space-y-5 border-b pb-10">
           {before}
-          <h1 className="text-display">{doc.title}</h1>
+          {/* Long single words, such as German ones, hyphenate or wrap instead of overflowing a phone. */}
+          <h1 className="text-display wrap-break-word hyphens-auto">{doc.title}</h1>
           <p className="text-lede text-muted-foreground">{doc.description}</p>
           <p className="text-sm text-muted-foreground">
             {t('updated', { date: new Date(doc.updated) })}
