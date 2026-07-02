@@ -71,3 +71,6 @@ need to take when merging it.
   so the row fits in every language.
 - The pricing section's title is optional, so a page's hero can introduce the
   plans.
+- The full footer sits in a wider frame and keeps its tablet layout up to
+  1280px, so its one-row layout fits in every language. Below 1024px the legal
+  links sit under the copyright, one per line on phones.

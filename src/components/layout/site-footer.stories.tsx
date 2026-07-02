@@ -39,11 +39,21 @@ type Story = StoryObj<typeof meta>;
 /** Where an element sits on the page. */
 const box = (element: Element) => element.getBoundingClientRect();
 
+/** Where the copyright line and each legal link sit, the links in reading order. */
+function legalBar(canvasElement: HTMLElement) {
+  const canvas = within(canvasElement);
+  const legal = within(canvas.getByRole('navigation', { name: 'Legal' }));
+  return {
+    copyright: box(canvas.getByText(/Released under the MIT licence/)),
+    links: ['Privacy Policy', 'Terms of Use', 'LLM Notice'].map((name) =>
+      box(legal.getByRole('link', { name })),
+    ),
+  };
+}
+
 /**
- * One row: the brand with the social links under it, the Company links, the
- * Resources links in two columns under one heading, then after a hairline the
- * contact details under their own heading, with the address last. There is no
- * language column.
+ * The brand, the link groups, the contact details with working links, and the
+ * social links. Each layout has a story of its own below.
  */
 export const Full: Story = {
   args: { variant: 'full' },
@@ -56,6 +66,27 @@ export const Full: Story = {
     await expect(phone).toHaveAttribute('href', 'tel:+447700900123');
     await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/447700900456');
     await expect(canvas.getByText('28001')).toBeVisible();
+
+    // Email, phone, WhatsApp, then the address.
+    await expect(box(phone).top).toBeGreaterThan(box(email).bottom);
+    await expect(box(whatsapp).top).toBeGreaterThan(box(phone).bottom);
+    await expect(box(canvas.getByText(street)).top).toBeGreaterThan(box(whatsapp).bottom);
+  },
+};
+
+/**
+ * From 1280px, one row: the brand with the social links under it, the Company
+ * links, the Resources links in two columns under one heading, then after a
+ * hairline the contact details under their own heading, with the address last.
+ * There is no language column. The copyright and legal links share the row below.
+ */
+export const FullOnDesktop: Story = {
+  tags: ['!autodocs'],
+  args: { variant: 'full' },
+  globals: { viewport: { value: 'desktop' } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const email = canvas.getByRole('link', { name: contact.email });
     await expect(canvas.getAllByRole('heading').map((heading) => heading.textContent)).toEqual([
       'Company',
       'Resources',
@@ -72,12 +103,6 @@ export const Full: Story = {
     await expect(docs.left).toBeGreaterThan(features.right);
     await expect(docs.top).toBeCloseTo(features.top, 0);
 
-    // Email, phone, WhatsApp, then the address.
-    const address = box(canvas.getByText(street));
-    await expect(box(phone).top).toBeGreaterThan(box(email).bottom);
-    await expect(box(whatsapp).top).toBeGreaterThan(box(phone).bottom);
-    await expect(address.top).toBeGreaterThan(box(whatsapp).bottom);
-
     // The details beside the groups, level with the first links; the social links under the brand.
     const nav = box(canvas.getByRole('navigation', { name: 'Footer' }));
     const description = box(canvas.getByText(/reusable foundation/));
@@ -89,19 +114,26 @@ export const Full: Story = {
     await expect(links.top).toBeGreaterThan(description.bottom);
     await expect(links.right).toBeLessThan(nav.left);
 
-    // The four details spread evenly down the column, wider apart than the 12px
-    // they would have packed at the top.
+    // The four details 16px apart, however tall the brand beside them grows.
     const rows = [...(canvasElement.querySelector('dl')?.children ?? [])].map(box);
     const gaps = rows.slice(1).map((row, index) => row.top - (rows[index]?.bottom ?? 0));
     await expect(gaps).toHaveLength(3);
-    await expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(2);
-    await expect(Math.min(...gaps)).toBeGreaterThan(12);
+    for (const gap of gaps) await expect(gap).toBeCloseTo(16, 0);
+
+    // The copyright on the left, the legal links on the right, in one row.
+    const legal = legalBar(canvasElement);
+    const middle = (rect: DOMRect) => rect.top + rect.height / 2;
+    for (const link of legal.links) {
+      await expect(link.left).toBeGreaterThan(legal.copyright.right);
+      await expect(Math.abs(middle(link) - middle(legal.copyright))).toBeLessThan(2);
+    }
   },
 };
 
 /**
- * Below 1024px the contact details and social links move beside the brand, and
+ * Below 1280px the contact details and social links move beside the brand, and
  * the groups run underneath, Resources' second column in line with the details.
+ * The legal links take a row of their own under the copyright.
  */
 export const FullOnTablet: Story = {
   tags: ['!autodocs'],
@@ -121,12 +153,19 @@ export const FullOnTablet: Story = {
     await expect(links.top).toBeGreaterThan(box(canvas.getByText(street)).bottom);
     await expect(company.top).toBeGreaterThan(links.bottom);
     await expect(canvas.queryByRole('heading', { name: 'Contact' })).toBeNull();
+
+    const legal = legalBar(canvasElement);
+    const [privacy, ...rest] = legal.links;
+    await expect(privacy?.top).toBeGreaterThan(legal.copyright.bottom);
+    await expect(privacy?.left).toBeCloseTo(legal.copyright.left, 0);
+    for (const link of rest) await expect(link.top).toBeCloseTo(privacy?.top ?? 0, 0);
   },
 };
 
 /**
  * On phones each group takes the full width with its links in two columns, and
- * the groups come before the contact details.
+ * the groups come before the contact details. The legal links follow the
+ * copyright one per line, so no translation leaves one stranded.
  */
 export const FullOnMobile: Story = {
   tags: ['!autodocs'],
@@ -152,6 +191,15 @@ export const FullOnMobile: Story = {
       address.bottom,
     );
     await expect(canvas.queryByRole('heading', { name: 'Contact' })).toBeNull();
+
+    const legal = legalBar(canvasElement);
+    let above = legal.copyright;
+    for (const link of legal.links) {
+      await expect(link.top).toBeGreaterThanOrEqual(above.bottom);
+      await expect(link.left).toBeCloseTo(legal.copyright.left, 0);
+      above = link;
+    }
+
     const page = canvasElement.ownerDocument.documentElement;
     await expect(page.scrollWidth).toBeLessThanOrEqual(page.clientWidth);
   },
