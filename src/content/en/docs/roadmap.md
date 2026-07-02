@@ -19,13 +19,13 @@ The foundation itself is in place: the design system, four languages,
 section-based content, forms, tests, CI and a controlled release process.
 The current work is LaunchKit’s own website, the one you’re reading.
 
-- **Final English content.** Real reviews in place of the placeholders,
-  settled pricing, and the homepage copy refined.
-- **Every page in every language.** The new homepage, Examples and Pricing
-  pages and these guides are English-first. Spanish, French and German
-  versions follow once the English is final, so nothing is translated twice.
-- **The remaining pages.** Terms of use and the LLM notice join the privacy
-  policy, and the footer’s placeholder links get real destinations.
+- **Final content.** Real reviews in place of the placeholders and settled
+  pricing, in every language.
+- **Every page in every language.** The website and these guides are written
+  in English first, then translated into Spanish, French and German once the
+  English is settled, so nothing is translated twice.
+- **The remaining pages.** The footer’s placeholder links, such as About and
+  the changelog, get real destinations.
 
 ## Next: proving it on real sites
 
