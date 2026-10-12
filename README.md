@@ -38,9 +38,7 @@ LaunchKit is maintained centrally, allowing improvements, dependency updates and
 
 ---
 
-**Build once. Reuse often. Improve centrally.** <br/> Every new project should start with the boring-but-important engineering already in place: a clear structure, good defaults, accessible components, responsive layouts, and a dependable developer workflow. That leaves more time for the product, its content and its customers.
-
-LaunchKit is intentionally opinionated about its foundations and flexible about everything built on top. Shared components and tooling belong upstream; branding, copy, custom sections, and business logic belong to the individual project. It's designed to be forked, adapted, and improved — not to force every website into the same template. The goal isn't to build the biggest starter kit. It's to build one that's genuinely useful, easy to maintain, and ready to grow with real projects.
+**Build once. Reuse often. Improve centrally.** <br/> LaunchKit is intentionally opinionated about its foundations and flexible about everything built on top. Shared components and tooling belong upstream; branding, copy, custom sections, and business logic belong to the individual project. It's designed to be forked, adapted, and improved — not to force every website into the same template. The goal isn't to build the biggest starter kit. It's to build one that's genuinely useful, easy to maintain, and ready to grow with real projects.
 
 <br/>
 
@@ -61,7 +59,7 @@ LaunchKit is intentionally opinionated about its foundations and flexible about 
   </a>
 
   <p>
-    <sub>Midnight Yacht Club & Sunlight Yacht Club — two appearances, one design system.</sub>
+    <sub>Midnight Yacht Club & Sunlight Yacht Club design system.</sub>
   </p>
 </div>
 
