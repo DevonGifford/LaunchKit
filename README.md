@@ -28,9 +28,8 @@
 
 **LaunchKit is a reusable foundation for building and launching better websites, faster and cheaper.** <br/> It provides everything a modern website needs — responsive UI, themes, localization, section-based content, forms, testing, CI and AI-assisted development — so each new project can launch faster and focus on what makes it different.
 
-LaunchKit is maintained centrally, allowing improvements, dependency updates and security fixes to be shared across all downstream projects.
+LaunchKit is centrally maintained, with improvements and dependency updates shared across downstream projects.
 
-<br/>
 <br/>
 <!-- -------------------------------------------------------------------------- -->
 
@@ -67,6 +66,7 @@ LaunchKit is maintained centrally, allowing improvements, dependency updates and
 
 <details>
   <summary><strong>Tech Stack</strong></summary>
+  <br/>
 
 | Area                     | Tooling                                              |
 | ------------------------ | ---------------------------------------------------- |
@@ -91,6 +91,7 @@ LaunchKit is maintained centrally, allowing improvements, dependency updates and
 
 <details>
   <summary><strong>Features</strong></summary>
+  <br/>
 
 - **Modern application foundation** — Next.js App Router, React, strict TypeScript, and Tailwind CSS.
 - **Themeable design system** — shadcn/ui components, semantic tokens, light/dark/system appearance, and the _Midnight Yacht Club_ / _Sunlight Yacht Club_ reference brand.
@@ -113,6 +114,7 @@ LaunchKit is maintained centrally, allowing improvements, dependency updates and
 
 <details>
   <summary><strong>Documentation</strong></summary>
+  <br/>
 
 - [Project specification](docs/SPEC.md) — vision, scope, architecture, and development phases.
 - [Style guide](docs/STYLE_GUIDE.md) — brand identity, light/dark palettes, typography, and visual direction.
