@@ -37,5 +37,5 @@
     ".storybook/**/*.ts",
     ".storybook/**/*.tsx"
   ],
-  "exclude": ["node_modules", ".next", "storybook-static", "coverage"]
+  "exclude": ["node_modules", ".next", "storybook-static", "coverage", ".agents", ".claude"]
 }

@@ -9,3 +9,8 @@ public/
 next-env.d.ts
 # The spec is reproduced verbatim from its source document.
 docs/SPEC.md
+
+# Vendored agent skills (installed by the skills CLI; restore with skills-lock.json).
+.agents/
+.claude/skills/
+skills-lock.json

@@ -7,6 +7,10 @@
 @import 'tw-animate-css';
 @import './theme.css';
 
+/* Vendored agent skills hold Markdown full of class names; don't scan them. */
+@source not '../../.agents';
+@source not '../../.claude';
+
 /* Appearance is a class on <html>, set by next-themes. */
 @custom-variant dark (&:where(.dark, .dark *));
 

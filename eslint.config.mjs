@@ -23,6 +23,9 @@ export default defineConfig([
     'playwright-report/**',
     'test-results/**',
     'next-env.d.ts',
+    // Vendored agent skills, not project code.
+    '.agents/**',
+    '.claude/skills/**',
   ]),
 
   js.configs.recommended,

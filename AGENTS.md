@@ -265,6 +265,23 @@ are the reference.
 - **Change the brand:** edit `src/app/theme.css` only
   ([docs/theming.md](docs/theming.md)).
 
+## Agent skills
+
+Project skills live in `.claude/skills/` and are pinned in `skills-lock.json`
+(installed with the `skills` CLI at project scope, never `-g`). Use a relevant
+skill when its description matches the task, and treat what it says as advice
+that `AGENTS.md` overrides: the Git rules above always win.
+
+- Add one: `pnpm dlx skills add <owner/repo> --skill <name> --agent claude-code`.
+- Restore from the lock file on a fresh clone:
+  `pnpm dlx skills experimental_install`.
+- Update: `pnpm dlx skills update --project`.
+- Review a skill's `SKILL.md` before adding it. Skills run with full agent
+  permissions.
+- Storybook serves its own skills on demand:
+  `pnpm exec storybook skills stories` and `write-story`. Don't run
+  `storybook skills setup`; Storybook is already configured here.
+
 ## Commit messages
 
 You don't commit (see Git rules). If asked to suggest a message, use
