@@ -1,0 +1,71 @@
+{
+  "Common": {
+    "close": "Close"
+  },
+  "Metadata": {
+    "siteName": "LaunchKit",
+    "description": "A reusable Next.js foundation for building and launching ideas."
+  },
+  "Layout": {
+    "skipToContent": "Skip to content",
+    "homeLink": "LaunchKit home",
+    "mainNavigation": "Main",
+    "openMenu": "Open menu",
+    "menuTitle": "Menu",
+    "menuDescription": "Site navigation and preferences"
+  },
+  "Navigation": {
+    "home": "Home",
+    "docs": "Docs",
+    "contact": "Contact"
+  },
+  "Theme": {
+    "toggle": "Switch between light and dark mode"
+  },
+  "LocaleSwitcher": {
+    "label": "Language"
+  },
+  "Footer": {
+    "tagline": "Build once, reuse often, improve centrally.",
+    "navigation": "Footer",
+    "copyright": "© {year} LaunchKit. Released under the MIT licence."
+  },
+  "Docs": {
+    "title": "Documentation",
+    "description": "Guides for starting a new project from LaunchKit and making it your own.",
+    "count": "{count, plural, one {# guide} other {# guides}}",
+    "updated": "Updated {date, date, long}",
+    "fallbackNotice": "This guide isn’t available in {language} yet, so it’s shown in {fallbackLanguage}.",
+    "allGuides": "All guides"
+  },
+  "ContactForm": {
+    "requiredNote": "All fields are required.",
+    "name": "Name",
+    "email": "Email",
+    "topic": "Topic",
+    "topicPlaceholder": "Choose a topic",
+    "topics": {
+      "project": "Starting a new project",
+      "foundation": "Using LaunchKit",
+      "other": "Something else"
+    },
+    "message": "Message",
+    "consent": "I agree to be contacted about this enquiry.",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "success": "Thank you — your message has been received.",
+    "errors": {
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "topic": "Please choose a topic.",
+      "message": "Please write at least {min} characters.",
+      "consent": "Please confirm that we may contact you.",
+      "server": "Your message couldn’t be sent. Please try again."
+    }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "The page you were looking for doesn’t exist or has moved.",
+    "backHome": "Back to the homepage"
+  }
+}

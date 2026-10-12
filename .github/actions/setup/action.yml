@@ -1,0 +1,13 @@
+name: Set up project
+description: pnpm (version from package.json), Node.js (from .node-version) and a frozen install.
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v6
+    - uses: actions/setup-node@v7
+      with:
+        node-version-file: .node-version
+        cache: pnpm
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile

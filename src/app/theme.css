@@ -1,0 +1,65 @@
+/*
+ * LaunchKit brand theme — Midnight Yacht Club.
+ *
+ * PROJECT-OWNED. This is the one file a downstream project edits to rebrand:
+ * colour values for both appearances, typefaces and corner radius. Shared
+ * components only ever reference the semantic token names below, so changing a
+ * value here never requires touching a component. See docs/theming.md.
+ *
+ * Every text/background pair below meets WCAG 2.2 AA (4.5:1 for text, 3:1 for
+ * input borders and focus rings). Re-check contrast when changing values.
+ */
+
+:root {
+  /* Light appearance — the yacht club in daylight. */
+  --background: #f8f7f3; /* Warm Ivory */
+  --foreground: #142d46; /* Midnight Navy */
+  --surface: #ffffff; /* cards, menus, dialogs */
+  --surface-foreground: #142d46;
+  --primary: #142d46;
+  --primary-foreground: #f8f7f3;
+  --muted: #efede6;
+  --muted-foreground: #5b6878; /* Slate, deepened from #637182 to keep 4.5:1 on muted */
+  --accent: #c5b391; /* Champagne — hairlines and small details, never body text */
+  --accent-foreground: #142d46;
+  --emphasis: #142d46; /* high-emphasis bands, e.g. the final call to action */
+  --emphasis-foreground: #f8f7f3;
+  --border: #dedad0;
+  --input: #7d8896; /* form control borders: 3:1 against background and surface */
+  --ring: #203d54; /* Deep Ocean */
+  --destructive: #9f2f2f;
+  --overlay: rgb(13 27 42 / 0.45);
+
+  /*
+   * Typography is deliberately undecided (spec §16): system stacks stand in
+   * until the final faces are chosen. To adopt a web font, load it with
+   * next/font in src/app/[locale]/layout.tsx and put its variable first here.
+   */
+  --typeface-serif: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --typeface-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --typeface-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --radius: 0.375rem;
+}
+
+.dark {
+  /* Dark appearance — the same yacht club after sunset. */
+  --background: #0d1b2a; /* Deep Midnight */
+  --foreground: #e8e2d5; /* Warm Ivory Text */
+  --surface: #172b40; /* Navy Surface */
+  --surface-foreground: #e8e2d5;
+  --primary: #e8e2d5;
+  --primary-foreground: #0d1b2a;
+  --muted: #13243a;
+  --muted-foreground: #8996a3; /* Muted Blue-Grey */
+  --accent: #bda77b; /* Antique Gold — sparse details only */
+  --accent-foreground: #0d1b2a;
+  --emphasis: #08131f;
+  --emphasis-foreground: #e8e2d5;
+  --border: #243a51;
+  --input: #6b7b8d;
+  --ring: #bda77b;
+  --destructive: #e38b7e;
+  --overlay: rgb(0 0 0 / 0.6);
+}

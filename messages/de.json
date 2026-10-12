@@ -1,0 +1,71 @@
+{
+  "Common": {
+    "close": "Schließen"
+  },
+  "Metadata": {
+    "siteName": "LaunchKit",
+    "description": "Ein wiederverwendbares Next.js-Fundament, um Ideen zu entwickeln und zu veröffentlichen."
+  },
+  "Layout": {
+    "skipToContent": "Zum Inhalt springen",
+    "homeLink": "LaunchKit-Startseite",
+    "mainNavigation": "Hauptnavigation",
+    "openMenu": "Menü öffnen",
+    "menuTitle": "Menü",
+    "menuDescription": "Seitennavigation und Einstellungen"
+  },
+  "Navigation": {
+    "home": "Start",
+    "docs": "Dokumentation",
+    "contact": "Kontakt"
+  },
+  "Theme": {
+    "toggle": "Zwischen hellem und dunklem Modus wechseln"
+  },
+  "LocaleSwitcher": {
+    "label": "Sprache"
+  },
+  "Footer": {
+    "tagline": "Einmal bauen, oft wiederverwenden, zentral verbessern.",
+    "navigation": "Fußzeile",
+    "copyright": "© {year} LaunchKit. Veröffentlicht unter der MIT-Lizenz."
+  },
+  "Docs": {
+    "title": "Dokumentation",
+    "description": "Anleitungen, um ein neues Projekt auf Basis von LaunchKit zu starten und anzupassen.",
+    "count": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
+    "updated": "Aktualisiert am {date, date, long}",
+    "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
+    "allGuides": "Alle Anleitungen"
+  },
+  "ContactForm": {
+    "requiredNote": "Alle Felder sind Pflichtfelder.",
+    "name": "Name",
+    "email": "E-Mail-Adresse",
+    "topic": "Thema",
+    "topicPlaceholder": "Thema auswählen",
+    "topics": {
+      "project": "Ein neues Projekt starten",
+      "foundation": "LaunchKit verwenden",
+      "other": "Etwas anderes"
+    },
+    "message": "Nachricht",
+    "consent": "Ich bin damit einverstanden, zu dieser Anfrage kontaktiert zu werden.",
+    "submit": "Nachricht senden",
+    "submitting": "Wird gesendet …",
+    "success": "Vielen Dank, Ihre Nachricht ist eingegangen.",
+    "errors": {
+      "name": "Bitte geben Sie Ihren Namen ein.",
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "topic": "Bitte wählen Sie ein Thema.",
+      "message": "Bitte schreiben Sie mindestens {min} Zeichen.",
+      "consent": "Bitte bestätigen Sie, dass wir Sie kontaktieren dürfen.",
+      "server": "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "NotFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zurück zur Startseite"
+  }
+}

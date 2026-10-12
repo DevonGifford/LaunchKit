@@ -1,0 +1,42 @@
+# pnpm settings for this repository (pnpm 10+ reads them from here).
+
+# Save exact versions so `pnpm add` matches the pinned style of package.json.
+savePrefix: ''
+
+# pnpm does not run dependency install scripts unless they are listed here, and
+# pnpm 12 fails the install while any are unreviewed. Each `true` runs code at
+# install time — keep that set short. See docs/toolchain.md.
+allowBuilds:
+  # Registers the Git hooks from lefthook.yml.
+  lefthook: true
+  sharp: true
+  unrs-resolver: true
+  # Pulled in by next-intl's optional message extractor, which LaunchKit does
+  # not use. Both ship prebuilt binaries; their scripts are a build-from-source
+  # fallback.
+  '@parcel/watcher': false
+  '@swc/core': false
+  # Used by Storybook's Vite builder. The platform binary arrives as an optional
+  # dependency; the script only re-verifies it.
+  esbuild: false
+
+# Peer ranges acknowledged deliberately — each one is explained in
+# docs/toolchain.md. Remove an entry once the package declares support.
+peerDependencyRules:
+  allowedVersions:
+    # eslint-config-next@16 depends on these; their `eslint` peer stops at ^9,
+    # and ESLint 9 is out of maintenance. Verified working on ESLint 10.
+    eslint-plugin-import>eslint: '10'
+    eslint-plugin-jsx-a11y>eslint: '10'
+    eslint-plugin-react>eslint: '10'
+    # Optional peer, used only by tsconfck's native parser, which
+    # vite-tsconfig-paths (inside @storybook/nextjs-vite) does not call.
+    tsconfck>typescript: '6'
+
+patchedDependencies:
+  '@storybook/nextjs-vite@10.6.1': patches/@storybook__nextjs-vite@10.6.1.patch
+
+# A dependency bump (e.g. from Dependabot) makes a version-pinned patch stop
+# applying. Install anyway: the Storybook story tests then show whether the
+# upstream fix landed (delete the patch) or not (re-create it).
+allowUnusedPatches: true

@@ -1,0 +1,35 @@
+name: Improvement proposal
+description: Propose a change to the shared foundation.
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        LaunchKit stays small on purpose: a change belongs upstream when it is
+        useful to more than one downstream project. Project-specific sections,
+        integrations and business logic belong in the downstream repository.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or repetitive today, and in which project(s)?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: What would change in LaunchKit? Mention new dependencies explicitly.
+    validations:
+      required: true
+  - type: textarea
+    id: reuse
+    attributes:
+      label: Who else benefits?
+      description: Which other downstream projects would use this? If only one, say why it should still live upstream.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

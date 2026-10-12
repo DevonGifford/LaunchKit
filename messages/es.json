@@ -1,0 +1,71 @@
+{
+  "Common": {
+    "close": "Cerrar"
+  },
+  "Metadata": {
+    "siteName": "LaunchKit",
+    "description": "Una base reutilizable de Next.js para crear y lanzar ideas."
+  },
+  "Layout": {
+    "skipToContent": "Saltar al contenido",
+    "homeLink": "Inicio de LaunchKit",
+    "mainNavigation": "Principal",
+    "openMenu": "Abrir menú",
+    "menuTitle": "Menú",
+    "menuDescription": "Navegación del sitio y preferencias"
+  },
+  "Navigation": {
+    "home": "Inicio",
+    "docs": "Documentación",
+    "contact": "Contacto"
+  },
+  "Theme": {
+    "toggle": "Cambiar entre modo claro y oscuro"
+  },
+  "LocaleSwitcher": {
+    "label": "Idioma"
+  },
+  "Footer": {
+    "tagline": "Construir una vez, reutilizar a menudo, mejorar de forma centralizada.",
+    "navigation": "Pie de página",
+    "copyright": "© {year} LaunchKit. Publicado bajo la licencia MIT."
+  },
+  "Docs": {
+    "title": "Documentación",
+    "description": "Guías para empezar un proyecto nuevo a partir de LaunchKit y hacerlo tuyo.",
+    "count": "{count, plural, one {# guía} other {# guías}}",
+    "updated": "Actualizado el {date, date, long}",
+    "fallbackNotice": "Esta guía aún no está disponible en {language}, así que se muestra en {fallbackLanguage}.",
+    "allGuides": "Todas las guías"
+  },
+  "ContactForm": {
+    "requiredNote": "Todos los campos son obligatorios.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "topic": "Tema",
+    "topicPlaceholder": "Elige un tema",
+    "topics": {
+      "project": "Empezar un proyecto nuevo",
+      "foundation": "Usar LaunchKit",
+      "other": "Otra cosa"
+    },
+    "message": "Mensaje",
+    "consent": "Acepto que se me contacte en relación con esta consulta.",
+    "submit": "Enviar mensaje",
+    "submitting": "Enviando…",
+    "success": "Gracias: hemos recibido tu mensaje.",
+    "errors": {
+      "name": "Introduce tu nombre.",
+      "email": "Introduce una dirección de correo electrónico válida.",
+      "topic": "Elige un tema.",
+      "message": "Escribe al menos {min} caracteres.",
+      "consent": "Confirma que podemos contactarte.",
+      "server": "No se ha podido enviar tu mensaje. Inténtalo de nuevo."
+    }
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscabas no existe o se ha movido.",
+    "backHome": "Volver a la página de inicio"
+  }
+}

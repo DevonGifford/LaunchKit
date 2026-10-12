@@ -1,0 +1,11 @@
+pnpm-lock.yaml
+.next/
+out/
+coverage/
+storybook-static/
+playwright-report/
+test-results/
+public/
+next-env.d.ts
+# The spec is reproduced verbatim from its source document.
+docs/SPEC.md

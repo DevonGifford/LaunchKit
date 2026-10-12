@@ -1,0 +1,29 @@
+# Local checks run by Git hooks. Lefthook's own install script registers the
+# hooks during `pnpm install` (it is allowlisted in pnpm-workspace.yaml).
+#
+# Hooks stay fast and check-only — they never rewrite or re-stage files. CI
+# runs the complete suite. Skip once with `LEFTHOOK=0 git commit ...` if needed.
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: eslint
+      glob: '*.{ts,tsx,mts,mjs,js}'
+      # Route types (PageProps, LayoutProps) must exist for type-aware rules;
+      # a fresh clone has no .next/ yet.
+      run: pnpm exec next typegen > /dev/null && pnpm exec eslint --max-warnings=0 --no-warn-ignored {staged_files}
+
+    - name: prettier
+      glob: '*.{ts,tsx,mts,mjs,js,json,css,md,yml,yaml}'
+      run: pnpm exec prettier --check --ignore-unknown {staged_files}
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit {1}
+
+pre-push:
+  parallel: true
+  jobs:
+    - name: typecheck
+      run: pnpm typecheck

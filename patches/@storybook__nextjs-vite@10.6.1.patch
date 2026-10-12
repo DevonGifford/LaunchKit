@@ -1,0 +1,14 @@
+diff --git a/dist/_browser-chunks/chunk-342N7CWU.js b/dist/_browser-chunks/chunk-342N7CWU.js
+index 342f9b9b78c04e71bef8f43a5b6d1a00d14a45c1..5b3eee796541128d90da4bdc67c9649dc7594b14 100644
+--- a/dist/_browser-chunks/chunk-342N7CWU.js
++++ b/dist/_browser-chunks/chunk-342N7CWU.js
+@@ -118,6 +118,9 @@ var getParallelRoutes = (segmentsList) => {
+           // @ts-ignore Only available in Next.js >= v15.1.1
+           parentCacheNode: newLazyCacheNode,
+           // END
++          // LaunchKit patch: Next.js >= 16.4 useRouter() reads
++          // parentRenderTree.data.bfcacheId from LayoutRouterContext.
++          parentRenderTree: { data: { bfcacheId: 0 }, slots: null },
+           url: pathname,
+           loading: null
+         }

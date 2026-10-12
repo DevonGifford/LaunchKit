@@ -1,0 +1,71 @@
+{
+  "Common": {
+    "close": "Fermer"
+  },
+  "Metadata": {
+    "siteName": "LaunchKit",
+    "description": "Une base Next.js réutilisable pour concevoir et lancer des idées."
+  },
+  "Layout": {
+    "skipToContent": "Aller au contenu",
+    "homeLink": "Accueil LaunchKit",
+    "mainNavigation": "Principale",
+    "openMenu": "Ouvrir le menu",
+    "menuTitle": "Menu",
+    "menuDescription": "Navigation du site et préférences"
+  },
+  "Navigation": {
+    "home": "Accueil",
+    "docs": "Documentation",
+    "contact": "Contact"
+  },
+  "Theme": {
+    "toggle": "Basculer entre le mode clair et le mode sombre"
+  },
+  "LocaleSwitcher": {
+    "label": "Langue"
+  },
+  "Footer": {
+    "tagline": "Construire une fois, réutiliser souvent, améliorer de façon centralisée.",
+    "navigation": "Pied de page",
+    "copyright": "© {year} LaunchKit. Publié sous licence MIT."
+  },
+  "Docs": {
+    "title": "Documentation",
+    "description": "Des guides pour démarrer un nouveau projet à partir de LaunchKit et vous l’approprier.",
+    "count": "{count, plural, one {# guide} other {# guides}}",
+    "updated": "Mis à jour le {date, date, long}",
+    "fallbackNotice": "Ce guide n’est pas encore disponible en {language} ; il est donc affiché en {fallbackLanguage}.",
+    "allGuides": "Tous les guides"
+  },
+  "ContactForm": {
+    "requiredNote": "Tous les champs sont obligatoires.",
+    "name": "Nom",
+    "email": "Adresse e-mail",
+    "topic": "Sujet",
+    "topicPlaceholder": "Choisissez un sujet",
+    "topics": {
+      "project": "Démarrer un nouveau projet",
+      "foundation": "Utiliser LaunchKit",
+      "other": "Autre chose"
+    },
+    "message": "Message",
+    "consent": "J’accepte d’être contacté au sujet de cette demande.",
+    "submit": "Envoyer le message",
+    "submitting": "Envoi…",
+    "success": "Merci, votre message a bien été reçu.",
+    "errors": {
+      "name": "Veuillez saisir votre nom.",
+      "email": "Veuillez saisir une adresse e-mail valide.",
+      "topic": "Veuillez choisir un sujet.",
+      "message": "Veuillez écrire au moins {min} caractères.",
+      "consent": "Veuillez confirmer que nous pouvons vous contacter.",
+      "server": "Votre message n’a pas pu être envoyé. Veuillez réessayer."
+    }
+  },
+  "NotFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous cherchez n’existe pas ou a été déplacée.",
+    "backHome": "Retour à l’accueil"
+  }
+}

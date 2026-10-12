@@ -1,0 +1,171 @@
+/*
+ * Shared design-system wiring. Brand values live in ./theme.css (project-owned);
+ * this file maps them onto Tailwind utilities and sets base element styles.
+ * Downstream projects should rarely need to edit it.
+ */
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './theme.css';
+
+/* Appearance is a class on <html>, set by next-themes. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-emphasis: var(--emphasis);
+  --color-emphasis-foreground: var(--emphasis-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-overlay: var(--overlay);
+
+  /* Aliases so components from the shadcn/ui registry work unmodified. */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--surface-foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--surface-foreground);
+  --color-secondary: var(--muted);
+  --color-secondary-foreground: var(--foreground);
+
+  --font-serif: var(--typeface-serif);
+  --font-sans: var(--typeface-sans);
+  --font-mono: var(--typeface-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* Fluid editorial type scale: comfortable on a 320px phone, generous on desktop. */
+@theme {
+  --text-display: clamp(2.5rem, 1.75rem + 3.75vw, 4.75rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+  --text-headline: clamp(1.875rem, 1.45rem + 2.1vw, 3rem);
+  --text-headline--line-height: 1.12;
+  --text-headline--letter-spacing: -0.015em;
+  --text-lede: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-lede--line-height: 1.6;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif font-normal;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+
+/* Long-form Markdown (src/content/<locale>/docs). Token-driven like everything else. */
+@layer components {
+  .prose {
+    @apply text-base leading-relaxed;
+
+    & > * + * {
+      @apply mt-5;
+    }
+    & h2 {
+      @apply mt-14 font-serif text-3xl leading-tight;
+    }
+    & h3 {
+      @apply mt-10 font-serif text-xl;
+    }
+    & a {
+      @apply underline decoration-accent underline-offset-4 hover:decoration-current;
+    }
+    & strong {
+      @apply font-semibold;
+    }
+    & ul,
+    & ol {
+      @apply space-y-2 pl-6;
+    }
+    & ul {
+      @apply list-disc;
+    }
+    & ol {
+      @apply list-decimal;
+    }
+    & li::marker {
+      @apply text-muted-foreground;
+    }
+    & blockquote {
+      @apply border-l-2 border-accent pl-5 font-serif text-lg text-muted-foreground italic;
+    }
+    & :not(pre) > code {
+      @apply rounded bg-muted px-1.5 py-0.5 font-mono text-[0.875em];
+    }
+    & pre {
+      @apply overflow-x-auto rounded-lg bg-emphasis p-5 font-mono text-sm leading-6 text-emphasis-foreground outline-none focus-visible:ring-3 focus-visible:ring-ring/50;
+    }
+    /* Tables keep table semantics (no display:block); long cells wrap instead. */
+    & table {
+      @apply w-full text-left text-sm;
+    }
+    & th,
+    & td {
+      overflow-wrap: anywhere;
+    }
+    & th {
+      @apply border-b px-3 py-2 font-medium;
+    }
+    & td {
+      @apply border-b px-3 py-2 align-top text-muted-foreground;
+    }
+    & th:first-child,
+    & td:first-child {
+      @apply pl-0;
+    }
+    & hr {
+      @apply my-12;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,70 @@
+name: Release
+
+# Run by hand from the Actions tab once a version is ready on `main`.
+# See docs/releasing.md for the full process.
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to release, without the "v" (e.g. 0.1.0). Must match package.json.
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    name: Tag and publish v${{ inputs.version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # Releases only come from validated `main` commits.
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write # create the tag and the GitHub Release
+      actions: read # check that CI passed for this commit
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ inputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the version
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::'$VERSION' is not a semantic version (expected e.g. 0.1.0)"; exit 1
+          fi
+          package_version=$(node -p "require('./package.json').version")
+          if [ "$package_version" != "$VERSION" ]; then
+            echo "::error::package.json is at $package_version, not $VERSION. Bump it on staging first."; exit 1
+          fi
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "::error::v$VERSION has already been released"; exit 1
+          fi
+
+      - name: Check that CI passed for this commit
+        run: |
+          conclusion=$(gh run list --commit "$GITHUB_SHA" --workflow ci.yml --branch main \
+            --json conclusion --jq '.[0].conclusion // "none"')
+          if [ "$conclusion" != "success" ]; then
+            echo "::error::CI for $GITHUB_SHA is '$conclusion'. Release only commits that passed CI."; exit 1
+          fi
+
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          awk -v version="$VERSION" '
+            $0 ~ "^## \\[" version "\\]" { found = 1; next }
+            found && /^## \[/ { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+          if ! grep -q '[^[:space:]]' release-notes.md; then
+            echo "::error::CHANGELOG.md has no '## [$VERSION]' section"; exit 1
+          fi
+
+      - name: Create tag and GitHub Release
+        run: |
+          gh release create "v$VERSION" \
+            --target "$GITHUB_SHA" \
+            --title "v$VERSION" \
+            --notes-file release-notes.md \
+            $([[ "$VERSION" == *-* ]] && echo --prerelease)

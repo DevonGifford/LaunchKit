@@ -1,0 +1,81 @@
+# Dependency updates. Version updates go to `staging`, like any other change,
+# and are promoted to `main` with the next release. Security updates are
+# configured in the repository settings (not here) and target the default
+# branch, so urgent fixes stay visible on `main`. See docs/releasing.md.
+#
+# Downstream projects: Dependabot is not enabled automatically on forks or
+# copies. Keep this file, then enable Dependabot alerts and security updates
+# under Settings → Code security.
+version: 2
+updates:
+  - package-ecosystem: npm # also covers pnpm (pnpm-lock.yaml)
+    directory: /
+    target-branch: staging
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    # pnpm refuses versions published less than a day ago (minimumReleaseAge,
+    # 1440 minutes by default since pnpm 11), so CI would fail on anything
+    # newer. Three days is also Dependabot's own default; set here so it can't
+    # silently drop below pnpm's limit.
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: chore
+      include: scope # → "chore(deps): …", accepted by Commitlint
+    ignore:
+      # Pinned to 6.x until typescript-eslint supports TypeScript 7 —
+      # see docs/toolchain.md.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+    groups:
+      # Packages released together are updated together.
+      next:
+        patterns: ['next', 'eslint-config-next', '@next/*']
+      react:
+        patterns: ['react', 'react-dom', '@types/react', '@types/react-dom']
+      storybook:
+        patterns: ['storybook', '@storybook/*']
+      test-tooling:
+        patterns:
+          [
+            'vitest',
+            '@vitest/*',
+            'vite',
+            '@vitejs/*',
+            'vitest-browser-react',
+            'playwright',
+            '@playwright/test',
+            '@axe-core/*',
+            'axe-core',
+          ]
+      lint-and-format:
+        patterns:
+          [
+            'eslint',
+            '@eslint/*',
+            'typescript-eslint',
+            'eslint-config-prettier',
+            'prettier',
+            'prettier-plugin-*',
+          ]
+      tailwind:
+        patterns: ['tailwindcss', '@tailwindcss/*', 'tw-animate-css']
+      # Everything else: one weekly PR for minor and patch releases.
+      minor-and-patch:
+        patterns: ['*']
+        update-types: ['minor', 'patch']
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: staging
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: ci
+      include: scope
+    groups:
+      actions:
+        patterns: ['*']

@@ -1,0 +1,62 @@
+name: Bug report
+description: Something in the LaunchKit foundation does not work as documented.
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. If the problem only appears in a downstream site,
+        please check whether it reproduces on a clean LaunchKit checkout first —
+        that tells us whether the fix belongs upstream.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected to see instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. pnpm install
+        2. pnpm dev
+        3. Open /es and toggle the theme
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Design system / theming
+        - Components / sections
+        - Localization
+        - Content layer
+        - Forms
+        - Tooling (lint, format, hooks)
+        - Tests / CI
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: LaunchKit version or commit
+      placeholder: v0.1.0 or a commit SHA
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Node and pnpm versions, OS, and browser if relevant.
+      placeholder: Node 26.2.0, pnpm 12.3.4, macOS 16, Safari 20
+  - type: checkboxes
+    id: upstream
+    attributes:
+      label: Checks
+      options:
+        - label: This reproduces on a clean LaunchKit checkout, not only in a downstream project.
