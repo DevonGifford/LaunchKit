@@ -1,7 +1,7 @@
 import { beforeEach, expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 import { ThemeProvider } from '@/components/theme/theme-provider';
-import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 
 const root = document.documentElement;
 

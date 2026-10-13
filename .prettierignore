@@ -14,3 +14,7 @@ docs/SPEC.md
 .agents/
 .claude/skills/
 skills-lock.json
+
+# Prettier's MDX parser predates MDX 3: it rewrites {/* */} comments and
+# re-indents template literals, which breaks Storybook's MDX pages.
+*.mdx

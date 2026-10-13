@@ -3,10 +3,17 @@ import type { StorybookConfig } from '@storybook/nextjs-vite';
 import { mergeConfig, type InlineConfig } from 'vite';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-a11y', '@storybook/addon-themes', '@storybook/addon-vitest'],
+  // The intro page and Foundations live here; component stories sit next to their components.
+  stories: ['./*.mdx', './foundations/*.stories.tsx', '../src/**/*.stories.@(ts|tsx)'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-themes',
+    '@storybook/addon-vitest',
+  ],
   framework: { name: '@storybook/nextjs-vite', options: {} },
-  staticDirs: ['../public'],
+  // The app's public files, plus logo colourways used only by Storybook's own UI.
+  staticDirs: ['../public', { from: './brand', to: '/storybook-brand' }],
   core: { disableTelemetry: true },
   // Lets async Server Components (the site header and footer) render in the preview.
   features: { experimentalRSC: true },

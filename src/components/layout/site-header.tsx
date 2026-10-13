@@ -1,11 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 import { Logo } from '@/components/ui/logo';
-import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { features } from '@/config/features';
 import { mainNavigation } from '@/config/navigation';
 import { Link } from '@/i18n/navigation';
-import { Container } from './container';
-import { LocaleSwitcher } from './locale-switcher';
+import { Container } from '@/components/ui/container';
+import { LocaleSwitcher } from '@/components/ui/locale-switcher';
 import { MobileNav } from './mobile-nav';
 import { NavLinks } from './nav-links';
 

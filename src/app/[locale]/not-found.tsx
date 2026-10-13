@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Container } from '@/components/layout/container';
+import { Container } from '@/components/ui/container';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/navigation';
 

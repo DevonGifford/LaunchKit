@@ -76,7 +76,7 @@ TypeScript checks every field, and an unknown section type is a compile error.
 ```text
 src/
   app/              routes ([locale]/…), theme.css, globals.css, sitemap, robots
-  components/       ui/ (primitives, logo) · layout/ · sections/ · forms/ · theme/
+  components/       ui/ (primitives and small controls) · layout/ · sections/ · forms/ · theme/
   content/          page content and Markdown documents, per locale
   config/           site, navigation, feature switches
   i18n/             routing, navigation, request config

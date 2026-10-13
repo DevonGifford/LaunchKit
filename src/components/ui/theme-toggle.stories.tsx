@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { expect, userEvent, waitFor, within } from 'storybook/test';
-import { ThemeProvider } from './theme-provider';
+import { ThemeProvider } from '@/components/theme/theme-provider';
 import { ThemeToggle } from './theme-toggle';
 
 const meta = {
-  title: 'Layout/Theme toggle',
+  title: 'Primitives/Theme toggle',
   component: ThemeToggle,
   args: { label: 'Switch between light and dark mode' },
   decorators: [
@@ -20,7 +20,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** The icon swaps with CSS; this clicks it and checks the class on <html>. */
+/** The icon swaps with CSS; this clicks it and checks the class on `<html>`. */
 export const Default: Story = {
   play: async ({ canvasElement, args }) => {
     const html = document.documentElement;

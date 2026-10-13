@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { LocaleLinks, LocaleSwitcher } from './locale-switcher';
 
 const meta = {
-  title: 'Layout/Locale switcher',
+  title: 'Primitives/Locale switcher',
   component: LocaleSwitcher,
   args: { label: 'Language' },
 } satisfies Meta<typeof LocaleSwitcher>;

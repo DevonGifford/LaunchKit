@@ -2,13 +2,13 @@
 
 import { CheckIcon, GlobeIcon } from 'lucide-react';
 import { useLocale } from 'next-intl';
-import { Button } from '@/components/ui/button';
+import { Button } from './button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from './dropdown-menu';
 import { Link, usePathname } from '@/i18n/navigation';
 import { localeNames, routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';

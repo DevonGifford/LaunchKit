@@ -119,7 +119,7 @@ more, so run it first and the hooks will pass.
 | `src/content/<locale>/`                   | Page content (`pages/*.ts`) and Markdown documents (`docs/*.md`).         |
 | `messages/<locale>.json`                  | Interface text; English is the source catalogue.                          |
 | `src/lib/content/`                        | Content model (Zod → types), section registry, renderer, Markdown loader. |
-| `src/components/ui/`                      | shadcn/ui primitives and the `Logo`, owned here.                          |
+| `src/components/ui/`                      | shadcn/ui primitives plus small shared controls (logo, container, …).     |
 | `src/components/{layout,sections,forms}/` | Shared layout, section and form components.                               |
 | `src/config/`                             | Site settings, navigation, feature switches.                              |
 | `tests/{unit,integration,e2e}/`           | Vitest (node), Vitest Browser Mode, Playwright. Stories are tested too.   |
@@ -262,8 +262,10 @@ are the reference.
 - **Add a locale:** follow the steps in `src/i18n/routing.ts`, then run
   `pnpm i18n:check` for what's missing.
 - **Add a section type:** see Conventions. Give it a story.
-- **Change the brand:** edit `src/app/theme.css` only
-  ([docs/theming.md](docs/theming.md)).
+- **Change the brand:** edit `src/app/theme.css`; components follow. Storybook's
+  own UI copies those colours in `.storybook/theme.ts` and uses recoloured logos
+  in `.storybook/brand/`, so update those too
+  ([docs/theming.md](docs/theming.md#storybook)).
 
 ## Agent skills
 
