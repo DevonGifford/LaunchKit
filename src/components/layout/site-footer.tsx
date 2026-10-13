@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { Logo } from '@/components/brand/logo';
+import { Logo } from '@/components/ui/logo';
 import { features } from '@/config/features';
 import { mainNavigation } from '@/config/navigation';
 import { Container } from './container';

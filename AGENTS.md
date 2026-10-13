@@ -119,7 +119,7 @@ more, so run it first and the hooks will pass.
 | `src/content/<locale>/`                   | Page content (`pages/*.ts`) and Markdown documents (`docs/*.md`).         |
 | `messages/<locale>.json`                  | Interface text; English is the source catalogue.                          |
 | `src/lib/content/`                        | Content model (Zod → types), section registry, renderer, Markdown loader. |
-| `src/components/ui/`                      | shadcn/ui primitives, owned here.                                         |
+| `src/components/ui/`                      | shadcn/ui primitives and the `Logo`, owned here.                          |
 | `src/components/{layout,sections,forms}/` | Shared layout, section and form components.                               |
 | `src/config/`                             | Site settings, navigation, feature switches.                              |
 | `tests/{unit,integration,e2e}/`           | Vitest (node), Vitest Browser Mode, Playwright. Stories are tested too.   |
