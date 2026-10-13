@@ -9,3 +9,12 @@ public/
 next-env.d.ts
 # The spec is reproduced verbatim from its source document.
 docs/SPEC.md
+
+# Vendored agent skills (installed by the skills CLI; restore with skills-lock.json).
+.agents/
+.claude/skills/
+skills-lock.json
+
+# Prettier's MDX parser predates MDX 3: it rewrites {/* */} comments and
+# re-indents template literals, which breaks Storybook's MDX pages.
+*.mdx

@@ -2,7 +2,7 @@
 
 import { MenuIcon } from 'lucide-react';
 import { useState } from 'react';
-import { ThemeToggle } from '@/components/theme/theme-toggle';
+import { ThemeToggle } from '@/components/ui/theme-toggle';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { LocaleLinks } from './locale-switcher';
+import { LocaleLinks } from '@/components/ui/locale-switcher';
 import { NavLinks, type NavItem } from './nav-links';
 
 /**

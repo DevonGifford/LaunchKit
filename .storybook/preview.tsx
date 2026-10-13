@@ -3,9 +3,27 @@ import type { Preview } from '@storybook/nextjs-vite';
 import { NextIntlClientProvider } from 'next-intl';
 import messages from '../messages/en.json';
 import '../src/app/globals.css';
+import { lightTheme } from './theme';
 
 const preview: Preview = {
+  // A generated docs page for every component: its stories, props table and comments.
+  tags: ['autodocs'],
   parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Get started',
+          'Foundations',
+          ['Colours', 'Typography', 'Radius and spacing'],
+          'Sections',
+          'Layout',
+          'Primitives',
+          'Forms',
+        ],
+      },
+    },
+    // Docs pages use the brand's light theme; the canvas follows the toolbar.
+    docs: { theme: lightTheme },
     // The i18n Link and usePathname need the App Router mocks.
     nextjs: { appDirectory: true, navigation: { pathname: '/' } },
     layout: 'padded',

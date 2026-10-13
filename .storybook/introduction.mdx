@@ -1,0 +1,232 @@
+import { Meta, Source, Unstyled } from '@storybook/addon-docs/blocks';
+import {
+  AccessibilityIcon,
+  ArrowUpRightIcon,
+  ChevronRightIcon,
+  MonitorSmartphoneIcon,
+  SunMoonIcon,
+} from 'lucide-react';
+import { buttonVariants } from '../src/components/ui/button';
+import { Logo } from '../src/components/ui/logo';
+import midnightBoard from '../docs/brand/midnight-yacht-club-brand-board.png';
+import sunlightBoard from '../docs/brand/sunlight-yacht-club-brand-board.png';
+
+<Meta title="Get started" />
+
+{/*
+  Built with LaunchKit's own tokens and components, so it follows the brand.
+  The whole page sits on bg-background: MDX pages run no decorators, so the
+  `dark` class from the last story may still be on <html>, and this keeps the
+  text readable on either appearance.
+*/}
+
+export const repo = 'https://github.com/DevonGifford/LaunchKit/blob/main';
+
+export const groups = [
+  {
+    name: 'Foundations',
+    description: 'The colours, type and spacing every component draws on, read live from the theme.',
+    href: './?path=/story/foundations-colours--colours-story',
+  },
+  {
+    name: 'Sections',
+    description: 'The blocks that pages are made of, shown with the real page content.',
+    href: './?path=/docs/sections-hero--docs',
+  },
+  {
+    name: 'Layout',
+    description: 'The site header and footer, the mobile menu and the navigation links.',
+    href: './?path=/docs/layout-site-header--docs',
+  },
+  {
+    name: 'Primitives',
+    description: 'Buttons, form controls, menus, dialogs, the logo, the page container and the language and theme switches.',
+    href: './?path=/docs/primitives-button--docs',
+  },
+  {
+    name: 'Forms',
+    description: 'The contact form, with its validation and messages.',
+    href: './?path=/docs/forms-contact-form--docs',
+  },
+];
+
+export const tools = [
+  {
+    Icon: SunMoonIcon,
+    name: 'Light and dark',
+    description: 'Switch appearance with the paintbrush in the toolbar. Stories open in light.',
+  },
+  {
+    Icon: MonitorSmartphoneIcon,
+    name: 'Screen sizes',
+    description: 'Preview any story at mobile, tablet and desktop widths from the toolbar.',
+  },
+  {
+    Icon: AccessibilityIcon,
+    name: 'Accessibility',
+    description:
+      'The Accessibility panel runs axe on the open story. A violation also fails the tests.',
+  },
+];
+
+export const reading = [
+  {
+    name: 'Theming',
+    path: 'docs/theming.md',
+    description: 'Tokens, light and dark, and changing the brand.',
+  },
+  {
+    name: 'Upstream sync',
+    path: 'docs/upstream-sync.md',
+    description: 'Starting a project from LaunchKit and taking its updates.',
+  },
+  {
+    name: 'Toolchain',
+    path: 'docs/toolchain.md',
+    description: 'Version decisions and the reasons behind them.',
+  },
+  {
+    name: 'Agent instructions',
+    path: 'AGENTS.md',
+    description: 'Conventions for code, content and tests.',
+  },
+];
+
+export const linkFocus = 'outline-none focus-visible:ring-3 focus-visible:ring-ring/50';
+
+export const storyExample = `import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import { home } from '@/content/en/pages/home';
+import { findSection } from '@/lib/content/pages';
+import { StatementSection } from './statement-section';
+
+const meta = {
+  title: 'Sections/Statement',
+  component: StatementSection,
+  args: findSection(home, 'statement'),
+} satisfies Meta<typeof StatementSection>;
+
+export default meta;
+
+export const Default: StoryObj<typeof meta> = {};`;
+
+<Unstyled>
+  <div className="space-y-20 rounded-2xl bg-background p-3 pb-14 font-sans text-foreground sm:p-4 sm:pb-16">
+    <header className="relative isolate overflow-hidden rounded-xl bg-emphasis px-6 py-12 text-emphasis-foreground sm:px-12 sm:py-16">
+      <Logo variant="emblem" className="pointer-events-none absolute -right-16 -bottom-20 -z-10 h-96 text-accent opacity-15" />
+      <Logo className="h-8 sm:h-9" />
+      <h1 className="mt-12 max-w-3xl font-serif text-display leading-[1.02] font-normal text-balance">
+        Build once. Reuse often. Improve centrally.
+      </h1>
+      <p className="mt-6 max-w-xl text-lede text-emphasis-foreground/80">
+        Every shared LaunchKit component, rendered with the real design tokens, page content and
+        accessibility checks. Review a change here before it reaches a page.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <a href="./?path=/docs/primitives-button--docs" target="_top" className={buttonVariants({ variant: 'inverse', size: 'lg' })}>
+          Browse the components
+        </a>
+        <a href="https://launch-kit-flax.vercel.app/" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'inverse-outline', size: 'lg' })}>
+          Live demo
+          <ArrowUpRightIcon aria-hidden="true" />
+          <span className="sr-only">(opens in a new tab)</span>
+        </a>
+        <a href="https://github.com/DevonGifford/LaunchKit" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'inverse-outline', size: 'lg' })}>
+          Source on GitHub
+          <ArrowUpRightIcon aria-hidden="true" />
+          <span className="sr-only">(opens in a new tab)</span>
+        </a>
+      </div>
+    </header>
+
+    <section aria-labelledby="library" className="px-3 sm:px-8">
+      <h2 id="library" className="font-serif text-headline font-normal">What's in the library</h2>
+      <p className="mt-3 max-w-2xl text-muted-foreground">
+        Pages are made of sections, framed by the layout. Both are built from primitives, and everything draws on the foundations.
+      </p>
+      <ul className="mt-10 border-b">
+        {groups.map((group) => (
+          <li key={group.name} className="border-t">
+            <a href={group.href} target="_top" className={`group grid gap-2 rounded-md px-2 py-6 transition-colors hover:bg-muted sm:grid-cols-[11rem_1fr_auto] sm:items-baseline sm:gap-8 ${linkFocus}`}>
+              <span className="font-serif text-2xl">{group.name}</span>
+              <span className="text-muted-foreground">{group.description}</span>
+              <ChevronRightIcon aria-hidden="true" className="hidden size-5 text-muted-foreground transition-transform group-hover:translate-x-1 sm:block" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section aria-labelledby="brand" className="px-3 sm:px-8">
+      <h2 id="brand" className="font-serif text-headline font-normal">One brand, two appearances</h2>
+      <p className="mt-3 max-w-2xl text-muted-foreground">
+        Midnight Yacht Club and Sunlight Yacht Club are LaunchKit's reference brand. Every component
+        reads its colours from the tokens in <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em] text-foreground">src/app/theme.css</code>,
+        so a project changes the brand in one place.
+      </p>
+      <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <figure className="space-y-3">
+          <img src={midnightBoard.src} width={midnightBoard.width} height={midnightBoard.height} alt="Midnight Yacht Club brand board: the dark appearance, with its palette and type." className="h-auto w-full rounded-lg border shadow-sm" />
+          <figcaption className="text-sm text-muted-foreground">Midnight Yacht Club, the dark appearance</figcaption>
+        </figure>
+        <figure className="space-y-3">
+          <img src={sunlightBoard.src} width={sunlightBoard.width} height={sunlightBoard.height} alt="Sunlight Yacht Club brand board: the light appearance, with its palette and type." className="h-auto w-full rounded-lg border shadow-sm" />
+          <figcaption className="text-sm text-muted-foreground">Sunlight Yacht Club, the light appearance</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section aria-labelledby="tools" className="px-3 sm:px-8">
+      <h2 id="tools" className="font-serif text-headline font-normal">Reviewing a component</h2>
+      <dl className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
+        {tools.map(({ Icon, name, description }) => (
+          <div key={name} className="space-y-3 border-t border-accent pt-6">
+            <dt className="flex items-center gap-3 font-serif text-xl">
+              <Icon aria-hidden="true" className="size-5 shrink-0" />
+              {name}
+            </dt>
+            <dd className="leading-relaxed text-muted-foreground">{description}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section aria-labelledby="add" className="px-3 sm:px-8">
+      <h2 id="add" className="font-serif text-headline font-normal">Adding a story</h2>
+      <ol className="mt-10 grid gap-8 sm:grid-cols-3">
+        <li className="space-y-2">
+          <span className="font-serif text-3xl text-muted-foreground">1</span>
+          <p>Create <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">name.stories.tsx</code> next to the component.</p>
+        </li>
+        <li className="space-y-2">
+          <span className="font-serif text-3xl text-muted-foreground">2</span>
+          <p>Give it a title that places it in the sidebar, such as <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">Sections/Statement</code>.</p>
+        </li>
+        <li className="space-y-2">
+          <span className="font-serif text-3xl text-muted-foreground">3</span>
+          <p>Run <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-[0.9em]">pnpm test:storybook</code>. Every story is a test: it must render and pass the accessibility checks.</p>
+        </li>
+      </ol>
+      <div className="mt-8">
+        <Source code={storyExample} language="tsx" dark />
+      </div>
+    </section>
+
+    <section aria-labelledby="reading" className="px-3 sm:px-8">
+      <h2 id="reading" className="font-serif text-headline font-normal">Further reading</h2>
+      <ul className="mt-8 grid gap-x-8 sm:grid-cols-2">
+        {reading.map((doc) => (
+          <li key={doc.path} className="border-t">
+            <a href={`${repo}/${doc.path}`} target="_blank" rel="noopener noreferrer" className={`group block rounded-md px-2 py-5 transition-colors hover:bg-muted ${linkFocus}`}>
+              <span className="flex items-center gap-1.5 font-medium">
+                {doc.name}
+                <ArrowUpRightIcon aria-hidden="true" className="size-4 text-muted-foreground" />
+                <span className="sr-only">(opens in a new tab)</span>
+              </span>
+              <span className="mt-1 block text-sm text-muted-foreground">{doc.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Unstyled>

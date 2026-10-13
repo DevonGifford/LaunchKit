@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Container } from '@/components/layout/container';
+import { Container } from '@/components/ui/container';
 import { Link } from '@/i18n/navigation';
 import { localeNames, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';

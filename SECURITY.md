@@ -20,7 +20,10 @@ should merge that release promptly (see
 **Do not open a public issue for a security problem.**
 
 Use GitHub's private vulnerability reporting: open the repository's
-**Security** tab and choose **Report a vulnerability**. Please include:
+**Security** tab and choose **Report a vulnerability**. (GitHub offers this on
+public repositories only. While a repository is private, contact the
+maintainer, [@DevonGifford](https://github.com/DevonGifford), privately
+instead.) Please include:
 
 - the affected file, route or dependency and the LaunchKit version or commit;
 - steps to reproduce, or a proof of concept;

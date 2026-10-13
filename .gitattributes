@@ -1,0 +1,5 @@
+# Vendored agent skills (installed by the skills CLI, pinned in skills-lock.json).
+# GitHub collapses these in pull request diffs and leaves them out of language stats.
+.agents/** linguist-generated
+.claude/skills/** linguist-generated
+skills-lock.json linguist-generated

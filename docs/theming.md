@@ -87,6 +87,25 @@ const serif = Cormorant_Garamond({
 --typeface-serif: var(--font-brand-serif), ui-serif, Georgia, serif;
 ```
 
+## Storybook
+
+Stories and the "Get started" page use the tokens, so they follow `theme.css`
+with no extra work. Storybook's own interface (sidebar, toolbar, docs pages)
+is themed in JavaScript and cannot read CSS variables, so it keeps a copy:
+
+- `.storybook/theme.ts`: a light and a dark theme with the palette's values.
+  Storybook picks one from the system appearance. Re-check contrast on the
+  selected sidebar row: Storybook draws it as white text on `colorSecondary`.
+- `.storybook/brand/`: the logo recoloured for each sidebar, from the lockup in
+  `public/brand/`. For example:
+
+```sh
+magick public/brand/launchkit-lockup.png -alpha on -fill '#142d46' -colorize 100 \
+  -resize x96 -strip .storybook/brand/launchkit-lockup-navy.png
+```
+
+Restart Storybook after changing either; they are read at startup.
+
 ## Components from the shadcn/ui registry
 
 Primitives in `src/components/ui/` come from shadcn/ui and are owned here.

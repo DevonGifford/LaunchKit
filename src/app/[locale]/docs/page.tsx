@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { Container } from '@/components/layout/container';
+import { Container } from '@/components/ui/container';
 import { Eyebrow } from '@/components/sections/section-parts';
 import { Link } from '@/i18n/navigation';
 import { localeNames } from '@/i18n/routing';
