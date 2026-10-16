@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckIcon, GlobeIcon } from 'lucide-react';
+import { CheckIcon, LanguagesIcon } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { Button } from './button';
 import {
@@ -10,12 +10,14 @@ import {
   DropdownMenuTrigger,
 } from './dropdown-menu';
 import { Link, usePathname } from '@/i18n/navigation';
-import { localeNames, routing } from '@/i18n/routing';
+import { localeFlags, localeNames, routing } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 /**
- * Compact language menu for the header. Each option is a real link to the same
- * page in another locale, so it works for crawlers and keyboard users alike.
+ * Compact language menu for the header: the translate mark and the current
+ * language's code (EN, ES, …), opening a menu of languages with their flags.
+ * Each option is a real link to the same page in another locale, so it works
+ * for crawlers and keyboard users alike.
  */
 export function LocaleSwitcher({ label }: { label: string }) {
   const locale = useLocale();
@@ -24,13 +26,21 @@ export function LocaleSwitcher({ label }: { label: string }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="gap-2 px-3 text-muted-foreground hover:text-foreground">
-          <GlobeIcon aria-hidden="true" />
-          <span className="sr-only">{label}: </span>
-          {localeNames[locale]}
+        <Button
+          variant="ghost"
+          className="gap-1.5 px-2.5 text-muted-foreground hover:text-foreground"
+        >
+          <LanguagesIcon aria-hidden="true" />
+          {/* Screen readers hear the language's name rather than its code spelled out. */}
+          <span aria-hidden="true" className="text-xs font-medium tracking-wider">
+            {locale.toUpperCase()}
+          </span>
+          <span className="sr-only">
+            {label}: {localeNames[locale]}
+          </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-40">
+      <DropdownMenuContent align="end" className="min-w-44">
         {routing.locales.map((option) => (
           <DropdownMenuItem key={option} asChild>
             <Link
@@ -39,10 +49,19 @@ export function LocaleSwitcher({ label }: { label: string }) {
               hrefLang={option}
               lang={option}
               aria-current={option === locale ? 'true' : undefined}
-              className="min-h-10 justify-between"
+              className="min-h-10 gap-3"
             >
+              {/* Decorative, like the Logo: the name beside it is the option's label. */}
+              <span
+                aria-hidden="true"
+                style={{ backgroundImage: `url(/flags/${localeFlags[option]}.svg)` }}
+                className="h-3.75 w-5 shrink-0 rounded-[2px] bg-cover bg-center ring-1 ring-foreground/10"
+              />
               {localeNames[option]}
-              <CheckIcon aria-hidden="true" className={cn(option !== locale && 'invisible')} />
+              <CheckIcon
+                aria-hidden="true"
+                className={cn('ml-auto', option !== locale && 'invisible')}
+              />
             </Link>
           </DropdownMenuItem>
         ))}

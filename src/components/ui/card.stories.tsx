@@ -11,7 +11,7 @@ import {
 } from './card';
 
 const meta = {
-  title: 'Primitives/Card',
+  title: 'UI/Content/Card',
   component: Card,
   args: { className: 'max-w-sm' },
   argTypes: { size: { control: 'inline-radio', options: ['default', 'sm'] } },

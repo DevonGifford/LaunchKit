@@ -3,7 +3,7 @@ import { Input } from './input';
 import { Label } from './label';
 
 const meta = {
-  title: 'Primitives/Input',
+  title: 'UI/Forms/Input',
   component: Input,
   args: { id: 'email', type: 'email', placeholder: 'you@example.com' },
   argTypes: { type: { control: 'select', options: ['text', 'email', 'password', 'search'] } },

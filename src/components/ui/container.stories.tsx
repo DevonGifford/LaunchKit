@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Container } from './container';
 
 const meta = {
-  title: 'Primitives/Container',
+  title: 'UI/Content/Container',
   component: Container,
   parameters: { layout: 'fullscreen' },
 } satisfies Meta<typeof Container>;
@@ -23,5 +23,6 @@ export const Default: Story = {
 
 export const OnMobile: Story = {
   ...Default,
+  tags: ['!autodocs'],
   globals: { viewport: { value: 'mobile' } },
 };

@@ -68,18 +68,64 @@ export const featuresSectionSchema = z.object({
     .min(1),
 });
 
-export const useCasesSectionSchema = z.object({
+/** A service, capability or area of expertise; each variant shows the fields it needs. */
+const capabilityItemSchema = z.object({
+  title: text,
+  description: text,
+  /** An icon above the title, shown by the cards variant. */
+  icon: z
+    .enum([
+      'app-window',
+      'cloud',
+      'sparkles',
+      'users',
+      'code',
+      'server',
+      'shield-check',
+      'chart-line',
+      'palette',
+      'megaphone',
+      'compass',
+      'rocket',
+    ])
+    .optional(),
+  /** A text link under the description, shown by the cards and numbered variants. */
+  action: actionSchema.optional(),
+  /** Short labels under the description, shown by the detailed variant, e.g. "Typography". */
+  tags: z.array(text).optional(),
+});
+
+/** Services or areas of expertise under a split heading, in one of three layouts. */
+export const capabilitiesSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('use-cases'),
+  type: z.literal('capabilities'),
+  /**
+   * `cards` (the default): bordered cards with icons, four to a row.
+   * `numbered`: numbered editorial columns, four to a row.
+   * `detailed`: larger titles with tags, three to a row between vertical rules.
+   */
+  variant: z.enum(['cards', 'numbered', 'detailed']).optional(),
+  eyebrow: text.optional(),
+  title: text,
+  /** Beside the heading from 1024px, under it before then. */
+  description: text.optional(),
+  /** A text link under the intro, e.g. "Explore our services". */
+  action: actionSchema.optional(),
+  items: z.array(capabilityItemSchema).min(1),
+});
+
+export const lineupSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('lineup'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
   items: z.array(z.object({ name: text, kind: text, description: text })).min(1),
 });
 
-export const workflowSectionSchema = z.object({
+export const marketingDeveloperExperienceSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('workflow'),
+  type: z.literal('marketing-developer-experience'),
   eyebrow: text.optional(),
   title: text,
   description: text.optional(),
@@ -88,13 +134,479 @@ export const workflowSectionSchema = z.object({
   stack: z.array(text).optional(),
 });
 
-export const ctaSectionSchema = z.object({
+export const marketingQualityGatesSectionSchema = z.object({
   ...sectionBase,
-  type: z.literal('cta'),
+  type: z.literal('marketing-quality-gates'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The stages a change passes through, in order; at most three, side by side on wide screens. */
+  stages: z
+    .array(
+      z.object({
+        /** Short position label above the title, e.g. "Stage 1". */
+        label: text,
+        title: text,
+        icon: z.enum(['shield-check', 'flask-conical', 'package-check']),
+        items: z.array(z.object({ name: text, description: text })).min(1),
+      }),
+    )
+    .min(1)
+    .max(3),
+  /** Short outcomes shown with a check mark below the stages. */
+  highlights: z.array(text).optional(),
+});
+
+/** Brand marks and icons for tools; the set is drawn in src/components/sections/tech-icons.tsx. */
+const techIconSchema = z.enum([
+  'nextjs',
+  'react',
+  'typescript',
+  'tailwindcss',
+  'shadcn-ui',
+  'next-intl',
+  'zod',
+  'react-hook-form',
+  'radix-ui',
+  'lucide',
+  'next-themes',
+  'sonner',
+  'date-fns',
+  'marked',
+  't3-env',
+  'vitest',
+  'playwright',
+  'storybook',
+  'axe-core',
+  'eslint',
+  'prettier',
+  'lefthook',
+  'commitlint',
+  'pnpm',
+  'github-actions',
+  'dependabot',
+]);
+
+const technicalStackItemSchema = z.object({
+  name: text,
+  description: text,
+  icon: techIconSchema,
+});
+
+export const marketingTechnicalStackSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-technical-stack'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The main technologies, as larger cards; four per row on wide screens. */
+  featured: z.array(technicalStackItemSchema).min(1),
+  /** Supporting tools in a denser grid below; an incomplete last row is centred. */
+  tools: z.array(technicalStackItemSchema).optional(),
+});
+
+const timelineRowSchema = z.object({ item: text, before: text, after: text });
+
+export const marketingSetupTimelineSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-setup-timeline'),
+  title: text,
+  /** A second line of the heading, shown muted. */
+  titleMuted: text.optional(),
+  /** Body copy; an `emphasis` paragraph stands out in the text colour. */
+  paragraphs: z.array(z.object({ text, emphasis: z.boolean().optional() })).min(1),
+  /** A highlighted conclusion below the copy. */
+  callout: z
+    .object({ eyebrow: text.optional(), title: text, description: text.optional() })
+    .optional(),
+  /** The table beside the copy: how long each item takes without and with the foundation. */
+  timeline: z.object({
+    title: text,
+    badge: text.optional(),
+    /** Column headings, in the same order as each row. */
+    columns: timelineRowSchema,
+    rows: z.array(timelineRowSchema).min(1),
+    total: timelineRowSchema.optional(),
+    note: text.optional(),
+  }),
+});
+
+export const marketingDeploymentPipelineSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-deployment-pipeline'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** Short promises beside the pipeline; four read best. */
+  items: z
+    .array(
+      z.object({
+        icon: z.enum(['globe', 'trending-up', 'coins', 'file-code']),
+        title: text,
+        description: text,
+      }),
+    )
+    .min(1)
+    .max(4),
+  /** A push travelling through each stage; the last step is the destination. */
+  pipeline: z.object({
+    caption: text,
+    command: text,
+    steps: z.array(z.object({ label: text, detail: text.optional() })).min(1),
+  }),
+  /** Short platform and tool labels under the pipeline. */
+  badges: z.array(text).optional(),
+});
+
+/** A path to a file in public/, such as `/marketing/hero-showcase-light.webp`. */
+const publicPath = z.string().regex(/^\/(?!\/)/, 'Public files start with a single "/"');
+
+export const marketingHeroLaunchKitSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-hero-launchkit'),
+  eyebrow: text.optional(),
+  /** The page's h1, one entry per line. */
+  title: z.array(text).min(1).max(3),
+  /** Words within the title shown in gold, e.g. "matters.". */
+  titleHighlight: text.optional(),
+  /** Audiences the line under the title cycles through, e.g. "For founders". */
+  audiences: z.array(text).min(1).optional(),
+  description: text,
+  primaryAction: actionSchema.optional(),
+  secondaryAction: actionSchema.optional(),
+  /** Artwork for each appearance; it's shared by every locale. */
+  showcase: z.object({
+    light: publicPath,
+    dark: publicPath,
+    alt: text,
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+  }),
+});
+
+export const heroCinematicSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('hero-cinematic'),
+  title: text,
+  description: text.optional(),
+  action: actionSchema.optional(),
+  /** Shown with a percentage while the frames load. */
+  loadingLabel: text,
+  /**
+   * The frames played as the section scrolls: `frame-001.jpg` and onwards in
+   * `directory`, zero-padded to at least three digits.
+   */
+  sequence: z.object({
+    directory: publicPath,
+    frames: z.number().int().min(2),
+    extension: z.enum(['jpg', 'webp', 'avif', 'png']),
+    alt: text,
+  }),
+});
+
+/**
+ * A centred page opener: the h1 with a highlighted phrase, a primary action, an
+ * optional menu of links and a line of social proof. Adapted from shadcn-ui-kit.
+ */
+export const heroCenteredSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('hero-centered'),
+  title: text,
+  /** Words within the title marked as if with a highlighter, e.g. "LaunchKit". */
+  titleHighlight: text.optional(),
+  description: text,
+  primaryAction: actionSchema,
+  /** A second button that opens a menu of links. */
+  menu: z.object({ label: text, items: z.array(actionSchema).min(1) }).optional(),
+  /** Faces, a star rating and a short claim, linking to the evidence. */
+  proof: z
+    .object({
+      href,
+      rating: z.number().min(0).max(5),
+      label: text,
+      people: z
+        .array(z.object({ name: text, image: publicPath.optional() }))
+        .min(1)
+        .max(5),
+    })
+    .optional(),
+});
+
+/**
+ * A page opener in two halves: the h1, description and actions beside a photo
+ * that runs to the screen's edge, with a few optional words over it.
+ */
+export const heroSplitSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('hero-split'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text,
+  primaryAction: actionSchema.optional(),
+  /** A text link beside the button, e.g. "Our services". */
+  secondaryAction: actionSchema.optional(),
+  /** Short facts under the actions, e.g. the cities you work from. */
+  details: z.array(text).min(1).max(4).optional(),
+  /** A decorative photo, cropped to fit; it carries no meaning, so it has no alt text. */
+  image: publicPath,
+  /**
+   * The same photo framed for the column beside the copy from 1024px, such as a
+   * crop closer to its subject. Without it, `image` is used at every width.
+   */
+  desktopImage: publicPath.optional(),
+  /**
+   * A few words over the photo's lower corner from 1024px, e.g. "Discretion.".
+   * They have no backdrop, so the photo must be dark enough there to keep them
+   * at 4.5:1.
+   */
+  highlights: z.array(text).min(1).max(4).optional(),
+});
+
+/** An image with a version for each appearance. */
+const themedImageSchema = z.object({ light: publicPath, dark: publicPath });
+
+/** Four tiles of different kinds in a 2×2 grid. Adapted from shadcn-ui-kit. */
+export const bentoSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('bento'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** The tall tile: a figure, copy and screenshots that take turns. */
+  showcase: z.object({
+    stat: text,
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    images: z.array(themedImageSchema).min(1),
+    alt: text,
+  }),
+  /** A figure and copy over up to three rows of names, drifting in alternate directions. */
+  marquee: z.object({
+    stat: text,
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    rows: z.array(z.array(text).min(3)).min(1).max(3),
+  }),
+  /** Six tools wired to the centre mark. */
+  integrations: z.object({
+    title: text,
+    description: text,
+    tools: z.array(z.object({ name: text, icon: techIconSchema })).length(6),
+  }),
+  /** Three screenshots fanned out like prints. */
+  gallery: z.object({
+    title: text,
+    description: text,
+    action: actionSchema.optional(),
+    images: z.array(themedImageSchema.extend({ alt: text })).length(3),
+  }),
+});
+
+/** A heading and actions over a carousel of screenshots. Adapted from shadcn-ui-kit. */
+export const showcaseSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('showcase'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  primaryAction: actionSchema.optional(),
+  secondaryAction: actionSchema.optional(),
+  /** Each screenshot links to its demo; the name labels the link, so the image needs no alt. */
+  items: z.array(themedImageSchema.extend({ name: text, href })).min(1),
+});
+
+/** A row of logos drifting sideways in a seamless loop, such as clients, partners or tools. */
+export const marqueeSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marquee'),
+  /** A quiet line above the logos, e.g. "Trusted by teams at". */
+  title: text.optional(),
+  /**
+   * Each logo is drawn as a single-colour silhouette of its transparent areas, so
+   * it follows the theme: use a PNG, WebP or SVG with a transparent background.
+   * The name is its accessible name; width and height give its proportions.
+   */
+  items: z
+    .array(
+      z.object({
+        name: text,
+        src: publicPath,
+        width: z.number().int().positive(),
+        height: z.number().int().positive(),
+        href: href.optional(),
+      }),
+    )
+    .min(1),
+  /** Which way the logos drift; `left` by default. */
+  direction: z.enum(['left', 'right']).optional(),
+  /** How fast they drift; `normal` by default. */
+  speed: z.enum(['slow', 'normal', 'fast']).optional(),
+});
+
+/** Quotes in a bordered grid; a carousel on phones. Adapted from shadcn-ui-kit. */
+export const reviewsSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('reviews'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  reviews: z
+    .array(
+      z.object({
+        name: text,
+        /** Role and organisation, e.g. "Founder, Northwind". */
+        role: text.optional(),
+        quote: text,
+        /** A square photo; initials are shown without one. */
+        image: publicPath.optional(),
+        /** Where the review was first published. */
+        href: href.optional(),
+      }),
+    )
+    .min(1),
+});
+
+/** Two to four figures in a row under a heading. Adapted from shadcn-ui-kit. */
+export const statsSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('stats'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  stats: z
+    .array(z.object({ value: text, label: text }))
+    .min(2)
+    .max(4),
+});
+
+/** Questions in accordions, grouped by topic, beside the heading. Adapted from shadcn-ui-kit. */
+export const faqSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('faq'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  groups: z
+    .array(
+      z.object({
+        title: text,
+        items: z.array(z.object({ question: text, answer: text })).min(1),
+      }),
+    )
+    .min(1)
+    .max(2),
+});
+
+/** Currencies the pricing section can show; each plan sets its own amount in every one. */
+export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
+
+export const pricingSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('pricing'),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  /** Currencies offered in the selector, in order; the first (required) is the default. */
+  currencies: z.tuple([currencyCodeSchema], currencyCodeSchema),
+  /** A short note under the currency selector. */
+  currencyNote: text.optional(),
+  plans: z
+    .array(
+      z.object({
+        name: text,
+        description: text,
+        /**
+         * Fixed amounts per currency, set by hand rather than converted live, or a
+         * label such as "Custom" that stays the same in every currency.
+         */
+        price: z.union([
+          z.object({ amounts: z.record(currencyCodeSchema, z.number().nonnegative()) }),
+          z.object({ label: text }),
+        ]),
+        /** Beside the price, e.g. "starting price". */
+        priceNote: text.optional(),
+        features: z.array(text).min(1),
+        action: actionSchema,
+        /** Highlighted, and where the carousel starts on small screens. */
+        recommended: z.boolean().optional(),
+      }),
+    )
+    .min(1)
+    .max(3),
+  /** A smaller invitation below the plans, for work they don't cover. */
+  callout: z.object({ title: text, description: text, action: actionSchema }).optional(),
+  /** A restrained row of figures below the plans. Use only real, verifiable ones. */
+  proof: z
+    .object({
+      title: text,
+      items: z
+        .array(z.object({ value: text, label: text }))
+        .min(1)
+        .max(4),
+    })
+    .optional(),
+});
+
+/** The content every call to action takes, whatever its look. */
+const ctaFields = {
   title: text,
   description: text.optional(),
   primaryAction: actionSchema,
   secondaryAction: actionSchema.optional(),
+};
+
+/** A closing invitation that runs full width on the high-emphasis surface. */
+export const ctaBandSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-band'),
+  ...ctaFields,
+});
+
+/** A quieter closing invitation in a contained panel on the muted surface. */
+export const ctaPanelSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-panel'),
+  ...ctaFields,
+});
+
+/** A compact band: an eyebrow and large heading, with the actions opposite them on wide screens. */
+export const ctaEditorialSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-editorial'),
+  eyebrow: text.optional(),
+  ...ctaFields,
+});
+
+/** A band with the actions opposite the heading and a decorative photo behind it. */
+export const ctaMediaSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-media'),
+  ...ctaFields,
+  /**
+   * A decorative photo, cropped to fit and toned to the band; it carries no
+   * meaning, so it has no alt text. Without one, a faint dot grid takes its place.
+   */
+  image: publicPath.optional(),
+});
+
+/** Copy beside a short list of principles, with an optional photo in its own column. */
+export const ctaSplitSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('cta-split'),
+  eyebrow: text.optional(),
+  ...ctaFields,
+  /** Optional here, so the section can close a page as a statement. */
+  primaryAction: actionSchema.optional(),
+  /**
+   * A decorative photo, cropped to fit: a column on wide screens and a strip
+   * above the copy before then. It has no alt text; without one, the copy and
+   * list take the full width.
+   */
+  image: publicPath.optional(),
+  /** Short principles or facts beside the copy, e.g. "Security". */
+  items: z.array(text).min(1).max(6).optional(),
 });
 
 export const contactSectionSchema = z.object({
@@ -108,12 +620,33 @@ export const contactSectionSchema = z.object({
 
 export const sectionSchema = z.discriminatedUnion('type', [
   heroSectionSchema,
-  statementSectionSchema,
-  featuresSectionSchema,
-  useCasesSectionSchema,
-  workflowSectionSchema,
-  ctaSectionSchema,
+  heroCenteredSectionSchema,
+  heroCinematicSectionSchema,
+  heroSplitSectionSchema,
+  ctaBandSectionSchema,
+  ctaPanelSectionSchema,
+  ctaEditorialSectionSchema,
+  ctaMediaSectionSchema,
+  ctaSplitSectionSchema,
   contactSectionSchema,
+  featuresSectionSchema,
+  capabilitiesSectionSchema,
+  statsSectionSchema,
+  reviewsSectionSchema,
+  faqSectionSchema,
+  bentoSectionSchema,
+  statementSectionSchema,
+  lineupSectionSchema,
+  marqueeSectionSchema,
+  pricingSectionSchema,
+  showcaseSectionSchema,
+  // LaunchKit's own marketing site (src/components/sections/launchkit-marketing/).
+  marketingHeroLaunchKitSectionSchema,
+  marketingDeveloperExperienceSectionSchema,
+  marketingDeploymentPipelineSectionSchema,
+  marketingQualityGatesSectionSchema,
+  marketingTechnicalStackSectionSchema,
+  marketingSetupTimelineSectionSchema,
 ]);
 
 export const pageDefinitionSchema = z
@@ -127,6 +660,7 @@ export const pageDefinitionSchema = z
   );
 
 export type Action = z.infer<typeof actionSchema>;
+export type TechIconName = z.infer<typeof techIconSchema>;
 export type Section = z.infer<typeof sectionSchema>;
 export type SectionType = Section['type'];
 export type SectionOf<T extends SectionType> = Extract<Section, { type: T }>;

@@ -23,9 +23,9 @@ export const home = {
     { type: 'hero', title: 'Gebaut für das, was kommt.' },
     { type: 'statement', title: 'Einmal bauen…' },
     { type: 'features', title: 'Drei Ebenen…' },
-    { type: 'use-cases', title: 'Sechs Websites…' },
-    { type: 'workflow', title: 'Vom Klon…' },
-    { type: 'cta', title: 'Beginnen Sie…' },
+    { type: 'lineup', title: 'Sechs Websites…' },
+    { type: 'marketing-developer-experience', title: 'Vom Klon…' },
+    { type: 'cta-band', title: 'Beginnen Sie…' },
   ],
 } satisfies PageDefinition;`,
       },
@@ -83,7 +83,7 @@ export const home = {
     },
     {
       id: 'adapt',
-      type: 'use-cases',
+      type: 'lineup',
       eyebrow: 'Gebaut, um sich anzupassen',
       title: 'Sechs verschiedene Websites. Ein Fundament.',
       description:
@@ -125,7 +125,7 @@ export const home = {
     },
     {
       id: 'developer-experience',
-      type: 'workflow',
+      type: 'marketing-developer-experience',
       eyebrow: 'Entwicklererfahrung',
       title: 'Vom Klon zur laufenden Website in Minuten.',
       description:
@@ -157,7 +157,7 @@ export const home = {
     },
     {
       id: 'begin',
-      type: 'cta',
+      type: 'cta-band',
       title: 'Beginnen Sie mit einem besseren Fundament.',
       description:
         'Starten Sie Ihre nächste Website mit LaunchKit, machen Sie sie unverwechselbar zu Ihrer eigenen und lassen Sie die Technik darunter weiter besser werden.',

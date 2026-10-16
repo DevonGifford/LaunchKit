@@ -60,7 +60,7 @@ export const home = {
     { id: 'hero', type: 'hero', title: 'Built for what’s next.', description: '…' },
     {
       id: 'begin',
-      type: 'cta',
+      type: 'cta-band',
       title: 'Begin with a better foundation.',
       primaryAction: { label: 'Read the guide', href: '/docs/getting-started' },
     },

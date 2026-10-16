@@ -17,7 +17,7 @@ import {
 } from './dropdown-menu';
 
 const meta = {
-  title: 'Primitives/Dropdown menu',
+  title: 'UI/Navigation/Dropdown menu',
   component: DropdownMenu,
 } satisfies Meta<typeof DropdownMenu>;
 
@@ -48,7 +48,10 @@ export const Default: Story = {
     await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open menu' }));
     // Radix renders the menu in a portal on document.body.
     const menu = await within(document.body).findByRole('menu');
-    await expect(within(menu).getByRole('menuitem', { name: /Settings/ })).toBeVisible();
+    // Waits for the fade-in to finish.
+    await waitFor(() =>
+      expect(within(menu).getByRole('menuitem', { name: /Settings/ })).toBeVisible(),
+    );
     // Close it again: an open menu marks the page behind it aria-hidden, which
     // axe flags because the trigger is still focusable.
     await userEvent.keyboard('{Escape}');

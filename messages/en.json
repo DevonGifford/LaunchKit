@@ -17,7 +17,19 @@
   "Navigation": {
     "home": "Home",
     "docs": "Docs",
-    "contact": "Contact"
+    "contact": "Contact",
+    "getStarted": "Get started",
+    "features": "Features",
+    "pricing": "Pricing",
+    "roadmap": "Roadmap",
+    "showcase": "Showcase",
+    "storybook": "Storybook",
+    "changelog": "Changelog",
+    "faq": "FAQ",
+    "about": "About",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "llmNotice": "LLM Notice"
   },
   "Theme": {
     "toggle": "Switch between light and dark mode"
@@ -27,8 +39,22 @@
   },
   "Footer": {
     "tagline": "Build once, reuse often, improve centrally.",
+    "description": "LaunchKit is a reusable foundation for modern websites, helping teams ship faster with a consistent, high-quality base.",
     "navigation": "Footer",
-    "copyright": "© {year} LaunchKit. Released under the MIT licence."
+    "copyright": "© {year} LaunchKit. Released under the MIT licence.",
+    "legal": "Legal",
+    "contact": {
+      "heading": "Contact",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp"
+    },
+    "social": "Social links",
+    "groups": {
+      "resources": "Resources",
+      "company": "Company"
+    }
   },
   "Docs": {
     "title": "Documentation",
@@ -63,9 +89,54 @@
       "server": "Your message couldn’t be sent. Please try again."
     }
   },
+  "Pricing": {
+    "currency": "Currency",
+    "recommended": "Recommended",
+    "plans": "Plans",
+    "carousel": "carousel",
+    "slide": "slide",
+    "slideLabel": "{name}, {index} of {total}",
+    "previous": "Previous plan",
+    "next": "Next plan"
+  },
+  "HeroCentered": {
+    "rating": "Rated {rating, number} out of 5"
+  },
+  "Showcase": {
+    "label": "Screens",
+    "carousel": "carousel",
+    "slide": "slide",
+    "previous": "Previous screen",
+    "next": "Next screen",
+    "slideLabel": "{name}, {index} of {total}"
+  },
+  "Reviews": {
+    "label": "Reviews",
+    "carousel": "carousel",
+    "slide": "slide",
+    "previous": "Previous review",
+    "next": "Next review",
+    "slideLabel": "{name}, {index} of {total}"
+  },
   "NotFound": {
+    "label": "Error 404",
     "title": "Page not found",
     "description": "The page you were looking for doesn’t exist or has moved.",
     "backHome": "Back to the homepage"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Something went wrong",
+    "description": "An unexpected problem stopped this page from loading. Try again, or go back to the homepage.",
+    "retry": "Try again",
+    "backHome": "Back to the homepage",
+    "reference": "Reference: {digest}"
+  },
+  "ComingSoon": {
+    "label": "Coming soon",
+    "title": "This page is on its way",
+    "description": "We’re still putting it together. Check back soon, or get in touch if you’d like to hear when it’s ready.",
+    "backHome": "Back to the homepage",
+    "contact": "Get in touch"
   }
 }

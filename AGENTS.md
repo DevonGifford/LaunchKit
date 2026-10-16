@@ -137,7 +137,22 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
 - `src/lib/` and `src/config/` stay free of components, with one exception:
   `src/lib/content/registry.ts` maps section types to their components.
 - Sections do not import each other. Shared pieces go in
-  `src/components/sections/section-parts.tsx`.
+  `src/components/sections/section-parts.tsx`, or a helper beside it such as
+  `tech-icons.tsx`.
+- Reusable sections sit in `src/components/sections/` with plain names
+  (`stats-section.tsx`, type `stats`). Layouts that share one data model are
+  one section with a `variant` field, in one file (`capabilities-section.tsx`,
+  type `capabilities`). A kind whose variants are separate section types gets a
+  folder named after its prefix, such as `hero/` (`hero-centered-section.tsx`,
+  type `hero-centered`) and `cta/` (`cta-band-section.tsx`, type `cta-band`).
+  Sections written for LaunchKit's own site sit in
+  `sections/launchkit-marketing/` with a `marketing-` prefix, and generic
+  sections never import from there. Their stories mirror this: `Sections/<Name>`,
+  `Sections/<Group>/<Name>` (`Sections/CTA/Band`) and, for
+  `launchkit-marketing/`, `Sections/Marketing/<Name>`.
+- Page states (not found, error, coming soon) sit in `src/components/layout/`
+  and are built from the hero section; route files such as `not-found.tsx`
+  and `error.tsx` only render them.
 - Colocate: a component's stories sit beside it, and a helper used by one
   component stays in that component's folder until a second user appears.
 - Server Components by default. Add `'use client'` only for state, effects,
@@ -153,7 +168,7 @@ Dependencies point one way: `config`, `i18n` and `lib` (leaf code) ← `componen
   `not-found`, `sitemap`, `robots`, stories).
 - **Files:** `kebab-case` for files and folders, `PascalCase` components,
   `camelCase` functions. Stories sit next to their component
-  (`cta-section.stories.tsx`).
+  (`stats-section.stories.tsx`).
 - **Pages:** the default export is named `<Thing>Page`, takes
   `PageProps<'/[locale]/...'>`, and calls `resolveLocale(params)` first.
 - **Environment variables** are declared and validated in `src/env.ts`. Read

@@ -47,7 +47,7 @@ describe('pageDefinitionSchema', () => {
   const page = (sections: unknown[]) => ({ meta: { title: 'T', description: 'D' }, sections });
   const cta = (id: string, href: string) => ({
     id,
-    type: 'cta',
+    type: 'cta-band',
     title: 'Begin',
     primaryAction: { label: 'Go', href },
   });

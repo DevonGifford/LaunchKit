@@ -17,7 +17,19 @@
   "Navigation": {
     "home": "Start",
     "docs": "Dokumentation",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "getStarted": "Loslegen",
+    "features": "Funktionen",
+    "pricing": "Preise",
+    "roadmap": "Roadmap",
+    "showcase": "Beispiele",
+    "storybook": "Storybook",
+    "changelog": "Änderungen",
+    "faq": "FAQ",
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "llmNotice": "LLM-Hinweis"
   },
   "Theme": {
     "toggle": "Zwischen hellem und dunklem Modus wechseln"
@@ -27,8 +39,22 @@
   },
   "Footer": {
     "tagline": "Einmal bauen, oft wiederverwenden, zentral verbessern.",
+    "description": "LaunchKit ist eine wiederverwendbare Grundlage für moderne Websites, mit der Teams schneller auf einer einheitlichen, hochwertigen Basis veröffentlichen.",
     "navigation": "Fußzeile",
-    "copyright": "© {year} LaunchKit. Veröffentlicht unter der MIT-Lizenz."
+    "copyright": "© {year} LaunchKit. Veröffentlicht unter der MIT-Lizenz.",
+    "legal": "Rechtliches",
+    "contact": {
+      "heading": "Kontakt",
+      "address": "Adresse",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "whatsapp": "WhatsApp"
+    },
+    "social": "Soziale Netzwerke",
+    "groups": {
+      "resources": "Ressourcen",
+      "company": "Unternehmen"
+    }
   },
   "Docs": {
     "title": "Dokumentation",
@@ -63,9 +89,54 @@
       "server": "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
     }
   },
+  "Pricing": {
+    "currency": "Währung",
+    "recommended": "Empfohlen",
+    "plans": "Tarife",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "slideLabel": "{name}, {index} von {total}",
+    "previous": "Vorheriger Tarif",
+    "next": "Nächster Tarif"
+  },
+  "HeroCentered": {
+    "rating": "Mit {rating, number} von 5 bewertet"
+  },
+  "Showcase": {
+    "label": "Bildschirme",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "previous": "Vorheriger Bildschirm",
+    "next": "Nächster Bildschirm",
+    "slideLabel": "{name}, {index} von {total}"
+  },
+  "Reviews": {
+    "label": "Bewertungen",
+    "carousel": "Karussell",
+    "slide": "Folie",
+    "previous": "Vorherige Bewertung",
+    "next": "Nächste Bewertung",
+    "slideLabel": "{name}, {index} von {total}"
+  },
   "NotFound": {
+    "label": "Fehler 404",
     "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     "backHome": "Zurück zur Startseite"
+  },
+  "Error": {
+    "label": "Fehler",
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwartetes Problem hat das Laden dieser Seite verhindert. Versuchen Sie es erneut oder kehren Sie zur Startseite zurück.",
+    "retry": "Erneut versuchen",
+    "backHome": "Zurück zur Startseite",
+    "reference": "Referenz: {digest}"
+  },
+  "ComingSoon": {
+    "label": "Demnächst",
+    "title": "Diese Seite ist in Arbeit",
+    "description": "Wir arbeiten noch daran. Schauen Sie bald wieder vorbei, oder schreiben Sie uns, wenn Sie benachrichtigt werden möchten.",
+    "backHome": "Zurück zur Startseite",
+    "contact": "Kontakt aufnehmen"
   }
 }

@@ -30,18 +30,18 @@ export const groups = [
   },
   {
     name: 'Sections',
-    description: 'The blocks that pages are made of, shown with the real page content.',
-    href: './?path=/docs/sections-hero--docs',
+    description: 'The blocks that pages are made of: reusable sections first, then the ones written for LaunchKit’s own site, under Marketing.',
+    href: './?path=/docs/sections-hero-basic--docs',
   },
   {
     name: 'Layout',
-    description: 'The site header and footer, the mobile menu and the navigation links.',
+    description: 'The site header and footer, the mobile menu, the navigation links, and the not found, error and coming soon pages.',
     href: './?path=/docs/layout-site-header--docs',
   },
   {
-    name: 'Primitives',
-    description: 'Buttons, form controls, menus, dialogs, the logo, the page container and the language and theme switches.',
-    href: './?path=/docs/primitives-button--docs',
+    name: 'UI',
+    description: 'The shared component library: forms, actions, feedback, content, overlays and navigation, plus LaunchKit’s own logo, container and switches.',
+    href: './?path=/docs/ui-actions-button--docs',
   },
   {
     name: 'Forms',
@@ -122,7 +122,7 @@ export const Default: StoryObj<typeof meta> = {};`;
         accessibility checks. Review a change here before it reaches a page.
       </p>
       <div className="mt-10 flex flex-wrap gap-3">
-        <a href="./?path=/docs/primitives-button--docs" target="_top" className={buttonVariants({ variant: 'inverse', size: 'lg' })}>
+        <a href="./?path=/docs/ui-actions-button--docs" target="_top" className={buttonVariants({ variant: 'inverse', size: 'lg' })}>
           Browse the components
         </a>
         <a href="https://launch-kit-flax.vercel.app/" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: 'inverse-outline', size: 'lg' })}>
@@ -141,7 +141,7 @@ export const Default: StoryObj<typeof meta> = {};`;
     <section aria-labelledby="library" className="px-3 sm:px-8">
       <h2 id="library" className="font-serif text-headline font-normal">What's in the library</h2>
       <p className="mt-3 max-w-2xl text-muted-foreground">
-        Pages are made of sections, framed by the layout. Both are built from primitives, and everything draws on the foundations.
+        Pages are made of sections, framed by the layout. Both are built from the UI components, and everything draws on the foundations.
       </p>
       <ul className="mt-10 border-b">
         {groups.map((group) => (

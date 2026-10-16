@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, userEvent, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import { Button } from './button';
 import {
   Sheet,
@@ -12,7 +12,7 @@ import {
 } from './sheet';
 
 const meta = {
-  title: 'Primitives/Sheet',
+  title: 'UI/Overlays/Sheet',
   component: Sheet,
 } satisfies Meta<typeof Sheet>;
 
@@ -45,7 +45,8 @@ export const Right: Story = {
     await userEvent.click(within(canvasElement).getByRole('button', { name: 'Open sheet' }));
     // Radix renders the sheet in a portal on document.body.
     const sheet = await within(document.body).findByRole('dialog', { name: 'Preferences' });
-    await expect(sheet).toBeVisible();
+    // Waits for the slide-in to finish.
+    await waitFor(() => expect(sheet).toBeVisible());
   },
 };
 

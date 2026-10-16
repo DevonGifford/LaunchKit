@@ -17,7 +17,19 @@
   "Navigation": {
     "home": "Inicio",
     "docs": "Documentación",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "getStarted": "Empezar",
+    "features": "Funciones",
+    "pricing": "Precios",
+    "roadmap": "Hoja de ruta",
+    "showcase": "Ejemplos",
+    "storybook": "Storybook",
+    "changelog": "Novedades",
+    "faq": "Preguntas frecuentes",
+    "about": "Acerca de",
+    "privacy": "Política de privacidad",
+    "terms": "Condiciones de uso",
+    "llmNotice": "Aviso sobre LLM"
   },
   "Theme": {
     "toggle": "Cambiar entre modo claro y oscuro"
@@ -27,8 +39,22 @@
   },
   "Footer": {
     "tagline": "Construir una vez, reutilizar a menudo, mejorar de forma centralizada.",
+    "description": "LaunchKit es una base reutilizable para sitios web modernos que ayuda a los equipos a lanzar más rápido sobre una base coherente y de alta calidad.",
     "navigation": "Pie de página",
-    "copyright": "© {year} LaunchKit. Publicado bajo la licencia MIT."
+    "copyright": "© {year} LaunchKit. Publicado bajo la licencia MIT.",
+    "legal": "Legal",
+    "contact": {
+      "heading": "Contacto",
+      "address": "Dirección",
+      "email": "Correo electrónico",
+      "phone": "Teléfono",
+      "whatsapp": "WhatsApp"
+    },
+    "social": "Redes sociales",
+    "groups": {
+      "resources": "Recursos",
+      "company": "Empresa"
+    }
   },
   "Docs": {
     "title": "Documentación",
@@ -63,9 +89,54 @@
       "server": "No se ha podido enviar tu mensaje. Inténtalo de nuevo."
     }
   },
+  "Pricing": {
+    "currency": "Moneda",
+    "recommended": "Recomendado",
+    "plans": "Planes",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "slideLabel": "{name}, {index} de {total}",
+    "previous": "Plan anterior",
+    "next": "Plan siguiente"
+  },
+  "HeroCentered": {
+    "rating": "Valoración de {rating, number} sobre 5"
+  },
+  "Showcase": {
+    "label": "Pantallas",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "previous": "Pantalla anterior",
+    "next": "Pantalla siguiente",
+    "slideLabel": "{name}, {index} de {total}"
+  },
+  "Reviews": {
+    "label": "Opiniones",
+    "carousel": "carrusel",
+    "slide": "diapositiva",
+    "previous": "Opinión anterior",
+    "next": "Opinión siguiente",
+    "slideLabel": "{name}, {index} de {total}"
+  },
   "NotFound": {
+    "label": "Error 404",
     "title": "Página no encontrada",
     "description": "La página que buscabas no existe o se ha movido.",
     "backHome": "Volver a la página de inicio"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Algo salió mal",
+    "description": "Un problema inesperado impidió cargar esta página. Vuelve a intentarlo o regresa a la página de inicio.",
+    "retry": "Reintentar",
+    "backHome": "Volver a la página de inicio",
+    "reference": "Referencia: {digest}"
+  },
+  "ComingSoon": {
+    "label": "Próximamente",
+    "title": "Esta página está en camino",
+    "description": "Todavía la estamos preparando. Vuelve pronto o escríbenos si quieres saber cuándo estará lista.",
+    "backHome": "Volver a la página de inicio",
+    "contact": "Escríbenos"
   }
 }

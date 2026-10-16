@@ -4,7 +4,7 @@ import { Checkbox } from './checkbox';
 import { Label } from './label';
 
 const meta = {
-  title: 'Primitives/Checkbox',
+  title: 'UI/Forms/Checkbox',
   component: Checkbox,
   args: { id: 'terms' },
   decorators: [

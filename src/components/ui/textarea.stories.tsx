@@ -3,7 +3,7 @@ import { Label } from './label';
 import { Textarea } from './textarea';
 
 const meta = {
-  title: 'Primitives/Textarea',
+  title: 'UI/Forms/Textarea',
   component: Textarea,
   args: { id: 'message', placeholder: 'How can we help?' },
   decorators: [

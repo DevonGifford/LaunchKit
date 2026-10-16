@@ -23,9 +23,9 @@ export const home = {
     { type: 'hero', title: 'Hecho para lo que viene.' },
     { type: 'statement', title: 'Construir una vez…' },
     { type: 'features', title: 'Tres capas…' },
-    { type: 'use-cases', title: 'Seis sitios…' },
-    { type: 'workflow', title: 'Del clon…' },
-    { type: 'cta', title: 'Empieza con…' },
+    { type: 'lineup', title: 'Seis sitios…' },
+    { type: 'marketing-developer-experience', title: 'Del clon…' },
+    { type: 'cta-band', title: 'Empieza con…' },
   ],
 } satisfies PageDefinition;`,
       },
@@ -83,7 +83,7 @@ export const home = {
     },
     {
       id: 'adapt',
-      type: 'use-cases',
+      type: 'lineup',
       eyebrow: 'Hecho para adaptarse',
       title: 'Seis sitios web distintos. Una sola base.',
       description:
@@ -126,7 +126,7 @@ export const home = {
     },
     {
       id: 'developer-experience',
-      type: 'workflow',
+      type: 'marketing-developer-experience',
       eyebrow: 'Experiencia de desarrollo',
       title: 'Del clon al sitio en marcha en minutos.',
       description:
@@ -158,7 +158,7 @@ export const home = {
     },
     {
       id: 'begin',
-      type: 'cta',
+      type: 'cta-band',
       title: 'Empieza con una base mejor.',
       description:
         'Crea tu próximo sitio web a partir de LaunchKit, hazlo inconfundiblemente tuyo y deja que la ingeniería siga mejorando por debajo.',
