@@ -7,10 +7,21 @@ export const locales = routing.locales;
 /** Every page of the site, without a locale prefix. */
 export const routes = [
   '/',
+  '/examples',
+  '/pricing',
   '/docs',
   '/docs/getting-started',
   '/docs/making-it-yours',
+  '/docs/launching-a-project',
+  '/docs/component-library',
+  '/docs/building-with-ai',
+  '/docs/roadmap',
   '/contact',
+  '/privacy',
+  '/terms',
+  '/llm-notice',
+  '/coming-soon',
+  '/home-v1',
 ] as const;
 
 export const localized = (locale: string, route: string) =>

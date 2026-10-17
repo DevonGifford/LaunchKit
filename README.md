@@ -1,141 +1,130 @@
-<p align="center">
-  <img src="docs/brand/launchkit-brand-reference.png" alt="LaunchKit" width="420">
-</p>
+ <div align="center">
+  <a href="https://launch-kit-flax.vercel.app/">
+    <img
+      src="docs/brand/launchkit-readme-banner.png"
+      alt="LaunchKit — reusable Next.js website foundation"
+      height="250"
+    />
+  </a>
+  <h2>A reusable foundation for building & launching ideas.</h2>
+  <p>
+    <img
+      src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,vitest,vercel,github"
+      alt="Next.js, React, TypeScript, Tailwind CSS, Vitest, Vercel and GitHub"
+    />
+  </p>
+  <p>
+    <a href="https://launch-kit-flax.vercel.app/" target="_blank" rel="noopener noreferrer">
+      Live Demo ↗
+    </a>
+  </p>
+</div>
 
-<p align="center"><strong>A reusable Next.js foundation for building and launching ideas.</strong><br>
-Build once, reuse often, improve centrally.</p>
+<!-- -------------------------------------------------------------------------- -->
+
+### About This Project
 
 ---
 
-LaunchKit is the shared starting point for a family of different websites: an
-agency site, a product showcase, app and SaaS landing pages, a retail brand.
-It provides the parts every one of them needs — design system, localization,
-section-based content, forms, testing and CI — so each project spends its time
-on what makes it different. Improvements are made once, here, and merged into
-each project deliberately.
+**LaunchKit is a reusable foundation for building and launching better websites, faster and cheaper.** <br/> It provides everything a modern website needs — responsive UI, themes, localization, section-based content, forms, testing, CI and AI-assisted development — so each new project can launch faster and focus on what makes it different.
 
-It is a **website foundation**, not a SaaS boilerplate. There is no database,
-authentication or paid service, and a fresh clone runs without any accounts or
-keys.
+LaunchKit is centrally maintained, with improvements and dependency updates shared across downstream projects.
 
-## What’s included
+<br/>
+<!-- -------------------------------------------------------------------------- -->
 
-- **Next.js 16** App Router, **React 19**, strict **TypeScript 6**, **Tailwind CSS 4**
-- **Design system** — semantic tokens in one project-owned file, light and dark
-  appearances that follow the system, shadcn/ui primitives owned in the repo,
-  and the _Midnight Yacht Club_ brand as the reference palette
-- **Localization** — next-intl with `en`, `es`, `fr`, `de`; localized routes,
-  metadata, `hreflang` and canonical URLs, sitemap; a missing-translation check
-- **Content** — pages are ordered lists of typed sections in `src/content/`;
-  Markdown for long-form documents, with a fallback to the default language
-- **Forms** — React Hook Form + Zod, validated in the browser and again in a
-  server action
-- **Quality** — ESLint (type-aware, full jsx-a11y), Prettier, Lefthook,
-  Commitlint, T3 Env
-- **Tests** — Vitest unit tests, Vitest Browser Mode integration tests,
-  Storybook stories run as tests, Playwright end-to-end tests on desktop and
-  mobile, with axe accessibility checks throughout
-- **Delivery** — GitHub Actions CI, grouped Dependabot updates, `main`/`staging`
-  branches, a manual tagged-release workflow
+### Philosophy
 
-## Getting started
+---
 
-Requirements: Node.js 24+ and pnpm 12.
+**Build once. Reuse often. Improve centrally.** <br/> LaunchKit is intentionally opinionated about its foundations and flexible about everything built on top. Shared components and tooling belong upstream; branding, copy, custom sections, and business logic belong to the individual project. It's designed to be forked, adapted, and improved — not to force every website into the same template. The goal isn't to build the biggest starter kit. It's to build one that's genuinely useful, easy to maintain, and ready to grow with real projects.
 
-```sh
-git clone --origin upstream git@github.com:DevonGifford/LaunchKit.git my-site
-cd my-site
-pnpm install
-pnpm exec playwright install chromium   # once: the browser used by the tests
-pnpm dev
-```
+<br/>
 
-Open <http://localhost:3000>. No `.env` file is needed; see
-[`.env.example`](.env.example) for the optional settings.
+<!-- -------------------------------------------------------------------------- -->
 
-Starting a new project from LaunchKit? Read
-[docs/upstream-sync.md](docs/upstream-sync.md) first. It covers remotes, where
-project-specific work belongs, and how to merge LaunchKit releases later.
+<div align="center">
+  <a href="https://launch-kit-flax.vercel.app/">
+    <img
+      src="docs/brand/midnight-yacht-club-brand-board.png"
+      alt="Midnight Yacht Club — Dark Theme"
+      width="49%"
+    />
+    <img
+      src="docs/brand/sunlight-yacht-club-brand-board.png"
+      alt="Sunlight Yacht Club — Light Theme"
+      width="49%"
+    />
+  </a>
 
-## Commands
+  <p>
+    <sub>Midnight Yacht Club & Sunlight Yacht Club design system.</sub>
+  </p>
+</div>
 
-| Command                | What it does                                                        |
-| ---------------------- | ------------------------------------------------------------------- |
-| `pnpm dev`             | Development server                                                  |
-| `pnpm build`           | Production build                                                    |
-| `pnpm start`           | Serve the production build                                          |
-| `pnpm check`           | Everything CI checks except the build and end-to-end tests          |
-| `pnpm typecheck`       | TypeScript                                                          |
-| `pnpm lint`            | ESLint (`pnpm lint:fix` to fix)                                     |
-| `pnpm format:check`    | Prettier (`pnpm format` to write)                                   |
-| `pnpm i18n:check`      | Missing or inconsistent translations                                |
-| `pnpm test`            | All Vitest projects: unit, integration (browser), Storybook stories |
-| `pnpm test:coverage`   | The same, with a local coverage report in `coverage/`               |
-| `pnpm test:e2e`        | Builds, serves and runs Playwright on desktop and mobile            |
-| `pnpm storybook`       | Component workshop on <http://localhost:6006>                       |
-| `pnpm build-storybook` | Static Storybook in `storybook-static/`                             |
+<!-- -------------------------------------------------------------------------- -->
 
-Git hooks (Lefthook) run ESLint and Prettier on staged files, Commitlint on
-commit messages and the type checker before pushing.
+<details>
+  <summary><strong>Tech Stack</strong></summary>
+  <br/>
 
-## Making it yours
+| Area                     | Tooling                                              |
+| ------------------------ | ---------------------------------------------------- |
+| Framework                | Next.js 16 (App Router), React 19, TypeScript 6      |
+| Styling & UI             | Tailwind CSS 4, shadcn/ui, semantic design tokens    |
+| Localization             | next-intl, i18n-check                                |
+| Content                  | TypeScript page definitions, Markdown, JSON messages |
+| Forms & validation       | React Hook Form, Zod                                 |
+| Environment              | T3 Env                                               |
+| Code quality             | ESLint, Prettier, Lefthook, Commitlint               |
+| Unit & integration tests | Vitest, Vitest Browser Mode                          |
+| End-to-end tests         | Playwright, axe accessibility checks                 |
+| Component development    | Storybook                                            |
+| Automation               | GitHub Actions, Dependabot                           |
+| Hosting                  | Vercel                                               |
 
-| To change…                      | Edit                                                         |
-| ------------------------------- | ------------------------------------------------------------ |
-| Colours, typefaces, radius      | `src/app/theme.css` — see [docs/theming.md](docs/theming.md) |
-| Page content and section order  | `src/content/<locale>/pages/*.ts`                            |
-| Long-form documents             | `src/content/<locale>/docs/*.md`                             |
-| Interface text                  | `messages/<locale>.json`                                     |
-| Navigation and feature switches | `src/config/`                                                |
-| Languages                       | `src/i18n/routing.ts`, then `pnpm i18n:check`                |
-| Logo and social image           | `public/brand/`                                              |
+</details>
 
-Pages are composed from sections:
+---
 
-```ts
-// src/content/en/pages/home.ts
-export const home = {
-  meta: { title: 'A reusable Next.js foundation', description: '…' },
-  sections: [
-    { id: 'hero', type: 'hero', title: 'Built for what’s next.', description: '…' },
-    {
-      id: 'begin',
-      type: 'cta',
-      title: 'Begin with a better foundation.',
-      primaryAction: { label: 'Read the guide', href: '/docs/getting-started' },
-    },
-  ],
-} satisfies PageDefinition;
-```
+<!-- -------------------------------------------------------------------------- -->
 
-Reorder, remove or add sections and the page follows — no component changes.
-TypeScript checks every field, and an unknown section type is a compile error.
+<details>
+  <summary><strong>Features</strong></summary>
+  <br/>
 
-## Project structure
+- **Modern application foundation** — Next.js App Router, React, strict TypeScript, and Tailwind CSS.
+- **Themeable design system** — shadcn/ui components, semantic tokens, light/dark/system appearance, and the _Midnight Yacht Club_ / _Sunlight Yacht Club_ reference brand.
+- **Localization** — English, Spanish, French, and German; locale-aware routes, page content, navigation, metadata, and translation checks.
+- **Section-based content** — typed, ordered page sections in `src/content/`, separate from React presentation components; Markdown for long-form content.
+- **Reusable layouts and sections** — accessible navigation, responsive layouts, and essential marketing sections without a full visual page builder.
+- **Validated forms** — React Hook Form and Zod, with client-side validation and server-side validation where forms are submitted.
+- **Quality tooling** — strict type-checking, ESLint, Prettier, Lefthook, Commitlint, and type-safe environment configuration.
+- **Testing and accessibility** — Vitest suites, browser integration tests, Storybook stories, desktop/mobile Playwright tests, and automated accessibility checks.
+- **SEO and performance foundations** — metadata, Open Graph, canonical and alternate-language URLs, sitemap, robots, optimized assets, and modern rendering defaults.
+- **GitHub workflow** — `staging` and `main`, pull-request CI, grouped Dependabot updates, and a controlled version-tag / GitHub Release process.
 
-```text
-src/
-  app/              routes ([locale]/…), theme.css, globals.css, sitemap, robots
-  components/       ui/ (primitives) · layout/ · sections/ · forms/ · theme/ · brand/
-  content/          page content and Markdown documents, per locale
-  config/           site, navigation, feature switches
-  i18n/             routing, navigation, request config
-  lib/              content model and rendering, forms, SEO helpers
-messages/           interface text, per locale
-tests/              unit/ · integration/ · e2e/
-docs/               specification and guides
-```
+> LaunchKit is intentionally not bundled with a database, authentication provider, checkout system, or paid monitoring service. Those are added to downstream projects when there's a real requirement.
 
-## Documentation
+</details>
 
-- [docs/SPEC.md](docs/SPEC.md) — the product and technical specification
-- [docs/theming.md](docs/theming.md) — tokens, palettes, typography, adding shadcn/ui components
-- [docs/upstream-sync.md](docs/upstream-sync.md) — building on LaunchKit and merging its releases
-- [docs/releasing.md](docs/releasing.md) — branches, versions, releases, dependency updates
-- [docs/toolchain.md](docs/toolchain.md) — version choices and the conflicts behind them
-- [CONTRIBUTING.md](CONTRIBUTING.md) · [SECURITY.md](SECURITY.md) · [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) · [CHANGELOG.md](CHANGELOG.md)
-- [AGENTS.md](AGENTS.md) — rules for AI coding agents, including the Git restrictions
+---
 
-## Licence
+<!-- -------------------------------------------------------------------------- -->
 
-[MIT](LICENSE)
+<details>
+  <summary><strong>Documentation</strong></summary>
+  <br/>
+
+- [Project specification](docs/SPEC.md) — vision, scope, architecture, and development phases.
+- [Style guide](docs/STYLE_GUIDE.md) — brand identity, light/dark palettes, typography, and visual direction.
+- [Theming](docs/theming.md) — semantic tokens, brand customization, and shadcn/ui components.
+- [Upstream sync](docs/upstream-sync.md) — creating downstream projects and merging LaunchKit improvements.
+- [Releasing](docs/releasing.md) — branches, tags, GitHub Releases, and dependency updates.
+- [Toolchain](docs/toolchain.md) — version decisions, compatibility, and maintenance notes.
+- [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Changelog](CHANGELOG.md)
+- [Agent instructions](AGENTS.md) — coding conventions and explicit Git restrictions for AI agents.
+
+</details>
+
+---

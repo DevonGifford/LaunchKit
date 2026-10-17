@@ -1,5 +1,6 @@
+import { existsSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { localeNames, routing } from '@/i18n/routing';
+import { localeFlags, localeNames, routing } from '@/i18n/routing';
 import { localizedAlternates, openGraphLocales, pageMetadata } from '@/lib/seo';
 
 describe('locale configuration', () => {
@@ -12,6 +13,12 @@ describe('locale configuration', () => {
     for (const locale of routing.locales) {
       expect(localeNames[locale]).toBeTruthy();
       expect(openGraphLocales[locale]).toMatch(/^[a-z]{2}_[A-Z]{2}$/);
+    }
+  });
+
+  it('gives every locale a flag image for the language menu', () => {
+    for (const locale of routing.locales) {
+      expect(existsSync(`public/flags/${localeFlags[locale]}.svg`)).toBe(true);
     }
   });
 });

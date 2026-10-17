@@ -7,8 +7,80 @@
 @import 'tw-animate-css';
 @import './theme.css';
 
+/* Vendored agent skills hold Markdown full of class names; don't scan them. */
+@source not '../../.agents';
+@source not '../../.claude';
+
 /* Appearance is a class on <html>, set by next-themes. */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * State variants that components from the shadcn/ui registry use
+ * (`data-checked:`, `data-open:`, `data-horizontal:` …). They map Radix's
+ * `data-state` and `data-orientation` attributes, and the boolean attributes of
+ * Base UI and @shadcn/react, to one name. Copied from shadcn 4.21's
+ * `shadcn/tailwind.css`, which the CLI would otherwise import as a dependency.
+ */
+@custom-variant data-open {
+  &:where([data-state='open']),
+  &:where([data-open]:not([data-open='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-closed {
+  &:where([data-state='closed']),
+  &:where([data-closed]:not([data-closed='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-checked {
+  &:where([data-state='checked']),
+  &:where([data-checked]:not([data-checked='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-unchecked {
+  &:where([data-state='unchecked']),
+  &:where([data-unchecked]:not([data-unchecked='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-selected {
+  &:where([data-selected='true']) {
+    @slot;
+  }
+}
+@custom-variant data-disabled {
+  &:where([data-disabled='true']),
+  &:where([data-disabled]:not([data-disabled='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-active {
+  &:where([data-state='active']),
+  &:where([data-active]:not([data-active='false'])) {
+    @slot;
+  }
+}
+@custom-variant data-horizontal {
+  &:where([data-orientation='horizontal']) {
+    @slot;
+  }
+}
+@custom-variant data-vertical {
+  &:where([data-orientation='vertical']) {
+    @slot;
+  }
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -21,6 +93,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
   --color-emphasis: var(--emphasis);
   --color-emphasis-foreground: var(--emphasis-foreground);
   --color-border: var(--border);
@@ -60,9 +133,42 @@
   --text-lede--line-height: 1.6;
 }
 
+/* Decorative motion. Use with `motion-safe:` so reduced motion shows the end state. */
+@theme {
+  /* A highlighter stroke drawn left to right behind text, once. */
+  --animate-marker: marker 0.9s 0.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+  /*
+   * An endless drift over copies of a row, moved by one copy's width: -50% for
+   * two copies, or set --marquee-shift (e.g. calc(-100% / 3) for three).
+   */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  /* A slow bob, for illustrations that should feel light. */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes marker {
+    from {
+      background-size: 0% 100%;
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      translate: var(--marquee-shift, -50%) 0;
+    }
+  }
+
+  @keyframes float {
+    50% {
+      translate: 0 -6px;
+    }
+  }
+}
+
 @layer base {
   :root {
     color-scheme: light;
+    /* Anchors and keyboard focus land clear of the sticky header (h-16). */
+    scroll-padding-top: 5rem;
   }
 
   .dark {
@@ -159,6 +265,14 @@
   }
 }
 
+/*
+ * Page transitions: src/app/[locale]/template.tsx cross-fades the page content
+ * on navigation. Clicks pass through to the new page while it plays.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -167,5 +281,12 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

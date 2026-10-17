@@ -38,3 +38,39 @@ need to take when merging it.
   and mobile.
 - GitHub Actions CI, Dependabot, a manual release workflow, and governance
   documents.
+- Optional Storybook deployment to Vercel from CI: production from `main` and
+  a preview for each pull request, off until switched on.
+- Website pages: a new homepage composed from the section library, an
+  Examples page and a Pricing page. The previous homepage stays at `/home-v1`,
+  unlinked and out of search results.
+- Site navigation: the wide header with Product, Examples, Pricing and Docs and
+  a "Get in Contact" call to action (also in the mobile menu), and the full
+  footer with placeholder contact details and social links.
+- A coming-soon page for links whose page doesn't exist yet.
+- Page transitions: a cross-fade between pages with React's `<ViewTransition>`,
+  turned off by reduced motion.
+- A privacy policy at `/privacy`, written in Markdown under
+  `src/content/<locale>/legal/` and loaded like the docs, with the same
+  fallback to English.
+- Terms of use at `/terms`, separating use of the website from the MIT-licensed
+  source code, and an LLM notice at `/llm-notice`.
+- `/llms.txt`, a curated map of the site for LLMs and coding agents following
+  the llms.txt proposal, generated from the content at build time; the LLM
+  notice shows the same file in full.
+- Documentation: the quickstart and customizing guides rewritten, and four new
+  articles on launching a project, the design system, AI integrations and the
+  roadmap, with a closing call to action on the docs index. Each document
+  shows an estimated reading time, an optional executive summary from its
+  frontmatter, and suggestions for what to read next.
+- The new pages, documents and legal pages in English, Spanish, French and
+  German, with the plans' prices shared by every language.
+
+### Changed
+
+- The wide header shows its navigation inline from 1024px rather than 768px,
+  so the row fits in every language.
+- The pricing section's title is optional, so a page's hero can introduce the
+  plans.
+- The full footer sits in a wider frame and keeps its tablet layout up to
+  1280px, so its one-row layout fits in every language. Below 1024px the legal
+  links sit under the copyright, one per line on phones.

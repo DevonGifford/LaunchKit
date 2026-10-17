@@ -1,5 +1,5 @@
 import { ContactForm } from '@/components/forms/contact-form';
-import { Container } from '@/components/layout/container';
+import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
 
 /** Contact details beside the reference form. */

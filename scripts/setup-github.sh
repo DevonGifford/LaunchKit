@@ -12,6 +12,8 @@
 #   1. Create `staging` from `main` (on GitHub — no local Git changes).
 #   2. Enable Dependabot alerts and security updates.
 #   3. Enable private vulnerability reporting (SECURITY.md relies on it).
+#      GitHub offers it for public repositories only; on a private one the
+#      step explains and skips — re-run once the repository is public.
 #   4. Protect `main` and `staging`: pull requests only, CI must pass, no force
 #      pushes or deletion. On private repositories this needs GitHub Pro, Team
 #      or Enterprise; on the Free plan the step explains and skips.
@@ -60,9 +62,15 @@ if confirm "Enable them?"; then
 fi
 
 step "3. Private vulnerability reporting"
-if confirm "Enable it?"; then
-  gh api -X PUT "repos/$repo/private-vulnerability-reporting" >/dev/null
-  echo "Enabled: Security tab → Report a vulnerability."
+if [[ "$(gh api "repos/$repo" --jq .private)" == "true" ]]; then
+  echo "Skipped: GitHub offers this for public repositories only."
+  echo "Re-run this script after making the repository public."
+elif confirm "Enable it?"; then
+  if output=$(gh api -X PUT "repos/$repo/private-vulnerability-reporting" 2>&1); then
+    echo "Enabled: Security tab → Report a vulnerability."
+  else
+    echo "Not enabled: $output"
+  fi
 fi
 
 step "4. Protect main and staging"

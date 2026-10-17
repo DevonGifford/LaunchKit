@@ -27,7 +27,8 @@ export function NavLinks({
   return (
     <ul className={className}>
       {items.map((item) => (
-        <li key={item.href}>
+        // Placeholder links can share an href, such as the coming-soon page.
+        <li key={`${item.href} ${item.label}`}>
           <Link
             href={item.href}
             aria-current={isActive(pathname, item.href) ? 'page' : undefined}

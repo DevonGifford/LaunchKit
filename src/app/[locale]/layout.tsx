@@ -42,10 +42,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         </a>
         {/* Client components only receive the catalogues they use. */}
         <NextIntlClientProvider
-          messages={{ Common: messages.Common, ContactForm: messages.ContactForm }}
+          messages={{
+            Common: messages.Common,
+            ContactForm: messages.ContactForm,
+            Error: messages.Error,
+          }}
         >
           <ThemeProvider>
-            <SiteHeader />
+            <SiteHeader variant="wide" />
             <main id="main" tabIndex={-1} className="flex-1 outline-none">
               {children}
             </main>
