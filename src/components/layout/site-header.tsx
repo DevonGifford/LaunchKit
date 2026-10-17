@@ -10,7 +10,7 @@ import { Container } from '@/components/ui/container';
 import { LocaleSwitcher } from '@/components/ui/locale-switcher';
 import { cn } from '@/lib/utils';
 import { MobileNav } from './mobile-nav';
-import { NavLinks } from './nav-links';
+import { NavLinks, type NavItem } from './nav-links';
 
 const bar =
   'sticky top-0 z-40 border-b bg-background/90 backdrop-blur-md supports-backdrop-filter:bg-background/75';
@@ -18,12 +18,14 @@ const bar =
 /**
  * The site header. `default` sits within the page container. `wide` spans
  * nearly the full width: the logo on the left, the navigation centred, and the
- * theme, language and a call to action on the right. Below md both collapse into
- * the same menu button.
+ * theme, language and a call to action on the right. Both collapse into the same
+ * menu button: `default` below md, `wide` below lg, with its call to action
+ * inside the menu.
  */
 export async function SiteHeader({ variant = 'default' }: { variant?: 'default' | 'wide' }) {
   const t = await getTranslations();
   const items = mainNavigation.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) }));
+  const action = { href: headerAction.href, label: t(`Navigation.${headerAction.key}`) };
 
   const home = (className?: string) => (
     <Link
@@ -44,10 +46,11 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
     </nav>
   );
 
-  const mobile = (
-    <div className="md:hidden">
+  const mobile = (className: string, menuAction?: NavItem) => (
+    <div className={className}>
       <MobileNav
         items={items}
+        action={menuAction}
         showLocaleLinks={features.localeSwitcher}
         showThemeToggle={features.themeSwitcher}
         labels={{
@@ -68,24 +71,25 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
       <header className={bar}>
         {/*
           Its own frame rather than the page container: slim gutters (the
-          container's on phones) and a cap at 120rem. From md the side columns
-          share the leftover width, so the navigation sits at the centre; if one
-          side needs more room, it nudges over rather than overlap.
+          container's on phones) and a cap at 120rem. Inline only from lg: below
+          it, the row runs wider than the screen in the longer languages. The
+          side columns share the leftover width, so the navigation sits at the
+          centre; if one side needs more room, it nudges over rather than overlap.
         */}
-        <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-5 sm:px-6 md:grid md:grid-cols-[1fr_auto_1fr]">
-          {home('md:justify-self-start')}
-          <div className="hidden md:block">{nav}</div>
-          <div className="hidden items-center gap-1 justify-self-end md:flex">
+        <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-5 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+          {home('lg:justify-self-start')}
+          <div className="hidden lg:block">{nav}</div>
+          <div className="hidden items-center gap-1 justify-self-end lg:flex">
             {features.themeSwitcher && <ThemeToggle label={t('Theme.toggle')} />}
             {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
             <Button asChild className="ml-3">
-              <Link href={headerAction.href}>
-                {t(`Navigation.${headerAction.key}`)}
+              <Link href={action.href}>
+                {action.label}
                 <ArrowRightIcon aria-hidden="true" />
               </Link>
             </Button>
           </div>
-          {mobile}
+          {mobile('lg:hidden', action)}
         </div>
       </header>
     );
@@ -103,7 +107,7 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
           {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
         </div>
 
-        {mobile}
+        {mobile('md:hidden')}
       </Container>
     </header>
   );

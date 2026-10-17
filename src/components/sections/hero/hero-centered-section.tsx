@@ -2,21 +2,15 @@
  * Adapted from shadcn-ui-kit, components/sections/hero-section.tsx
  * (https://github.com/bundui/shadcn-ui-kit). Copyright (c) 2024 Mohd. Nisab, MIT License.
  */
-import { ChevronDownIcon, StarIcon } from 'lucide-react';
+import { StarIcon } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { AvatarGroup } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Link } from '@/i18n/navigation';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
 import { ActionButton, PersonAvatar } from '@/components/sections/section-parts';
+import { LinkMenu } from './hero-centered-link-menu';
 
 type Section = SectionOf<'hero-centered'>;
 
@@ -68,35 +62,6 @@ function Highlighted({ text, highlight }: { text: string; highlight?: string }) 
       <span className={marker}>{highlight}</span>
       {text.slice(at + highlight.length)}
     </>
-  );
-}
-
-/** An outline button that opens a menu of links. */
-function LinkMenu({ menu }: { menu: NonNullable<Section['menu']> }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="lg">
-          {menu.label}
-          <ChevronDownIcon aria-hidden="true" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="center" className="min-w-48">
-        {menu.items.map((item) => (
-          <DropdownMenuItem key={item.href} asChild>
-            {item.href.startsWith('/') ? (
-              <Link href={item.href} className="min-h-10">
-                {item.label}
-              </Link>
-            ) : (
-              <a href={item.href} className="min-h-10">
-                {item.label}
-              </a>
-            )}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }
 

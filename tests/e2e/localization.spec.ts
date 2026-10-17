@@ -17,7 +17,7 @@ test.describe('locale detection', () => {
     await page.goto('/');
     await expect(page).toHaveURL(/\/de$/);
     await expect(page.locator('html')).toHaveAttribute('lang', 'de');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Gebaut für das, was kommt.');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Schneller starten.');
   });
 });
 
@@ -52,19 +52,19 @@ test('every page declares its language alternates and canonical URL', async ({ p
     'href',
     /\/es\/docs\/getting-started$/,
   );
-  await expect(page).toHaveTitle('Primeros pasos · LaunchKit');
+  await expect(page).toHaveTitle('Inicio rápido de LaunchKit · LaunchKit');
   await expect(page.locator('head meta[property="og:locale"]')).toHaveAttribute('content', 'es_ES');
 });
 
 test('dates and plurals follow the locale', async ({ page }) => {
   await page.goto('/de/docs/getting-started');
-  await expect(page.getByText('Aktualisiert am 12. Oktober 2026')).toBeVisible();
+  await expect(page.getByText('Aktualisiert am 17. Oktober 2026')).toBeVisible();
 
   await page.goto('/fr/docs');
-  await expect(page.getByText('2 guides', { exact: true })).toBeVisible();
+  await expect(page.getByText('6 guides', { exact: true })).toBeVisible();
 
   await page.goto('/es/docs/making-it-yours');
-  await expect(page.getByText('Actualizado el 12 de octubre de 2026')).toBeVisible();
+  await expect(page.getByText('Actualizado el 17 de octubre de 2026')).toBeVisible();
 });
 
 test('an unknown page returns a localized 404', async ({ page }) => {

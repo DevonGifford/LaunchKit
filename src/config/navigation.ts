@@ -5,7 +5,9 @@ type NavigationLink = { key: NavigationKey; href: string };
 
 // Links that appear in more than one list, defined once.
 const docs: NavigationLink = { key: 'docs', href: '/docs' };
+const pricing: NavigationLink = { key: 'pricing', href: '/pricing' };
 const contact: NavigationLink = { key: 'contact', href: '/contact' };
+// Pages that don't exist yet point at the coming-soon page until they do.
 const privacy: NavigationLink = { key: 'privacy', href: '/privacy' };
 const terms: NavigationLink = { key: 'terms', href: '/terms' };
 
@@ -14,19 +16,20 @@ const terms: NavigationLink = { key: 'terms', href: '/terms' };
  * (`Navigation.<key>`); hrefs are locale-less — the i18n Link adds the prefix.
  */
 export const mainNavigation: readonly NavigationLink[] = [
-  { key: 'home', href: '/' },
+  { key: 'product', href: '/' },
+  { key: 'examples', href: '/examples' },
+  pricing,
   docs,
-  contact,
 ];
 
 /** The call to action at the end of the wide header. */
-export const headerAction: NavigationLink = { key: 'getStarted', href: '/docs/getting-started' };
+export const headerAction: NavigationLink = { key: 'getInContact', href: '/contact' };
 
 /**
  * Grouped footer links, shared by every footer variant. Headings are
  * `Footer.groups.<key>` messages; a `wide` group spans two columns from 768px,
- * its links flowing down both. Routes that don't exist yet are placeholders for
- * the project to add or remove.
+ * its links flowing down both. Pages that don't exist yet point at the
+ * coming-soon page, for the project to add or remove.
  */
 export const footerNavigation: ReadonlyArray<{
   key: keyof Messages['Footer']['groups'];
@@ -35,20 +38,20 @@ export const footerNavigation: ReadonlyArray<{
 }> = [
   {
     key: 'company',
-    links: [{ key: 'about', href: '/about' }, contact, privacy, terms],
+    links: [{ key: 'about', href: '/coming-soon' }, contact, privacy, terms],
   },
   {
     key: 'resources',
     wide: true,
     links: [
       { key: 'features', href: '/#included' },
-      { key: 'pricing', href: '/pricing' },
-      { key: 'roadmap', href: '/roadmap' },
-      { key: 'showcase', href: '/#adapt' },
+      pricing,
+      { key: 'roadmap', href: '/coming-soon' },
+      { key: 'examples', href: '/examples' },
       docs,
-      { key: 'storybook', href: '/storybook' },
-      { key: 'changelog', href: '/changelog' },
-      { key: 'faq', href: '/faq' },
+      { key: 'storybook', href: '/coming-soon' },
+      { key: 'changelog', href: '/coming-soon' },
+      { key: 'faq', href: '/#faq' },
     ],
   },
 ];

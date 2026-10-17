@@ -505,8 +505,14 @@ export const currencyCodeSchema = z.enum(['GBP', 'EUR', 'USD', 'ZAR']);
 export const pricingSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('pricing'),
+  /** Shown only with a title. */
   eyebrow: text.optional(),
-  title: text,
+  /**
+   * Optional, so a page's hero can introduce the plans; a visually hidden
+   * heading takes its place.
+   */
+  title: text.optional(),
+  /** Shown only with a title. */
   description: text.optional(),
   /** Currencies offered in the selector, in order; the first (required) is the default. */
   currencies: z.tuple([currencyCodeSchema], currencyCodeSchema),
@@ -674,6 +680,22 @@ export const docFrontmatterSchema = z.object({
   updated: z.iso.date(),
   /** Position in the docs index; lower comes first. */
   order: z.coerce.number().int().nonnegative(),
+  /** What the page covers, above the text: short enough to read in under 20 seconds. */
+  summary: text.optional(),
+  /**
+   * Slugs of the documents to suggest at the end, comma-separated. Without
+   * them, the documents that follow in `order` are suggested.
+   */
+  next: z
+    .string()
+    .optional()
+    .transform(
+      (slugs) =>
+        slugs
+          ?.split(',')
+          .map((slug) => slug.trim())
+          .filter(Boolean) ?? [],
+    ),
 });
 
 export type DocFrontmatter = z.infer<typeof docFrontmatterSchema>;

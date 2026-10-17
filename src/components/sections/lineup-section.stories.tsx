@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { home } from '@/content/en/pages/home';
+import { homeV1 } from '@/content/en/pages/home-v1';
 import { findSection } from '@/lib/content/pages';
 import { LineupSection } from './lineup-section';
 
@@ -7,13 +7,13 @@ const meta = {
   title: 'Sections/Lineup',
   component: LineupSection,
   parameters: { layout: 'fullscreen' },
-  args: findSection(home, 'lineup'),
+  args: findSection(homeV1, 'lineup'),
 } satisfies Meta<typeof LineupSection>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** The homepage use cases, rendered from src/content/en/pages/home.ts. */
+/** The previous homepage's use cases, rendered from src/content/en/pages/home-v1.ts. */
 export const Default: Story = {};
 
 export const Tablet: Story = { tags: ['!autodocs'], globals: { viewport: { value: 'tablet' } } };

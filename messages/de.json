@@ -15,14 +15,14 @@
     "menuDescription": "Seitennavigation und Einstellungen"
   },
   "Navigation": {
-    "home": "Start",
+    "product": "Produkt",
+    "examples": "Beispiele",
     "docs": "Dokumentation",
     "contact": "Kontakt",
-    "getStarted": "Loslegen",
+    "getInContact": "Kontakt aufnehmen",
     "features": "Funktionen",
     "pricing": "Preise",
     "roadmap": "Roadmap",
-    "showcase": "Beispiele",
     "storybook": "Storybook",
     "changelog": "Änderungen",
     "faq": "FAQ",
@@ -58,11 +58,23 @@
   },
   "Docs": {
     "title": "Dokumentation",
-    "description": "Anleitungen, um ein neues Projekt auf Basis von LaunchKit zu starten und anzupassen.",
+    "description": "Anleitungen und Artikel zum Bauen, Starten und Weiterentwickeln einer Website mit LaunchKit.",
     "count": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
     "updated": "Aktualisiert am {date, date, long}",
+    "readingTime": "{minutes} Min. Lesezeit",
+    "summaryLabel": "KI-Zusammenfassung",
+    "summaryIntro": "Auf dieser Seite finden Sie",
     "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
-    "allGuides": "Alle Anleitungen"
+    "allGuides": "Alle Anleitungen",
+    "whereNext": "Weiterlesen",
+    "cta": {
+      "title": "Bereit loszulegen?",
+      "description": "Folgen Sie dem Schnellstart, und Ihre Website läuft in wenigen Minuten, oder schreiben Sie uns, und wir bauen sie mit Ihnen.",
+      "quickstart": "Zum Schnellstart"
+    }
+  },
+  "Legal": {
+    "fallbackNotice": "Diese Seite ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt."
   },
   "ContactForm": {
     "requiredNote": "Alle Felder sind Pflichtfelder.",

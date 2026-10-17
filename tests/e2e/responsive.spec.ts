@@ -18,6 +18,31 @@ test.describe('320px wide screens', () => {
   }
 });
 
+// The header keeps its menu button below 1024px, where its full row would be
+// wider than the screen in the longer languages.
+for (const { width, inline } of [
+  { width: 768, inline: false },
+  { width: 1024, inline: true },
+]) {
+  test.describe(`${width}px wide screens`, () => {
+    test.use({ viewport: { width, height: 900 } });
+
+    for (const locale of locales) {
+      test(`the /${locale} header fits ${inline ? 'inline' : 'behind the menu button'}`, async ({
+        page,
+        isMobile,
+      }) => {
+        test.skip(isMobile, 'Runs once, in the desktop project');
+        await page.goto(localized(locale, '/'));
+        const nav = page.getByRole('banner').getByRole('navigation');
+        if (inline) await expect(nav).toBeVisible();
+        else await expect(nav).toBeHidden();
+        expect(await horizontalOverflow(page)).toBe(0);
+      });
+    }
+  });
+}
+
 test('desktop shows inline navigation; mobile uses the menu button', async ({ page, isMobile }) => {
   await page.goto('/en');
   const header = page.getByRole('banner');

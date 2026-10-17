@@ -15,14 +15,14 @@
     "menuDescription": "Navegación del sitio y preferencias"
   },
   "Navigation": {
-    "home": "Inicio",
+    "product": "Producto",
+    "examples": "Ejemplos",
     "docs": "Documentación",
     "contact": "Contacto",
-    "getStarted": "Empezar",
+    "getInContact": "Ponte en contacto",
     "features": "Funciones",
     "pricing": "Precios",
     "roadmap": "Hoja de ruta",
-    "showcase": "Ejemplos",
     "storybook": "Storybook",
     "changelog": "Novedades",
     "faq": "Preguntas frecuentes",
@@ -58,11 +58,23 @@
   },
   "Docs": {
     "title": "Documentación",
-    "description": "Guías para empezar un proyecto nuevo a partir de LaunchKit y hacerlo tuyo.",
+    "description": "Guías y artículos para crear, lanzar y hacer crecer un sitio web con LaunchKit.",
     "count": "{count, plural, one {# guía} other {# guías}}",
     "updated": "Actualizado el {date, date, long}",
+    "readingTime": "{minutes} min de lectura",
+    "summaryLabel": "Resumen ejecutivo con IA",
+    "summaryIntro": "En esta página encontrarás",
     "fallbackNotice": "Esta guía aún no está disponible en {language}, así que se muestra en {fallbackLanguage}.",
-    "allGuides": "Todas las guías"
+    "allGuides": "Todas las guías",
+    "whereNext": "Qué leer después",
+    "cta": {
+      "title": "¿Listo para empezar?",
+      "description": "Sigue la guía de inicio y tendrás un sitio funcionando en minutos, o escríbenos y lo construimos contigo.",
+      "quickstart": "Abrir la guía de inicio"
+    }
+  },
+  "Legal": {
+    "fallbackNotice": "Esta página aún no está disponible en {language}, así que se muestra en {fallbackLanguage}."
   },
   "ContactForm": {
     "requiredNote": "Todos los campos son obligatorios.",

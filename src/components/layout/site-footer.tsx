@@ -85,8 +85,9 @@ export async function SiteFooter({
  * The brand, a column per group, then the contact details and social links: in
  * that order on phones, with the groups paired. From 768px the contact details
  * and social links sit beside the brand, in line with the last group's column
- * below. From 1024px the brand, groups and contact details share one row, with a
- * hairline before the details, and the social links move under the brand.
+ * below. From 1280px, where they fit in every language, the brand, groups and
+ * contact details share one row, with a hairline before the details, and the
+ * social links move under the brand.
  */
 function FullFooter({
   tagline,
@@ -104,45 +105,44 @@ function FullFooter({
     <footer className="border-t">
       <Container
         className={cn(
-          'grid gap-y-12 py-14 md:grid-cols-3 md:gap-x-10 md:py-16 lg:grid-rows-[auto_1fr] lg:gap-x-10 lg:gap-y-6',
+          frame,
+          'grid gap-y-12 py-14 md:grid-cols-3 md:gap-x-10 md:py-16 xl:grid-rows-[auto_1fr] xl:gap-x-10 xl:gap-y-6',
+          // The groups and details take the width their links need; the brand
+          // takes the rest, never less than its logo and a readable line.
           reachable
-            ? 'lg:grid-cols-[minmax(0,1fr)_auto_auto]'
-            : 'lg:grid-cols-[minmax(0,1fr)_auto]',
+            ? 'xl:grid-cols-[minmax(20rem,1fr)_auto_auto]'
+            : 'xl:grid-cols-[minmax(20rem,1fr)_auto]',
         )}
       >
         <FooterBrand
           tagline={tagline}
           description={description}
-          className="md:col-span-2 lg:col-start-1 lg:col-end-2 lg:row-start-1"
+          className="md:col-span-2 xl:col-start-1 xl:col-end-2 xl:row-start-1"
         />
         <ColumnNav
           groups={groups}
           labels={labels}
           languages={false}
           className={cn(
-            'md:col-span-3 md:grid-cols-subgrid md:gap-x-10 lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-3 lg:grid-cols-[repeat(3,auto)] lg:content-start lg:gap-x-10',
-            reachable && 'lg:border-e lg:pe-10',
+            'md:col-span-3 md:grid-cols-subgrid md:gap-x-10 xl:col-start-2 xl:col-end-3 xl:row-start-1 xl:row-end-3 xl:grid-cols-[repeat(3,auto)] xl:content-start xl:gap-x-10',
+            reachable && 'xl:border-e xl:pe-10',
           )}
         />
         {reachable && (
-          // From 1024px the wrapper steps aside, so the details and links can part.
-          <div className="space-y-4 md:col-start-3 md:row-start-1 md:self-center lg:contents">
-            {/* From 1024px the details sit under a heading, spread down the rest of the column. */}
+          // From 1280px the wrapper steps aside, so the details and links can part.
+          <div className="space-y-4 md:col-start-3 md:row-start-1 md:self-center xl:contents">
+            {/* From 1280px the details sit under a heading in a column of their own. */}
             {hasDetails(contact) && (
-              <div className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3 lg:flex lg:flex-col lg:gap-5">
-                <ColumnHeading className="hidden lg:block">{labels.contactHeading}</ColumnHeading>
+              <div className="xl:col-start-3 xl:col-end-4 xl:row-start-1 xl:row-end-3 xl:flex xl:flex-col xl:gap-5">
+                <ColumnHeading className="hidden xl:block">{labels.contactHeading}</ColumnHeading>
                 {/* The top padding lines the email up with the first links, which sit in taller targets. */}
-                <FooterContact
-                  contact={contact}
-                  labels={labels.contact}
-                  className="lg:flex-1 lg:content-between lg:pt-2"
-                />
+                <FooterContact contact={contact} labels={labels.contact} className="xl:pt-2" />
               </div>
             )}
             <SocialLinks
               links={social}
               label={labels.social}
-              className="lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:self-start"
+              className="xl:col-start-1 xl:col-end-2 xl:row-start-2 xl:self-start"
             />
           </div>
         )}
@@ -159,7 +159,7 @@ function FullFooter({
 function MobileFooter({ tagline, copyright, labels, groups, legal }: FooterContent) {
   return (
     <footer className="border-t">
-      <Container className="space-y-10 py-10">
+      <Container className={cn(frame, 'space-y-10 py-10')}>
         <FooterBrand tagline={tagline} size="sm" />
         <ColumnNav groups={groups} labels={labels} />
       </Container>
@@ -167,6 +167,9 @@ function MobileFooter({ tagline, copyright, labels, groups, legal }: FooterConte
     </footer>
   );
 }
+
+// Wider than the page's sections, so the one-row layout has room in every language.
+const frame = 'max-w-[88rem]';
 
 // Footer links read a step brighter than the muted text around them.
 const link = 'text-foreground/80';
@@ -210,8 +213,8 @@ function hasDetails({ email, phone, whatsapp, address }: SiteContact) {
 /**
  * The contact details in one compact column: email, phone, WhatsApp, then the
  * address on three lines. Smaller than the text around them, and a step larger
- * from 1024px, where they have a column of their own. Only the details that are
- * set appear.
+ * and further apart from 1280px, where they have a column of their own. Only the
+ * details that are set appear.
  */
 function FooterContact({
   contact,
@@ -226,7 +229,7 @@ function FooterContact({
   const { email, phone, whatsapp, address } = contact;
 
   return (
-    <dl className={cn('grid gap-y-2.5 text-sm lg:gap-y-3 lg:text-base', className)}>
+    <dl className={cn('grid gap-y-2.5 text-sm xl:gap-y-4 xl:text-base', className)}>
       {email && (
         <ContactItem icon={<SendIcon />} label={labels.email}>
           <ContactLink href={`mailto:${email}`}>{email}</ContactLink>
@@ -267,7 +270,7 @@ function ContactItem({
 }) {
   return (
     <div className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 leading-normal text-foreground/80">
-      <dt className="flex h-[1lh] items-center text-accent [&_svg]:size-4 lg:[&_svg]:size-5">
+      <dt className="flex h-[1lh] items-center text-accent [&_svg]:size-4 xl:[&_svg]:size-5">
         {icon}
         <span className="sr-only">{label}</span>
       </dt>
@@ -303,7 +306,7 @@ function SocialLinks({
     // Pulled left so the first mark lines up with the text above it.
     <ul aria-label={label} className={cn('-ms-2 flex flex-wrap gap-2', className)}>
       {links.map(({ network, href }) => (
-        <li key={href}>
+        <li key={network}>
           <a
             href={href}
             aria-label={brandName(network)}
@@ -401,7 +404,12 @@ function ColumnHeading({ className, children }: { className?: string; children: 
   );
 }
 
-/** The copyright line and legal links under a full-width rule; on phones the links come last. */
+/**
+ * The copyright line and legal links under a full-width rule, the links below
+ * the copyright: one per line on phones, then in a row with hairlines between
+ * them. From 1024px the two share a row, the links wrapping under the
+ * copyright again if a translation leaves them too little room.
+ */
 function FooterBottom({
   copyright,
   label,
@@ -413,13 +421,18 @@ function FooterBottom({
 }) {
   return (
     <div className="border-t">
-      <Container className="flex flex-col gap-3 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:gap-8">
-        <p>{copyright}</p>
+      <Container
+        className={cn(
+          frame,
+          'flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-6 text-sm text-muted-foreground',
+        )}
+      >
+        <p className="basis-full text-balance lg:basis-auto">{copyright}</p>
         <nav aria-label={label}>
           {/* Hairlines between the links from 640px, where they always fit on one line. */}
           <NavLinks
             items={links}
-            className="flex flex-wrap items-center gap-x-6 sm:gap-x-0 sm:[&>li]:flex sm:[&>li]:items-center sm:[&>li+li]:before:mx-5 sm:[&>li+li]:before:h-5 sm:[&>li+li]:before:w-px sm:[&>li+li]:before:bg-muted-foreground/40"
+            className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:[&>li]:flex sm:[&>li]:items-center sm:[&>li+li]:before:mx-5 sm:[&>li+li]:before:h-5 sm:[&>li+li]:before:w-px sm:[&>li+li]:before:bg-muted-foreground/40"
             linkClassName="text-sm"
           />
         </nav>

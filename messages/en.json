@@ -15,14 +15,14 @@
     "menuDescription": "Site navigation and preferences"
   },
   "Navigation": {
-    "home": "Home",
+    "product": "Product",
+    "examples": "Examples",
     "docs": "Docs",
     "contact": "Contact",
-    "getStarted": "Get started",
+    "getInContact": "Get in Contact",
     "features": "Features",
     "pricing": "Pricing",
     "roadmap": "Roadmap",
-    "showcase": "Showcase",
     "storybook": "Storybook",
     "changelog": "Changelog",
     "faq": "FAQ",
@@ -58,11 +58,23 @@
   },
   "Docs": {
     "title": "Documentation",
-    "description": "Guides for starting a new project from LaunchKit and making it your own.",
+    "description": "Guides and articles on building, launching and growing a website with LaunchKit.",
     "count": "{count, plural, one {# guide} other {# guides}}",
     "updated": "Updated {date, date, long}",
+    "readingTime": "{minutes} min read",
+    "summaryLabel": "AI executive summary",
+    "summaryIntro": "On this page you’ll find",
     "fallbackNotice": "This guide isn’t available in {language} yet, so it’s shown in {fallbackLanguage}.",
-    "allGuides": "All guides"
+    "allGuides": "All guides",
+    "whereNext": "Where to go next",
+    "cta": {
+      "title": "Ready to start building?",
+      "description": "Follow the quickstart and have a site running in minutes, or get in touch and we’ll build it with you.",
+      "quickstart": "Open the quickstart"
+    }
+  },
+  "Legal": {
+    "fallbackNotice": "This page isn’t available in {language} yet, so it’s shown in {fallbackLanguage}."
   },
   "ContactForm": {
     "requiredNote": "All fields are required.",

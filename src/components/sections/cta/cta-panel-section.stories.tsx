@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { home } from '@/content/en/pages/home';
+import { homeV1 } from '@/content/en/pages/home-v1';
 import { findSection } from '@/lib/content/pages';
 import { CtaPanelSection } from './cta-panel-section';
 
@@ -7,8 +7,8 @@ const meta = {
   title: 'Sections/CTA/Panel',
   component: CtaPanelSection,
   parameters: { layout: 'fullscreen' },
-  // The homepage's closing invitation, shown as a panel.
-  args: { ...findSection(home, 'cta-band'), type: 'cta-panel' },
+  // The previous homepage's closing invitation, shown as a panel.
+  args: { ...findSection(homeV1, 'cta-band'), type: 'cta-panel' },
 } satisfies Meta<typeof CtaPanelSection>;
 
 export default meta;

@@ -167,6 +167,8 @@
 @layer base {
   :root {
     color-scheme: light;
+    /* Anchors and keyboard focus land clear of the sticky header (h-16). */
+    scroll-padding-top: 5rem;
   }
 
   .dark {
@@ -263,6 +265,14 @@
   }
 }
 
+/*
+ * Page transitions: src/app/[locale]/template.tsx cross-fades the page content
+ * on navigation. Clicks pass through to the new page while it plays.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -271,5 +281,12 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

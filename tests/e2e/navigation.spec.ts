@@ -1,14 +1,19 @@
 import { expect, test } from '@playwright/test';
 
-test('the homepage renders its sections in content order', async ({ page }) => {
+// The previous homepage, kept at /home-v1. The current homepage has no
+// content-specific end-to-end tests yet, while its content settles.
+test('the previous homepage renders its sections in content order, out of search', async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
   });
 
-  await page.goto('/en');
-  await expect(page).toHaveTitle('LaunchKit — A reusable Next.js foundation');
+  await page.goto('/en/home-v1');
+  await expect(page).toHaveTitle('A reusable Next.js foundation · LaunchKit');
+  await expect(page.locator('head meta[name="robots"]')).toHaveAttribute('content', 'noindex');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Built for what’s next.');
 
   const sectionIds = await page
@@ -22,20 +27,25 @@ test('the homepage renders its sections in content order', async ({ page }) => {
     'developer-experience',
     'begin',
   ]);
+  expect(errors).toEqual([]);
+});
 
+test('the previous homepage’s call to action leads to the getting-started guide', async ({
+  page,
+}) => {
+  await page.goto('/en/home-v1');
+  await page.getByRole('link', { name: 'Get started' }).click();
+  await expect(page).toHaveURL(/\/en\/docs\/getting-started$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('LaunchKit Quickstart');
+});
+
+test('the homepage describes the site in structured data', async ({ page }) => {
+  await page.goto('/en');
   const structuredData = await page.locator('script[type="application/ld+json"]').textContent();
   expect(JSON.parse(structuredData ?? '{}')).toMatchObject({
     '@type': 'WebSite',
     inLanguage: 'en',
   });
-  expect(errors).toEqual([]);
-});
-
-test('the primary call to action leads to the getting-started guide', async ({ page }) => {
-  await page.goto('/en');
-  await page.getByRole('link', { name: 'Get started' }).click();
-  await expect(page).toHaveURL(/\/en\/docs\/getting-started$/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Getting started');
 });
 
 test('main navigation marks the current page', async ({ page, isMobile }) => {
@@ -45,7 +55,34 @@ test('main navigation marks the current page', async ({ page, isMobile }) => {
     : page.getByRole('banner').getByRole('navigation', { name: 'Main' });
 
   await expect(nav.getByRole('link', { name: 'Docs' })).toHaveAttribute('aria-current', 'page');
-  await expect(nav.getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current');
+  await expect(nav.getByRole('link', { name: 'Product' })).not.toHaveAttribute('aria-current');
+});
+
+test('the header lists the main sections and leads to the contact page', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, 'The header call to action shows from md up');
+  await page.goto('/en');
+  const header = page.getByRole('banner');
+
+  await expect(header.getByRole('navigation', { name: 'Main' }).getByRole('link')).toHaveText([
+    'Product',
+    'Examples',
+    'Pricing',
+    'Docs',
+  ]);
+  await header.getByRole('link', { name: 'Get in Contact' }).click();
+  await expect(page).toHaveURL(/\/en\/contact$/);
+});
+
+test('placeholder social links lead to the coming-soon page in the current language', async ({
+  page,
+}) => {
+  await page.goto('/fr');
+  await page.getByRole('contentinfo').getByRole('link', { name: 'GitHub' }).click();
+  await expect(page).toHaveURL(/\/fr\/coming-soon$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cette page arrive bientôt');
 });
 
 test.describe('mobile menu', () => {
@@ -57,7 +94,7 @@ test.describe('mobile menu', () => {
 
     const menu = page.getByRole('dialog', { name: 'Menu' });
     await expect(menu).toBeVisible();
-    await menu.getByRole('link', { name: 'Contact' }).tap();
+    await menu.getByRole('link', { name: 'Get in Contact' }).tap();
 
     await expect(page).toHaveURL(/\/en\/contact$/);
     await expect(menu).toBeHidden();

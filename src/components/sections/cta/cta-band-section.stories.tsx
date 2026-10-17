@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { home } from '@/content/en/pages/home';
+import { homeV1 } from '@/content/en/pages/home-v1';
 import { findSection } from '@/lib/content/pages';
 import { CtaBandSection } from './cta-band-section';
 
@@ -7,7 +7,7 @@ const meta = {
   title: 'Sections/CTA/Band',
   component: CtaBandSection,
   parameters: { layout: 'fullscreen' },
-  args: findSection(home, 'cta-band'),
+  args: findSection(homeV1, 'cta-band'),
 } satisfies Meta<typeof CtaBandSection>;
 
 export default meta;
