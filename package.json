@@ -1,6 +1,6 @@
 {
   "name": "launchkit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "description": "A reusable Next.js foundation for building and launching ideas.",
