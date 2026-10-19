@@ -60,7 +60,6 @@ export function SearchDialog({
   onNavigate: (href: string) => void;
 }) {
   const t = useTranslations('Search');
-  const tCommon = useTranslations('Common');
   const [query, setQuery] = useState('');
   const prepared = useMemo(() => (index ? prepareIndex(index) : []), [index]);
 
@@ -116,9 +115,8 @@ export function SearchDialog({
       }}
       title={t('title')}
       description={t('description')}
-      closeLabel={tCommon('close')}
       // Near the top on phones, so the on-screen keyboard leaves the results in view.
-      className="top-4 sm:top-[12dvh] sm:max-w-xl"
+      className="top-4 ring-3 ring-accent/40 sm:top-[12dvh] sm:max-w-xl"
       onOpenAutoFocus={() => {
         opener.current =
           document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -137,13 +135,11 @@ export function SearchDialog({
         onValueChange={setSelected}
         label={t('title')}
       >
-        <div className="pr-10">
-          <CommandInput
-            placeholder={t('placeholder', { site: siteName })}
-            value={query}
-            onValueChange={setQuery}
-          />
-        </div>
+        <CommandInput
+          placeholder={t('placeholder', { site: siteName })}
+          value={query}
+          onValueChange={setQuery}
+        />
         {/* An empty listbox isn't valid, so it hides while the message below speaks instead. */}
         <CommandList
           label={t('results')}

@@ -16,6 +16,8 @@ export function ThemeToggle({ label }: { label: string }) {
       type="button"
       variant="ghost"
       size="icon"
+      // Muted like the locale switcher and search beside it; full strength on hover.
+      className="text-muted-foreground hover:text-foreground"
       aria-label={label}
       title={label}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
