@@ -93,11 +93,40 @@ describe('search', () => {
     expect(hrefs('accessibility pricing')).toEqual([]);
   });
 
-  it('keeps a page to two entries, and the list to its limit', () => {
-    expect(hrefs('server')).toEqual([
-      '/docs/getting-started#run-it-locally',
-      '/docs/getting-started#where-things-live',
-    ]);
+  it('returns each page once, led by its best-matching entry', () => {
+    // Both Quickstart sections mention the server equally; the tie goes the same way every time.
+    expect(hrefs('server')).toEqual(['/docs/getting-started#run-it-locally']);
+
+    // The heading match beats the guide's own description, so the result links to that section.
+    const [designSystem] = search(index, 'accessibility');
+    expect(designSystem?.entry.href).toBe('/docs/component-library#accessibility');
+    expect(designSystem?.title.map((segment) => segment.text).join('')).toBe(
+      'LaunchKit Design System',
+    );
+    expect(designSystem?.heading?.find((segment) => segment.match)?.text).toBe('Accessibility');
+    expect(
+      hrefs('accessibility').filter((href) => href.startsWith('/docs/component-library')),
+    ).toHaveLength(1);
+  });
+
+  it('ranks a page by its best match, not by how often the words recur', () => {
+    const many = [
+      entry({ href: '/docs/a', title: 'Guide A', text: '' }),
+      ...[1, 2, 3, 4].map((n) =>
+        entry({
+          href: `/docs/a#part-${n}`,
+          title: 'Guide A',
+          heading: `Part ${n}`,
+          text: 'tokens tokens',
+        }),
+      ),
+      entry({ href: '/docs/b', title: 'Tokens', text: '' }),
+    ];
+    const ranked = search(prepareIndex({ locale: 'en', entries: many }), 'tokens');
+    expect(ranked.map((result) => result.entry.href)).toEqual(['/docs/b', '/docs/a#part-1']);
+  });
+
+  it('keeps the list to its limit', () => {
     expect(hrefs('the', { limit: 1 })).toHaveLength(1);
   });
 
@@ -141,8 +170,21 @@ describe('excerpt', () => {
       .map((segment) => segment.text)
       .join('');
     expect(passage.startsWith('…')).toBe(true);
-    expect(passage.endsWith('…')).toBe(true);
     expect(passage).toContain('The theme tokens live in theme.css.');
+    // Cut mid-sentence it trails off; cut after a full stop it doesn't need to.
+    expect(passage).toMatch(/(…|[.!?])$/);
+    expect(passage).not.toMatch(/[.!?]…$/);
+  });
+
+  it('trails off only when it stops mid-sentence', () => {
+    const passage = (sentence: string, length: number) =>
+      excerpt(`The tokens live in theme.css. ${sentence}`, ['tokens'], length)
+        .map((segment) => segment.text)
+        .join('');
+    expect(passage('Everything else follows them.', 30)).toBe('The tokens live in theme.css.');
+    expect(passage('Everything else follows them', 40)).toBe(
+      'The tokens live in theme.css. Everything…',
+    );
   });
 });
 

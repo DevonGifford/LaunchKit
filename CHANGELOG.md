@@ -87,7 +87,8 @@ need to take when merging it.
   that and on phones), opened with ⌘K on Apple devices and Ctrl+K elsewhere,
   and a command-menu dialog (shadcn/ui Command on `cmdk`) with results grouped
   into pages, documentation and legal pages, matching words highlighted and
-  keyboard navigation. Results link to the page or straight to the section.
+  keyboard navigation. Each page or guide appears once, with the section that
+  matched best beneath its title, and links straight to that section.
   When nothing matches, it suggests a broader word and offers the contact page.
 - A search index per locale at `/<locale>/search-index.json`, built at build
   time from the existing content (pages and their sections, guides and legal

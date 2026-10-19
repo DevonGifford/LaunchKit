@@ -11,6 +11,10 @@
  * outranks body text. A section's page title counts only a little: it says
  * where the section is, not what it's about. Ties break on fixed fields, so
  * the same query always gives the same order.
+ *
+ * The index holds every page and section, so a query can find the passage it
+ * belongs to; results come back one per page, each led by its best-matching
+ * entry. A page ranks by that best match, never by how often the words recur.
  */
 
 /** What an entry is: a structured page, a guide or a legal page. */
@@ -37,9 +41,12 @@ export type SearchIndex = { locale: string; entries: SearchEntry[] };
 export type Segment = { text: string; match: boolean };
 
 export type SearchResult = {
+  /** The page's best-matching entry: the page itself, or one of its sections. */
   entry: SearchEntry;
   score: number;
+  /** The page's title. */
   title: Segment[];
+  /** The section that matched best, when that wasn't the page itself. */
   heading?: Segment[];
   /** Where the query matched in the body or description, or the start of either. */
   excerpt?: Segment[];
@@ -175,7 +182,7 @@ export function highlight(text: string, terms: string[]): Segment[] {
  * A short passage of `text` around the first word `terms` match, trimmed to
  * whole words; or its start, if nothing matches.
  */
-export function excerpt(text: string, terms: string[], length = 160): Segment[] {
+export function excerpt(text: string, terms: string[], length = 120): Segment[] {
   const { normalized, positions } = normalizeWithPositions(text);
   const first = Math.min(...terms.flatMap((term) => wordStarts(normalized, term).slice(0, 1)));
   const at = Number.isFinite(first) ? (positions[first] ?? 0) : 0;
@@ -186,18 +193,22 @@ export function excerpt(text: string, terms: string[], length = 160): Segment[] 
   if (end < text.length)
     end = text.lastIndexOf(' ', end) > start ? text.lastIndexOf(' ', end) : end;
 
-  const passage = `${start > 0 ? '…' : ''}${text.slice(start, end).trim()}${end < text.length ? '…' : ''}`;
+  const body = text.slice(start, end).trim();
+  // A cut after a full sentence needs no ellipsis: "clean." rather than "clean.…".
+  const cut = end < text.length && !/[.!?]$/.test(body);
+  const passage = `${start > 0 ? '…' : ''}${body}${cut ? '…' : ''}`;
   return highlight(passage, terms);
 }
 
 /**
- * Entries matching `query`, best first. A page contributes at most `perPage`
- * entries (itself or its sections), so one long guide can't fill the list.
+ * Pages matching `query`, best first: one result per page, represented by its
+ * best-matching entry, so a guide that mentions a word in every section still
+ * appears once, and links to the section where it matched best.
  */
 export function search(
   index: Prepared[],
   query: string,
-  { limit = 12, perPage = 2 }: { limit?: number; perPage?: number } = {},
+  { limit = 12 }: { limit?: number } = {},
 ): SearchResult[] {
   const terms = queryTerms(query);
   if (terms.length === 0) return [];
@@ -208,13 +219,13 @@ export function search(
     .filter((result) => result.score > 0)
     .sort(compare);
 
-  const perPageCount = new Map<string, number>();
+  // Ranked best first, so the first entry seen for a page is its best match.
+  const seen = new Set<string>();
   const results: SearchResult[] = [];
   for (const { entry, score: points } of ranked) {
     const page = entry.href.split('#')[0] ?? entry.href;
-    const count = perPageCount.get(page) ?? 0;
-    if (count >= perPage) continue;
-    perPageCount.set(page, count + 1);
+    if (seen.has(page)) continue;
+    seen.add(page);
 
     const body = [entry.text, entry.description ?? ''].find((field) =>
       terms.some((term) => wordStarts(normalize(field), term).length > 0),

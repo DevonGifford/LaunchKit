@@ -110,6 +110,18 @@ test('ranks results as you type, and Enter opens the best one', async () => {
     .toEqual([['/docs/component-library#storybook-the-workbench']]);
 });
 
+test('shows each guide once, with the section that matched beneath its title', async () => {
+  await renderSearch();
+  await page.getByRole('button', { name: 'Search…' }).click();
+  await userEvent.type(input(), 'storybook');
+  await expect.poll(selectedText).toContain('Storybook, the workbench');
+
+  const options = dialog().getByRole('group', { name: 'Documentation' }).getByRole('option');
+  const texts = options.elements().map((option) => option.textContent ?? '');
+  expect(texts[0]?.startsWith('LaunchKit Design SystemStorybook, the workbench')).toBe(true);
+  expect(texts.filter((text) => text.startsWith('LaunchKit Design System'))).toHaveLength(1);
+});
+
 test('arrow keys choose another result', async () => {
   await renderSearch();
   await page.getByRole('button', { name: 'Search…' }).click();

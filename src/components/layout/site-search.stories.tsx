@@ -53,7 +53,8 @@ export const Open: Story = {
 
 /**
  * Results match words anywhere in the page, grouped by kind, best first, with
- * the matching words marked. A section shows its page beneath its heading.
+ * the matching words marked. Each page or guide appears once, with the section
+ * that matched best beneath its title; choosing it opens that section.
  */
 export const Results: Story = {
   tags: ['!autodocs'],

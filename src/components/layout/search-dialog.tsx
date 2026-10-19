@@ -40,7 +40,15 @@ const icons: Record<SearchKind, ComponentType<SVGProps<SVGSVGElement>>> = {
 };
 
 /** A row in the list: a result, or a suggestion before anything is typed. */
-type Row = { entry: SearchEntry; title: Segment[]; context?: string; excerpt?: Segment[] };
+type Row = {
+  entry: SearchEntry;
+  /** The page or guide: where the result goes. */
+  title: Segment[];
+  /** The section inside it that matched best, when that wasn't the page itself. */
+  section?: Segment[];
+  /** Why it matched. */
+  excerpt?: Segment[];
+};
 
 /**
  * A whole website page (not one of its sections): a destination, shown by
@@ -93,8 +101,8 @@ export function SearchDialog({
     }
     return search(prepared, query).map((result) => ({
       entry: result.entry,
-      title: result.heading ?? result.title,
-      context: result.heading ? result.entry.title : undefined,
+      title: result.title,
+      section: result.heading,
       excerpt: isDestination(result.entry) ? undefined : result.excerpt,
     }));
   }, [index, prepared, query]);
@@ -230,7 +238,7 @@ function SearchMiss({
 function SearchRow({ row, onSelect }: { row: Row; onSelect: () => void }) {
   const Icon = icons[row.entry.kind];
   // A single line centres its icon; longer rows align it with their first line.
-  const singleLine = !row.context && !row.excerpt;
+  const singleLine = !row.section && !row.excerpt;
   return (
     <CommandItem
       value={row.entry.href}
@@ -238,13 +246,18 @@ function SearchRow({ row, onSelect }: { row: Row; onSelect: () => void }) {
       className={cn('gap-3', singleLine ? 'items-center py-2' : 'items-start py-2.5')}
     >
       <Icon aria-hidden="true" className={cn('text-muted-foreground', !singleLine && 'mt-0.5')} />
-      <span className="min-w-0 flex-1 space-y-0.5" lang={row.entry.lang}>
+      {/* Where it goes first, then the section that matched inside it, then why. */}
+      <span className="min-w-0 flex-1" lang={row.entry.lang}>
         <span className="block font-medium text-foreground">
           <Highlighted segments={row.title} />
         </span>
-        {row.context && <span className="block text-xs text-muted-foreground">{row.context}</span>}
+        {row.section && (
+          <span className="mt-0.5 block truncate text-[0.8125rem] font-medium text-muted-foreground">
+            <Highlighted segments={row.section} />
+          </span>
+        )}
         {row.excerpt && (
-          <span className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+          <span className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
             <Highlighted segments={row.excerpt} />
           </span>
         )}
@@ -257,7 +270,8 @@ function SearchRow({ row, onSelect }: { row: Row; onSelect: () => void }) {
 function Highlighted({ segments }: { segments: Segment[] }) {
   return segments.map((segment, index) =>
     segment.match ? (
-      <mark key={index} className="bg-transparent font-semibold text-foreground">
+      // The accent as text: legible in both themes, and the same wherever a match shows.
+      <mark key={index} className="bg-transparent font-semibold text-accent-text">
         {segment.text}
       </mark>
     ) : (
