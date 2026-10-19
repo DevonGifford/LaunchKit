@@ -56,6 +56,36 @@
       "company": "Unternehmen"
     }
   },
+  "Consent": {
+    "title": "Ihre Privatsphäre",
+    "description": "{measuring, select, yes {Wir zählen Besuche und messen die Ladezeit der Seiten anonym, ohne Cookies von Drittanbietern. Andere Analyse- und Marketingdienste laufen nur, wenn Sie sie erlauben.} other {Analyse- und Marketingdienste laufen nur, wenn Sie sie erlauben.}} <link>Zur Datenschutzerklärung</link>.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Alle ablehnen",
+    "managePreferences": "Einstellungen verwalten",
+    "settings": "Datenschutzeinstellungen",
+    "preferences": {
+      "title": "Datenschutzeinstellungen",
+      "description": "Wählen Sie, welche optionalen Dienste auf dieser Website laufen dürfen. Sie können Ihre Wahl jederzeit unter „Datenschutzeinstellungen“ unten auf jeder Seite ändern.",
+      "save": "Einstellungen speichern",
+      "usedBy": "Genutzt von {services}.",
+      "unused": "Bisher nutzt kein Dienst dieser Website diese Kategorie.",
+      "alwaysRunning": "Immer aktiv für alle Besucher: {services}. Die Datenschutzerklärung beschreibt, was jeweils erfasst wird."
+    },
+    "categories": {
+      "necessary": {
+        "label": "Notwendig",
+        "description": "Immer aktiv. Hält die Website am Laufen und merkt sich Ihre Sprache, Darstellung und Datenschutzeinstellungen."
+      },
+      "analytics": {
+        "label": "Analyse",
+        "description": "Hilft uns zu verstehen, wie die Website genutzt wird."
+      },
+      "marketing": {
+        "label": "Marketing",
+        "description": "Misst Kampagnen und personalisiert Inhalte auf anderen Websites."
+      }
+    }
+  },
   "Docs": {
     "title": "Dokumentation",
     "description": "Anleitungen und Artikel zum Bauen, Starten und Weiterentwickeln einer Website mit LaunchKit.",

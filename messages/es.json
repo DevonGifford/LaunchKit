@@ -56,6 +56,36 @@
       "company": "Empresa"
     }
   },
+  "Consent": {
+    "title": "Tu privacidad",
+    "description": "{measuring, select, yes {Contamos las visitas y medimos la velocidad de las páginas de forma anónima, sin cookies de terceros. Otros servicios de analítica y marketing solo funcionan si los permites.} other {Los servicios de analítica y marketing solo funcionan si los permites.}} <link>Lee la política de privacidad</link>.",
+    "acceptAll": "Aceptar todo",
+    "rejectAll": "Rechazar todo",
+    "managePreferences": "Gestionar preferencias",
+    "settings": "Ajustes de privacidad",
+    "preferences": {
+      "title": "Preferencias de privacidad",
+      "description": "Elige qué servicios opcionales pueden funcionar en este sitio. Puedes cambiar tu elección en cualquier momento desde «Ajustes de privacidad», al final de cada página.",
+      "save": "Guardar preferencias",
+      "usedBy": "Servicios que lo usan: {services}.",
+      "unused": "Ningún servicio de este sitio lo usa todavía.",
+      "alwaysRunning": "Siempre en marcha para todos los visitantes: {services}. La política de privacidad explica qué recoge cada uno."
+    },
+    "categories": {
+      "necessary": {
+        "label": "Necesarias",
+        "description": "Siempre activas. Mantienen el sitio en funcionamiento y recuerdan tu idioma, tu apariencia y tus elecciones de privacidad."
+      },
+      "analytics": {
+        "label": "Analítica",
+        "description": "Nos ayuda a entender cómo se usa el sitio."
+      },
+      "marketing": {
+        "label": "Marketing",
+        "description": "Mide campañas y personaliza contenidos en otros sitios."
+      }
+    }
+  },
   "Docs": {
     "title": "Documentación",
     "description": "Guías y artículos para crear, lanzar y hacer crecer un sitio web con LaunchKit.",

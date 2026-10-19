@@ -9,6 +9,7 @@ import { Container } from '@/components/ui/container';
 import { LocaleLinks } from '@/components/ui/locale-switcher';
 import { cn } from '@/lib/utils';
 import { BrandMark, brandName } from './brand-marks';
+import { ConsentSettingsButton } from './consent-settings-button';
 import { NavLinks, type NavItem } from './nav-links';
 
 type FooterVariant = 'full' | 'mobile';
@@ -434,7 +435,11 @@ function FooterBottom({
             items={links}
             className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:[&>li]:flex sm:[&>li]:items-center sm:[&>li+li]:before:mx-5 sm:[&>li+li]:before:h-5 sm:[&>li+li]:before:w-px sm:[&>li+li]:before:bg-muted-foreground/40"
             linkClassName="text-sm"
-          />
+          >
+            <li>
+              <ConsentSettingsButton className="text-sm" />
+            </li>
+          </NavLinks>
         </nav>
       </Container>
     </div>

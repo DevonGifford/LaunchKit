@@ -4,6 +4,7 @@ import type { Preview } from '@storybook/nextjs-vite';
 import { NextIntlClientProvider } from 'next-intl';
 import { useEffect, useState, type PropsWithChildren } from 'react';
 import messages from '../messages/en.json';
+import { ConsentProvider } from '../src/components/layout/consent-provider';
 import '../src/app/globals.css';
 import { darkTheme, lightTheme } from './theme';
 
@@ -69,8 +70,10 @@ const preview: Preview = {
             'Site footer',
             'Navigation links',
             'Mobile navigation',
-            'Not found',
+            'Consent preferences',
+            'Consent prompt',
             'Coming soon',
+            'Not found',
             'Error',
           ],
           'UI',
@@ -104,9 +107,13 @@ const preview: Preview = {
       defaultTheme: 'light',
       parentSelector: 'html',
     }),
+    // The footer's privacy settings button reads consent state. With no
+    // services listed, nothing waits on consent; the consent stories add some.
     (Story) => (
       <NextIntlClientProvider locale="en" messages={messages} timeZone="UTC">
-        <Story />
+        <ConsentProvider services={[]}>
+          <Story />
+        </ConsentProvider>
       </NextIntlClientProvider>
     ),
   ],
