@@ -58,11 +58,11 @@ test('main navigation marks the current page', async ({ page, isMobile }) => {
   await expect(nav.getByRole('link', { name: 'Product' })).not.toHaveAttribute('aria-current');
 });
 
-test('the header lists the main sections and leads to the contact page', async ({
+test('the header lists the main sections, with search where the call to action was', async ({
   page,
   isMobile,
 }) => {
-  test.skip(isMobile, 'The header call to action shows from md up');
+  test.skip(isMobile, 'The header row shows from 1024px');
   await page.goto('/en');
   const header = page.getByRole('banner');
 
@@ -72,8 +72,9 @@ test('the header lists the main sections and leads to the contact page', async (
     'Pricing',
     'Docs',
   ]);
-  await header.getByRole('link', { name: 'Get in Contact' }).click();
-  await expect(page).toHaveURL(/\/en\/contact$/);
+  // The site uses the wide-search header: search replaces the call to action on desktop.
+  await expect(header.getByRole('button', { name: 'Search…' })).toBeVisible();
+  await expect(header.getByRole('link', { name: 'Get in Contact' })).toHaveCount(0);
 });
 
 test('placeholder social links lead to the coming-soon page in the current language', async ({

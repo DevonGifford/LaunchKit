@@ -6,7 +6,8 @@ type NavigationLink = { key: NavigationKey; href: string };
 // Links that appear in more than one list, defined once.
 const docs: NavigationLink = { key: 'docs', href: '/docs' };
 const pricing: NavigationLink = { key: 'pricing', href: '/pricing' };
-const contact: NavigationLink = { key: 'contact', href: '/contact' };
+/** The contact page, also offered when site search finds nothing. */
+export const contactLink: NavigationLink = { key: 'contact', href: '/contact' };
 // Pages that don't exist yet point at the coming-soon page until they do.
 const privacy: NavigationLink = { key: 'privacy', href: '/privacy' };
 const terms: NavigationLink = { key: 'terms', href: '/terms' };
@@ -38,7 +39,7 @@ export const footerNavigation: ReadonlyArray<{
 }> = [
   {
     key: 'company',
-    links: [{ key: 'about', href: '/coming-soon' }, contact, privacy, terms],
+    links: [{ key: 'about', href: '/coming-soon' }, contactLink, privacy, terms],
   },
   {
     key: 'resources',

@@ -83,9 +83,29 @@ need to take when merging it.
 - A shared long-form foundation: `Article` (title, metadata, executive summary,
   Markdown), framed by `ArticleLayout` for the legal pages and a future blog,
   and by `DocsLayout` for guides. It replaces `DocArticle`.
+- Site search: a `wide-search` header variant with a search field in place of
+  the call to action from 1024px (an icon beside the menu below that, where the
+  call to action stays in the menu), opened with ⌘K on Apple devices and Ctrl+K elsewhere,
+  and a command-menu dialog (shadcn/ui Command on `cmdk`) with results grouped
+  into pages, documentation and legal pages, matching words highlighted and
+  keyboard navigation. Each page or guide appears once, with the section that
+  matched best beneath its title, and links straight to that section.
+  When nothing matches, it suggests a broader word and offers the contact page.
+- A search index per locale at `/<locale>/search-index.json`, built at build
+  time from the existing content (pages and their sections, guides and legal
+  pages and their headings) and loaded when search is first opened. Matching
+  and ranking are LaunchKit's own (`src/lib/search/`), with no search service
+  or library: titles outrank headings, headings descriptions, and those the
+  text. `src/config/search.ts` sets each page's path, or keeps it out. A page
+  can set `meta.navTitle`, its name as a search result ("Home" rather than the
+  homepage's headline title); whole pages list by name alone, while guides and
+  sections show an excerpt.
+- shadcn/ui `Command` and `Kbd` primitives.
 
 ### Changed
 
+- Guide and legal page headings (h2, h3) have ids from their text, so search
+  and links can point to a section: `/docs/getting-started#run-it-locally`.
 - **Breaking for translations:** `Docs.updated`, `Docs.readingTime`,
   `Docs.summaryLabel` and `Docs.summaryIntro` moved to a new `Article`
   namespace, and `Docs` gained `navigation`, `browse`, `browseDescription` and

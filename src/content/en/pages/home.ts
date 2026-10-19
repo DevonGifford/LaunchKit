@@ -28,6 +28,7 @@ const logo = (name: string, file: string) => ({
 export const home = {
   meta: {
     title: 'The foundation for your next website',
+    navTitle: 'Home',
     description:
       'LaunchKit is a refined Next.js foundation with a design system, four languages, typed content and automated checks, so every new website starts from proven ground.',
   },

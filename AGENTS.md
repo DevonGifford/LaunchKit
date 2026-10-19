@@ -123,7 +123,7 @@ more, so run it first and the hooks will pass.
 | `src/components/{layout,sections,forms}/` | Shared layout, section and form components.                               |
 | `src/config/`                             | Site settings, navigation, feature switches.                              |
 | `tests/{unit,integration,e2e}/`           | Vitest (node), Vitest Browser Mode, Playwright. Stories are tested too.   |
-| `docs/`                                   | Spec, toolchain decisions, theming, releasing, upstream sync.             |
+| `docs/`                                   | Spec, toolchain decisions, theming, releasing, upstream sync, search.     |
 
 ## Architecture
 
@@ -272,13 +272,17 @@ are the reference.
   Load it with `getPage` in a route under `src/app/[locale]/` that calls
   `resolveLocale(params)` first. For a menu entry, add it to
   `src/config/navigation.ts` and a `Navigation.<key>` message in every locale.
+  Give it a path in `src/config/search.ts` (or `null` to keep it out of site
+  search); TypeScript fails until you do.
 - **Add a doc:** add `<slug>.md` under `src/content/<locale>/docs/`. A locale
   without it falls back to English and shows a notice. Add its slug to a
   section in `src/config/docs-navigation.ts` (a unit test checks), and
   `Docs.sections.<key>` in every locale for a new section.
 - **Add a locale:** follow the steps in `src/i18n/routing.ts`, then run
   `pnpm i18n:check` for what's missing.
-- **Add a section type:** see Conventions. Give it a story.
+- **Add a section type:** see Conventions. Give it a story. Site search indexes
+  its string fields as text; add any that aren't (options, file names) to
+  `skippedKeys` in `src/lib/search/build-index.ts`.
 - **Change the brand:** edit `src/app/theme.css`; components follow. Storybook's
   own UI copies those colours in `.storybook/theme.ts` and uses recoloured logos
   in `.storybook/brand/`, so update those too

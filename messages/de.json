@@ -37,6 +37,26 @@
   "LocaleSwitcher": {
     "label": "Sprache"
   },
+  "Search": {
+    "open": "Suchen",
+    "trigger": "Suchen…",
+    "title": "Suche",
+    "description": "Finden Sie Seiten, Anleitungen und Abschnitte dieser Website.",
+    "placeholder": "{site} durchsuchen…",
+    "results": "Ergebnisse",
+    "empty": "Keine Ergebnisse für „{query}“.",
+    "emptyHint": "Prüfen Sie die Schreibweise oder versuchen Sie einen allgemeineren Begriff.",
+    "contactPrompt": "Nicht gefunden, wonach Sie suchen? Sagen Sie uns, was Sie brauchen.",
+    "contactAction": "Schreiben Sie uns",
+    "loading": "Wird geladen…",
+    "error": "Die Suche ist gerade nicht verfügbar. Bitte versuchen Sie es später erneut.",
+    "controlKey": "Strg",
+    "groups": {
+      "page": "Seiten",
+      "doc": "Dokumentation",
+      "legal": "Rechtliches"
+    }
+  },
   "Footer": {
     "tagline": "Einmal bauen, oft wiederverwenden, zentral verbessern.",
     "description": "LaunchKit ist eine wiederverwendbare Grundlage für moderne Websites, mit der Teams schneller auf einer einheitlichen, hochwertigen Basis veröffentlichen.",
