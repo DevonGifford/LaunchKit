@@ -657,7 +657,15 @@ export const sectionSchema = z.discriminatedUnion('type', [
 
 export const pageDefinitionSchema = z
   .object({
-    meta: z.object({ title: text, description: text }),
+    meta: z.object({
+      title: text,
+      description: text,
+      /**
+       * The page's name as a destination, in site search: "Home" rather than
+       * the homepage's headline title. Defaults to `title`.
+       */
+      navTitle: text.optional(),
+    }),
     sections: z.array(sectionSchema).min(1),
   })
   .refine(

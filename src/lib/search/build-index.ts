@@ -84,7 +84,8 @@ export function sectionText(section: Section) {
 
 function pageEntries(locale: Locale, slug: PageSlug, href: string): SearchEntry[] {
   const page = getPage(locale, slug);
-  const title = page.meta.title;
+  // Its name as a destination ("Home"), not its headline.
+  const title = page.meta.navTitle ?? page.meta.title;
   return [
     { href, kind: 'page', title, description: page.meta.description, text: '' },
     ...page.sections.flatMap((section): SearchEntry[] => {

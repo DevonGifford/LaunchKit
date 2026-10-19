@@ -10,7 +10,7 @@ export const sampleSearchIndex: SearchIndex = {
     {
       href: '/',
       kind: 'page',
-      title: 'The foundation for your next website',
+      title: 'Home',
       description:
         'LaunchKit is a refined Next.js foundation with a design system, four languages and automated checks.',
       text: '',
@@ -18,7 +18,7 @@ export const sampleSearchIndex: SearchIndex = {
     {
       href: '/#included',
       kind: 'page',
-      title: 'The foundation for your next website',
+      title: 'Home',
       heading: 'Everything a new site needs, already built.',
       description:
         'Themes, four languages, responsive layouts, tests and accessibility checks come with every project.',

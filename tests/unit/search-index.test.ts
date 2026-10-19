@@ -58,6 +58,19 @@ describe('search index', () => {
     }
   });
 
+  it('names a page by its navigation title, keeping its headline searchable', () => {
+    const names = { en: 'Home', es: 'Inicio', fr: 'Accueil', de: 'Startseite' };
+    for (const index of indexes) {
+      const home = index.entries.filter((entry) => entry.href.split('#')[0] === '/');
+      expect(home.find((entry) => entry.href === '/')?.title).toBe(
+        names[index.locale as keyof typeof names],
+      );
+      // Its sections name the page the same way, and the hero heading is still there.
+      expect(new Set(home.map((entry) => entry.title)).size).toBe(1);
+      expect(home.find((entry) => entry.href === '/#hero')?.heading).toBeTruthy();
+    }
+  });
+
   it('uses each locale’s own text', async () => {
     const [english, spanish] = [indexes[0], indexes[1]];
     const quickstart = (entries: SearchEntry[]) =>

@@ -47,6 +47,24 @@ test('opens from the search field, offering every page and guide', async () => {
   await expect.element(dialog().getByRole('group', { name: 'Documentation' })).toBeVisible();
 });
 
+test('lists pages by name alone, and guides with their description', async () => {
+  await renderSearch();
+  await page.getByRole('button', { name: 'Search…' }).click();
+  const pages = dialog().getByRole('group', { name: 'Pages' });
+  const docs = dialog().getByRole('group', { name: 'Documentation' });
+  await expect.element(pages).toBeVisible();
+
+  expect(
+    pages
+      .getByRole('option')
+      .elements()
+      .map((option) => option.textContent),
+  ).toEqual(['Home', 'Pricing']);
+  expect(docs.getByRole('option').first().element().textContent).toContain(
+    'how to go from a fresh clone to a running site',
+  );
+});
+
 test('Escape closes it and puts focus back on the button', async () => {
   await renderSearch();
   const button = page.getByRole('button', { name: 'Search', exact: true });
@@ -104,13 +122,29 @@ test('arrow keys choose another result', async () => {
   await expect.poll(() => router.push.mock.calls).toEqual([['/docs/getting-started#what-you-get']]);
 });
 
-test('says so when nothing matches', async () => {
+const statusText = () => dialog().getByRole('status').element().textContent;
+
+test('says so when nothing matches, and suggests what to try', async () => {
   await renderSearch();
   await page.getByRole('button', { name: 'Search…' }).click();
   await userEvent.type(input(), 'zebra');
 
-  await expect.element(dialog().getByRole('status')).toHaveTextContent('No results for “zebra”.');
+  await expect.poll(statusText).toContain('No results for “zebra”.');
+  expect(statusText()).toContain('Check the spelling, or try a broader word.');
   await expect.element(dialog().getByRole('listbox')).not.toBeInTheDocument();
+});
+
+test('offers the contact page when nothing matches', async () => {
+  await renderSearch();
+  await page.getByRole('button', { name: 'Search…' }).click();
+  await userEvent.type(input(), 'zebra');
+  await expect
+    .element(dialog().getByText('Not finding what you’re looking for? Tell us what you need.'))
+    .toBeVisible();
+
+  await dialog().getByRole('button', { name: 'Get in touch' }).click();
+  await expect.element(dialog()).not.toBeInTheDocument();
+  await expect.poll(() => router.push.mock.calls).toEqual([['/contact']]);
 });
 
 test('has no accessibility violations, with results or without', async () => {
@@ -124,6 +158,6 @@ test('has no accessibility violations, with results or without', async () => {
 
   await userEvent.clear(input());
   await userEvent.type(input(), 'zebra');
-  await expect.element(dialog().getByRole('status')).toHaveTextContent('No results for “zebra”.');
+  await expect.poll(statusText).toContain('No results for “zebra”.');
   expect(await axeViolations(document.body)).toEqual([]);
 });

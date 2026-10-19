@@ -1,8 +1,15 @@
 'use client';
 
 import { useMemo, useRef, useState, type ComponentType, type SVGProps } from 'react';
-import { FileTextIcon, LayoutTemplateIcon, ScaleIcon } from 'lucide-react';
+import {
+  ArrowRightIcon,
+  FileTextIcon,
+  LayoutTemplateIcon,
+  ScaleIcon,
+  SearchXIcon,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandDialog,
@@ -20,6 +27,8 @@ import {
   type SearchKind,
   type Segment,
 } from '@/lib/search/search';
+import { contactLink } from '@/config/navigation';
+import { cn } from '@/lib/utils';
 
 /** Whether the index has arrived: search waits for it on the first opening. */
 export type SearchStatus = 'loading' | 'ready' | 'error';
@@ -32,6 +41,13 @@ const icons: Record<SearchKind, ComponentType<SVGProps<SVGSVGElement>>> = {
 
 /** A row in the list: a result, or a suggestion before anything is typed. */
 type Row = { entry: SearchEntry; title: Segment[]; context?: string; excerpt?: Segment[] };
+
+/**
+ * A whole website page (not one of its sections): a destination, shown by
+ * name alone. Guides, legal pages and sections keep their text, which is how
+ * readers tell long-form results apart.
+ */
+const isDestination = (entry: SearchEntry) => entry.kind === 'page' && !entry.heading;
 
 /**
  * The search dialog: a command menu (cmdk) over the site's search index.
@@ -69,14 +85,17 @@ export function SearchDialog({
       return suggestions(index).map((entry) => ({
         entry,
         title: [{ text: entry.title, match: false }],
-        excerpt: entry.description ? [{ text: entry.description, match: false }] : undefined,
+        excerpt:
+          entry.description && !isDestination(entry)
+            ? [{ text: entry.description, match: false }]
+            : undefined,
       }));
     }
     return search(prepared, query).map((result) => ({
       entry: result.entry,
       title: result.heading ?? result.title,
       context: result.heading ? result.entry.title : undefined,
-      excerpt: result.excerpt,
+      excerpt: isDestination(result.entry) ? undefined : result.excerpt,
     }));
   }, [index, prepared, query]);
 
@@ -154,25 +173,71 @@ export function SearchDialog({
             </CommandGroup>
           ))}
         </CommandList>
-        <p role="status" className="text-center text-sm text-muted-foreground empty:hidden">
-          {status === 'loading'
-            ? t('loading')
-            : status === 'error'
-              ? t('error')
-              : rows.length === 0 && query.trim()
-                ? t('empty', { query: query.trim() })
-                : null}
-        </p>
+        {status === 'loading' && (
+          <p
+            role="status"
+            className="-mx-1 mt-1 border-t py-8 text-center text-sm text-muted-foreground"
+          >
+            {t('loading')}
+          </p>
+        )}
+        {(status === 'error' || (status === 'ready' && rows.length === 0 && query.trim())) && (
+          <SearchMiss
+            message={status === 'error' ? t('error') : t('empty', { query: query.trim() })}
+            hint={status === 'error' ? undefined : t('emptyHint')}
+            onContact={() => choose(contactLink.href)}
+          />
+        )}
       </Command>
     </CommandDialog>
   );
 }
 
+/**
+ * Nothing to show: what happened, and a way forward, the contact page, below a
+ * line that separates it from the search box.
+ */
+function SearchMiss({
+  message,
+  hint,
+  onContact,
+}: {
+  message: string;
+  hint?: string;
+  onContact: () => void;
+}) {
+  const t = useTranslations('Search');
+  return (
+    <div className="-mx-1 mt-1 -mb-1 border-t">
+      <div role="status" className="flex flex-col items-center gap-1.5 px-6 py-10 text-center">
+        <span className="mb-2 flex size-10 items-center justify-center rounded-full bg-muted text-muted-foreground">
+          <SearchXIcon aria-hidden="true" className="size-5" />
+        </span>
+        <p className="text-sm font-medium text-foreground">{message}</p>
+        {hint && <p className="text-sm text-muted-foreground">{hint}</p>}
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t bg-muted/40 px-4 py-3">
+        <p className="text-sm text-muted-foreground">{t('contactPrompt')}</p>
+        <Button variant="outline" size="sm" onClick={onContact}>
+          {t('contactAction')}
+          <ArrowRightIcon aria-hidden="true" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function SearchRow({ row, onSelect }: { row: Row; onSelect: () => void }) {
   const Icon = icons[row.entry.kind];
+  // A single line centres its icon; longer rows align it with their first line.
+  const singleLine = !row.context && !row.excerpt;
   return (
-    <CommandItem value={row.entry.href} onSelect={onSelect} className="items-start gap-3 py-2.5">
-      <Icon aria-hidden="true" className="mt-0.5 text-muted-foreground" />
+    <CommandItem
+      value={row.entry.href}
+      onSelect={onSelect}
+      className={cn('gap-3', singleLine ? 'items-center py-2' : 'items-start py-2.5')}
+    >
+      <Icon aria-hidden="true" className={cn('text-muted-foreground', !singleLine && 'mt-0.5')} />
       <span className="min-w-0 flex-1 space-y-0.5" lang={row.entry.lang}>
         <span className="block font-medium text-foreground">
           <Highlighted segments={row.title} />

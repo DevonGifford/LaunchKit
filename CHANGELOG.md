@@ -88,12 +88,16 @@ need to take when merging it.
   and a command-menu dialog (shadcn/ui Command on `cmdk`) with results grouped
   into pages, documentation and legal pages, matching words highlighted and
   keyboard navigation. Results link to the page or straight to the section.
+  When nothing matches, it suggests a broader word and offers the contact page.
 - A search index per locale at `/<locale>/search-index.json`, built at build
   time from the existing content (pages and their sections, guides and legal
   pages and their headings) and loaded when search is first opened. Matching
   and ranking are LaunchKit's own (`src/lib/search/`), with no search service
   or library: titles outrank headings, headings descriptions, and those the
-  text. `src/config/search.ts` sets each page's path, or keeps it out.
+  text. `src/config/search.ts` sets each page's path, or keeps it out. A page
+  can set `meta.navTitle`, its name as a search result ("Home" rather than the
+  homepage's headline title); whole pages list by name alone, while guides and
+  sections show an excerpt.
 - shadcn/ui `Command` and `Kbd` primitives.
 
 ### Changed
