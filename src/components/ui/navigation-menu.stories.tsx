@@ -75,6 +75,9 @@ export const Default: Story = {
     await expect(trigger).toHaveAttribute('aria-expanded', 'true');
     await expect(await canvas.findByRole('link', { name: /Feedback/ })).toBeVisible();
     await userEvent.keyboard('{Escape}');
+    // Moving onto the trigger also started Radix's 200ms open-on-hover timer;
+    // leaving cancels it, so the menu can't reopen while axe checks the story.
+    await userEvent.unhover(trigger);
     await waitFor(() => expect(trigger).toHaveAttribute('aria-expanded', 'false'));
   },
 };
