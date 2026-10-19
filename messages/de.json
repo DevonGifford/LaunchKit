@@ -86,14 +86,16 @@
       }
     }
   },
+  "Article": {
+    "updated": "Aktualisiert am {date, date, long}",
+    "readingTime": "{minutes} Min. Lesezeit",
+    "summaryLabel": "KI-Zusammenfassung",
+    "summaryIntro": "Auf dieser Seite finden Sie"
+  },
   "Docs": {
     "title": "Dokumentation",
     "description": "Anleitungen und Artikel zum Bauen, Starten und Weiterentwickeln einer Website mit LaunchKit.",
     "count": "{count, plural, one {# Anleitung} other {# Anleitungen}}",
-    "updated": "Aktualisiert am {date, date, long}",
-    "readingTime": "{minutes} Min. Lesezeit",
-    "summaryLabel": "KI-Zusammenfassung",
-    "summaryIntro": "Auf dieser Seite finden Sie",
     "fallbackNotice": "Diese Anleitung ist noch nicht auf {language} verfügbar und wird daher auf {fallbackLanguage} angezeigt.",
     "allGuides": "Alle Anleitungen",
     "whereNext": "Weiterlesen",
@@ -101,6 +103,14 @@
       "title": "Bereit loszulegen?",
       "description": "Folgen Sie dem Schnellstart, und Ihre Website läuft in wenigen Minuten, oder schreiben Sie uns, und wir bauen sie mit Ihnen.",
       "quickstart": "Zum Schnellstart"
+    },
+    "navigation": "Dokumentation",
+    "browse": "Anleitungen ansehen",
+    "browseDescription": "Alle Anleitungen, nach Thema geordnet.",
+    "sections": {
+      "gettingStarted": "Erste Schritte",
+      "building": "Entwickeln",
+      "project": "Projekt"
     }
   },
   "Legal": {

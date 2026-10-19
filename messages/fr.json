@@ -86,14 +86,16 @@
       }
     }
   },
+  "Article": {
+    "updated": "Mis à jour le {date, date, long}",
+    "readingTime": "{minutes} min de lecture",
+    "summaryLabel": "Résumé exécutif par IA",
+    "summaryIntro": "Sur cette page, vous trouverez"
+  },
   "Docs": {
     "title": "Documentation",
     "description": "Guides et articles pour créer, lancer et faire grandir un site web avec LaunchKit.",
     "count": "{count, plural, one {# guide} other {# guides}}",
-    "updated": "Mis à jour le {date, date, long}",
-    "readingTime": "{minutes} min de lecture",
-    "summaryLabel": "Résumé exécutif par IA",
-    "summaryIntro": "Sur cette page, vous trouverez",
     "fallbackNotice": "Ce guide n’est pas encore disponible en {language} ; il est donc affiché en {fallbackLanguage}.",
     "allGuides": "Tous les guides",
     "whereNext": "Pour aller plus loin",
@@ -101,6 +103,14 @@
       "title": "Prêt à vous lancer ?",
       "description": "Suivez le guide de démarrage pour lancer un site en quelques minutes, ou contactez-nous et nous le construirons avec vous.",
       "quickstart": "Ouvrir le guide de démarrage"
+    },
+    "navigation": "Documentation",
+    "browse": "Parcourir les guides",
+    "browseDescription": "Tous les guides, regroupés par thème.",
+    "sections": {
+      "gettingStarted": "Premiers pas",
+      "building": "Construire",
+      "project": "Projet"
     }
   },
   "Legal": {

@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { DocArticle } from '@/components/layout/doc-article';
-import { NextDocs } from '@/components/layout/next-docs';
-import { Link } from '@/i18n/navigation';
+import { DocsLayout } from '@/components/layout/docs-layout';
 import { localeNames, routing } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';
 import { getDoc, getDocSlugs, getNextDocs } from '@/lib/content/docs';
+import { getDocsNavigation } from '@/lib/content/docs-navigation';
 import { pageMetadata } from '@/lib/seo';
 
 // Only documents that exist at build time; anything else is a 404.
@@ -34,24 +33,17 @@ export default async function DocPage({ params }: PageProps<'/[locale]/docs/[slu
   if (!doc) notFound();
 
   const t = await getTranslations('Docs');
-  const next = await getNextDocs(locale, doc);
+  const [next, sections] = await Promise.all([getNextDocs(locale, doc), getDocsNavigation(locale)]);
 
   return (
-    <DocArticle
-      doc={doc}
-      after={<NextDocs docs={next} />}
+    <DocsLayout
+      content={doc}
+      sections={sections}
+      next={next}
       fallbackNotice={t('fallbackNotice', {
         language: localeNames[locale],
         fallbackLanguage: localeNames[doc.locale],
       })}
-      before={
-        <Link
-          href="/docs"
-          className="inline-flex min-h-10 items-center rounded-md text-sm text-muted-foreground outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
-        >
-          ← {t('allGuides')}
-        </Link>
-      }
     />
   );
 }
