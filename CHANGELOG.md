@@ -64,9 +64,22 @@ need to take when merging it.
   frontmatter, and suggestions for what to read next.
 - The new pages, documents and legal pages in English, Spanish, French and
   German, with the plans' prices shared by every language.
+- Privacy consent: a first-party prompt (bottom right on desktop, a bottom
+  panel on smaller screens) with Accept all, Reject all and Manage preferences,
+  a preferences dialog with Necessary, Analytics and Marketing, and a Privacy
+  settings button in the footer to change the choice later. The choice is kept
+  in local storage as `consent`. Services list the category they need in
+  `src/config/integrations.ts` and wait for it; `ConsentGate` and `useConsent()`
+  do the same for any other code.
+- Vercel Web Analytics and Speed Insights, switched in `src/config/features.ts`
+  and loaded only in builds on Vercel. Neither identifies visitors, and both
+  run for every visitor without waiting for consent; the privacy policy
+  describes what they collect.
 
 ### Changed
 
+- The privacy policy and roadmap, in every language, describe the consent
+  settings and the two Vercel services.
 - The wide header shows its navigation inline from 1024px rather than 768px,
   so the row fits in every language.
 - The pricing section's title is optional, so a page's hero can introduce the

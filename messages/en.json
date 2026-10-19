@@ -56,6 +56,36 @@
       "company": "Company"
     }
   },
+  "Consent": {
+    "title": "Your privacy",
+    "description": "{measuring, select, yes {We count visits and measure page speed anonymously, without third-party cookies. Other analytics and marketing services run only if you allow them.} other {Analytics and marketing services run only if you allow them.}} <link>Read the privacy policy</link>.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "managePreferences": "Manage preferences",
+    "settings": "Privacy settings",
+    "preferences": {
+      "title": "Privacy preferences",
+      "description": "Choose which optional services may run on this site. You can change your choice at any time from “Privacy settings” at the bottom of every page.",
+      "save": "Save preferences",
+      "usedBy": "Used by {services}.",
+      "unused": "Nothing on this site uses this yet.",
+      "alwaysRunning": "Always running for every visitor: {services}. The privacy policy explains what each one collects."
+    },
+    "categories": {
+      "necessary": {
+        "label": "Necessary",
+        "description": "Always on. Keeps the site working and remembers your language, appearance and privacy choices."
+      },
+      "analytics": {
+        "label": "Analytics",
+        "description": "Helps us understand how visitors use the site."
+      },
+      "marketing": {
+        "label": "Marketing",
+        "description": "Measures campaigns and personalises content on other sites."
+      }
+    }
+  },
   "Docs": {
     "title": "Documentation",
     "description": "Guides and articles on building, launching and growing a website with LaunchKit.",

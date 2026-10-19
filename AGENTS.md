@@ -281,6 +281,14 @@ are the reference.
   own UI copies those colours in `.storybook/theme.ts` and uses recoloured logos
   in `.storybook/brand/`, so update those too
   ([docs/theming.md](docs/theming.md#storybook)).
+- **Add a third-party service** (analytics, monitoring, an embed): give it a
+  switch in `src/config/features.ts`, an entry in `src/config/integrations.ts`
+  with the consent category it waits for (or `null` to run for every visitor:
+  the site owner's call, from what the provider documents it collects), and
+  its component in `src/components/layout/consent-integrations.tsx`, which
+  waits for consent where needed. Say what it collects in the privacy policy,
+  in every locale. Code that must wait for consent elsewhere uses `ConsentGate`
+  or `useConsent()`.
 
 ## Agent skills
 

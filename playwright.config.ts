@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import {
+  consentStorageKey,
+  createConsentRecord,
+  rejectAllChoices,
+} from './src/lib/consent/consent';
 
 const port = 3200;
+const baseURL = `http://localhost:${port}`;
 const isCI = Boolean(process.env.CI);
 
 /**
@@ -15,8 +21,24 @@ export default defineConfig({
   retries: isCI ? 1 : 0,
   reporter: isCI ? [['github'], ['html', { open: 'never' }]] : [['list']],
   use: {
-    baseURL: `http://localhost:${port}`,
+    baseURL,
     trace: 'retain-on-failure',
+    // Visitors who already chose, so the consent prompt never covers what a test
+    // clicks or checks. tests/e2e/consent.spec.ts starts without a choice.
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: baseURL,
+          localStorage: [
+            {
+              name: consentStorageKey,
+              value: JSON.stringify(createConsentRecord(rejectAllChoices)),
+            },
+          ],
+        },
+      ],
+    },
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'] } },

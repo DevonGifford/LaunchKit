@@ -169,6 +169,8 @@
     color-scheme: light;
     /* Anchors and keyboard focus land clear of the sticky header (h-16). */
     scroll-padding-top: 5rem;
+    /* …and of the consent prompt while it shows (set by consent-prompt.tsx). */
+    scroll-padding-bottom: var(--consent-prompt-space, 0px);
   }
 
   .dark {
@@ -181,6 +183,8 @@
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
+    /* Room to scroll the page's end out from behind the consent prompt. */
+    padding-bottom: var(--consent-prompt-space, 0px);
   }
 
   h1,
