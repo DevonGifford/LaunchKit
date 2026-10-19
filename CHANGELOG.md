@@ -75,9 +75,26 @@ need to take when merging it.
   and loaded only in builds on Vercel. Neither identifies visitors, and both
   run for every visitor without waiting for consent; the privacy policy
   describes what they collect.
+- Docs navigation beside every guide: sections and guides in a column to the
+  left of the article from 1024px, staying in view while it scrolls, and behind
+  a "Browse guides" button that opens a sheet below that. Sections and their
+  order live in `src/config/docs-navigation.ts`; the article keeps its reading
+  width and position.
+- A shared long-form foundation: `Article` (title, metadata, executive summary,
+  Markdown), framed by `ArticleLayout` for the legal pages and a future blog,
+  and by `DocsLayout` for guides. It replaces `DocArticle`.
 
 ### Changed
 
+- **Breaking for translations:** `Docs.updated`, `Docs.readingTime`,
+  `Docs.summaryLabel` and `Docs.summaryIntro` moved to a new `Article`
+  namespace, and `Docs` gained `navigation`, `browse`, `browseDescription` and
+  `sections`.
+- **Breaking for code:** `DocArticle` is gone. Pages that used it render
+  `<ArticleLayout content={doc}>` instead of `<DocArticle doc={doc}>`;
+  `fallbackNotice`, `before`, `after` and `children` keep their meaning. Guide
+  routes render `DocsLayout`, which adds the back link and "Where to go next"
+  itself. A new guide's slug must also go in `src/config/docs-navigation.ts`.
 - The privacy policy and roadmap, in every language, describe the consent
   settings and the two Vercel services.
 - The wide header shows its navigation inline from 1024px rather than 768px,

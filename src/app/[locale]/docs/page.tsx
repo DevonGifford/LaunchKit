@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/docs'>):
 export default async function DocsIndexPage({ params }: PageProps<'/[locale]/docs'>) {
   const locale = await resolveLocale(params);
   const t = await getTranslations('Docs');
+  const tArticle = await getTranslations('Article');
   const tNavigation = await getTranslations('Navigation');
   const docs = await listDocs(locale);
 
@@ -50,9 +51,9 @@ export default async function DocsIndexPage({ params }: PageProps<'/[locale]/doc
                   <span>
                     {doc.isFallback
                       ? localeNames[doc.locale]
-                      : t('updated', { date: new Date(doc.updated) })}
+                      : tArticle('updated', { date: new Date(doc.updated) })}
                   </span>
-                  <span>{t('readingTime', { minutes: doc.readingMinutes })}</span>
+                  <span>{tArticle('readingTime', { minutes: doc.readingMinutes })}</span>
                 </span>
               </Link>
             </li>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { DocArticle } from '@/components/layout/doc-article';
+import { ArticleLayout } from '@/components/layout/article-layout';
 import { localeNames } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';
 import { getLegalDoc } from '@/lib/content/docs';
@@ -24,8 +24,8 @@ export default async function PrivacyPage({ params }: PageProps<'/[locale]/priva
   const t = await getTranslations('Legal');
 
   return (
-    <DocArticle
-      doc={doc}
+    <ArticleLayout
+      content={doc}
       fallbackNotice={t('fallbackNotice', {
         language: localeNames[locale],
         fallbackLanguage: localeNames[doc.locale],

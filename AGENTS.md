@@ -273,7 +273,9 @@ are the reference.
   `resolveLocale(params)` first. For a menu entry, add it to
   `src/config/navigation.ts` and a `Navigation.<key>` message in every locale.
 - **Add a doc:** add `<slug>.md` under `src/content/<locale>/docs/`. A locale
-  without it falls back to English and shows a notice.
+  without it falls back to English and shows a notice. Add its slug to a
+  section in `src/config/docs-navigation.ts` (a unit test checks), and
+  `Docs.sections.<key>` in every locale for a new section.
 - **Add a locale:** follow the steps in `src/i18n/routing.ts`, then run
   `pnpm i18n:check` for what's missing.
 - **Add a section type:** see Conventions. Give it a story.

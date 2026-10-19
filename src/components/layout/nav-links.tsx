@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
-export type NavItem = { href: string; label: string };
+/** A link; `lang` marks a label in another language than the page, such as a fallback guide's title. */
+export type NavItem = { href: string; label: string; lang?: string };
 
 /** True when `href` is the current page or one of its ancestors (except home). */
 export function isActive(pathname: string, href: string) {
@@ -37,6 +38,7 @@ export function NavLinks({
         <li key={`${item.href} ${item.label}`}>
           <Link
             href={item.href}
+            lang={item.lang}
             aria-current={isActive(pathname, item.href) ? 'page' : undefined}
             onClick={onNavigate}
             className={cn(

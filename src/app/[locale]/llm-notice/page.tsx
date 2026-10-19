@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { CodeFile } from '@/components/layout/code-file';
-import { DocArticle } from '@/components/layout/doc-article';
+import { ArticleLayout } from '@/components/layout/article-layout';
 import { localeNames } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';
 import { getLegalDoc } from '@/lib/content/docs';
@@ -26,8 +26,8 @@ export default async function LlmNoticePage({ params }: PageProps<'/[locale]/llm
   const t = await getTranslations('Legal');
 
   return (
-    <DocArticle
-      doc={doc}
+    <ArticleLayout
+      content={doc}
       fallbackNotice={t('fallbackNotice', {
         language: localeNames[locale],
         fallbackLanguage: localeNames[doc.locale],
@@ -35,6 +35,6 @@ export default async function LlmNoticePage({ params }: PageProps<'/[locale]/llm
     >
       {/* The notice ends by explaining /llms.txt; here is the file itself, from its one source. */}
       <CodeFile name="llms.txt" code={await getLlmsTxt()} />
-    </DocArticle>
+    </ArticleLayout>
   );
 }
