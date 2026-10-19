@@ -1,5 +1,5 @@
  <div align="center">
-  <a href="https://launch-kit-flax.vercel.app/">
+  <a href="https://launchkit-website.vercel.app/">
     <img
       src="docs/brand/launchkit-readme-banner.png"
       alt="LaunchKit — reusable Next.js website foundation"
