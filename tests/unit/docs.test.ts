@@ -3,9 +3,14 @@ import { describe, expect, it } from 'vitest';
 import {
   createDocsSource,
   estimateReadingMinutes,
+  getDoc,
+  getDocSlugs,
   parseFrontmatter,
+  parseMarkdown,
   renderMarkdown,
+  slugify,
 } from '@/lib/content/docs';
+import { routing } from '@/i18n/routing';
 import { docFrontmatterSchema } from '@/lib/content/types';
 
 const fixtures = path.join(import.meta.dirname, '..', 'fixtures');
@@ -82,5 +87,48 @@ describe('renderMarkdown', () => {
 
   it('renders GitHub-flavoured tables', () => {
     expect(renderMarkdown('| a | b |\n| - | - |\n| 1 | 2 |')).toContain('<table>');
+  });
+});
+
+describe('heading anchors', () => {
+  it('turns heading text into plain ASCII ids, accents folded', () => {
+    expect(slugify('What you get')).toBe('what-you-get');
+    expect(slugify('Política de privacidad')).toBe('politica-de-privacidad');
+    expect(slugify('Größe & Übersicht')).toBe('grosse-ubersicht');
+  });
+
+  it('gives h2 and h3 headings ids that are unique and free on the page', () => {
+    const { html, sections } = parseMarkdown(
+      '## Main\n\nOne\n\n## Setup\n\nTwo\n\n### Setup\n\nThree\n\n#### Deeper\n\nFour',
+    );
+    expect(sections.map((section) => section.anchor)).toEqual(['main-2', 'setup', 'setup-2']);
+    expect(html).toContain('<h2 id="main-2">Main</h2>');
+    expect(html).toContain('<h3 id="setup-2">Setup</h3>');
+    expect(html).toContain('<h4>Deeper</h4>');
+  });
+
+  it('keeps the text under each heading, as plain text', () => {
+    const { intro, sections } = parseMarkdown(
+      'Before **any** heading.\n\n## Run it *locally*\n\nInstall with `pnpm install`.\n\n- one\n- two',
+    );
+    expect(intro).toBe('Before any heading.');
+    expect(sections).toEqual([
+      {
+        heading: 'Run it locally',
+        anchor: 'run-it-locally',
+        text: 'Install with pnpm install. one two',
+      },
+    ]);
+  });
+
+  it('links every section of every guide to a heading that exists', async () => {
+    for (const locale of routing.locales) {
+      for (const slug of await getDocSlugs()) {
+        const doc = await getDoc(locale, slug);
+        expect(doc?.sections.length).toBeGreaterThan(0);
+        for (const { anchor } of doc?.sections ?? [])
+          expect(doc?.html).toContain(` id="${anchor}"`);
+      }
+    }
   });
 });

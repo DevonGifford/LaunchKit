@@ -53,6 +53,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
             Consent: messages.Consent,
             ContactForm: messages.ContactForm,
             Error: messages.Error,
+            Search: messages.Search,
           }}
         >
           <ThemeProvider>

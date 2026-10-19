@@ -37,6 +37,23 @@
   "LocaleSwitcher": {
     "label": "Language"
   },
+  "Search": {
+    "open": "Search",
+    "trigger": "Search…",
+    "title": "Search",
+    "description": "Find pages, guides and sections on this site.",
+    "placeholder": "Search {site}…",
+    "results": "Results",
+    "empty": "No results for “{query}”.",
+    "loading": "Loading…",
+    "error": "Search isn’t available right now. Please try again later.",
+    "controlKey": "Ctrl",
+    "groups": {
+      "page": "Pages",
+      "doc": "Documentation",
+      "legal": "Legal"
+    }
+  },
   "Footer": {
     "tagline": "Build once, reuse often, improve centrally.",
     "description": "LaunchKit is a reusable foundation for modern websites, helping teams ship faster with a consistent, high-quality base.",

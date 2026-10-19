@@ -67,6 +67,7 @@ const preview: Preview = {
           'Layout',
           [
             'Site header',
+            'Site search',
             'Site footer',
             'Navigation links',
             'Mobile navigation',
