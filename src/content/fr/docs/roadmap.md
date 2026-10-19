@@ -1,7 +1,7 @@
 ---
 title: L’avenir de LaunchKit
 description: Où va LaunchKit, ce que chaque phase apporte, et ce qu’il ne deviendra délibérément jamais.
-updated: 2026-10-17
+updated: 2026-10-19
 order: 6
 summary: Où va LaunchKit : terminer et traduire ce site, faire ses preuves sur de vrais sites, des outils facultatifs d’analytics et de suivi des erreurs, des services applicatifs seulement en cas de besoin, les décisions encore ouvertes et ce qu’il ne deviendra jamais.
 next: launching-a-project, building-with-ai
@@ -29,12 +29,13 @@ Six sites sont prévus pour cela, du site d’une agence et d’une boutique de 
 
 ## Plus tard : de la visibilité, en option
 
-Quand de vrais déploiements le justifieront, LaunchKit proposera des moyens légers et **facultatifs** de voir comment se portent les sites :
+Quand de vrais déploiements le justifieront, LaunchKit proposera des moyens légers de voir comment se portent les sites. Les premiers sont déjà là :
 
+- **Le trafic et la vitesse** avec Vercel Web Analytics et Speed Insights. Aucun des deux n’identifie les visiteurs, ils fonctionnent donc pour tous, et ils ne se chargent que sur Vercel.
 - **Le suivi des erreurs** avec Sentry, avec un échantillonnage prudent.
-- **L’analyse du trafic** avec Vercel Web Analytics, ou PostHog quand un projet a besoin d’analytics produit. Jamais les deux par défaut.
+- **L’analytics produit** avec PostHog quand un projet en a besoin, en attendant le consentement du visiteur. Jamais en même temps que Vercel Web Analytics par défaut.
 
-Chacun restera désactivé tant qu’un projet ne l’active pas, sera configuré par environnement, respectera la vie privée et pourra rester non configuré sans risque. Un clone tout neuf continuera de fonctionner sans aucun compte.
+Chacun est, ou sera, un interrupteur dans `src/config/features.ts`, respectueux de la vie privée et sans risque s’il reste non configuré. Un clone tout neuf fonctionne toujours sans aucun compte.
 
 ## Plus loin : des services applicatifs
 

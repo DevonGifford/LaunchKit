@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
+import { ConsentIntegrations } from '@/components/layout/consent-integrations';
+import { ConsentPreferences } from '@/components/layout/consent-preferences';
+import { ConsentPrompt } from '@/components/layout/consent-prompt';
+import { ConsentProvider } from '@/components/layout/consent-provider';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { ThemeProvider } from '@/components/theme/theme-provider';
+import { activeIntegrations } from '@/config/integrations';
 import { getSiteUrl } from '@/config/site';
 import { routing } from '@/i18n/routing';
 import { resolveLocale } from '@/i18n/server';
@@ -30,6 +35,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   const locale = await resolveLocale(params);
   const t = await getTranslations('Layout');
   const messages = await getMessages();
+  const services = activeIntegrations().map(({ name, consent }) => ({ name, consent }));
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -44,16 +50,23 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
         <NextIntlClientProvider
           messages={{
             Common: messages.Common,
+            Consent: messages.Consent,
             ContactForm: messages.ContactForm,
             Error: messages.Error,
           }}
         >
           <ThemeProvider>
-            <SiteHeader variant="wide" />
-            <main id="main" tabIndex={-1} className="flex-1 outline-none">
-              {children}
-            </main>
-            <SiteFooter />
+            <ConsentProvider services={services}>
+              {/* Early in the tab order, so keyboard users reach it before the page. */}
+              <ConsentPrompt />
+              <SiteHeader variant="wide" />
+              <main id="main" tabIndex={-1} className="flex-1 outline-none">
+                {children}
+              </main>
+              <SiteFooter />
+              <ConsentPreferences />
+              <ConsentIntegrations />
+            </ConsentProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

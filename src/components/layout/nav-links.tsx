@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -10,17 +11,22 @@ export function isActive(pathname: string, href: string) {
   return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-/** Navigation links with `aria-current` on the active page. */
+/**
+ * Navigation links with `aria-current` on the active page. `children` are extra
+ * list items after the links, such as a button that belongs among them.
+ */
 export function NavLinks({
   items,
   className,
   linkClassName,
   onNavigate,
+  children,
 }: {
   items: readonly NavItem[];
   className?: string;
   linkClassName?: string;
   onNavigate?: () => void;
+  children?: ReactNode;
 }) {
   const pathname = usePathname();
 
@@ -42,6 +48,7 @@ export function NavLinks({
           </Link>
         </li>
       ))}
+      {children}
     </ul>
   );
 }

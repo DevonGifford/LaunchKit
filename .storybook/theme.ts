@@ -9,7 +9,7 @@ import { create } from 'storybook/theming';
  */
 const shared = {
   brandTitle: 'LaunchKit',
-  brandUrl: 'https://launch-kit-flax.vercel.app/',
+  brandUrl: 'https://launchkit-website.vercel.app/',
   brandTarget: '_blank',
   fontBase:
     "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",

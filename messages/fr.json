@@ -56,6 +56,36 @@
       "company": "Entreprise"
     }
   },
+  "Consent": {
+    "title": "Votre vie privée",
+    "description": "{measuring, select, yes {Nous comptons les visites et mesurons la vitesse des pages de façon anonyme, sans cookies tiers. Les autres services d’analytics et de marketing ne fonctionnent que si vous les autorisez.} other {Les services d’analytics et de marketing ne fonctionnent que si vous les autorisez.}} <link>Lire la politique de confidentialité</link>.",
+    "acceptAll": "Tout accepter",
+    "rejectAll": "Tout refuser",
+    "managePreferences": "Gérer les préférences",
+    "settings": "Paramètres de confidentialité",
+    "preferences": {
+      "title": "Préférences de confidentialité",
+      "description": "Choisissez quels services facultatifs peuvent fonctionner sur ce site. Vous pouvez modifier votre choix à tout moment depuis « Paramètres de confidentialité », en bas de chaque page.",
+      "save": "Enregistrer les préférences",
+      "usedBy": "Services concernés : {services}.",
+      "unused": "Aucun service de ce site ne l’utilise pour l’instant.",
+      "alwaysRunning": "Toujours en service pour tous les visiteurs : {services}. La politique de confidentialité indique ce que chacun collecte."
+    },
+    "categories": {
+      "necessary": {
+        "label": "Nécessaire",
+        "description": "Toujours activé. Fait fonctionner le site et retient votre langue, votre apparence et vos choix de confidentialité."
+      },
+      "analytics": {
+        "label": "Mesure d’audience",
+        "description": "Nous aide à comprendre comment le site est utilisé."
+      },
+      "marketing": {
+        "label": "Marketing",
+        "description": "Mesure les campagnes et personnalise les contenus sur d’autres sites."
+      }
+    }
+  },
   "Docs": {
     "title": "Documentation",
     "description": "Guides et articles pour créer, lancer et faire grandir un site web avec LaunchKit.",

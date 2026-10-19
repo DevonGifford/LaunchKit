@@ -96,7 +96,7 @@ To switch it on:
    also build every push. In an empty folder outside the repository, run
    `pnpm dlx --allow-build=esbuild vercel@64.2.0 login`, then the same with
    `link` instead of `login`, create a new project
-   (`launchkit-storybook`, say), and note `orgId` and `projectId` from
+   (`launchkit-library`, say), and note `orgId` and `projectId` from
    `.vercel/project.json`.
 2. Create a token at <https://vercel.com/account/tokens>.
 3. Add them to the repository:

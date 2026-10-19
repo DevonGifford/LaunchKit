@@ -1,7 +1,7 @@
 ---
 title: What’s Next for LaunchKit
 description: Where LaunchKit is heading, what each phase adds, and what it will deliberately never become.
-updated: 2026-10-17
+updated: 2026-10-19
 order: 6
 summary: Where LaunchKit is heading: finishing and translating this website, proving the foundation on real sites, optional analytics and error monitoring, application services only when needed, the decisions still open, and what it will never become.
 next: launching-a-project, building-with-ai
@@ -47,16 +47,17 @@ built for the purpose.
 
 ## Later: optional insight
 
-When real deployments justify it, LaunchKit will offer lightweight,
-**opt-in** ways to see how sites are doing:
+When real deployments justify it, LaunchKit will offer lightweight ways to
+see how sites are doing. The first are already here:
 
+- **Traffic and speed** with Vercel Web Analytics and Speed Insights. Neither
+  identifies visitors, so both run for everyone, and they load only on Vercel.
 - **Error monitoring** with Sentry, sampled conservatively.
-- **Traffic analytics** with Vercel Web Analytics, or PostHog where a project
-  needs product analytics. Never both by default.
+- **Product analytics** with PostHog where a project needs it, waiting for the
+  visitor's consent. Never alongside Vercel Web Analytics by default.
 
-Each will be off until a project switches it on, configured per environment,
-privacy-aware, and safe to leave unconfigured. A fresh clone will still run
-with no accounts at all.
+Each is, or will be, a switch in `src/config/features.ts`, privacy-aware and
+safe to leave unconfigured. A fresh clone still runs with no accounts at all.
 
 ## Further out: application services
 
