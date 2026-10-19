@@ -68,12 +68,12 @@ test.describe('desktop', () => {
     await expect(page).toHaveURL(/\/es\/pricing$/);
   });
 
-  test('a narrower desktop row shows search as an icon', async ({ page }) => {
+  test('the search field takes the call to action’s place from 1024px', async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
     await page.goto('/de');
     const banner = page.getByRole('banner');
-    await expect(banner.getByRole('button', { name: 'Suchen…' })).toBeHidden();
-    await banner.getByRole('button', { name: 'Suchen', exact: true }).click();
+    await expect(banner.getByRole('link', { name: 'Kontakt aufnehmen' })).toHaveCount(0);
+    await banner.getByRole('button', { name: 'Suchen…' }).click();
     await expect(dialog(page)).toBeVisible();
   });
 

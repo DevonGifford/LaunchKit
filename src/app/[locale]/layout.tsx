@@ -60,7 +60,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
             <ConsentProvider services={services}>
               {/* Early in the tab order, so keyboard users reach it before the page. */}
               <ConsentPrompt />
-              <SiteHeader variant="wide" />
+              <SiteHeader variant="wide-search" />
               <main id="main" tabIndex={-1} className="flex-1 outline-none">
                 {children}
               </main>

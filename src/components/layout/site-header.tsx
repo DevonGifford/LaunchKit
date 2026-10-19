@@ -19,12 +19,18 @@ const bar =
 
 /**
  * The site header. `default` sits within the page container. `wide` spans
- * nearly the full width: the logo on the left, the navigation centred, and
- * site search, the theme, language and a call to action on the right. Both
- * collapse into the same menu button: `default` below md, `wide` below lg, with
- * its call to action inside the menu and search as an icon beside it.
+ * nearly the full width: the logo on the left, the navigation centred, and the
+ * theme, language and a call to action on the right. `wide-search` puts site
+ * search where the call to action was, for a site with enough content to
+ * search (and ⌘K / Ctrl+K opens it). All collapse into the same menu button:
+ * `default` below md, the wide ones below lg, with the call to action inside
+ * the menu and, for `wide-search`, search as an icon beside it.
  */
-export async function SiteHeader({ variant = 'default' }: { variant?: 'default' | 'wide' }) {
+export async function SiteHeader({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'wide' | 'wide-search';
+}) {
   const t = await getTranslations();
   const items = mainNavigation.map(({ key, href }) => ({ href, label: t(`Navigation.${key}`) }));
   const action = { href: headerAction.href, label: t(`Navigation.${headerAction.key}`) };
@@ -68,39 +74,43 @@ export async function SiteHeader({ variant = 'default' }: { variant?: 'default' 
     </div>
   );
 
-  if (variant === 'wide') {
+  if (variant === 'wide' || variant === 'wide-search') {
+    const search = variant === 'wide-search';
+    /*
+      Its own frame rather than the page container: slim gutters (the
+      container's on phones) and a cap at 120rem. Inline only from lg: below
+      it, the row runs wider than the screen in the longer languages. The side
+      columns share the leftover width, so the navigation sits at the centre;
+      if one side needs more room, it nudges over rather than overlap.
+    */
+    const row = (
+      <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-5 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+        {home('lg:justify-self-start')}
+        <div className="hidden lg:block">{nav}</div>
+        <div className="hidden items-center gap-1 justify-self-end lg:flex">
+          {features.themeSwitcher && <ThemeToggle label={t('Theme.toggle')} />}
+          {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
+          {/* At the end of the row, where the call to action sits in `wide`. */}
+          {search && <SearchTrigger className="ml-2" />}
+          {!search && (
+            <Button asChild className="ml-3">
+              <Link href={action.href}>
+                {action.label}
+                <ArrowRightIcon aria-hidden="true" />
+              </Link>
+            </Button>
+          )}
+        </div>
+        <div className="flex items-center gap-1 lg:hidden">
+          {search && <SearchTrigger variant="icon" />}
+          {mobile('', action)}
+        </div>
+      </div>
+    );
+
     return (
       <header className={bar}>
-        {/*
-          Its own frame rather than the page container: slim gutters (the
-          container's on phones) and a cap at 120rem. Inline only from lg: below
-          it, the row runs wider than the screen in the longer languages. The
-          side columns share the leftover width, so the navigation sits at the
-          centre; if one side needs more room, it nudges over rather than overlap.
-        */}
-        <SiteSearch siteName={siteConfig.name}>
-          <div className="mx-auto flex h-16 w-full max-w-[120rem] items-center justify-between gap-6 px-5 sm:px-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
-            {home('lg:justify-self-start')}
-            <div className="hidden lg:block">{nav}</div>
-            <div className="hidden items-center gap-1 justify-self-end lg:flex">
-              {/* A search field once the row has room for it in every language; an icon until then. */}
-              <SearchTrigger className="mr-2 hidden xl:flex" />
-              <SearchTrigger variant="icon" className="xl:hidden" />
-              {features.themeSwitcher && <ThemeToggle label={t('Theme.toggle')} />}
-              {features.localeSwitcher && <LocaleSwitcher label={t('LocaleSwitcher.label')} />}
-              <Button asChild className="ml-3">
-                <Link href={action.href}>
-                  {action.label}
-                  <ArrowRightIcon aria-hidden="true" />
-                </Link>
-              </Button>
-            </div>
-            <div className="flex items-center gap-1 lg:hidden">
-              <SearchTrigger variant="icon" />
-              {mobile('', action)}
-            </div>
-          </div>
-        </SiteSearch>
+        {search ? <SiteSearch siteName={siteConfig.name}>{row}</SiteSearch> : row}
       </header>
     );
   }

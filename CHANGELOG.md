@@ -83,8 +83,9 @@ need to take when merging it.
 - A shared long-form foundation: `Article` (title, metadata, executive summary,
   Markdown), framed by `ArticleLayout` for the legal pages and a future blog,
   and by `DocsLayout` for guides. It replaces `DocArticle`.
-- Site search: a search field in the wide header from 1280px (an icon below
-  that and on phones), opened with ⌘K on Apple devices and Ctrl+K elsewhere,
+- Site search: a `wide-search` header variant with a search field in place of
+  the call to action from 1024px (an icon beside the menu below that, where the
+  call to action stays in the menu), opened with ⌘K on Apple devices and Ctrl+K elsewhere,
   and a command-menu dialog (shadcn/ui Command on `cmdk`) with results grouped
   into pages, documentation and legal pages, matching words highlighted and
   keyboard navigation. Each page or guide appears once, with the section that
