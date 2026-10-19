@@ -123,7 +123,7 @@ more, so run it first and the hooks will pass.
 | `src/components/{layout,sections,forms}/` | Shared layout, section and form components.                               |
 | `src/config/`                             | Site settings, navigation, feature switches.                              |
 | `tests/{unit,integration,e2e}/`           | Vitest (node), Vitest Browser Mode, Playwright. Stories are tested too.   |
-| `docs/`                                   | Spec, toolchain decisions, theming, releasing, upstream sync.             |
+| `docs/`                                   | Spec, toolchain decisions, theming, releasing, upstream sync, search.     |
 
 ## Architecture
 

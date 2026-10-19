@@ -152,6 +152,7 @@ New to LaunchKit? Start with the [live documentation ↗](https://launchkit-webs
 | [Theming](docs/theming.md)             | Design tokens, brand customization, and shadcn/ui          |
 | [Upstream Sync](docs/upstream-sync.md) | Creating downstream projects and taking LaunchKit updates  |
 | [Releasing](docs/releasing.md)         | Branches, versions, tags, and GitHub Releases              |
+| [Site Search](docs/search.md)          | How search indexes, ranks and shows the site's content     |
 | [Toolchain](docs/toolchain.md)         | Version decisions, compatibility, and maintenance          |
 
 **Project guides:** [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Changelog](CHANGELOG.md)
