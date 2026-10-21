@@ -31,7 +31,7 @@ export function MarketingDownstreamExamples({
         <ul className="mt-6 grid gap-5 md:grid-cols-2 md:gap-6 lg:mt-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
           {projects.map((project, index) => (
             <li
-              key={project.href}
+              key={project.name}
               className={cn(index === 0 && 'md:col-span-2 lg:col-span-1 lg:row-span-2')}
             >
               <ProjectCard project={project} featured={index === 0} />
@@ -43,19 +43,21 @@ export function MarketingDownstreamExamples({
   );
 }
 
+/** The card's layout at each width, whether or not it links anywhere. */
+const card =
+  'grid h-full grid-cols-[7rem_minmax(0,1fr)_auto] items-center gap-x-4 rounded-md md:grid-cols-1 md:grid-rows-[auto_1fr] md:items-stretch md:overflow-hidden md:rounded-lg md:border md:bg-card lg:grid-rows-[minmax(0,1fr)_auto]';
+
 /**
  * A row of thumbnail, copy and arrow on phones; from 768px a card with the
  * screenshot above the copy. From 1024px the featured screenshot keeps 16:10 and
  * sets the group's height, and the other two share it, each screenshot filling
  * what its copy leaves. A long description grows the featured screenshot rather
- * than shrinking theirs below 7rem.
+ * than shrinking theirs below 7rem. Without a URL, as for a site still in
+ * progress, the card is no link and has no arrow.
  */
 function ProjectCard({ project, featured }: { project: Project; featured: boolean }) {
-  return (
-    <a
-      href={project.href}
-      className="group grid h-full grid-cols-[7rem_minmax(0,1fr)_auto] items-center gap-x-4 rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-md:focus-visible:ring-offset-4 max-md:focus-visible:ring-offset-background md:grid-cols-1 md:grid-rows-[auto_1fr] md:items-stretch md:overflow-hidden md:rounded-lg md:border md:bg-card md:transition-colors md:hover:border-accent lg:grid-rows-[minmax(0,1fr)_auto]"
-    >
+  const content = (
+    <>
       <span
         className={cn(
           'relative block aspect-[3/2] overflow-hidden rounded-sm border md:rounded-none md:border-0 md:border-b',
@@ -86,11 +88,27 @@ function ProjectCard({ project, featured }: { project: Project; featured: boolea
             {project.description}
           </span>
         </span>
-        <ArrowUpRightIcon
-          aria-hidden="true"
-          className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground md:mt-1"
-        />
+        {project.href && (
+          <ArrowUpRightIcon
+            aria-hidden="true"
+            className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground md:mt-1"
+          />
+        )}
       </span>
+    </>
+  );
+
+  return project.href ? (
+    <a
+      href={project.href}
+      className={cn(
+        card,
+        'group outline-none focus-visible:ring-3 focus-visible:ring-ring/50 max-md:focus-visible:ring-offset-4 max-md:focus-visible:ring-offset-background md:transition-colors md:hover:border-accent',
+      )}
+    >
+      {content}
     </a>
+  ) : (
+    <div className={card}>{content}</div>
   );
 }

@@ -4,10 +4,10 @@ import type { SectionOf } from '@/lib/content/types';
 import { MarketingDownstreamExamples } from './marketing-downstream-examples';
 
 /**
- * Fixture copy until the section is placed on a page. The sites are invented
- * design mockups; their screenshots, in public/marketing/downstream/ so a page
- * can use them as placeholders, come in three shapes on purpose: a full page
- * (1024×1536), a 16:10 first screen and a 4:3 one.
+ * Fixture copy, with placeholder links. The screenshots are design mockups in
+ * public/marketing/downstream/, which the Examples page uses too. These three
+ * come in different shapes on purpose: a full page (1024×1536), a 16:10 first
+ * screen and a 4:3 one.
  */
 const section = {
   id: 'company-websites',
@@ -255,4 +255,19 @@ export const StackedOnMobile: Story = {
   ...Stacked,
   globals: { viewport: { value: 'mobile' } },
   play: async ({ canvasElement }) => noSidewaysScroll(canvasElement),
+};
+
+/**
+ * Sites still in progress have no URL yet: their cards are no links and show no
+ * arrow, but keep the same layout.
+ */
+export const InProgress: Story = {
+  args: {
+    projects: section.projects.map(({ href: _href, ...project }) => project),
+  },
+  play: async ({ canvasElement }) => {
+    await expect(within(canvasElement).queryAllByRole('link')).toEqual([]);
+    await expect(canvasElement.querySelectorAll('li')).toHaveLength(3);
+    await expect(canvasElement.querySelectorAll('li svg')).toHaveLength(0);
+  },
 };

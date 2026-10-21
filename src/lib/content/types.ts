@@ -294,7 +294,7 @@ export const marketingDownstreamExamplesSectionSchema = z.object({
   type: z.literal('marketing-downstream-examples'),
   title: text,
   description: text.optional(),
-  /** Exactly three; the first is featured. Each card links to the live site, in the same tab. */
+  /** Exactly three; the first is featured. */
   projects: z
     .array(
       z.object({
@@ -306,7 +306,11 @@ export const marketingDownstreamExamplesSectionSchema = z.object({
          * fit: its first screen or the full page, ideally at least 1600px wide.
          */
         image: publicPath,
-        href: z.url({ protocol: /^https$/ }),
+        /**
+         * The live site, which the whole card links to in the same tab. Leave it
+         * out while a site is still in progress: the card is then no link.
+         */
+        href: z.url({ protocol: /^https$/ }).optional(),
       }),
     )
     .length(3),

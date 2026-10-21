@@ -38,47 +38,52 @@ export const examples = {
         ],
       },
     },
+    // The projects as downstream examples, in place of the lineup the other
+    // languages still show until they're translated. No links until each launches.
     {
-      // The previous homepage's use cases: the projects LaunchKit was made for.
+      // `projects`, so the hero's menu and the showcase's "Use cases" still land here.
       id: 'projects',
-      type: 'lineup',
-      eyebrow: 'In progress',
-      title: 'Six websites in the making.',
-      description:
-        'Each keeps its own brand, content and features while sharing the engineering underneath. They’ll be linked here as they launch.',
-      items: [
+      type: 'marketing-downstream-examples',
+      title: 'Company Websites',
+      description: 'Corporate and brochure websites for established businesses.',
+      projects: [
         {
-          name: 'Agency website',
-          kind: 'Corporate · Portfolio',
-          description: 'Services, case studies and a considered contact journey.',
+          name: 'Atelier',
+          description: 'Brand and digital studio for organisations that value considered design.',
+          image: '/marketing/downstream/atelier.webp',
         },
         {
-          name: 'Homelab hardware',
-          kind: 'Product showcase',
-          description:
-            'Refurbished equipment with specifications and enquiries; commerce can follow later.',
+          name: 'Blake & Co.',
+          description: 'Software engineering for law firms and financial institutions.',
+          image: '/marketing/downstream/blake-and-co.webp',
         },
         {
-          name: 'UnPocketed',
-          kind: 'App landing page',
-          description: 'Features, screenshots and download links for a mobile app.',
+          name: 'Principio',
+          description: 'Software engineering and AI consulting for ambitious businesses.',
+          image: '/marketing/downstream/principio.webp',
+        },
+      ],
+    },
+    {
+      id: 'applications',
+      type: 'marketing-downstream-examples',
+      title: 'Web & Mobile Applications',
+      description: 'Product sites for web and mobile apps.',
+      projects: [
+        {
+          name: 'TableKit',
+          description: 'Restaurant reservations, added to any website in minutes.',
+          image: '/marketing/downstream/tablekit.webp',
         },
         {
-          name: 'selfOS',
-          kind: 'Product · SaaS',
-          description: 'A clear product story, documentation and a waitlist.',
+          name: 'Unpocketed',
+          description: 'Record and transcribe audio on Android with the AI models you choose.',
+          image: '/marketing/downstream/unpocketed.webp',
         },
         {
-          name: 'Clothing brand',
-          kind: 'Retail showcase',
-          description:
-            'Collections, imagery and brand storytelling, with checkout handled elsewhere.',
-        },
-        {
-          name: 'Redesign demonstrations',
-          kind: 'Sales · Portfolio',
-          description:
-            'Before-and-after homepage refactors that show what a better foundation allows.',
+          name: 'SelfOS',
+          description: 'Self-hosted personal data for training, nutrition and habits.',
+          image: '/marketing/downstream/selfos.webp',
         },
       ],
     },

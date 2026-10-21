@@ -112,11 +112,14 @@ need to take when merging it.
   a group of three sites built with LaunchKit, such as company websites: one
   featured beside two others on wide screens, featured above the other two on
   tablets, and a compact list of thumbnails on phones. Each card links to the
-  live site. Placeholder screenshots of six invented sites live in
+  live site once it has one. Placeholder screenshots of six projects live in
   `public/marketing/downstream/`.
 
 ### Changed
 
+- The English Examples page shows its projects as downstream examples, in two
+  groups, instead of the lineup. The other languages keep the lineup until
+  they're translated.
 - Guide and legal page headings (h2, h3) have ids from their text, so search
   and links can point to a section: `/docs/getting-started#run-it-locally`.
 - **Breaking for translations:** `Docs.updated`, `Docs.readingTime`,
