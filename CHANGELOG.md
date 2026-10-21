@@ -112,8 +112,8 @@ need to take when merging it.
   a group of three sites built with LaunchKit, such as company websites: one
   featured beside two others on wide screens, featured above the other two on
   tablets, and a compact list of thumbnails on phones. Each card links to the
-  live site. Stand-in screenshots for its stories live in
-  `tests/fixtures/downstream/`.
+  live site. Placeholder screenshots of six invented sites live in
+  `public/marketing/downstream/`.
 
 ### Changed
 

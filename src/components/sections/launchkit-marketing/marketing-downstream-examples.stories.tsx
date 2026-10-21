@@ -4,9 +4,10 @@ import type { SectionOf } from '@/lib/content/types';
 import { MarketingDownstreamExamples } from './marketing-downstream-examples';
 
 /**
- * Fixture copy until the section is placed on a page. The sites are invented,
- * and their screenshots in tests/fixtures/downstream/ come in three shapes on
- * purpose: a full page, a 16:10 first screen and a 4:3 one.
+ * Fixture copy until the section is placed on a page. The sites are invented
+ * design mockups; their screenshots, in public/marketing/downstream/ so a page
+ * can use them as placeholders, come in three shapes on purpose: a full page
+ * (1024×1536), a 16:10 first screen and a 4:3 one.
  */
 const section = {
   id: 'company-websites',
@@ -18,20 +19,49 @@ const section = {
     {
       name: 'Atelier',
       description: 'Brand and digital studio for organisations that value considered design.',
-      image: '/fixtures/downstream/atelier.webp',
+      image: '/marketing/downstream/atelier.webp',
       href: 'https://atelier.example/',
     },
     {
       name: 'Blake & Co.',
       description: 'Software engineering for law firms and financial institutions.',
-      image: '/fixtures/downstream/blake-and-co.webp',
+      image: '/marketing/downstream/blake-and-co.webp',
       href: 'https://blake-engineering.example/',
     },
     {
       name: 'Principio',
       description: 'Software engineering and AI consulting for ambitious businesses.',
-      image: '/fixtures/downstream/principio.webp',
+      image: '/marketing/downstream/principio.webp',
       href: 'https://principio.example/',
+    },
+  ],
+} satisfies SectionOf<'marketing-downstream-examples'>;
+
+/** A second group, for the stories that show groups one after another. */
+const applications = {
+  id: 'applications',
+  type: 'marketing-downstream-examples',
+  title: 'Web & Mobile Applications',
+  description: 'Product sites for web and mobile apps.',
+  action: { label: 'View all', href: '/examples' },
+  projects: [
+    {
+      name: 'TableKit',
+      description: 'Restaurant reservations, added to any website in minutes.',
+      image: '/marketing/downstream/tablekit.webp',
+      href: 'https://tablekit.example/',
+    },
+    {
+      name: 'Unpocketed',
+      description: 'Record and transcribe audio on Android with the AI models you choose.',
+      image: '/marketing/downstream/unpocketed.webp',
+      href: 'https://unpocketed.example/',
+    },
+    {
+      name: 'SelfOS',
+      description: 'Self-hosted personal data for training, nutrition and habits.',
+      image: '/marketing/downstream/selfos.webp',
+      href: 'https://selfos.example/',
     },
   ],
 } satisfies SectionOf<'marketing-downstream-examples'>;
@@ -177,21 +207,21 @@ export const LongContent: Story = {
       {
         name: 'Atelier für Markenentwicklung und digitale Kommunikation',
         description: 'Brand and digital studio for organisations that value considered design.',
-        image: '/fixtures/downstream/atelier.webp',
+        image: '/marketing/downstream/atelier.webp',
         href: 'https://atelier.example/',
       },
       {
         name: 'Blake & Co. Softwareentwicklung für Rechtsanwaltskanzleien',
         description:
           'Spezialisierte Softwareentwicklung für Kanzleien, Finanzinstitute und Beratungsunternehmen, mit Sicherheit, Diskretion und Kontrolle.',
-        image: '/fixtures/downstream/blake-and-co.webp',
+        image: '/marketing/downstream/blake-and-co.webp',
         href: 'https://blake-engineering.example/',
       },
       {
         name: 'Principio',
         description:
           'Softwareentwicklung und KI-Beratung für ehrgeizige Unternehmen, von digitalen Produkten bis zu Cloud-Plattformen.',
-        image: '/fixtures/downstream/principio.webp',
+        image: '/marketing/downstream/principio.webp',
         href: 'https://principio.example/',
       },
     ],
@@ -203,4 +233,34 @@ export const LongContent: Story = {
   },
   globals: { viewport: { value: 'laptop' } },
   play: async ({ canvasElement }) => desktopLayout(canvasElement),
+};
+
+/**
+ * Two groups one after another, as a page shows them under its own hero. The
+ * sections' padding alone spaces them; there's no rule between.
+ */
+export const Stacked: Story = {
+  tags: ['!autodocs'],
+  globals: { viewport: { value: 'desktop' } },
+  render: (args) => (
+    <>
+      <MarketingDownstreamExamples {...args} />
+      <MarketingDownstreamExamples {...applications} />
+    </>
+  ),
+  play: async ({ canvasElement }) => {
+    const groups = [...canvasElement.querySelectorAll('section')];
+    await expect(groups.map((group) => group.querySelector('h2')?.textContent)).toEqual([
+      section.title,
+      applications.title,
+    ]);
+    for (const group of groups) await desktopLayout(group);
+  },
+};
+
+/** The same two groups on phones: one list after another. */
+export const StackedOnMobile: Story = {
+  ...Stacked,
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => noSidewaysScroll(canvasElement),
 };

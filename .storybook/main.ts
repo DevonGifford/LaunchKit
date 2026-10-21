@@ -13,15 +13,13 @@ const config: StorybookConfig = {
   ],
   framework: { name: '@storybook/nextjs-vite', options: {} },
   // The app's public files, logo colourways and the favicon used only by
-  // Storybook's own UI, and stand-in logos and screenshots for stories, kept out
-  // of public/ so the site never ships them. Storybook picks up a favicon served
-  // at /favicon.ico.
+  // Storybook's own UI, and stand-in logos for stories, kept out of public/ so
+  // the site never ships them. Storybook picks up a favicon served at /favicon.ico.
   staticDirs: [
     '../public',
     { from: './brand', to: '/storybook-brand' },
     { from: './brand/favicon.ico', to: '/favicon.ico' },
     { from: '../tests/fixtures/logos', to: '/fixtures/logos' },
-    { from: '../tests/fixtures/downstream', to: '/fixtures/downstream' },
   ],
   core: { disableTelemetry: true },
   // Lets async Server Components (the site header and footer) render in the preview.
