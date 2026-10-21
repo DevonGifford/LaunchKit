@@ -62,6 +62,7 @@ const preview: Preview = {
               'Technical stack',
               'Setup timeline',
               'Quality gates',
+              'Downstream examples',
             ],
           ],
           'Layout',

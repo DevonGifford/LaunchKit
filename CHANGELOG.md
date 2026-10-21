@@ -108,9 +108,17 @@ need to take when merging it.
   poster instead with reduced motion, and plays only while on screen. A sample
   office time-lapse lives in `public/marketing/videos/`, and `docs/video.md`
   covers how it was encoded. New `BackgroundVideo` messages in every language.
+- Downstream examples (`marketing-downstream-examples`), a marketing section for
+  a group of three sites built with LaunchKit, such as company websites: one
+  featured beside two others on wide screens, featured above the other two on
+  tablets, and a compact list of thumbnails on phones. Each card links to the
+  live site once it has one. Placeholder screenshots of six projects live in
+  `public/marketing/downstream/`.
 
 ### Changed
 
+- The Examples page shows its projects as downstream examples, in two groups,
+  instead of the lineup, in every language.
 - Guide and legal page headings (h2, h3) have ids from their text, so search
   and links can point to a section: `/docs/getting-started#run-it-locally`.
 - **Breaking for translations:** `Docs.updated`, `Docs.readingTime`,

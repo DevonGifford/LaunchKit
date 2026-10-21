@@ -3,7 +3,7 @@ title: Sistema de diseño de LaunchKit
 description: Las primitivas y secciones con las que se construye cada sitio de LaunchKit, cómo pasa una sección del contenido tipado a la página y cómo añadir las tuyas.
 updated: 2026-10-21
 order: 4
-summary: Cómo encajan las dos capas de LaunchKit: unas cincuenta primitivas propias y 28 tipos de sección, cómo viaja una sección de un esquema de Zod a la página, cómo Storybook prueba cada historia, y los pasos y normas para añadir la tuya.
+summary: Cómo encajan las dos capas de LaunchKit: unas cincuenta primitivas propias y 29 tipos de sección, cómo viaja una sección de un esquema de Zod a la página, cómo Storybook prueba cada historia, y los pasos y normas para añadir la tuya.
 next: making-it-yours, building-with-ai
 ---
 
@@ -63,7 +63,7 @@ Equivoca un campo, o pon cinco cifras, y TypeScript lo dirá antes de que la pá
 
 ## Qué hay en la biblioteca
 
-Hay 28 tipos de sección, agrupados según la función que cumplen en una página:
+Hay 29 tipos de sección, agrupados según la función que cumplen en una página:
 
 | Grupo                     | Secciones                                                                                         |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -71,7 +71,7 @@ Hay 28 tipos de sección, agrupados según la función que cumplen en una págin
 | Contar la historia        | Declaración, funciones, capacidades, bento, catálogo, escaparate                                  |
 | Convencer                 | Cifras, marquesina de logotipos, opiniones, precios, preguntas frecuentes, formulario de contacto |
 | Invitar al siguiente paso | Llamadas a la acción de banda, panel, editorial, imagen y dividida                                |
-| El sitio de LaunchKit     | Seis secciones de marketing, del hero de la portada a los controles de calidad                    |
+| El sitio de LaunchKit     | Siete secciones de marketing, del hero de la portada a los controles de calidad                   |
 
 El último grupo está escrito para el propio sitio de LaunchKit y vive en su propia carpeta. Las secciones genéricas nunca importan nada de ahí, así que un proyecto derivado puede ignorarlo por completo.
 
@@ -79,7 +79,7 @@ Una regla decide si un diseño nuevo es una **variante** o un **tipo nuevo**. Si
 
 ## Storybook, el banco de trabajo
 
-Cada componente tiene historias a su lado: hoy son 92 archivos, cada uno mostrando el componente con contenido realista. Storybook (`pnpm storybook`) es donde una sección se diseña y se revisa antes de usarse en una página.
+Cada componente tiene historias a su lado: hoy son 93 archivos, cada uno mostrando el componente con contenido realista. Storybook (`pnpm storybook`) es donde una sección se diseña y se revisa antes de usarse en una página.
 
 Las historias también se ejecutan como pruebas. Cada historia se renderiza en un navegador real y axe la revisa en busca de problemas de accesibilidad. Otras historias fijan el tema oscuro y los anchos de móvil, tableta y escritorio, para comprobar el contraste y la maquetación en cada uno, y las pruebas de interacción confirman que los menús se abren, los carruseles avanzan y los formularios avisan con amabilidad. Varias historias leen su contenido directamente de una página real, así que lo que revisas ahí es exactamente lo que se publica.
 

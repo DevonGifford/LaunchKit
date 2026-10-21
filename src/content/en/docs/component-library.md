@@ -3,7 +3,7 @@ title: LaunchKit Design System
 description: The primitives and sections every LaunchKit site is built from, how a section goes from typed content to the page, and how to add your own.
 updated: 2026-10-21
 order: 4
-summary: How LaunchKit’s two layers fit together: around fifty owned primitives and 28 section types, how a section travels from a Zod schema to the page, how Storybook tests every story, and the steps and house rules for adding your own.
+summary: How LaunchKit’s two layers fit together: around fifty owned primitives and 29 section types, how a section travels from a Zod schema to the page, how Storybook tests every story, and the steps and house rules for adding your own.
 next: making-it-yours, building-with-ai
 ---
 
@@ -90,15 +90,15 @@ the page ever renders.
 
 ## What’s in the library
 
-There are 28 section types, grouped by the job they do on a page:
+There are 29 section types, grouped by the job they do on a page:
 
-| Group                | Sections                                                        |
-| -------------------- | --------------------------------------------------------------- |
-| Open the page        | Basic, centred, split, cinematic and video heroes               |
-| Tell the story       | Statement, features, capabilities, bento, lineup, showcase      |
-| Make the case        | Stats, logo marquee, reviews, pricing, FAQ, contact form        |
-| Invite the next step | Band, panel, editorial, media and split calls to action         |
-| LaunchKit’s own site | Six marketing sections, from the homepage hero to quality gates |
+| Group                | Sections                                                          |
+| -------------------- | ----------------------------------------------------------------- |
+| Open the page        | Basic, centred, split, cinematic and video heroes                 |
+| Tell the story       | Statement, features, capabilities, bento, lineup, showcase        |
+| Make the case        | Stats, logo marquee, reviews, pricing, FAQ, contact form          |
+| Invite the next step | Band, panel, editorial, media and split calls to action           |
+| LaunchKit’s own site | Seven marketing sections, from the homepage hero to quality gates |
 
 The last group is written for LaunchKit’s own website and lives in its own
 folder. Generic sections never import from it, so a downstream project can
@@ -112,7 +112,7 @@ grouped in a folder named after their kind, like `hero/` and `cta/`.
 
 ## Storybook, the workbench
 
-Every component has stories beside it: 92 story files today, each showing
+Every component has stories beside it: 93 story files today, each showing
 the component with realistic content. Storybook (`pnpm storybook`) is where
 a section gets designed and reviewed before it’s used on a page.
 

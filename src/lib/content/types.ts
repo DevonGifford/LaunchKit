@@ -284,6 +284,38 @@ export const marketingHeroLaunchKitSectionSchema = z.object({
   }),
 });
 
+/**
+ * A group of downstream sites built with LaunchKit, such as company websites:
+ * one featured beside two others on wide screens, a compact list on phones.
+ * Several groups can follow one another under a page's own hero.
+ */
+export const marketingDownstreamExamplesSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('marketing-downstream-examples'),
+  title: text,
+  description: text.optional(),
+  /** Exactly three; the first is featured. */
+  projects: z
+    .array(
+      z.object({
+        name: text,
+        /** One short line, e.g. "Interior design studio creating refined, livable spaces." */
+        description: text,
+        /**
+         * A screenshot of the site's homepage, shown from the top and cropped to
+         * fit: its first screen or the full page, ideally at least 1600px wide.
+         */
+        image: publicPath,
+        /**
+         * The live site, which the whole card links to in the same tab. Leave it
+         * out while a site is still in progress: the card is then no link.
+         */
+        href: z.url({ protocol: /^https$/ }).optional(),
+      }),
+    )
+    .length(3),
+});
+
 export const heroCinematicSectionSchema = z.object({
   ...sectionBase,
   type: z.literal('hero-cinematic'),
@@ -700,6 +732,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   marketingQualityGatesSectionSchema,
   marketingTechnicalStackSectionSchema,
   marketingSetupTimelineSectionSchema,
+  marketingDownstreamExamplesSectionSchema,
 ]);
 
 export const pageDefinitionSchema = z
