@@ -294,8 +294,6 @@ export const marketingDownstreamExamplesSectionSchema = z.object({
   type: z.literal('marketing-downstream-examples'),
   title: text,
   description: text.optional(),
-  /** A text link beside the heading, e.g. "View all". */
-  action: actionSchema.optional(),
   /** Exactly three; the first is featured. Each card links to the live site, in the same tab. */
   projects: z
     .array(

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
-import { ActionLink } from '@/components/sections/section-parts';
 
 type Project = SectionOf<'marketing-downstream-examples'>['projects'][number];
 
@@ -17,25 +16,17 @@ export function MarketingDownstreamExamples({
   id,
   title,
   description,
-  action,
   projects,
 }: SectionOf<'marketing-downstream-examples'>) {
   return (
     <section id={id} aria-labelledby={`${id}-title`}>
       {/* Modest padding, so groups that follow one another read as one page. */}
       <Container className="py-8 lg:py-12">
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-6 gap-y-2">
+        <div className="max-w-2xl space-y-2">
           <h2 id={`${id}-title`} className="text-3xl">
             {title}
           </h2>
-          {description && (
-            <p className="col-span-full max-w-2xl text-muted-foreground">{description}</p>
-          )}
-          {action && (
-            <div className="col-start-2 row-start-1">
-              <ActionLink action={action} />
-            </div>
-          )}
+          {description && <p className="text-muted-foreground">{description}</p>}
         </div>
         <ul className="mt-6 grid gap-5 md:grid-cols-2 md:gap-6 lg:mt-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(0,1fr)]">
           {projects.map((project, index) => (

@@ -14,7 +14,6 @@ const section = {
   type: 'marketing-downstream-examples',
   title: 'Company Websites',
   description: 'Corporate and brochure websites for established businesses.',
-  action: { label: 'View all', href: '/examples' },
   projects: [
     {
       name: 'Atelier',
@@ -43,7 +42,6 @@ const applications = {
   type: 'marketing-downstream-examples',
   title: 'Web & Mobile Applications',
   description: 'Product sites for web and mobile apps.',
-  action: { label: 'View all', href: '/examples' },
   projects: [
     {
       name: 'TableKit',
@@ -109,9 +107,8 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByRole('heading', { level: 2 })).toHaveTextContent(section.title);
-    const projects = canvas
-      .getAllByRole('link')
-      .filter((link) => link.getAttribute('href')?.startsWith('https://'));
+    // One link per site, and no other.
+    const projects = canvas.getAllByRole('link');
     await expect(projects.map((link) => link.getAttribute('href'))).toEqual(
       section.projects.map((project) => project.href),
     );
@@ -121,12 +118,7 @@ export const Default: Story = {
       await expect(link.textContent).toMatch(new RegExp(`^${section.projects[index]!.name}`));
       await expect(link.querySelector('img')).toHaveAttribute('alt', '');
     }
-    // The i18n Link adds the locale to the internal "View all".
-    const viewAll = canvas.getByRole('link', { name: 'View all' });
-    await expect(viewAll).toHaveAttribute('href', '/en/examples');
-    // The keyboard reaches "View all", then each site once, each with a visible ring.
-    await userEvent.tab();
-    await expect(viewAll).toHaveFocus();
+    // The keyboard reaches each site once, with a visible ring.
     for (const link of projects) {
       await userEvent.tab();
       await expect(link).toHaveFocus();
