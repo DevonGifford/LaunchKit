@@ -35,47 +35,53 @@ export const examples = {
         ],
       },
     },
+    // The projects as downstream examples. No links until each launches.
     {
-      // The previous homepage's use cases: the projects LaunchKit was made for.
+      // `projects`, so the hero's menu and the showcase's "Use cases" still land here.
       id: 'projects',
-      type: 'lineup',
-      eyebrow: 'En curso',
-      title: 'Seis sitios web en camino.',
-      description:
-        'Cada uno conserva su marca, su contenido y sus funciones, y comparte la ingeniería que hay debajo. Los enlazaremos aquí a medida que se lancen.',
-      items: [
+      type: 'marketing-downstream-examples',
+      title: 'Sitios web corporativos',
+      description: 'Sitios corporativos e institucionales para empresas consolidadas.',
+      projects: [
         {
-          name: 'Sitio de agencia',
-          kind: 'Corporativo · Portafolio',
-          description: 'Servicios, casos de estudio y un recorrido de contacto bien pensado.',
-        },
-        {
-          name: 'Hardware para homelab',
-          kind: 'Escaparate de productos',
+          name: 'Atelier',
           description:
-            'Equipos reacondicionados con especificaciones y consultas; el comercio electrónico puede llegar después.',
+            'Estudio de marca y diseño digital para organizaciones que valoran el diseño cuidado.',
+          image: '/marketing/downstream/atelier.webp',
         },
         {
-          name: 'UnPocketed',
-          kind: 'Página de aplicación',
+          name: 'Blake & Co.',
           description:
-            'Funciones, capturas de pantalla y enlaces de descarga para una aplicación móvil.',
+            'Ingeniería de software para despachos de abogados e instituciones financieras.',
+          image: '/marketing/downstream/blake-and-co.webp',
         },
         {
-          name: 'selfOS',
-          kind: 'Producto · SaaS',
-          description: 'Un relato de producto claro, documentación y una lista de espera.',
+          name: 'Principio',
+          description: 'Ingeniería de software y consultoría de IA para empresas ambiciosas.',
+          image: '/marketing/downstream/principio.webp',
+        },
+      ],
+    },
+    {
+      id: 'applications',
+      type: 'marketing-downstream-examples',
+      title: 'Aplicaciones web y móviles',
+      description: 'Sitios de producto para aplicaciones web y móviles.',
+      projects: [
+        {
+          name: 'TableKit',
+          description: 'Reservas para restaurantes, integradas en cualquier sitio web en minutos.',
+          image: '/marketing/downstream/tablekit.webp',
         },
         {
-          name: 'Marca de ropa',
-          kind: 'Escaparate comercial',
-          description: 'Colecciones, imágenes y relato de marca, con el pago gestionado aparte.',
+          name: 'Unpocketed',
+          description: 'Graba y transcribe audio en Android con los modelos de IA que elijas.',
+          image: '/marketing/downstream/unpocketed.webp',
         },
         {
-          name: 'Demostraciones de rediseño',
-          kind: 'Ventas · Portafolio',
-          description:
-            'Rediseños de portada con un antes y un después que muestran lo que permite una base mejor.',
+          name: 'SelfOS',
+          description: 'Datos personales autoalojados de entrenamiento, nutrición y hábitos.',
+          image: '/marketing/downstream/selfos.webp',
         },
       ],
     },

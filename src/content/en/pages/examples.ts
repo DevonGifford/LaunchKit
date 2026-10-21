@@ -38,8 +38,7 @@ export const examples = {
         ],
       },
     },
-    // The projects as downstream examples, in place of the lineup the other
-    // languages still show until they're translated. No links until each launches.
+    // The projects as downstream examples. No links until each launches.
     {
       // `projects`, so the hero's menu and the showcase's "Use cases" still land here.
       id: 'projects',

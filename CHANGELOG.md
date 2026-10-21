@@ -117,9 +117,8 @@ need to take when merging it.
 
 ### Changed
 
-- The English Examples page shows its projects as downstream examples, in two
-  groups, instead of the lineup. The other languages keep the lineup until
-  they're translated.
+- The Examples page shows its projects as downstream examples, in two groups,
+  instead of the lineup, in every language.
 - Guide and legal page headings (h2, h3) have ids from their text, so search
   and links can point to a section: `/docs/getting-started#run-it-locally`.
 - **Breaking for translations:** `Docs.updated`, `Docs.readingTime`,
