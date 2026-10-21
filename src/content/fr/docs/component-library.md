@@ -1,9 +1,9 @@
 ---
 title: Le design system de LaunchKit
 description: Les primitives et les sections qui composent chaque site LaunchKit, comment une section passe du contenu typé à la page, et comment ajouter les vôtres.
-updated: 2026-10-17
+updated: 2026-10-21
 order: 4
-summary: Comment s’articulent les deux couches de LaunchKit : une cinquantaine de primitives maison et 27 types de section, le parcours d’une section d’un schéma Zod jusqu’à la page, la façon dont Storybook teste chaque story, et les étapes et règles pour ajouter la vôtre.
+summary: Comment s’articulent les deux couches de LaunchKit : une cinquantaine de primitives maison et 28 types de section, le parcours d’une section d’un schéma Zod jusqu’à la page, la façon dont Storybook teste chaque story, et les étapes et règles pour ajouter la vôtre.
 next: making-it-yours, building-with-ai
 ---
 
@@ -63,11 +63,11 @@ Trompez-vous sur un champ, ou donnez cinq chiffres, et TypeScript le signale ava
 
 ## Ce que contient la bibliothèque
 
-Il y a 27 types de section, regroupés selon leur rôle dans une page :
+Il y a 28 types de section, regroupés selon leur rôle dans une page :
 
 | Groupe               | Sections                                                                   |
 | -------------------- | -------------------------------------------------------------------------- |
-| Ouvrir la page       | Heros simple, centré, scindé et cinématique                                |
+| Ouvrir la page       | Heros simple, centré, scindé, cinématique et vidéo                         |
 | Raconter l’histoire  | Déclaration, fonctionnalités, compétences, bento, catalogue, vitrine       |
 | Convaincre           | Chiffres, défilé de logos, avis, tarifs, FAQ, formulaire de contact        |
 | Inviter à la suite   | Appels à l’action en bandeau, panneau, éditorial, avec image et scindé     |
@@ -79,7 +79,7 @@ Une règle décide si une nouvelle mise en page est une **variante** ou un **nou
 
 ## Storybook, l’établi
 
-Chaque composant a des stories à côté de lui : 88 fichiers aujourd’hui, chacun montrant le composant avec un contenu réaliste. Storybook (`pnpm storybook`) est l’endroit où une section est conçue et relue avant d’être utilisée sur une page.
+Chaque composant a des stories à côté de lui : 92 fichiers aujourd’hui, chacun montrant le composant avec un contenu réaliste. Storybook (`pnpm storybook`) est l’endroit où une section est conçue et relue avant d’être utilisée sur une page.
 
 Les stories servent aussi de tests. Chaque story s’affiche dans un vrai navigateur et passe par axe pour détecter les problèmes d’accessibilité. Des stories dédiées fixent le thème sombre et les largeurs mobile, tablette et ordinateur, pour vérifier le contraste et la mise en page dans chaque cas, et des tests d’interaction confirment que les menus s’ouvrent, que les carrousels défilent et que les formulaires se plaignent poliment. Plusieurs stories lisent leur contenu directement depuis une vraie page : ce que vous y relisez est exactement ce qui part en production.
 

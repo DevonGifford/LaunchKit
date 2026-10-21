@@ -101,6 +101,13 @@ need to take when merging it.
   homepage's headline title); whole pages list by name alone, while guides and
   sections show an excerpt.
 - shadcn/ui `Command` and `Kbd` primitives.
+- A video hero (`hero-video`): a muted, looping background video filling the
+  first screen, with the copy straight on it over a wash (`overlay`) or in a
+  panel (`card`). The split call to action takes a `video` in place of its
+  photo. Both share `BackgroundVideo`, which has a pause button, shows the
+  poster instead with reduced motion, and plays only while on screen. A sample
+  office time-lapse lives in `public/marketing/videos/`, and `docs/video.md`
+  covers how it was encoded. New `BackgroundVideo` messages in every language.
 
 ### Changed
 

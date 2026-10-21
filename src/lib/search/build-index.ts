@@ -35,6 +35,7 @@ const skippedKeys = new Set([
   'width',
   'height',
   'sequence',
+  'video',
   'loadingLabel',
   'direction',
   'speed',
