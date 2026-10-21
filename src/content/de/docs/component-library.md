@@ -1,9 +1,9 @@
 ---
 title: Das LaunchKit-Designsystem
 description: Die Primitives und Sektionen, aus denen jede LaunchKit-Website besteht, wie eine Sektion von typisierten Inhalten zur Seite wird und wie Sie eigene ergänzen.
-updated: 2026-10-17
+updated: 2026-10-21
 order: 4
-summary: Wie die zwei Ebenen von LaunchKit zusammenspielen: rund fünfzig eigene Primitives und 27 Sektionstypen, der Weg einer Sektion vom Zod-Schema zur Seite, wie Storybook jede Story testet, und die Schritte und Hausregeln für eine eigene Sektion.
+summary: Wie die zwei Ebenen von LaunchKit zusammenspielen: rund fünfzig eigene Primitives und 28 Sektionstypen, der Weg einer Sektion vom Zod-Schema zur Seite, wie Storybook jede Story testet, und die Schritte und Hausregeln für eine eigene Sektion.
 next: making-it-yours, building-with-ai
 ---
 
@@ -63,11 +63,11 @@ Ist ein Feld falsch oder sind es fünf Zahlen, meldet TypeScript das, bevor die 
 
 ## Was die Bibliothek enthält
 
-Es gibt 27 Sektionstypen, gruppiert nach ihrer Aufgabe auf einer Seite:
+Es gibt 28 Sektionstypen, gruppiert nach ihrer Aufgabe auf einer Seite:
 
 | Gruppe                        | Sektionen                                                                        |
 | ----------------------------- | -------------------------------------------------------------------------------- |
-| Die Seite eröffnen            | Basis-, zentrierter, geteilter und Cinematic Hero                                |
+| Die Seite eröffnen            | Basis-, zentrierter, geteilter, Cinematic und Video-Hero                         |
 | Die Geschichte erzählen       | Statement, Funktionen, Leistungen, Bento, Übersicht, Showcase                    |
 | Überzeugen                    | Kennzahlen, Logo-Laufband, Stimmen, Preise, FAQ, Kontaktformular                 |
 | Zum nächsten Schritt einladen | Call-to-Actions als Band, Panel, redaktionell, mit Bild und geteilt              |
@@ -79,7 +79,7 @@ Eine Regel entscheidet, ob ein neues Layout eine **Variante** oder ein **neuer T
 
 ## Storybook, die Werkbank
 
-Neben jeder Komponente liegen ihre Stories: heute 88 Dateien, jede zeigt die Komponente mit realistischen Inhalten. In Storybook (`pnpm storybook`) wird eine Sektion entworfen und geprüft, bevor sie auf einer Seite landet.
+Neben jeder Komponente liegen ihre Stories: heute 92 Dateien, jede zeigt die Komponente mit realistischen Inhalten. In Storybook (`pnpm storybook`) wird eine Sektion entworfen und geprüft, bevor sie auf einer Seite landet.
 
 Die Stories laufen auch als Tests. Jede Story wird in einem echten Browser gerendert und von axe auf Barrierefreiheitsprobleme geprüft. Eigene Stories legen das dunkle Theme und die Breiten für Smartphone, Tablet und Desktop fest, sodass Kontrast und Layout in jedem Fall geprüft werden, und Interaktionstests bestätigen, dass Menüs sich öffnen, Karussells weiterlaufen und Formulare höflich protestieren. Einige Stories lesen ihre Inhalte direkt von einer echten Seite, sodass genau das geprüft wird, was live geht.
 

@@ -1,14 +1,22 @@
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { Container } from '@/components/ui/container';
 import type { SectionOf } from '@/lib/content/types';
 import { cn } from '@/lib/utils';
+import { BackgroundVideo } from '@/components/sections/background-video';
 import { Eyebrow } from '@/components/sections/section-parts';
 import { CtaActions } from './cta-parts';
 
+// From 1024px the column ends 12rem left of centre and the copy starts 8rem left
+// of it (below), so a 4rem gap separates them at every width.
+const mediaColumn =
+  'relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:start-0 lg:h-auto lg:w-[calc(50%-12rem)]';
+const mediaSizes = '(min-width: 64rem) 40vw, 100vw';
+
 /**
  * Copy beside a short list of principles on the high-emphasis surface. A
- * decorative photo, when there is one, runs as a strip above them until 1024px
- * and as a column reaching the left edge from then.
+ * decorative photo or video, when there is one, runs as a strip above them until
+ * 1024px and as a column reaching the left edge from then.
  */
 export function CtaSplitSection({
   id,
@@ -18,39 +26,41 @@ export function CtaSplitSection({
   primaryAction,
   secondaryAction,
   image,
+  video,
   items,
 }: SectionOf<'cta-split'>) {
+  const t = useTranslations('BackgroundVideo');
+  const media = Boolean(image ?? video);
+
   return (
     <section
       id={id}
       aria-labelledby={`${id}-title`}
       className="relative bg-emphasis text-emphasis-foreground"
     >
-      {image && (
-        // From 1024px the column ends 12rem left of centre and the copy starts
-        // 8rem left of it (below), so a 4rem gap separates them at every width.
-        <div
-          aria-hidden="true"
-          className="relative h-56 sm:h-72 lg:absolute lg:inset-y-0 lg:start-0 lg:h-auto lg:w-[calc(50%-12rem)]"
-        >
-          <Image
-            src={image}
-            alt=""
-            fill
-            sizes="(min-width: 64rem) 40vw, 100vw"
-            className="object-cover"
-          />
-        </div>
+      {video ? (
+        <BackgroundVideo
+          {...video}
+          sizes={mediaSizes}
+          labels={{ play: t('play'), pause: t('pause') }}
+          className={mediaColumn}
+        />
+      ) : (
+        image && (
+          <div aria-hidden="true" className={mediaColumn}>
+            <Image src={image} alt="" fill sizes={mediaSizes} className="object-cover" />
+          </div>
+        )
       )}
       <Container className="py-14 sm:py-16 lg:py-24">
         <div
           className={cn(
             'grid gap-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-12',
-            image && 'lg:ps-[calc(50%-8rem)]',
+            media && 'lg:ps-[calc(50%-8rem)]',
           )}
         >
-          {/* Without a photo there is room for the heading and the text side by side from 1024px. */}
-          <div className={cn('grid content-start gap-5', !image && 'lg:grid-cols-2 lg:gap-x-12')}>
+          {/* Without media there is room for the heading and the text side by side from 1024px. */}
+          <div className={cn('grid content-start gap-5', !media && 'lg:grid-cols-2 lg:gap-x-12')}>
             <div className="space-y-5">
               {eyebrow && <Eyebrow className="text-emphasis-foreground/75">{eyebrow}</Eyebrow>}
               <h2 id={`${id}-title`} className="max-w-xl text-headline">

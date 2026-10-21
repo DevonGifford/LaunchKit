@@ -98,6 +98,16 @@ describe('pageDefinitionSchema', () => {
     expect(result.error?.issues[0]?.message).toMatch(/unique/);
   });
 
+  it('takes an image or a video for a split call to action, not both', () => {
+    const split = (media: object) => ({ id: 'begin', type: 'cta-split', title: 'Begin', ...media });
+    const image = { image: '/photo.webp' };
+    const video = { video: { src: '/clip.mp4', poster: '/clip.webp' } };
+    expect(pageDefinitionSchema.safeParse(page([split(image)])).success).toBe(true);
+    expect(pageDefinitionSchema.safeParse(page([split(video)])).success).toBe(true);
+    const both = pageDefinitionSchema.safeParse(page([split({ ...image, ...video })]));
+    expect(both.error?.issues[0]?.message).toMatch(/not both/);
+  });
+
   it('rejects unknown section types and empty pages', () => {
     expect(pageDefinitionSchema.safeParse(page([{ id: 'x', type: 'carousel' }])).success).toBe(
       false,

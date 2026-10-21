@@ -174,6 +174,10 @@
   "HeroCentered": {
     "rating": "Valoración de {rating, number} sobre 5"
   },
+  "BackgroundVideo": {
+    "play": "Reproducir el vídeo de fondo",
+    "pause": "Pausar el vídeo de fondo"
+  },
   "Showcase": {
     "label": "Pantallas",
     "carousel": "carrusel",

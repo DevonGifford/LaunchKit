@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { expect, within } from 'storybook/test';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
 import type { SectionOf } from '@/lib/content/types';
 import { CtaSplitSection } from './cta-split-section';
 
@@ -99,5 +99,55 @@ export const Dark: Story = { tags: ['!autodocs'], globals: { theme: 'dark' } };
 export const WithoutImageDark: Story = {
   tags: ['!autodocs'],
   args: { image: undefined },
+  globals: { theme: 'dark' },
+};
+
+/** A video in the photo's place; the docs page shows its poster until it plays. */
+const video = {
+  src: '/marketing/videos/office-timelapse.mp4',
+  poster: '/marketing/videos/office-timelapse-poster.webp',
+} satisfies SectionOf<'cta-split'>['video'];
+
+/**
+ * A decorative video fills the photo's column: muted, looping, without controls,
+ * and with a pause button in its corner. The copy keeps its place.
+ */
+export const WithVideo: Story = {
+  args: { image: undefined, video },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const media = canvasElement.querySelector('video');
+    await waitFor(() => expect(media).toHaveAttribute('data-started'), { timeout: 5000 });
+    await expect(media).toHaveAttribute('aria-hidden', 'true');
+    const { heading } = edges(canvasElement);
+    const column = media?.getBoundingClientRect();
+    await expect(column?.left).toBe(0);
+    await expect(heading.left).toBeGreaterThan(column?.right ?? Infinity);
+    await userEvent.click(canvas.getByRole('button', { name: 'Pause background video' }));
+    await expect(media?.paused).toBe(true);
+    await userEvent.click(canvas.getByRole('button', { name: 'Play background video' }));
+    await waitFor(() => expect(media?.paused).toBe(false));
+  },
+};
+
+/** The video becomes a strip above the copy on phones, like the photo. */
+export const WithVideoOnMobile: Story = {
+  tags: ['!autodocs'],
+  args: { image: undefined, video },
+  globals: { viewport: { value: 'mobile' } },
+  play: async ({ canvasElement }) => {
+    const { heading } = edges(canvasElement);
+    await expect(
+      canvasElement.querySelector('video')?.getBoundingClientRect().bottom,
+    ).toBeLessThanOrEqual(heading.top);
+    const page = canvasElement.ownerDocument.documentElement;
+    await expect(page.scrollWidth).toBeLessThanOrEqual(page.clientWidth);
+  },
+};
+
+/** The video in the Midnight appearance. */
+export const WithVideoDark: Story = {
+  tags: ['!autodocs'],
+  args: { image: undefined, video },
   globals: { theme: 'dark' },
 };

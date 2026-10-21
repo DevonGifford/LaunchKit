@@ -362,6 +362,45 @@ export const heroSplitSectionSchema = z.object({
   highlights: z.array(text).min(1).max(4).optional(),
 });
 
+/**
+ * A decorative video that plays muted and on a loop, with no controls but a
+ * pause button. It carries no meaning, so it has no alt text, and no sound. Use
+ * an H.264 MP4; docs/video.md shows how to encode one.
+ */
+const backgroundVideoSchema = z.object({
+  src: publicPath,
+  /**
+   * A lighter file for screens narrower than 768px, framed as the section
+   * shows the video there, such as a portrait crop for a full-screen hero.
+   */
+  mobileSrc: publicPath.optional(),
+  /**
+   * A still of the first frame: shown until the video plays, and instead of it
+   * when the visitor prefers reduced motion or the browser blocks autoplay.
+   */
+  poster: publicPath.optional(),
+});
+
+/**
+ * A page opener that fills the first screen with a background video, the h1,
+ * description and actions over it, in one of two treatments.
+ */
+export const heroVideoSectionSchema = z.object({
+  ...sectionBase,
+  type: z.literal('hero-video'),
+  /**
+   * `overlay` (the default): the copy straight on the video, over a wash.
+   * `card`: the copy in a panel on the surface colour, so more of the video shows.
+   */
+  variant: z.enum(['overlay', 'card']).optional(),
+  eyebrow: text.optional(),
+  title: text,
+  description: text.optional(),
+  primaryAction: actionSchema.optional(),
+  secondaryAction: actionSchema.optional(),
+  video: backgroundVideoSchema,
+});
+
 /** An image with a version for each appearance. */
 const themedImageSchema = z.object({ light: publicPath, dark: publicPath });
 
@@ -597,23 +636,30 @@ export const ctaMediaSectionSchema = z.object({
   image: publicPath.optional(),
 });
 
-/** Copy beside a short list of principles, with an optional photo in its own column. */
-export const ctaSplitSectionSchema = z.object({
-  ...sectionBase,
-  type: z.literal('cta-split'),
-  eyebrow: text.optional(),
-  ...ctaFields,
-  /** Optional here, so the section can close a page as a statement. */
-  primaryAction: actionSchema.optional(),
-  /**
-   * A decorative photo, cropped to fit: a column on wide screens and a strip
-   * above the copy before then. It has no alt text; without one, the copy and
-   * list take the full width.
-   */
-  image: publicPath.optional(),
-  /** Short principles or facts beside the copy, e.g. "Security". */
-  items: z.array(text).min(1).max(6).optional(),
-});
+/** Copy beside a short list of principles, with an optional photo or video in its own column. */
+export const ctaSplitSectionSchema = z
+  .object({
+    ...sectionBase,
+    type: z.literal('cta-split'),
+    eyebrow: text.optional(),
+    ...ctaFields,
+    /** Optional here, so the section can close a page as a statement. */
+    primaryAction: actionSchema.optional(),
+    /**
+     * A decorative photo, cropped to fit: a column on wide screens and a strip
+     * above the copy before then. It has no alt text; without it or a video, the
+     * copy and list take the full width.
+     */
+    image: publicPath.optional(),
+    /** A decorative video in the photo's place, cropped to fit the same way. */
+    video: backgroundVideoSchema.optional(),
+    /** Short principles or facts beside the copy, e.g. "Security". */
+    items: z.array(text).min(1).max(6).optional(),
+  })
+  .refine((section) => !(section.image && section.video), {
+    message: 'Give the section an image or a video, not both',
+    path: ['video'],
+  });
 
 export const contactSectionSchema = z.object({
   ...sectionBase,
@@ -629,6 +675,7 @@ export const sectionSchema = z.discriminatedUnion('type', [
   heroCenteredSectionSchema,
   heroCinematicSectionSchema,
   heroSplitSectionSchema,
+  heroVideoSectionSchema,
   ctaBandSectionSchema,
   ctaPanelSectionSchema,
   ctaEditorialSectionSchema,
