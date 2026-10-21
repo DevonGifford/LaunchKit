@@ -22,8 +22,9 @@ export function MarketingDownstreamExamples({
     <section id={id} aria-labelledby={`${id}-title`}>
       {/* Modest padding, so groups that follow one another read as one page. */}
       <Container className="py-8 lg:py-12">
-        <div className="max-w-2xl space-y-2">
-          <h2 id={`${id}-title`} className="text-3xl">
+        <div className="max-w-2xl space-y-2 wrap-break-word">
+          {/* Long words hyphenate in the page's language, or break if it has no rule for them. */}
+          <h2 id={`${id}-title`} className="text-3xl hyphens-auto">
             {title}
           </h2>
           {description && <p className="text-muted-foreground">{description}</p>}
@@ -80,7 +81,8 @@ function ProjectCard({ project, featured }: { project: Project; featured: boolea
       </span>
       {/* Its children are cells of the row on phones, and a line under the screenshot from 768px. */}
       <span className="contents md:flex md:items-start md:justify-between md:gap-4 md:px-5 md:py-4">
-        <span className="min-w-0">
+        {/* Hyphenated too: on phones the column beside the thumbnail is narrow. */}
+        <span className="min-w-0 wrap-break-word hyphens-auto">
           <span className="block font-medium decoration-accent underline-offset-4 group-hover:underline">
             {project.name}
           </span>

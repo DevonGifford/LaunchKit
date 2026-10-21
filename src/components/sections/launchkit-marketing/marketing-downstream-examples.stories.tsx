@@ -271,3 +271,49 @@ export const InProgress: Story = {
     await expect(canvasElement.querySelectorAll('li svg')).toHaveLength(0);
   },
 };
+
+/**
+ * Long German words on the narrowest phones: they hyphenate, or break where the
+ * page's language has no rule for them, instead of widening the page. The words
+ * are long enough to overflow in any font, so this fails wherever it runs.
+ */
+export const LongWordsOnMobile: Story = {
+  tags: ['!autodocs'],
+  args: {
+    title: 'Rechtsanwaltskanzleiwebsites',
+    description: 'Unternehmenswebsites für etablierte Rechtsanwaltskanzleien.',
+    projects: [
+      {
+        name: 'Rechtsanwaltskanzlei',
+        description: 'Restaurantreservierungen, in wenigen Minuten eingebunden.',
+        image: '/marketing/downstream/atelier.webp',
+        href: 'https://atelier.example/',
+      },
+      {
+        name: 'Softwareentwicklung',
+        description: 'Datenschutzgrundverordnungskonforme Softwareentwicklung.',
+        image: '/marketing/downstream/blake-and-co.webp',
+        href: 'https://blake-engineering.example/',
+      },
+      {
+        name: 'Principio',
+        description: 'Softwareentwicklung und KI-Beratung für Unternehmen.',
+        image: '/marketing/downstream/principio.webp',
+        href: 'https://principio.example/',
+      },
+    ],
+  },
+  parameters: {
+    viewport: {
+      options: { narrow: { name: 'Narrow (320)', styles: { width: '320px', height: '720px' } } },
+    },
+  },
+  globals: { viewport: { value: 'narrow' } },
+  play: async ({ canvasElement }) => {
+    for (const text of canvasElement.querySelectorAll('h2, p, span')) {
+      if (text.clientWidth === 0) continue;
+      await expect(text.scrollWidth).toBeLessThanOrEqual(text.clientWidth);
+    }
+    await noSidewaysScroll(canvasElement);
+  },
+};
