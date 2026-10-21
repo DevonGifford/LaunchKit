@@ -17,6 +17,7 @@ import { HeroVideoSection } from '@/components/sections/hero/hero-video-section'
 import { MarketingDeveloperExperience } from '@/components/sections/launchkit-marketing/marketing-developer-experience';
 import { MarketingHeroLaunchKit } from '@/components/sections/launchkit-marketing/marketing-hero-launchkit';
 import { MarketingDeploymentPipeline } from '@/components/sections/launchkit-marketing/marketing-deployment-pipeline';
+import { MarketingDownstreamExamples } from '@/components/sections/launchkit-marketing/marketing-downstream-examples';
 import { MarketingQualityGates } from '@/components/sections/launchkit-marketing/marketing-quality-gates';
 import { MarketingTechnicalStack } from '@/components/sections/launchkit-marketing/marketing-technical-stack';
 import { MarketingSetupTimeline } from '@/components/sections/launchkit-marketing/marketing-setup-timeline';
@@ -64,4 +65,5 @@ export const sectionComponents: { [T in SectionType]: ComponentType<SectionOf<T>
   'marketing-quality-gates': MarketingQualityGates,
   'marketing-technical-stack': MarketingTechnicalStack,
   'marketing-setup-timeline': MarketingSetupTimeline,
+  'marketing-downstream-examples': MarketingDownstreamExamples,
 };

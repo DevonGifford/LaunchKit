@@ -108,6 +108,12 @@ need to take when merging it.
   poster instead with reduced motion, and plays only while on screen. A sample
   office time-lapse lives in `public/marketing/videos/`, and `docs/video.md`
   covers how it was encoded. New `BackgroundVideo` messages in every language.
+- Downstream examples (`marketing-downstream-examples`), a marketing section for
+  a group of three sites built with LaunchKit, such as company websites: one
+  featured beside two others on wide screens, featured above the other two on
+  tablets, and a compact list of thumbnails on phones. Each card links to the
+  live site. Stand-in screenshots for its stories live in
+  `tests/fixtures/downstream/`.
 
 ### Changed
 
